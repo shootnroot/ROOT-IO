@@ -1,0 +1,1734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Machine troubleshooting: 3D model, faults, I/O, sequence, exploded views, cabinet layouts and product defects.">
+<meta name="theme-color" content="#1f2a36">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Troubleshooter">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Troubleshooter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/barlow-semi-condensed-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-semi-condensed-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/barlow-semi-condensed-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2")}
+/* Layout: index rail on the left, 3D stage over a detail sheet on the right; stacks on phones */
+:root{
+  --bg:#edf0f3; --panel:#f8f9fb; --fg:#1a2129; --muted:#5b6672; --line:#d2d8df; --soft:#e4e8ed;
+  --ink:#1f4fb0; --amber:#c46f12; --stop:#b42318; --warn:#9a5a00; --ok:#2f6f3e; --scene:#e3e7eb;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151a; --panel:#171c22; --fg:#e2e7ed; --muted:#94a0ac; --line:#2a323b; --soft:#1f262e;
+  --ink:#8aa8ff; --amber:#f0a24a; --stop:#ff7a6b; --warn:#f2b154; --ok:#79c48e; --scene:#151a20; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151a; --panel:#171c22; --fg:#e2e7ed; --muted:#94a0ac; --line:#2a323b; --soft:#1f262e;
+  --ink:#8aa8ff; --amber:#f0a24a; --stop:#ff7a6b; --warn:#f2b154; --ok:#79c48e; --scene:#151a20; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.45}
+.app{display:grid;grid-template-columns:360px minmax(0,1fr);height:100%;min-height:0}
+.rail{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.rail-head{display:flex;flex-direction:column;gap:12px;padding-block:18px 12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;border-bottom:1px solid var(--line)}
+.idrow{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.idrow>div{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);overflow-wrap:anywhere}
+h1{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1;margin:4px 0 0;letter-spacing:.01em;text-wrap:balance}
+.setupbtn{flex:none;font:600 12px var(--f-body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:4px;padding:6px 9px;cursor:pointer;white-space:nowrap}
+.setupbtn:hover,.setupbtn[aria-current="true"]{border-color:var(--ink);color:var(--ink)}
+.example{font:600 11px var(--f-body);letter-spacing:.04em;color:var(--warn);border:1px solid currentColor;border-radius:3px;padding:2px 6px;align-self:flex-start}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.tabs button{font:600 13px var(--f-body);background:transparent;color:var(--muted);border:0;padding:8px 0;cursor:pointer}
+.tabs button+button{border-left:1px solid var(--line)}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--panel)}
+input[type=search],input[type=text],select{font:14px var(--f-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:8px 10px;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:500 12px var(--f-body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:3px;padding:3px 8px;cursor:pointer;line-height:1.35;text-align:left}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.chiprow{display:flex;flex-direction:column;gap:5px}
+.chiprow small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.list{overflow-y:auto;flex:1;min-height:0;padding-block:6px 20px}
+.group-h{font-family:var(--f-display);font-weight:600;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:12px 16px 4px max(16px,env(safe-area-inset-left,0px))}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:baseline;width:100%;text-align:left;background:transparent;border:0;border-left:3px solid transparent;color:var(--fg);font:14px/1.3 var(--f-body);padding:7px 16px 7px max(13px,calc(env(safe-area-inset-left,0px) - 3px));cursor:pointer}
+.item:hover{background:var(--soft)}
+.item[aria-current="true"]{background:var(--soft);border-left-color:var(--amber)}
+.item small{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.item .msg{font-family:var(--f-mono);font-size:10.5px;color:var(--ink);margin-left:4px}
+.item .ai{font-family:var(--f-mono);font-size:10px;color:var(--ok);margin-left:4px}
+.count{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.work{display:grid;grid-template-rows:minmax(320px,54%) minmax(0,1fr);min-height:0;min-width:0}
+.stage{position:relative;min-width:0;min-height:0;background:var(--scene);border-bottom:1px solid var(--line);overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+.overlay{position:absolute;font-family:var(--f-mono);font-size:11px;color:var(--muted);pointer-events:none;line-height:1.5}
+.tb{right:calc(14px + env(safe-area-inset-right,0px));top:12px;text-align:right;max-width:40%}
+.hint{left:14px;bottom:10px;right:14px}
+.nogl{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+.tools{position:absolute;z-index:5;left:12px;top:12px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 24px)}
+.tools button{font:500 12px var(--f-body);color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:5px 9px;cursor:pointer}
+.tools button:hover{border-color:var(--ink);color:var(--ink)}
+.tools button[aria-pressed="true"]{background:var(--fg);color:var(--panel);border-color:var(--fg)}
+.tools button:disabled{opacity:.45;cursor:default}
+.tag{position:absolute;transform:translate(-50%,-100%);pointer-events:none;font:500 11px/1.2 var(--f-mono);color:#fff;background:var(--amber);padding:3px 6px;border-radius:3px;white-space:nowrap;margin-top:-6px}
+.tag::after{content:"";position:absolute;left:50%;top:100%;margin-left:-4px;border:4px solid transparent;border-top-color:var(--amber)}
+:root[data-theme="dark"] .tag{color:#1a1206}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag{color:#1a1206}}
+
+.detail{overflow-y:auto;min-height:0;padding-block:20px 40px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.sheet{max-width:900px;display:flex;flex-direction:column;gap:18px}
+.sheet h2{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.05;margin:4px 0 0;text-wrap:balance}
+.lead{margin:0;max-width:72ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font:600 11.5px var(--f-body);letter-spacing:.03em;padding:3px 8px;border-radius:3px;border:1px solid currentColor}
+.pill.stop{color:var(--stop)} .pill.warn{color:var(--warn)} .pill.ok{color:var(--ok)} .pill.info{color:var(--muted)}
+.pill.hmi{color:var(--ink);font-family:var(--f-mono);font-weight:500;letter-spacing:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px 28px}
+.blk{display:flex;flex-direction:column;gap:6px;min-width:0}
+.blk h3{font-family:var(--f-display);font-weight:600;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0}
+.blk h3 em{font-style:normal;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.02em;text-transform:none;margin-left:6px}
+.blk ul,.blk ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.blk li{max-width:68ch}
+.blk ol li::marker{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.note{font-size:13px;border-left:2px solid var(--amber);padding:2px 0 2px 10px;max-width:72ch}
+.note.err{border-left-color:var(--warn)}
+.note.danger{border-left-color:var(--stop)}
+.note b{font-family:var(--f-display);letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:var(--muted);display:block}
+.acts{display:flex;flex-direction:column;gap:6px}
+.act{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.act:last-child{border-bottom:0}
+.act .what{flex:1 1 220px;min-width:0}
+.act .fix{flex:1 1 220px;min-width:0;color:var(--muted)}
+.act .area{font:600 10px var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--ink);border:1px solid currentColor;border-radius:3px;padding:0 5px;flex:none}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{font:600 13px var(--f-body);color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:7px 12px;cursor:pointer}
+.btn:hover{border-color:var(--ink);color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.btn.primary:hover{opacity:.9;color:var(--panel)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.danger{color:var(--stop)}
+textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:8px}
+.iot{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+.iot th{font:600 11px var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:left;padding:4px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.iot td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.iot td.tg{font-family:var(--f-mono);font-weight:500;white-space:nowrap}
+.iot td.ds{font-family:var(--f-mono);font-size:11.5px}
+.iot td.mn{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.iot .ty{font:600 10px var(--f-body);letter-spacing:.04em;padding:1px 5px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+.iot .ty.DI,.iot .ty.AI,.iot .ty.TC{color:var(--ok)} .iot .ty.DO,.iot .ty.AO{color:var(--amber)}
+.iot tr.lnk{cursor:pointer} .iot tr.lnk:hover td{background:var(--soft)}
+.iot.bom tr.on td{background:color-mix(in srgb,var(--amber) 22%,transparent)}
+.tblwrap{overflow-x:auto;max-width:100%}
+.kv{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:4px 16px;font-size:13.5px;margin:0}
+.kv dt{font-family:var(--f-mono);font-size:12px;color:var(--muted)} .kv dd{margin:0;min-width:0}
+.ends{font-size:13.5px;color:var(--fg);background:var(--soft);border-radius:4px;padding:8px 12px}
+.ends b{font-family:var(--f-display);letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;color:var(--muted);margin-right:6px}
+@media (max-width:600px){.iot .hidem{display:none}}
+.balloon{position:absolute;transform:translate(-50%,-115%);display:flex;align-items:center;gap:5px;font:600 11px/1 var(--f-mono);color:var(--fg);background:var(--panel);border:2px solid var(--amber);border-radius:999px;padding:2px;cursor:pointer;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.balloon b{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:999px;font-weight:600;padding:0 3px}
+.balloon span{display:none;font-weight:500;padding-right:7px;font-size:10.5px}
+.exnames .balloon span,.balloon:hover span,.balloon.on span{display:inline}
+.balloon.on{background:var(--amber);color:#fff;z-index:3}
+.nolabels .balloon,.nolabels .tag{display:none!important}
+#cabsel{position:sticky;top:0;z-index:2;background:var(--bg);max-height:46vh;overflow:auto;border-bottom:1px solid var(--line);padding:12px 0 8px;margin-top:-12px}
+.cabsel h3{font-family:var(--f-mono)}
+.extools{display:none}
+.exmode .extools{display:flex} .exmode .maintools,.exmode .tb,.exmode .tag{display:none!important}
+.extools label{font:500 12px var(--f-body);color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:3px 8px;display:flex;align-items:center;gap:6px}
+.extools input[type=range]{width:110px;accent-color:var(--amber)}
+.work.full{grid-template-rows:minmax(320px,1fr) 0} .work.full .detail{display:none}
+@media (max-width:900px){.work.full .stage{height:82vh}}
+.exbtns{display:flex;flex-wrap:wrap;gap:6px}
+.foot{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:76ch}
+/* setup */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 16px}
+.form label{display:flex;flex-direction:column;gap:4px;font:600 11px var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);min-width:0}
+.form label.wide{grid-column:1/-1}
+.drop{border:1.5px dashed var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:var(--panel)}
+.drop.over{border-color:var(--ink);background:var(--soft)}
+.drop p{margin:0;max-width:64ch}
+.files select{padding:4px 6px;font-size:12.5px;width:auto;max-width:100%}
+.steps{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.steps label{display:flex;gap:8px;align-items:baseline;font-size:13.5px}
+.steps small{color:var(--muted)}
+.log{font:12px/1.5 var(--f-mono);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:8px 10px;max-height:260px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.log .ok{color:var(--ok)} .log .err{color:var(--stop)} .log .run{color:var(--ink)}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.stat div{border:1px solid var(--line);border-radius:4px;padding:6px 10px;display:flex;flex-direction:column}
+.stat b{font-family:var(--f-display);font-size:22px;font-variant-numeric:tabular-nums}
+.stat small{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+@media (max-width:900px){
+  .app{display:flex;flex-direction:column;height:auto}
+  .rail{border-right:0;border-bottom:1px solid var(--line)}
+  .list{max-height:42vh}
+  .work{display:flex;flex-direction:column}
+  .stage{height:54vh}
+  .detail{overflow:visible;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .tb{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;font:500 13px var(--f-body);color:var(--panel);background:var(--fg);padding:9px 14px;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
+@media (display-mode: standalone){.rail-head{padding-top:max(18px,env(safe-area-inset-top,0px))}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="rail">
+    <div class="rail-head">
+      <div class="idrow">
+        <div>
+          <div class="eyebrow" id="mEyebrow">The Troubleshooter</div>
+          <h1 id="mName">Machine</h1>
+        </div>
+        <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
+      </div>
+      <span class="example" id="exampleFlag" hidden>Example data · replace with your documents</span>
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="machine" aria-selected="true">Machine</button>
+        <button role="tab" data-tab="process" aria-selected="false">Process</button>
+        <button role="tab" data-tab="defects" aria-selected="false">Defects</button>
+      </div>
+      <input type="search" id="q" placeholder="Search faults, causes, parts" aria-label="Search">
+      <div class="chips" id="cats"></div>
+      <div class="count" id="count"></div>
+    </div>
+    <nav class="list" id="list" aria-label="Index"></nav>
+  </aside>
+
+  <main class="work">
+    <div class="stage" id="stage">
+      <div class="tools extools">
+        <button id="exBack" type="button">← Machine</button>
+        <label>Explode <input type="range" id="exT" min="0" max="100" value="75" aria-label="Explode amount"></label>
+        <button id="exLabels" type="button" aria-pressed="true">Labels on</button>
+        <button id="exNames" type="button" aria-pressed="false">Show names</button>
+        <button id="exReset" type="button">Reset view</button>
+        <button id="exFull" type="button" aria-pressed="false">Expand</button>
+      </div>
+      <div class="tools maintools">
+        <button id="mainLabels" type="button" aria-pressed="true">Labels on</button>
+        <button id="resetView" type="button">Reset view</button>
+        <button id="doors" type="button">Hide guards</button>
+        <button id="viewBack" type="button">Rear view</button>
+      </div>
+      <div class="overlay tb" id="tb"></div>
+      <div class="overlay hint">Tap a part for its exploded view and faults · drag to orbit · pinch or scroll to zoom</div>
+    </div>
+    <section class="detail" id="detail" aria-live="polite"></section>
+  </main>
+</div>
+<script src="lib/three.min.js"></script>
+<script src="lib/OrbitControls.js"></script>
+<script>window.MTB_LIB="lib/";</script>
+<script>
+(function(){
+"use strict";
+/* ============================ DEFECT LIBRARY (general industry practice) ============================
+   [name, category, what it looks like, isolate-first steps, [[area, cause, corrective action]], parameters to review, component keywords] */
+const LIB=[
+{id:'im',name:'Injection molding',materials:['Plastic'],match:/injection|mold(ing)?\b|moulding|thermoplastic/i,defects:[
+ ['Short shot','Fill','Part is incomplete; thin sections, ribs or far-from-gate areas are missing.',['Check the cushion: zero cushion means not enough material or a leaking check ring','Run a fill study (short by 5% steps) to see the flow front','Compare with a known-good shot weight'],
+  [['machine','Shot size too small or cushion at zero','Increase shot size until a 5–10% cushion remains'],['machine','Injection speed or pressure limited','Raise first-stage speed; check that pressure is not hitting its limit'],['machine','Worn check ring or barrel letting melt slip back','Check cushion stability and screw recovery; repair the non-return valve'],['material','Melt too cold or viscous','Raise melt temperature within the resin datasheet range'],['tooling','Vents blocked or too shallow','Clean and deepen vents at the last-to-fill areas'],['tooling','Gate or runner too small or frozen early','Enlarge gate; check hot-runner tip temperatures']],
+  ['Shot size / transfer position','Injection speed and pressure limit','Melt temperature','Mold temperature','Cushion'],['screw','barrel','injection','nozzle','mold','hopper','heater']],
+ ['Flash','Fill','Thin fins of plastic at the parting line, ejector pins or slides.',['Note where flash occurs: everywhere points to clamp or pressure, one spot points to tooling damage','Check whether flash appears during fill or during pack'],
+  [['machine','Clamp tonnage too low for projected area','Increase clamp force; verify tonnage builds to setpoint'],['machine','Pack/hold pressure or transfer too late','Transfer earlier, lower pack pressure'],['material','Melt too hot or low viscosity','Lower melt temperature; check resin grade'],['tooling','Worn or damaged parting line, contamination on the faces','Clean faces; repair damaged shut-offs'],['tooling','Platen not parallel or mold too thin for the press','Check platen parallelism and support pillars']],
+  ['Clamp tonnage','Transfer position','Pack pressure','Melt temperature'],['clamp','platen','tonnage','mold','tie bar','strain rod']],
+ ['Sink marks','Appearance','Depressions on the surface opposite thick sections, ribs or bosses.',['Check whether the gate freezes before the part is packed (gate-freeze study)','See if sink changes with hold time'],
+  [['machine','Hold pressure or hold time too low','Increase hold pressure and hold time to gate freeze'],['machine','Cushion bottoming out','Increase shot size to keep a cushion'],['material','Melt too hot','Lower melt temperature'],['tooling','Wall too thick or rib too thick (>60% of wall)','Core out thick sections'],['tooling','Mold too hot near the thick section','Improve cooling at that area']],
+  ['Hold pressure','Hold time','Cushion','Mold temperature','Cooling time'],['injection','mold','water','cooling']],
+ ['Voids / bubbles','Internal','Hollow pockets inside thick sections, visible in clear parts or on cutting.',['Section a part through the thick area','Dry the material and compare'],
+  [['machine','Not enough pack pressure or time','Increase pack/hold'],['material','Moisture in hygroscopic resin','Dry to the resin dew point and time'],['tooling','Gate too small or far from the thick section','Move or enlarge gate']],
+  ['Hold pressure','Hold time','Drying temperature and time'],['dryer','hopper','injection']],
+ ['Warpage','Dimensional','Part bows or twists after ejection.',['Measure on a fixture right after molding and again after 24 h','Check mold surface temperatures both halves'],
+  [['machine','Uneven cooling or too-short cooling time','Balance mold temperatures; extend cooling'],['machine','Packing too high near the gate','Profile the hold pressure down'],['material','Fiber orientation or high-shrink resin','Change gate location; consider a lower-shrink grade'],['tooling','Unbalanced cooling channels','Rebalance water circuits; check for blocked lines'],['method','Ejection while too hot','Increase cooling; use a cooling fixture']],
+  ['Mold temperature (each half)','Cooling time','Hold pressure'],['mold','water','cooling','ejector','chiller']],
+ ['Burn marks / dieseling','Appearance','Black or brown scorch at the end of fill or around ribs.',['Slow the last 20% of fill and see if it clears','Check vents at the burn location'],
+  [['machine','Injection too fast at end of fill','Profile injection speed down at the end'],['tooling','Trapped air from poor venting','Add or clean vents'],['material','Melt degraded from long residence time','Reduce barrel temperature or use a smaller barrel']],
+  ['Injection speed profile','Melt temperature','Residence time'],['mold','injection','barrel']],
+ ['Splay / silver streaks','Appearance','Silver streaks in the flow direction, starting at the gate.',['Check material moisture before and after the dryer','Look for splay only at the start of a shot (gas from decompression)'],
+  [['material','Wet material','Dry correctly; check the dryer dew point'],['machine','Too much decompression pulling in air','Reduce decompression'],['machine','Melt too hot or sheared','Lower melt temperature and screw speed'],['material','Volatile additives or contamination','Check regrind and colorant']],
+  ['Drying temperature/time','Decompression','Screw rpm','Melt temperature'],['dryer','hopper','screw','barrel']],
+ ['Weld / knit lines','Appearance','Visible line where two flow fronts meet; may be a weak point.',['Find the flow fronts with a short-shot sequence'],
+  [['machine','Melt or mold too cold','Raise melt and mold temperature'],['machine','Injection too slow','Increase injection speed'],['tooling','No vent at the weld','Add a vent or overflow at the meeting point']],
+  ['Injection speed','Melt temperature','Mold temperature'],['mold','injection','heater']],
+ ['Jetting','Appearance','Snake-like flow pattern starting at the gate.',['Slow the first stage at the gate and compare'],
+  [['machine','Injection too fast at the gate','Slow the initial injection speed'],['tooling','Gate faces open cavity','Move the gate so flow hits a wall or pin']],
+  ['Injection speed profile'],['injection','mold']],
+ ['Black specks / contamination','Appearance','Dark particles in the part.',['Purge and check if specks clear','Inspect the screw, check ring and nozzle for degraded material'],
+  [['machine','Degraded material hanging up in the screw, check ring or hot runner','Purge; pull and clean the screw'],['material','Contaminated regrind or dirty hopper','Clean the hopper; screen the regrind'],['machine','Barrel overheated during idle','Lower idle temperatures']],
+  ['Barrel temperatures','Residence time','Regrind ratio'],['screw','barrel','hopper','nozzle']],
+ ['Dimensions out of tolerance','Dimensional','Parts measure outside drawing limits.',['Plot dimension against shot number and process data','Check after full conditioning (24 h)'],
+  [['machine','Unstable cushion, transfer or hold','Stabilize cushion; use position transfer'],['machine','Mold temperature drifting','Check chiller/thermolator flow and setpoint'],['material','Lot-to-lot variation','Check melt flow index of the lot'],['tooling','Worn cavity or wrong steel-safe size','Measure the cavity']],
+  ['Hold pressure','Mold temperature','Cooling time','Cushion'],['mold','water','injection']]
+]},
+{id:'cnc',name:'CNC machining',materials:['Metal','Plastic','Wood'],match:/cnc|machin|mill|lathe|turn|drill|router|grind/i,defects:[
+ ['Chatter marks','Surface','Regular wavy pattern on the machined surface, often with a squealing noise.',['Note the spindle speed where chatter starts; try ±10% rpm','Check tool stick-out and holder runout','Tap the part and fixture to find what is ringing'],
+  [['machine','Spindle bearings or way gibs worn, loose','Check spindle runout and axis backlash; adjust gibs'],['tooling','Tool overhang too long or holder too weak','Shorten stick-out; use a stiffer or shrink-fit holder'],['method','Speed in an unstable zone','Change rpm to a stable lobe; reduce radial engagement'],['method','Weak workholding','Add support near the cut; tighten fixturing'],['tooling','Dull or chipped insert','Replace the tool']],
+  ['Spindle speed','Feed per tooth','Radial/axial depth of cut','Tool stick-out'],['spindle','fixture','vise','table','tool']],
+ ['Poor surface finish','Surface','Surface roughness above the drawing Ra; feed marks or smearing.',['Measure Ra and compare with the theoretical value for the feed and nose radius','Check coolant concentration and flow at the cut'],
+  [['tooling','Worn or wrong grade of tool, built-up edge','Replace tool; choose a sharper geometry or coating'],['method','Feed too high for the nose radius','Lower finishing feed; increase nose radius'],['method','Recutting chips','Improve chip evacuation with coolant or air blast'],['machine','Spindle runout or vibration','Check runout at the tool tip (<0.01 mm)'],['material','Gummy material','Raise cutting speed; use correct coolant']],
+  ['Feed','Cutting speed','Coolant concentration and flow','Finishing allowance'],['spindle','coolant','pump','tool']],
+ ['Dimension out of tolerance','Dimensional','Features measure outside tolerance, all in one direction or randomly.',['Check whether the error is constant (offset), growing over time (thermal or wear) or random','Re-measure tool length and diameter offsets','Run a ballbar or check backlash on the axis involved'],
+  [['method','Wrong tool or work offset','Re-measure and set offsets'],['tooling','Tool wear','Use wear offsets or replace tool on a count'],['machine','Thermal growth of the spindle or ballscrews','Warm the machine up; use thermal compensation'],['machine','Axis backlash or a loose ballscrew/encoder coupling','Measure backlash; tighten or replace coupling'],['method','Tool deflection','Reduce depth of cut; add a spring pass']],
+  ['Tool offsets','Warm-up cycle','Backlash compensation','Depth of cut'],['axis','ballscrew','servo','spindle','encoder']],
+ ['Taper or out-of-square walls','Dimensional','Walls lean or diameters change along their length.',['Indicate the spindle tram to the table','Check whether the error flips with climb vs conventional milling'],
+  [['machine','Spindle out of tram or column not square','Tram the head; check geometry'],['tooling','Tool deflection on long cuts','Use a shorter, stiffer tool; add finishing passes'],['method','Part moving in the fixture','Improve clamping']],
+  ['Depth of cut','Finishing passes'],['spindle','column','table','fixture']],
+ ['Burrs','Edge','Raised material left on edges after cutting.',['Check tool sharpness and exit direction'],
+  [['tooling','Dull tool','Replace or regrind'],['method','Exit strategy pushes material out','Change toolpath direction; add a chamfer pass'],['material','Ductile material','Use sharper positive-rake tools']],
+  ['Toolpath direction','Feed at exit'],['tool','spindle']],
+ ['Tool breakage','Tooling','Tools snap or chip early.',['Check the broken tool: chipped edge vs clean snap','Look at chip load and coolant at the cut'],
+  [['method','Chip load too high or entering too aggressively','Lower feed; use ramp or helical entry'],['method','Chip packing in deep pockets or holes','Use peck cycles and through-spindle coolant'],['machine','Spindle runout or tool not seated','Clean taper and pull-stud; check drawbar force'],['tooling','Wrong grade or geometry','Choose a tougher grade']],
+  ['Feed per tooth','Entry strategy','Peck depth','Coolant'],['spindle','drawbar','coolant','atc','tool changer']],
+ ['Hole position error','Dimensional','Holes drill off location or wander.',['Check whether a spot drill was used','Compare first vs last hole in the program (drift)'],
+  [['method','No spot or center drill','Spot before drilling'],['tooling','Drill walking from a worn point','Replace drill'],['machine','Axis positioning error or lost steps','Re-home; check backlash and encoder']],
+  ['Spot drill depth','Feed'],['axis','servo','spindle']],
+ ['Built-up edge','Tooling','Material welds onto the cutting edge, leaving a torn finish.',['Inspect the cutting edge under magnification'],
+  [['method','Cutting speed too low','Raise surface speed'],['material','Soft, gummy alloy','Use polished or coated tools and good coolant'],['machine','Coolant concentration low','Check concentration with a refractometer']],
+  ['Cutting speed','Coolant concentration'],['coolant','pump']]
+]},
+{id:'weld',name:'Welding (MIG / TIG / stick)',materials:['Metal'],match:/weld|gmaw|gtaw|mig|tig|arc/i,defects:[
+ ['Porosity','Internal','Gas pockets on the bead surface or inside the weld.',['Check shielding gas flow at the nozzle with a flow meter','Look for drafts, fans or open doors near the arc','Check base metal for oil, paint, rust or moisture'],
+  [['machine','Gas flow too low or too high, leaking hose or fitting','Set 30–40 CFH (MIG typical); leak-test hoses'],['machine','Spatter-clogged or loose nozzle/contact tip','Clean or replace the nozzle; check the diffuser'],['environment','Drafts blowing gas away','Shield the area'],['material','Contaminated base metal or wire','Clean the joint; keep wire dry'],['method','Torch angle too steep or stick-out too long','Hold 10–15° drag/push; keep stick-out to spec']],
+  ['Gas flow','Contact-tip-to-work distance','Torch angle'],['gas','torch','nozzle','regulator','solenoid']],
+ ['Undercut','Profile','A groove melted into the base metal along the weld toe and left unfilled.',['Measure undercut depth against the code limit'],
+  [['method','Travel speed too high','Slow travel'],['machine','Voltage/current too high','Lower voltage or amperage'],['method','Wrong torch angle','Point the arc more toward the plate that is undercutting']],
+  ['Voltage','Wire feed speed / amperage','Travel speed'],['power source','torch','wire feeder']],
+ ['Lack of fusion','Internal','Weld metal does not fuse with the base metal or the previous pass.',['Macro-etch or bend test a sample','Check heat input against the WPS'],
+  [['machine','Heat input too low','Raise amperage within the WPS'],['method','Travel too fast or wrong angle','Slow down; direct the arc at the sidewall'],['material','Mill scale or oxide on the joint','Clean to bright metal']],
+  ['Amperage','Voltage','Travel speed','Joint preparation'],['power source','wire feeder','torch']],
+ ['Incomplete penetration','Internal','Weld does not reach through the joint root.',['Check joint fit-up, root gap and bevel against the drawing'],
+  [['method','Root gap too small or land too thick','Correct fit-up'],['machine','Current too low','Increase current'],['method','Travel too fast','Slow travel']],
+  ['Root gap','Amperage','Travel speed'],['power source','fixture']],
+ ['Burn-through','Profile','Holes melted through thin material.',['Check material thickness against the settings'],
+  [['machine','Heat input too high','Reduce voltage/wire speed; use pulse'],['method','Travel too slow or gap too large','Increase travel speed; tighten fit-up']],
+  ['Voltage','Wire feed speed','Travel speed'],['power source','wire feeder']],
+ ['Excessive spatter','Appearance','Many metal droplets stuck around the weld.',['Listen to the arc: an irregular crackle points to settings or ground'],
+  [['machine','Voltage too low for the wire speed, poor ground','Balance voltage and wire feed; clean and tighten the work clamp'],['machine','Wrong polarity','Set DCEP for solid-wire MIG'],['material','Dirty base metal or wrong gas','Clean; use the specified gas mix']],
+  ['Voltage','Wire feed speed','Inductance','Gas mix'],['ground','power source','wire feeder','gas']],
+ ['Cracking','Internal','Cracks in the weld or heat-affected zone, along or across the bead.',['Note when cracks appear: hot (during solidification) or cold (hours later)'],
+  [['material','High carbon or hydrogen pickup','Preheat; use low-hydrogen filler kept dry'],['method','High restraint, concave crater','Fill craters; reduce restraint; correct sequence'],['method','Cooling too fast','Preheat and control interpass temperature']],
+  ['Preheat','Interpass temperature','Filler type'],['fixture']],
+ ['Distortion','Dimensional','Parts pull out of shape after welding.',['Measure before and after each weld to find which joint pulls'],
+  [['method','Too much weld metal or poor sequence','Weld to size only; balance and back-step the sequence'],['method','Weak fixturing','Clamp and tack properly'],['machine','Heat input high','Use lower heat input or pulse']],
+  ['Weld size','Sequence','Heat input'],['fixture','positioner']],
+ ['Wire feeding problems / birdnesting','Equipment','Erratic arc, wire tangles at the drive rolls or burns back to the tip.',['Check the liner and drive roll tension','Look at the contact tip bore'],
+  [['machine','Wrong drive roll size or tension','Match roll groove to wire; set tension'],['machine','Worn liner or kinked cable','Replace liner; straighten the gun cable'],['machine','Worn contact tip','Replace tip']],
+  ['Drive roll tension','Liner length'],['wire feeder','drive roll','liner','torch','contact tip']]
+]},
+{id:'saw',name:'Sawing and cutting',materials:['Wood','Metal','Plastic'],match:/saw|cut-?off|bandsaw|circular|panel saw|blade/i,defects:[
+ ['Crooked cut / blade drift','Dimensional','Cut wanders from the line or is not square.',['Check blade tension and guide setting','Cut a test piece and measure squareness'],
+  [['machine','Low blade tension (band saw)','Tension to the blade maker\'s spec'],['machine','Guides worn or set too far from the work','Set guides close to the work; replace worn guides'],['tooling','Dull or unevenly set teeth','Replace or resharpen the blade'],['method','Feed too fast','Reduce feed rate']],
+  ['Blade tension','Feed rate','Guide position'],['blade','guide','tension','fence','vise']],
+ ['Burning','Surface','Scorch marks on the cut face (wood, plastic).',['Check feed speed and blade sharpness'],
+  [['tooling','Dull blade or pitch build-up','Clean or replace the blade'],['method','Feed too slow','Feed steadily'],['machine','Fence not parallel to the blade','Align the fence and blade']],
+  ['Feed rate','Blade speed'],['blade','fence','arbor']],
+ ['Tear-out / splintering','Edge','Chipped fibers or broken edges where the blade exits.',['Compare top and bottom faces'],
+  [['tooling','Wrong tooth count or geometry','Use a higher tooth count or scoring blade'],['method','No backing at the exit','Use a zero-clearance insert or sacrificial backer'],['tooling','Dull blade','Replace']],
+  ['Tooth count','Feed rate'],['blade','table','insert']],
+ ['Rough cut finish','Surface','Coarse tooth marks or wavy cut face.',['Check tooth count for the material thickness (3+ teeth in the cut)'],
+  [['tooling','Too few teeth in the cut','Choose a finer pitch'],['method','Feed too fast','Slow feed'],['machine','Arbor or wheel runout, blade wobble','Check runout; replace flanges or bearings']],
+  ['Tooth pitch','Feed rate','Blade speed'],['blade','arbor','bearing','wheel']],
+ ['Blade breakage / tooth stripping','Tooling','Blade snaps or loses teeth.',['Inspect where the break starts (gullet, weld, back edge)'],
+  [['method','Feed pressure too high or wrong pitch for thin walls','Reduce feed; use finer pitch'],['machine','Wheels misaligned or tension too high','Align wheels; set tension'],['material','Hard spots or workpiece moving','Clamp securely']],
+  ['Feed force','Blade tension','Pitch'],['blade','wheel','vise','tension']],
+ ['Excessive burr (metal)','Edge','Heavy burr on the exit side of metal cuts.',['Check blade sharpness and coolant'],
+  [['tooling','Dull blade','Replace'],['method','Feed too slow at exit','Keep feed steady through the exit'],['machine','No coolant','Apply the correct coolant']],
+  ['Feed rate','Coolant'],['blade','coolant']]
+]},
+{id:'press',name:'Stamping and press forming',materials:['Metal'],match:/stamp|press|punch|form|brake|blank/i,defects:[
+ ['Burrs','Edge','Sharp raised edges on blanked or pierced features.',['Measure burr height; check whether it is on all features or one punch'],
+  [['tooling','Dull punch or die','Sharpen'],['tooling','Wrong die clearance','Set clearance to 5–10% of thickness (material dependent)'],['machine','Press ram out of parallel','Check ram parallelism and gib clearance']],
+  ['Die clearance','Sharpening interval'],['die','ram','punch']],
+ ['Splits / cracks','Forming','Material tears in drawn or bent areas.',['Check the material certificate and grain direction'],
+  [['tooling','Radius too tight or poor lubrication','Increase radius; improve lubrication'],['material','Wrong grade or thickness','Verify material spec'],['machine','Binder pressure too high','Lower blank-holder pressure']],
+  ['Binder/cushion pressure','Lubrication'],['cushion','die','lube']],
+ ['Wrinkles','Forming','Waves in flanges or walls of drawn parts.',['Check where material flows in uncontrolled'],
+  [['machine','Binder pressure too low','Increase cushion pressure'],['tooling','Draw beads worn','Repair beads']],
+  ['Cushion pressure'],['cushion','die']],
+ ['Springback / angle out of tolerance','Dimensional','Bent angles open up after forming.',['Measure angle variation by coil or lot'],
+  [['material','Yield strength variation','Check certs; adjust per lot'],['tooling','Not enough overbend','Add overbend or coining'],['machine','Shut height drift','Check and lock shut height']],
+  ['Shut height','Overbend'],['ram','shut height','die']],
+ ['Slug pulling','Tooling','Slugs come back up with the punch and mark parts.',['Check for vacuum or magnetized punches'],
+  [['tooling','Clearance too tight or no slug retention','Adjust clearance; use slug-retention punches'],['tooling','Magnetized punch','Demagnetize']],
+  ['Die clearance'],['punch','die']]
+]},
+{id:'ext',name:'Plastic extrusion',materials:['Plastic'],match:/extru/i,defects:[
+ ['Surging','Dimensional','Output and dimensions vary in a regular cycle.',['Log screw load and melt pressure over time'],
+  [['machine','Feed zone too hot or bridging in the feed throat','Cool the feed throat; lower rear zone'],['material','Inconsistent pellet size or regrind','Blend evenly'],['machine','Worn screw or barrel','Measure flight clearance']],
+  ['Zone temperatures','Screw rpm','Feed throat cooling'],['screw','barrel','feed','hopper']],
+ ['Die lines','Surface','Continuous lines along the extrusion direction.',['Check the die land for damage or build-up'],
+  [['tooling','Scratched or contaminated die','Clean and polish'],['material','Degraded material hanging up','Purge; lower temperatures']],
+  ['Die temperature'],['die','barrel']],
+ ['Melt fracture / sharkskin','Surface','Rough, matte or ridged surface.',['Reduce output and see if it clears'],
+  [['machine','Shear rate too high at the die','Lower output or raise die temperature'],['tooling','Die gap too small','Open the die gap']],
+  ['Output rate','Die temperature'],['die','screw']],
+ ['Gels / unmelts','Appearance','Small lumps in the product.',['Check screen pack condition'],
+  [['machine','Not enough melting or mixing','Raise temperatures or back pressure; use a mixing screw'],['machine','Screen pack damaged','Replace screens'],['material','Cross-linked contamination','Clean the hopper and dryer']],
+  ['Screen pack','Melt temperature'],['screen','screw','barrel']]
+]},
+{id:'refrig',name:'Refrigeration and HVAC',materials:['Appliance output'],match:/refrig|freez|hvac|chill|cool(ing)? unit|air condition|heat pump|cooler/i,defects:[
+ ['Not cooling / warm cabinet','Performance','Cabinet or supply air is warmer than the setpoint.',['Check that the compressor and condenser fan run','Measure temperature split across the evaporator','Look for frost on the evaporator'],
+  [['machine','Dirty condenser coil or failed condenser fan','Clean coil; check fan motor and capacitor'],['machine','Compressor not starting (relay, overload, capacitor)','Test start relay, overload and run capacitor'],['machine','Low refrigerant from a leak','Leak-test and repair; charge by weight (licensed technician)'],['method','Door left open or gasket leaking','Check the gasket seal with a paper test'],['machine','Thermostat or sensor fault','Measure the sensor against a reference thermometer']],
+  ['Setpoint','Condenser airflow','Refrigerant charge'],['compressor','condenser','fan','evaporator','thermostat','sensor','gasket','door']],
+ ['Ice or frost buildup','Performance','Heavy frost on the evaporator or ice in the drain.',['Check defrost heater, defrost thermostat and timer/board'],
+  [['machine','Defrost heater or defrost termination thermostat failed','Measure resistance; replace'],['machine','Defrost timer or control board fault','Force a defrost and check output'],['method','Door gasket leaking humid air','Replace gasket']],
+  ['Defrost interval','Defrost termination temperature'],['defrost','heater','evaporator','timer','board','gasket']],
+ ['Short cycling','Performance','Compressor turns on and off frequently.',['Log run times; check head pressure and overload trips'],
+  [['machine','Overload tripping from high head pressure','Clean condenser; check fan'],['machine','Thermostat differential too small or sensor mounted badly','Reposition sensor; check differential'],['machine','Low charge freezing coil','Leak-test (licensed technician)']],
+  ['Differential','Head pressure'],['compressor','thermostat','condenser','overload']],
+ ['Water leaking','Other','Water under or inside the unit.',['Find the source: drain tube, drain pan, water line or condensation'],
+  [['machine','Defrost drain blocked or frozen','Clear the drain; check drain heater'],['machine','Cracked drain pan or loose water line','Replace pan; tighten line'],['environment','Unit not level','Level so the drain runs to the pan']],
+  [],['drain','pan','water','evaporator']],
+ ['Noisy operation','Other','Rattling, buzzing, clicking or squealing.',['Find the source with the panels off: fan, compressor, relay or tubing'],
+  [['machine','Fan blade hitting ice or shroud, worn bearing','Clear ice; replace fan motor'],['machine','Compressor mounts worn, tubing touching','Replace grommets; separate tubing'],['machine','Relay clicking (repeated start attempts)','Test start components']],
+  [],['fan','compressor','relay','motor']]
+]}
+];
+/* ============================ EXAMPLE PROFILE (illustrative only) ============================
+   box: [center x, center y, bottom z, width (x), depth (y), height (z)] in mm. x = left→right as seen
+   from the operator, y = front→rear, z = up. shapes: base, box, column, table, spindle, motor, cylinder,
+   cabinet, panel, guard, door, tank, hopper, conveyor, carousel, pump, fan, coil, compressor, pipe, unit */
+const EXAMPLE={
+ example:true,
+ meta:{name:'VMC-1000 Machining Center',maker:'Example Machine Co.',model:'VMC-1000',serial:'EX-0001',functions:['CNC machining'],materials:['Metal','Plastic'],
+  summary:'3-axis vertical machining center: 1000 × 500 × 550 mm travels, 10,000 rpm BT40 spindle, 24-tool arm changer, flood coolant and chip conveyor. Example data showing what the page builds from your documents.'},
+ groups:[{id:'spindle',name:'Spindle and tools'},{id:'axes',name:'Axes and motion'},{id:'coolant',name:'Coolant, lube and air'},{id:'safety',name:'Safety and controls'}],
+ components:[
+  {id:'base',name:'Base casting',group:'axes',shape:'base',box:[0,0,0,2300,1900,620],desc:'Cast-iron base carrying the Y-axis linear guides and saddle.'},
+  {id:'saddle',name:'Saddle (Y axis)',group:'axes',shape:'box',color:'frame',box:[0,-250,620,1000,700,140],desc:'Moves front to back on two linear guides, carries the table.',parts:[
+    {ref:'1',name:'Linear guide rail, size 45',pn:'LG45-1400',qty:2},{ref:'2',name:'Guide carriage block',pn:'LG45-B',qty:4},{ref:'3',name:'Ballscrew 40 mm × 10 mm lead',pn:'BS4010-900',qty:1},{ref:'4',name:'Ballscrew nut housing',pn:'NH-40',qty:1},{ref:'5',name:'Support bearing, fixed end',pn:'BK30',qty:1},{ref:'6',name:'Support bearing, float end',pn:'BF30',qty:1},{ref:'7',name:'Way cover, telescopic',pn:'WC-Y',qty:2},{ref:'8',name:'Wiper seal',pn:'WS-45',qty:4},{ref:'9',name:'SHCS M10×40',pn:'',qty:24}]},
+  {id:'table',name:'Table (X axis)',group:'axes',shape:'table',box:[0,-250,760,1200,500,120],desc:'T-slot work table, 1200 × 500 mm, moves left–right on the saddle.'},
+  {id:'xmotor',name:'X-axis servo motor',group:'axes',shape:'motor',axis:'x',box:[780,-250,770,180,140,140],desc:'Drives the X ballscrew through a flexible coupling; absolute encoder.',parts:[
+    {ref:'1',name:'Servo motor 3 kW, absolute encoder',pn:'SM-30-A',qty:1},{ref:'2',name:'Coupling, disc type',pn:'CPL-24-20',qty:1},{ref:'3',name:'Motor flange',pn:'MF-X',qty:1},{ref:'4',name:'Power cable connector',pn:'',qty:1},{ref:'5',name:'Encoder cable connector',pn:'',qty:1},{ref:'6',name:'SHCS M8×30',pn:'',qty:4}]},
+  {id:'column',name:'Column',group:'axes',shape:'column',box:[0,500,620,950,650,1750],desc:'Fixed column carrying the Z-axis guides and the spindle head.'},
+  {id:'head',name:'Spindle head (Z axis)',group:'spindle',shape:'box',color:'body',box:[0,90,1350,520,620,700],desc:'Moves up and down on the column; holds the spindle cartridge and motor.'},
+  {id:'spindle',name:'Spindle cartridge',group:'spindle',shape:'spindle',box:[0,-120,1150,200,200,420],desc:'10,000 rpm BT40 belt-driven spindle with drawbar and through-spindle coolant union.',parts:[
+    {ref:'1',name:'Spindle shaft',pn:'SP-40-SH',qty:1},{ref:'2',name:'Front angular-contact bearing set',pn:'7014-P4',qty:1},{ref:'3',name:'Rear bearing',pn:'7012-P4',qty:1},{ref:'4',name:'Drawbar',pn:'DB-40',qty:1},{ref:'5',name:'Disc spring stack',pn:'DS-40',qty:1},{ref:'6',name:'Gripper collet (4 ball)',pn:'GC-40',qty:1},{ref:'7',name:'Unclamp cylinder',pn:'UC-40',qty:1},{ref:'8',name:'Rotary union, coolant',pn:'RU-1/4',qty:1},{ref:'9',name:'Drive pulley',pn:'PL-40',qty:1},{ref:'10',name:'Poly-V belt',pn:'BELT-8PK',qty:1},{ref:'11',name:'Labyrinth seal',pn:'LS-40',qty:1},{ref:'12',name:'Proximity switch, tool clamped',pn:'PX-M12',qty:1},{ref:'13',name:'Proximity switch, tool unclamped',pn:'PX-M12',qty:1}]},
+  {id:'spmotor',name:'Spindle motor',group:'spindle',shape:'motor',axis:'z',box:[0,260,2050,300,300,420],desc:'15 kW spindle motor on top of the head.'},
+  {id:'atc',name:'Tool changer (24-tool arm type)',group:'spindle',shape:'carousel',box:[-760,220,1750,620,620,260],desc:'Drum magazine with a double-arm changer; pot up/down by air, arm by cam motor.',parts:[
+    {ref:'1',name:'Tool magazine drum',pn:'ATC-24-D',qty:1},{ref:'2',name:'Tool pot',pn:'POT-40',qty:24},{ref:'3',name:'Pot up/down air cylinder',pn:'CY-32-50',qty:1},{ref:'4',name:'Arm with grippers',pn:'ARM-40',qty:1},{ref:'5',name:'Cam box motor 0.75 kW',pn:'CM-075',qty:1},{ref:'6',name:'Magazine indexing motor',pn:'MM-04',qty:1},{ref:'7',name:'Cam limit switch',pn:'LS-01',qty:3},{ref:'8',name:'Pot position switch',pn:'PX-M18',qty:2},{ref:'9',name:'Solenoid valve 5/2',pn:'SV-52',qty:1}]},
+  {id:'enclosure',name:'Sheet-metal enclosure',group:'safety',shape:'guard',box:[0,0,0,2700,2300,2550],desc:'Full splash guard. The window and doors are interlocked.'},
+  {id:'doors',name:'Front doors and interlock',group:'safety',shape:'door',box:[0,-1150,700,1300,40,1250],desc:'Sliding doors with a guard-locking safety switch (SQ1).'},
+  {id:'panel',name:'Operator control panel',group:'safety',shape:'panel',box:[1520,-1050,1050,520,160,720],desc:'CNC screen, keypad, E-stop, cycle start / feed hold, MPG.'},
+  {id:'cabinet',name:'Electrical cabinet',group:'safety',shape:'cabinet',box:[0,1350,0,1300,500,2000],desc:'Main disconnect, CNC, servo drives, PLC I/O and 24 V supplies.'},
+  {id:'coolant',name:'Coolant tank and pump',group:'coolant',shape:'tank',box:[1400,700,0,600,1100,500],desc:'250 L tank, flood pump 0.4 kW and high-pressure through-spindle pump.',parts:[
+    {ref:'1',name:'Coolant tank 250 L',pn:'CT-250',qty:1},{ref:'2',name:'Flood pump 0.4 kW',pn:'CP-04',qty:1},{ref:'3',name:'Through-spindle pump 20 bar',pn:'HP-20',qty:1},{ref:'4',name:'Float level switch',pn:'FS-1',qty:1},{ref:'5',name:'Bag filter 25 µm',pn:'BF-25',qty:1},{ref:'6',name:'Pressure switch',pn:'PS-20',qty:1},{ref:'7',name:'Hose 3/4"',pn:'',qty:2}]},
+  {id:'conveyor',name:'Chip conveyor',group:'coolant',shape:'conveyor',box:[1550,-100,250,1200,420,400],desc:'Hinged-belt conveyor carrying chips out of the right side.'},
+  {id:'lube',name:'Way lube unit',group:'coolant',shape:'unit',color:'yellow',box:[-1250,650,950,260,180,320],desc:'Automatic way-oil lubricator with level and pressure switches.'},
+  {id:'air',name:'Air service unit (FRL)',group:'coolant',shape:'unit',color:'steel',box:[-1250,900,1350,280,140,260],desc:'Filter-regulator-lubricator, 6 bar, with low-pressure switch.'}
+ ],
+ faults:[
+  {id:'spindle-overload',title:'Spindle overload',group:'spindle',code:'AL 751',effect:'stop',msg:'SPINDLE OVERLOAD',causes:['Cut too heavy for the spindle power','Dull or wrong tool','Spindle bearing damage or belt slipping','Spindle drive or motor fault'],checks:['Watch the spindle load meter during the cut','Inspect the tool edge','Rotate the spindle by hand with power off: feel for roughness','Check belt tension and condition','Check the drive alarm history'],comps:['spindle','spmotor','head'],io:['X2.3']},
+  {id:'tool-unclamp',title:'Tool unclamp / clamp confirm fault',group:'spindle',code:'AL 1012',effect:'stop',msg:'TOOL CLAMP NOT CONFIRMED',causes:['Low air pressure to the unclamp cylinder','Clamp or unclamp proximity switch out of position','Broken disc springs or worn gripper','Dirty taper or pull stud'],checks:['Check air pressure at the FRL (≥ 5.5 bar)','Watch X1.4 / X1.5 on the PLC diagnostic screen while clamping by hand','Measure drawbar force with a gauge','Clean the spindle taper'],comps:['spindle','air'],io:['X1.4','X1.5','Y1.2','X0.6']},
+  {id:'atc-timeout',title:'Tool change timeout',group:'spindle',code:'AL 1020',effect:'stop',msg:'ATC SEQUENCE TIMEOUT',causes:['Pot did not reach down position (air, sensor)','Cam motor overload or brake not releasing','Magazine not indexed to the pocket'],checks:['Step through the ATC sequence in maintenance mode','Check pot up/down switches X3.0/X3.1','Check the cam motor overload QF5'],comps:['atc','air'],io:['X3.0','X3.1','X3.2','Y2.0','Y2.1']},
+  {id:'servo-following',title:'Servo excess following error',group:'axes',code:'AL 411',effect:'stop',msg:'X AXIS EXCESS ERROR',causes:['Mechanical binding: way covers, crash damage, lack of lube','Coupling slipping between motor and ballscrew','Servo amplifier or motor fault','Feedback cable damage'],checks:['Jog the axis slowly and watch the servo load','Inspect way covers and lube','Check coupling clamp screws','Swap encoder cables to isolate'],comps:['xmotor','saddle','table','lube'],io:[]},
+  {id:'overtravel',title:'Axis overtravel',group:'axes',code:'AL 500',effect:'stop',msg:'OVER TRAVEL +X',causes:['Program or offset drove the axis past its soft limit','Hard limit switch hit or failed'],checks:['Check the program coordinates and work offset','Release with overtravel release and jog back'],comps:['table','saddle'],io:['X0.4']},
+  {id:'coolant-low',title:'Coolant level low',group:'coolant',effect:'warn',msg:'COOLANT LEVEL LOW',causes:['Coolant consumed or leaking','Float switch stuck'],checks:['Check tank level and concentration','Clean the float switch'],comps:['coolant'],io:['X2.0']},
+  {id:'lube-low',title:'Way lube low / pressure not reached',group:'coolant',effect:'warn',msg:'LUBE ALARM',causes:['Lube reservoir empty','Blocked metering unit or broken line','Pump motor failed'],checks:['Fill with the correct way oil','Run a manual lube cycle and watch pressure','Check lines at the guide blocks'],comps:['lube','saddle','table'],io:['X2.1','X2.2','Y0.5']},
+  {id:'air-low',title:'Air pressure low',group:'coolant',effect:'stop',msg:'AIR PRESSURE LOW',causes:['Shop air below 5.5 bar','FRL filter blocked','Air leak at the spindle or ATC'],checks:['Read the FRL gauge','Drain and change the filter element','Listen for leaks with the machine idle'],comps:['air','atc','spindle'],io:['X0.6']},
+  {id:'door-open',title:'Door open during cycle',group:'safety',effect:'stop',msg:'DOOR OPEN',causes:['Door opened in auto','Interlock switch actuator misaligned','Safety relay fault'],checks:['Close the door and check the interlock lamp','Check SQ1 actuator alignment','Check safety relay KA1 indicator LEDs'],comps:['doors','cabinet'],io:['X0.2','X0.3','Y0.0']},
+  {id:'estop',title:'Emergency stop active',group:'safety',effect:'stop',msg:'EMERGENCY STOP',causes:['E-stop button pressed','Safety relay not reset','Servo amplifier ready signal missing'],checks:['Release all E-stop buttons and reset','Check KA1 safety relay LEDs','Check 24 V at the E-stop chain'],comps:['panel','cabinet'],io:['X0.0','X0.1']},
+  {id:'drive-overheat',title:'Cabinet or drive over-temperature',group:'safety',effect:'warn',msg:'CABINET TEMP HIGH',causes:['Cabinet cooler failed or filter blocked','High ambient temperature'],checks:['Clean the cooler filter','Check the cabinet thermostat setting'],comps:['cabinet'],io:['X2.4']}
+ ],
+ io:[
+  {tag:'X0.0',type:'DI',desc:'E-stop chain OK',device:'KA1',loc:'Cabinet',sheet:'12'},{tag:'X0.1',type:'DI',desc:'Safety relay reset',device:'KA1',loc:'Cabinet',sheet:'12'},
+  {tag:'X0.2',type:'DI',desc:'Door closed',device:'SQ1',loc:'Front door',sheet:'13'},{tag:'X0.3',type:'DI',desc:'Door locked',device:'SQ1',loc:'Front door',sheet:'13'},
+  {tag:'X0.4',type:'DI',desc:'X+ overtravel limit',device:'SQ4',loc:'Table',sheet:'14'},{tag:'X0.5',type:'DI',desc:'X home switch',device:'SQ5',loc:'Table',sheet:'14'},
+  {tag:'X0.6',type:'DI',desc:'Air pressure OK',device:'SP1',loc:'FRL',sheet:'15'},
+  {tag:'X1.4',type:'DI',desc:'Tool clamped',device:'SQ12',loc:'Spindle',sheet:'16'},{tag:'X1.5',type:'DI',desc:'Tool unclamped',device:'SQ13',loc:'Spindle',sheet:'16'},
+  {tag:'X2.0',type:'DI',desc:'Coolant level OK',device:'SL1',loc:'Coolant tank',sheet:'17'},{tag:'X2.1',type:'DI',desc:'Lube level OK',device:'SL2',loc:'Lube unit',sheet:'17'},
+  {tag:'X2.2',type:'DI',desc:'Lube pressure reached',device:'SP2',loc:'Lube unit',sheet:'17'},{tag:'X2.3',type:'DI',desc:'Spindle drive alarm',device:'U1',loc:'Cabinet',sheet:'9'},
+  {tag:'X2.4',type:'DI',desc:'Cabinet temperature OK',device:'ST1',loc:'Cabinet',sheet:'18'},
+  {tag:'X3.0',type:'DI',desc:'ATC pot down',device:'SQ20',loc:'Tool changer',sheet:'19'},{tag:'X3.1',type:'DI',desc:'ATC pot up',device:'SQ21',loc:'Tool changer',sheet:'19'},{tag:'X3.2',type:'DI',desc:'ATC arm at origin',device:'SQ22',loc:'Tool changer',sheet:'19'},
+  {tag:'Y0.0',type:'DO',desc:'Door lock solenoid',device:'SQ1',loc:'Front door',sheet:'21'},{tag:'Y0.4',type:'DO',desc:'Flood coolant pump',device:'KM3',loc:'Cabinet',sheet:'22'},
+  {tag:'Y0.5',type:'DO',desc:'Way lube pump',device:'KM5',loc:'Cabinet',sheet:'22'},{tag:'Y0.6',type:'DO',desc:'Chip conveyor forward',device:'KM6',loc:'Cabinet',sheet:'22'},
+  {tag:'Y1.2',type:'DO',desc:'Tool unclamp valve',device:'YV1',loc:'Spindle head',sheet:'23'},{tag:'Y1.3',type:'DO',desc:'Spindle air blast',device:'YV2',loc:'Spindle head',sheet:'23'},
+  {tag:'Y2.0',type:'DO',desc:'ATC pot down valve',device:'YV5',loc:'Tool changer',sheet:'24'},{tag:'Y2.1',type:'DO',desc:'ATC cam motor run',device:'KM8',loc:'Cabinet',sheet:'24'},
+  {tag:'Y2.4',type:'DO',desc:'Work lamp',device:'EL1',loc:'Enclosure',sheet:'25'},{tag:'Y2.5',type:'DO',desc:'Alarm light red',device:'HL1',loc:'Panel',sheet:'25'}
+ ],
+ sequence:[
+  {id:'power',name:'Power up and reset',desc:'Main disconnect on, CNC boots, safety relay reset, servo amplifiers ready.',ends:'Servo ready, no alarms',inputs:['X0.0','X0.1','X0.6'],outputs:[],comps:['cabinet','panel']},
+  {id:'home',name:'Reference return',desc:'Each axis drives to its home switch and sets the machine zero (absolute encoders skip this).',ends:'All axes referenced',inputs:['X0.5'],outputs:[],comps:['table','saddle','head']},
+  {id:'toolchange',name:'Tool change (M6)',desc:'Spindle orients, Z goes to change height, pot down, arm turns 60°, unclamp, arm swaps, clamp, arm returns, pot up.',ends:'Tool clamped confirmed and arm at origin',inputs:['X3.0','X3.1','X3.2','X1.4','X1.5'],outputs:['Y2.0','Y2.1','Y1.2','Y1.3'],comps:['atc','spindle']},
+  {id:'spindle-start',name:'Spindle start (M3)',desc:'Spindle drive enabled, ramps to commanded speed.',ends:'Speed reached',inputs:['X1.4','X2.3'],outputs:[],comps:['spindle','spmotor']},
+  {id:'cycle',name:'Cutting cycle',desc:'Axes interpolate along the program path with coolant on; lube pump runs on its interval.',ends:'M30 end of program',inputs:['X0.2','X0.3','X2.0'],outputs:['Y0.0','Y0.4','Y0.5','Y0.6'],comps:['table','saddle','head','coolant','conveyor']},
+  {id:'end',name:'End of cycle',desc:'Spindle stops, coolant off, axes return to the load position, door unlocks.',ends:'Door unlocked',inputs:[],outputs:['Y0.0'],comps:['doors']}
+ ],
+ checks:[
+  {id:'warmup',name:'Spindle warm-up',why:'Thermal growth moves the tool tip; a warm machine cuts closer to size.',steps:['Run the warm-up program: 15 min stepping from 2,000 to 8,000 rpm','Check the spindle load meter stays low at idle','Re-touch the first tool after warm-up'],comps:['spindle','head']},
+  {id:'daily',name:'Daily start-of-shift checks',why:'Catches low fluids and air before they become alarms.',steps:['Way lube level above minimum','Coolant level and concentration (refractometer)','Air pressure 6 bar at the FRL','Clean chips from way covers and the tool changer'],comps:['lube','coolant','air','atc']},
+  {id:'first-article',name:'First-article inspection',why:'Confirms offsets and program before running production.',steps:['Measure critical features on the first part','Record tool wear offsets used','Adjust and re-measure before releasing the job'],comps:['table','spindle']}
+ ],
+ reference:[
+  {id:'specs',name:'Machine specifications',intro:'Main ratings from the example manual.',rows:[['Travels X/Y/Z','1000 / 500 / 550 mm'],['Spindle','BT40, 10,000 rpm, 15 kW'],['Tool changer','24 tools, arm type'],['Air supply','6 bar, 300 L/min'],['Power','400 V 3-phase, 30 kVA']],notes:['Example values only.']}
+ ],
+ cabinets:{cabinet:{w:1200,h:1800,devices:[
+  {tag:'QS1',kind:'breaker',func:'Main disconnect, 63 A',pn:'',io:[]},{tag:'QF1',kind:'breaker',func:'Spindle drive feeder',io:[]},{tag:'QF2',kind:'breaker',func:'Servo drives feeder',io:[]},{tag:'QF3',kind:'breaker',func:'Coolant pump motor protector',io:[]},{tag:'QF5',kind:'breaker',func:'ATC cam motor protector',io:[]},
+  {tag:'TC1',kind:'transformer',func:'Control transformer 400/230 V',io:[]},{tag:'G1',kind:'psu',func:'24 VDC 10 A power supply',io:[]},
+  {tag:'U1',kind:'drive',func:'Spindle amplifier 15 kW',io:['X2.3']},{tag:'U2',kind:'drive',func:'X/Y servo amplifier (2-axis)',io:[]},{tag:'U3',kind:'drive',func:'Z servo amplifier with brake',io:[]},
+  {tag:'A1',kind:'plc',func:'CNC control unit',io:[]},{tag:'A2',kind:'io',func:'I/O module 1: inputs X0–X3',io:['X0.0','X0.1','X0.2','X0.3','X0.4','X0.5','X0.6','X1.4','X1.5','X2.0','X2.1','X2.2','X2.3','X2.4','X3.0','X3.1','X3.2']},{tag:'A3',kind:'io',func:'I/O module 2: outputs Y0–Y2',io:['Y0.0','Y0.4','Y0.5','Y0.6','Y1.2','Y1.3','Y2.0','Y2.1','Y2.4','Y2.5']},
+  {tag:'KA1',kind:'safety',func:'Safety relay, E-stop and door circuit',io:['X0.0','X0.1']},{tag:'KM3',kind:'contactor',func:'Flood coolant pump contactor',io:['Y0.4']},{tag:'KM5',kind:'contactor',func:'Way lube pump contactor',io:['Y0.5']},{tag:'KM6',kind:'contactor',func:'Chip conveyor contactor',io:['Y0.6']},{tag:'KM8',kind:'contactor',func:'ATC cam motor contactor',io:['Y2.1']},
+  {tag:'KA10',kind:'relay',func:'Interface relay, unclamp valve',io:['Y1.2']},{tag:'KA11',kind:'relay',func:'Interface relay, pot down valve',io:['Y2.0']},
+  {tag:'FU1',kind:'fuse',func:'24 V branch fuses',io:[]},{tag:'XT1',kind:'terminal',func:'Field terminal strip, inputs',io:[]},{tag:'XT2',kind:'terminal',func:'Field terminal strip, outputs and motors',io:[]},{tag:'ST1',kind:'meter',func:'Cabinet thermostat',io:['X2.4']}
+ ]}},
+ defects:[],
+ sources:[{name:'Example data',kind:'other'}]
+};
+/* ============================ UTIL ============================ */
+const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const slug=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'x';
+const arr=a=>Array.isArray(a)?a:(a==null||a===''?[]:[a]);
+const str=s=>s==null?'':String(s);
+const num=(v,d)=>{const n=+v;return isFinite(n)?n:d;};
+const stageEl=id=>document.getElementById(id);
+const stage=stageEl('stage'), list=stageEl('list'), detail=stageEl('detail'), q=stageEl('q'), cats=stageEl('cats'), count=stageEl('count');
+const SHAPES=['base','box','column','table','spindle','motor','cylinder','cabinet','panel','guard','door','tank','hopper','conveyor','carousel','pump','fan','coil','compressor','pipe','unit'];
+
+function normalize(raw){
+  const p=JSON.parse(JSON.stringify(raw||{}));
+  p.meta=Object.assign({name:'Untitled machine',maker:'',model:'',serial:'',functions:[],materials:[],summary:''},p.meta||{});
+  p.meta.functions=arr(p.meta.functions).map(str).filter(Boolean); p.meta.materials=arr(p.meta.materials).map(str).filter(Boolean);
+  p.groups=arr(p.groups).map(g=>typeof g==='string'?{id:slug(g),name:g}:{id:slug(g.id||g.name),name:str(g.name||g.id)}).filter(g=>g.name);
+  const seen=new Set();
+  p.components=arr(p.components).filter(c=>c&&(c.name||c.id)).map(c=>{let id=slug(c.id||c.name); while(seen.has(id)) id+='-2'; seen.add(id);
+    const b=arr(c.box).map(v=>num(v,NaN)); const box=b.length===6&&b.every(isFinite)?b:null;
+    return {id,name:str(c.name||c.id),group:c.group?slug(c.group):'',shape:SHAPES.includes(c.shape)?c.shape:'box',axis:/^[xyz]$/.test(c.axis)?c.axis:'',color:str(c.color),box,desc:str(c.desc),src:str(c.src),
+      parts:arr(c.parts).filter(x=>x&&(x.name||x.pn)).map((x,i)=>({ref:str(x.ref||i+1),name:str(x.name||x.pn),pn:str(x.pn),qty:str(x.qty||''),dw:str(x.drawing||x.dw||'')}))};});
+  const cids=new Set(p.components.map(c=>c.id));
+  const fix=ids=>arr(ids).map(x=>slug(x)).filter(x=>cids.has(x));
+  const gids=new Set(p.groups.map(g=>g.id));
+  p.components.forEach(c=>{if(c.group&&!gids.has(c.group)){p.groups.push({id:c.group,name:c.group.replace(/-/g,' ')});gids.add(c.group);}});
+  const fseen=new Set();
+  p.faults=arr(p.faults).filter(f=>f&&(f.title||f.name)).map(f=>{let id=slug(f.id||f.title||f.name); while(fseen.has(id)) id+='-2'; fseen.add(id);
+    let g=f.group?slug(f.group):''; if(g&&!gids.has(g)){p.groups.push({id:g,name:str(f.group)});gids.add(g);} if(!g) g='general';
+    return {id,title:str(f.title||f.name),group:g,code:str(f.code),effect:/stop|warn|info/.test(f.effect)?f.effect:'',msg:str(f.msg),causes:arr(f.causes).map(str),checks:arr(f.checks).map(str),comps:fix(f.comps),io:arr(f.io).map(str),src:str(f.src),safety:str(f.safety)};});
+  if(p.faults.some(f=>f.group==='general')&&!gids.has('general')) p.groups.push({id:'general',name:'General'});
+  p.io=arr(p.io).filter(r=>r&&r.tag).map(r=>({tag:str(r.tag),type:/^(DI|DO|AI|AO|TC)$/i.test(r.type)?r.type.toUpperCase():str(r.type||'').toUpperCase().slice(0,4),desc:str(r.desc),addr:str(r.addr),device:str(r.device),loc:str(r.loc),sheet:str(r.sheet),wire:str(r.wire)}));
+  const iot=new Set(p.io.map(r=>r.tag));
+  const sq=new Set();
+  p.sequence=arr(p.sequence).filter(s=>s&&s.name).map(s=>{let id=slug(s.id||s.name);while(sq.has(id)) id+='-2';sq.add(id);return {id,name:str(s.name),desc:str(s.desc),ends:str(s.ends),inputs:arr(s.inputs).map(str),outputs:arr(s.outputs).map(str),comps:fix(s.comps),hw:arr(s.hw).map(str)};});
+  p.checks=arr(p.checks).filter(s=>s&&s.name).map(s=>({id:slug(s.id||s.name),name:str(s.name),why:str(s.why),steps:arr(s.steps).map(str),comps:fix(s.comps),src:str(s.src)}));
+  p.reference=arr(p.reference).filter(s=>s&&s.name).map(s=>({id:slug(s.id||s.name),name:str(s.name),intro:str(s.intro),rows:arr(s.rows).filter(r=>Array.isArray(r)&&r.length>=2).map(r=>[str(r[0]),str(r[1])]),notes:arr(s.notes).map(str),io:arr(s.io).map(str).filter(t=>iot.has(t)),comps:fix(s.comps)}));
+  const cabs={}; Object.entries(p.cabinets||{}).forEach(([k,v])=>{const id=slug(k); if(!cids.has(id)||!v) return;
+    cabs[id]={w:num(v.w,1000),h:num(v.h,1200),devices:arr(v.devices).filter(d=>d&&d.tag).map(d=>({tag:str(d.tag),kind:str(d.kind),func:str(d.func),pn:str(d.pn),io:arr(d.io).map(str),guess:!!d.guess}))};});
+  p.cabinets=cabs;
+  const dseen=new Set();
+  p.defects=arr(p.defects).filter(d=>d&&d.name).map(d=>{let id=slug(d.id||d.name);while(dseen.has(id)) id+='-2';dseen.add(id);
+    return {id,name:str(d.name),cat:str(d.cat||'Other'),process:str(d.process||p.meta.functions[0]||'This machine'),material:str(d.material||p.meta.materials.join(', ')),looks:str(d.looks),isolate:arr(d.isolate).map(str),
+      causes:arr(d.causes).map(c=>Array.isArray(c)?{area:str(c[0]),cause:str(c[1]),fix:str(c[2])}:{area:str(c.area||'machine'),cause:str(c.cause||c.text),fix:str(c.fix)}).filter(c=>c.cause),params:arr(d.params).map(str),comps:fix(d.comps),src:str(d.src||'ai')};});
+  p.sources=arr(p.sources).map(s=>({name:str(s.name),kind:str(s.kind),assetId:str(s.assetId),pages:num(s.pages,0),size:num(s.size,0),added:str(s.added)}));
+  p.example=!!p.example;
+  return p;
+}
+
+/* ============================ 3D SCENE ============================ */
+let renderer=null;
+try{renderer=new THREE.WebGLRenderer({antialias:true});}catch(e){renderer=null;}
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(34,1,0.05,400);
+let controls=null;
+if(renderer){
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; renderer.outputEncoding=THREE.sRGBEncoding;
+  stage.appendChild(renderer.domElement);
+  controls=new THREE.OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.dampingFactor=0.08; controls.maxPolarAngle=Math.PI*0.495;
+} else { const d=document.createElement('div'); d.className='nogl'; d.textContent='3D view needs WebGL, which this browser has turned off. Everything else on the page still works.'; stage.appendChild(d); }
+let HOME_T=new THREE.Vector3(), HOME_C=new THREE.Vector3(3,3,6), BACK_C=new THREE.Vector3(-3,3,-6);
+scene.add(new THREE.HemisphereLight(0xffffff,0x8090a0,0.85));
+const sun=new THREE.DirectionalLight(0xffffff,0.7); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); sun.shadow.bias=-0.0005; scene.add(sun,sun.target);
+const fillL=new THREE.DirectionalLight(0xffffff,0.3); scene.add(fillL);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshStandardMaterial({color:0xcccccc,roughness:1})); floor.rotation.x=-Math.PI/2; floor.receiveShadow=true; scene.add(floor);
+let grid=null;
+const V=(x,y,z)=>new THREE.Vector3(x/1000,z/1000,-y/1000);
+const M=(c,o)=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.55,metalness:.15},o||{}));
+const MAT={frame:M(0x3a4047,{roughness:.75}),body:M(0xe6e9ec,{roughness:.6}),cab:M(0xd9dee3,{roughness:.6}),steel:M(0xc2c9d0,{metalness:.8,roughness:.25}),chrome:M(0xdfe5ea,{metalness:.9,roughness:.15}),
+  dark:M(0x24292f,{roughness:.6}),yellow:M(0xd9a21b),blue:M(0x2c55c9),red:M(0xc0261c),green:M(0x3f7d4a),orange:M(0xd2691e),white:M(0xf0f2f4),copper:M(0xb87333,{metalness:.6,roughness:.35}),
+  guard:M(0xa9bccf,{transparent:true,opacity:.16,roughness:.2,depthWrite:false,side:THREE.DoubleSide}),glass:M(0x9ed0e6,{transparent:true,opacity:.35,depthWrite:false,side:THREE.DoubleSide}),
+  screen:M(0x16324f,{emissive:0x0b2440,emissiveIntensity:.7}),hose:M(0x1b1e22,{roughness:.8}),platen:M(0x4d5965,{roughness:.5,metalness:.25})};
+const edgeMat=new THREE.LineBasicMaterial({color:0x1b232c,transparent:true,opacity:.28});
+const model=new THREE.Group(); scene.add(model);
+let meshes={}, pick=[], guardMeshes=[];
+function add(id,geo,mat,pos,o){
+  o=o||{}; const m=new THREE.Mesh(geo,mat.clone()); m.position.copy(pos); m.castShadow=!mat.transparent; m.receiveShadow=true;
+  m.userData.id=id; m.userData.base={e:m.material.emissive.getHex(),ei:m.material.emissiveIntensity,op:m.material.opacity};
+  model.add(m); pick.push(m); (meshes[id]=meshes[id]||[]).push(m);
+  if(o.edges!==false&&!mat.transparent){const e=new THREE.LineSegments(new THREE.EdgesGeometry(geo,25),edgeMat); e.raycast=()=>{}; m.add(e);}
+  if(mat.transparent||o.guard) guardMeshes.push(m);
+  return m;
+}
+const box=(id,x0,x1,y0,y1,z0,z1,mat,o)=>add(id,new THREE.BoxGeometry(Math.max(1,x1-x0)/1000,Math.max(1,z1-z0)/1000,Math.max(1,y1-y0)/1000),mat,V((x0+x1)/2,(y0+y1)/2,(z0+z1)/2),o);
+function cyl(id,ax,x,y,z,r,len,mat,o,r2){const m=add(id,new THREE.CylinderGeometry((r2||r)/1000,r/1000,len/1000,36),mat,V(x,y,z),o); if(ax==='x') m.rotation.z=-Math.PI/2; else if(ax==='y') m.rotation.x=Math.PI/2; return m;}
+const COLORMAT={frame:'frame',body:'body',cab:'cab',steel:'steel',dark:'dark',yellow:'yellow',blue:'blue',red:'red',green:'green',orange:'orange',white:'white',copper:'copper',grey:'platen',gray:'platen'};
+const SHAPEMAT={base:'frame',column:'frame',table:'steel',spindle:'steel',motor:'dark',cylinder:'steel',cabinet:'cab',panel:'dark',tank:'platen',hopper:'white',conveyor:'platen',carousel:'platen',pump:'blue',fan:'dark',coil:'copper',compressor:'dark',pipe:'steel',unit:'body',box:'body'};
+function buildComp(c){
+  const [cx,cy,z0,w,d,h]=c.box, x0=cx-w/2,x1=cx+w/2,y0=cy-d/2,y1=cy+d/2,z1=z0+h, id=c.id;
+  const mat=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body'];
+  const ax=c.axis||(w>=d&&w>=h?'x':d>=h?'y':'z'); const L=ax==='x'?w:ax==='y'?d:h; const R=Math.min(...[w,d,h].filter((v,i)=>i!==['x','y','z'].indexOf(ax)))/2;
+  const zc=z0+h/2;
+  switch(c.shape){
+    case 'guard': box(id,x0,x1,y0,y1,z0,z1,MAT.guard,{guard:true}); [[x0,y0],[x1,y0],[x0,y1],[x1,y1]].forEach(([x,y])=>box(id,x-15,x+15,y-15,y+15,z0,z1,MAT.platen,{guard:true})); box(id,x0,x1,y0-15,y0+15,z1-30,z1,MAT.platen,{guard:true}); box(id,x0,x1,y1-15,y1+15,z1-30,z1,MAT.platen,{guard:true}); break;
+    case 'door': box(id,x0,x1,y0,y1,z0,z1,MAT.glass,{guard:true}); box(id,x0,x1,y0-5,y1+5,z0,z0+40,MAT.platen); box(id,x0,x1,y0-5,y1+5,z1-40,z1,MAT.platen); box(id,x0,x0+40,y0-5,y1+5,z0,z1,MAT.platen); box(id,x1-40,x1,y0-5,y1+5,z0,z1,MAT.platen); box(id,cx-15,cx+15,y0-40,y0,zc-120,zc+120,MAT.dark); break;
+    case 'table': box(id,x0,x1,y0,y1,z0,z1,mat); for(let i=1;i<5;i++){const yy=y0+i*d/5; box(id,x0,x1,yy-9,yy+9,z1-1,z1+1,MAT.dark,{edges:false});} break;
+    case 'spindle': cyl(id,ax||'z',cx,cy,zc,R,L,MAT.steel); cyl(id,ax||'z',cx,cy,ax==='z'?z0+L*.08:zc,R*1.15,L*.12,MAT.dark); break;
+    case 'motor': cyl(id,ax,cx,cy,zc,R*.92,L*.78,mat); for(let i=0;i<8;i++){const t=-L*.35+i*L*.09; if(ax==='x') cyl(id,'x',cx+t,cy,zc,R,L*.02,mat,{edges:false}); else if(ax==='y') cyl(id,'y',cx,cy+t,zc,R,L*.02,mat,{edges:false}); else cyl(id,'z',cx,cy,zc+t,R,L*.02,mat,{edges:false});}
+      if(ax==='z') box(id,cx+R*.6,cx+R*1.15,cy-R*.4,cy+R*.4,zc,zc+L*.3,MAT.dark); else box(id,cx-R*.4,cx+R*.4,cy-R*.4,cy+R*.4,zc+R*.85,zc+R*1.3,MAT.dark); break;
+    case 'cylinder': case 'pipe': cyl(id,ax,cx,cy,zc,R,L,mat); if(c.shape==='cylinder'){ if(ax==='x'){cyl(id,'x',x0+L*.04,cy,zc,R*1.12,L*.08,MAT.dark);cyl(id,'x',x1-L*.04,cy,zc,R*1.12,L*.08,MAT.dark);} else if(ax==='y'){cyl(id,'y',cx,y0+L*.04,zc,R*1.12,L*.08,MAT.dark);cyl(id,'y',cx,y1-L*.04,zc,R*1.12,L*.08,MAT.dark);} else {cyl(id,'z',cx,cy,z0+L*.04,R*1.12,L*.08,MAT.dark);cyl(id,'z',cx,cy,z1-L*.04,R*1.12,L*.08,MAT.dark);} } break;
+    case 'cabinet': { box(id,x0,x1,y0,y1,z0+80,z1,mat); box(id,x0+20,x1-20,y0+20,y1-20,z0,z0+80,MAT.dark);
+      const front=y0, nd=Math.max(1,Math.round(w/700)), dw=w/nd;
+      for(let i=0;i<nd;i++){const a=x0+i*dw; box(id,a+8,a+dw-8,front-6,front,z0+100,z1-20,mat); box(id,a+dw-60,a+dw-40,front-30,front-6,zc-80,zc+80,MAT.dark,{edges:false});
+        for(let k=0;k<4;k++) box(id,a+dw*.25,a+dw*.75,front-8,front-6,z0+180+k*36,z0+194+k*36,MAT.dark,{edges:false});}
+      box(id,cx-60,cx+60,front-8,front-6,z1-160,z1-80,MAT.yellow,{edges:false}); break;}
+    case 'panel': box(id,x0,x1,y0,y1,z0,z1,mat); box(id,x0+w*.06,x1-w*.06,y0-4,y0,z0+h*.42,z1-h*.06,MAT.screen,{edges:false}); for(let i=0;i<6;i++) box(id,x0+w*.08+i*w*.12,x0+w*.16+i*w*.12,y0-6,y0,z0+h*.18,z0+h*.3,MAT.platen,{edges:false}); cyl(id,'y',x1-w*.15,y0-12,z0+h*.1,Math.min(w,h)*.06,24,MAT.red); break;
+    case 'tank': box(id,x0,x1,y0,y1,z0,z1-20,mat); box(id,x0-10,x1+10,y0-10,y1+10,z1-20,z1,MAT.platen); box(id,x0+w*.1,x0+w*.16,y0-8,y0,z0+h*.2,z0+h*.7,MAT.glass); break;
+    case 'hopper': cyl(id,'z',cx,cy,z0+h*.7,Math.min(w,d)/2,h*.6,mat,{},Math.min(w,d)/2); cyl(id,'z',cx,cy,z0+h*.2,Math.min(w,d)/2,h*.4,mat,{},Math.min(w,d)/8); cyl(id,'z',cx,cy,z1-10,Math.min(w,d)/2*1.03,20,MAT.platen); break;
+    case 'conveyor': box(id,x0,x1,y0,y1,z0+h*.55,z0+h*.75,MAT.dark); box(id,x0,x1,y0-15,y0,z0+h*.5,z1,mat); box(id,x0,x1,y1,y1+15,z0+h*.5,z1,mat); for(let x=x0+80;x<x1-40;x+=Math.max(120,w/10)) box(id,x-20,x+20,y0+20,y1-20,z0,z0+h*.55,MAT.platen,{edges:false}); break;
+    case 'carousel': cyl(id,ax==='z'?'z':'y',cx,cy,zc,R,L,mat); for(let i=0;i<12;i++){const t=i/12*Math.PI*2; if(ax==='z') cyl(id,'z',cx+Math.cos(t)*R*.85,cy+Math.sin(t)*R*.85,z0-L*.15,R*.08,L*.4,MAT.steel,{edges:false}); else cyl(id,'y',cx+Math.cos(t)*R*.85,cy-L*.6,zc+Math.sin(t)*R*.85,R*.08,L*.3,MAT.steel,{edges:false});} break;
+    case 'pump': box(id,x0,x1,y0,y1,z0,z0+h*.15,MAT.platen); cyl(id,ax==='z'?'x':ax,cx,cy,z0+h*.55,Math.min(R,h*.4),L*.7,mat); break;
+    case 'fan': cyl(id,ax,cx,cy,zc,R,Math.max(30,L*.25),MAT.dark); for(let i=0;i<5;i++){const m=box(id,cx-R*.08,cx+R*.08,cy-6,cy+6,zc,zc+R*.85,MAT.platen,{edges:false}); m.rotation.y=0; } break;
+    case 'coil': box(id,x0,x1,y0,y1,z0,z1,MAT.platen); for(let i=0;i<Math.min(40,Math.floor(w/25));i++) box(id,x0+12+i*25,x0+16+i*25,y0-4,y0,z0+10,z1-10,MAT.copper,{edges:false}); break;
+    case 'compressor': cyl(id,'z',cx,cy,z0+h*.45,Math.min(w,d)/2,h*.9,mat); add(id,new THREE.SphereGeometry(Math.min(w,d)/2000,24,12,0,Math.PI*2,0,Math.PI/2),mat,V(cx,cy,z0+h*.9)); break;
+    case 'column': box(id,x0,x1,y0,y1,z0,z1,mat); box(id,x0+w*.15,x0+w*.25,y0-20,y0,z0+h*.1,z1-h*.05,MAT.steel); box(id,x1-w*.25,x1-w*.15,y0-20,y0,z0+h*.1,z1-h*.05,MAT.steel); break;
+    case 'base': box(id,x0,x1,y0,y1,z0+60,z1,mat); [[x0+80,y0+80],[x1-80,y0+80],[x0+80,y1-80],[x1-80,y1-80]].forEach(([x,y])=>cyl(id,'z',x,y,z0+30,60,60,MAT.dark)); break;
+    case 'unit': box(id,x0,x1,y0,y1,z0,z1,mat); box(id,x0+w*.15,x1-w*.15,y0-6,y0,z0+h*.55,z0+h*.85,MAT.dark,{edges:false}); break;
+    default: box(id,x0,x1,y0,y1,z0,z1,mat);
+  }
+}
+function autoLayout(comps){
+  const missing=comps.filter(c=>!c.box); if(!missing.length) return;
+  const placed=comps.filter(c=>c.box); let x=placed.length?Math.max(...placed.map(c=>c.box[0]+c.box[3]/2))+400:0;
+  missing.forEach((c,i)=>{const s=c.shape==='cabinet'?[800,500,1800]:c.shape==='guard'?[1200,1000,1600]:[500,500,500]; c.box=[x+s[0]/2,0,0,s[0],s[1],s[2]]; c.auto=true; x+=s[0]+250;});
+}
+function buildModel(){
+  while(model.children.length) model.remove(model.children[0]);
+  meshes={}; pick=[]; guardMeshes=[];
+  autoLayout(P.components);
+  P.components.forEach(c=>{try{buildComp(c);}catch(e){console.warn('component',c.id,e);}});
+  const bb=new THREE.Box3().setFromObject(model); if(bb.isEmpty()) bb.set(new THREE.Vector3(-1,0,-1),new THREE.Vector3(1,1,1));
+  const ctr=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3()), span=Math.max(sz.x,sz.z,sz.y,1);
+  HOME_T=new THREE.Vector3(ctr.x,Math.min(ctr.y,sz.y*.45),ctr.z);
+  HOME_C=HOME_T.clone().add(new THREE.Vector3(-.32,.42,1).normalize().multiplyScalar(span*1.75));
+  BACK_C=HOME_T.clone().add(new THREE.Vector3(.4,.45,-1).normalize().multiplyScalar(span*1.75));
+  const fs=span*4; floor.scale.set(fs,fs,1); floor.position.set(ctr.x,0,ctr.z);
+  if(grid) scene.remove(grid); const gs=Math.ceil(span*3); grid=new THREE.GridHelper(gs,gs,0x888888,0x888888); grid.position.set(ctr.x,0.002,ctr.z); grid.material.transparent=true; grid.material.opacity=.18; scene.add(grid);
+  sun.position.set(ctr.x-span*.6,span*2.2,ctr.z+span*1.2); sun.target.position.copy(ctr); Object.assign(sun.shadow.camera,{left:-span,right:span,top:span,bottom:-span,near:.1,far:span*6}); sun.shadow.camera.updateProjectionMatrix();
+  fillL.position.set(ctr.x+span*2,span,ctr.z-span*1.5);
+  if(controls){controls.minDistance=span*.15; controls.maxDistance=span*6; controls.target.copy(HOME_T);} camera.position.copy(HOME_C);
+  guardsOn=true; stageEl('doors').textContent='Hide guards'; stageEl('doors').hidden=!guardMeshes.length;
+}
+
+/* ---------- highlight + tags ---------- */
+const AMB=new THREE.Color(); let hl=[], tags=[];
+const amberHex=()=>getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()||'#c46f12';
+function highlight(ids){
+  hl=ids.filter(i=>meshes[i]); AMB.set(amberHex());
+  pick.forEach(m=>{const b=m.userData.base; m.material.emissive.setHex(b.e); m.material.emissiveIntensity=b.ei; if(m.material.transparent) m.material.opacity=b.op;});
+  hl.forEach(id=>meshes[id].forEach(m=>{m.material.emissive.copy(AMB); m.material.emissiveIntensity=.6; if(m.material.transparent) m.material.opacity=.42;}));
+  tags.forEach(t=>t.el.remove()); tags=[];
+  hl.slice(0,8).forEach(id=>{const el=document.createElement('div'); el.className='tag'; el.textContent=C[id].name; stage.appendChild(el); tags.push({el,id});});
+}
+const goal={t:null,c:null};
+function focus(ids){
+  const bb=new THREE.Box3(); let any=false;
+  ids.forEach(id=>(meshes[id]||[]).forEach(m=>{if(m.visible){bb.expandByObject(m);any=true;}}));
+  if(!any||!controls) return;
+  const c=bb.getCenter(new THREE.Vector3()); if(bb.getSize(new THREE.Vector3()).length()>HOME_C.distanceTo(HOME_T)*.6) c.lerp(HOME_T,.5);
+  goal.t=c; goal.c=null;
+}
+stageEl('resetView').addEventListener('click',()=>{goal.t=HOME_T.clone();goal.c=HOME_C.clone();});
+stageEl('viewBack').addEventListener('click',e=>{const back=e.currentTarget.textContent==='Rear view';goal.t=HOME_T.clone();goal.c=(back?BACK_C:HOME_C).clone();e.currentTarget.textContent=back?'Front view':'Rear view';});
+let guardsOn=true;
+stageEl('doors').addEventListener('click',e=>{guardsOn=!guardsOn;guardMeshes.forEach(m=>m.visible=guardsOn);e.currentTarget.textContent=guardsOn?'Hide guards':'Show guards';});
+
+/* ============================ EXPLODED + CABINET VIEWS ============================ */
+const XCOL={P:0x56626f,F:0x9aa4ae,S:0xbfc6cd,Cr:0xe3e8ec,D:0x2b3036,Y:0xd9a21b,B:0x2c55c9,R:0xc0261c,O:0xd2691e,K:0x1d2024,W:0xe8ebee,H:0x8a6d52,Cu:0xb87333,G:0x3f7d4a,Gl:0x9ed0e6,Gr:0x7e8790,Bk:0x3a4047,Or:0xe07a1f};
+const Bx=(w,h,d,x,y,z,c)=>['b',w,h,d,x,y,z,c||'S'];
+const Cy=(r,l,ax,x,y,z,c,r2)=>['c',r,l,ax,x,y,z,c||'S',r2];
+const To=(R,t,ax,x,y,z,c)=>['t',R,t,ax,x,y,z,c||'K'];
+const Hl=(ro,ri,l,ax,x,y,z,c)=>['h',ro,ri,l,ax,x,y,z,c||'S'];
+const Hx=(r,l,ax,x,y,z,c)=>['x',r,l,ax,x,y,z,c||'S'];
+const Tu=(pts,r,c)=>['u',pts,r,c||'K'];
+const row=(n,fn)=>{const a=[];for(let i=0;i<n;i++) a.push(...fn(i));return a;};
+function shift(s,dx,dy,dz){s=s.slice(); const k=s[0];
+  if(k==='b'||k==='c'||k==='t'||k==='x'){s[4]+=dx;s[5]+=dy;s[6]+=dz;} else if(k==='h'){s[5]+=dx;s[6]+=dy;s[7]+=dz;} else if(k==='u'){s[1]=s[1].map(p=>[p[0]+dx,p[1]+dy,p[2]+dz]);} return s;}
+// shapes for a named part, centered at the origin; u = base size in mm
+function partShapes(name,u){
+  const n=name.toLowerCase();
+  const fast=n.match(/m(\d{1,2})\s*[x×]\s*(\d{1,3})/);
+  if(/\b(shcs|bhcs|fhcs|hhcs|screw|bolt|cap screw)\b/.test(n)){const r=fast?Math.max(+fast[1]*.5,u*.12):u*.15, L=fast?Math.max(+fast[2],u*.6):u*.9; return /hhcs|hex/.test(n)?[Cy(r,L,'y',0,L/2,0,'S'),Hx(r*1.8,r*1.4,'y',0,L+r*.7,0,'S')]:[Cy(r,L,'y',0,L/2,0,'D'),Cy(r*1.6,r*1.8,'y',0,L+r*.9,0,'D')];}
+  if(/\bnut\b/.test(n)) return [Hx(u*.3,u*.25,'y',0,0,0,'S')];
+  if(/washer/.test(n)) return [Hl(u*.35,u*.17,u*.06,'y',0,0,0,'S')];
+  if(/o-?ring|seal|gasket|wiper|packing|grommet/.test(n)) return [To(u*.6,u*.07,'y',0,0,0,'K')];
+  if(/\b(pin|dowel|rivet|key)\b/.test(n)) return [Cy(u*.1,u*.8,'y',0,u*.4,0,'Cr')];
+  if(/spring/.test(n)) return row(6,i=>[To(u*.3,u*.04,'y',0,i*u*.12,0,'S')]);
+  if(/motor|servo/.test(n)) return [Cy(u*.75,u*1.9,'x',0,0,0,'D'),...row(6,i=>[Cy(u*.82,u*.06,'x',-u*.7+i*u*.26,0,0,'D')]),Bx(u*.7,u*.5,u*.6,0,u*.95,0,'Bk'),Cy(u*.2,u*.5,'x',u*1.2,0,0,'Cr'),Bx(u*.25,u*1.5,u*1.5,u*.95,0,0,'P')];
+  if(/pump/.test(n)) return [Bx(u*1.2,u*1,u*1,0,0,0,'B'),Cy(u*.3,u*.4,'y',0,u*.7,0,'B'),Cy(u*.3,u*.4,'z',0,0,u*.7,'B'),Cy(u*.12,u*.6,'x',-u*.9,0,0,'S')];
+  if(/cylinder|actuator|\bram\b/.test(n)) return [Cy(u*.4,u*2.4,'x',0,0,0,'S'),Bx(u*.95,u*.95,u*.95,-u*1.25,0,0,'P'),Bx(u*.95,u*.95,u*.95,u*1.25,0,0,'P'),Cy(u*.16,u*1.4,'x',u*2.3,0,0,'Cr')];
+  if(/valve|solenoid/.test(n)) return [Bx(u*1.4,u*.5,u*.6,0,0,0,'S'),Bx(u*.45,u*.5,u*.45,-u*.95,0,0,'K'),Bx(u*.45,u*.5,u*.45,u*.95,0,0,'K'),Cy(u*.08,u*.2,'y',-u*.95,u*.35,0,'Y')];
+  if(/bearing|bushing/.test(n)) return [Hl(u*.7,u*.35,u*.35,'x',0,0,0,'S'),To(u*.52,u*.08,'x',0,0,0,'Cr')];
+  if(/ballscrew|lead ?screw|shaft|axle|spindle shaft|roller/.test(n)) return [Cy(u*.25,u*4,'x',0,0,0,'Cr'),Cy(u*.32,u*.4,'x',-u*1.8,0,0,'S')];
+  if(/rail|guide|\bway\b|track|slide/.test(n)) return [Bx(u*4,u*.4,u*.45,0,0,0,'S'),Bx(u*.8,u*.55,u*.75,u*.8,u*.12,0,'Gr')];
+  if(/gear|sprocket/.test(n)) return [Cy(u*.8,u*.3,'z',0,0,0,'S'),...row(12,i=>{const t=i/12*Math.PI*2;return [Bx(u*.14,u*.14,u*.3,Math.cos(t)*u*.85,Math.sin(t)*u*.85,0,'S')];}),Hl(u*.25,u*.12,u*.32,'z',0,0,0,'D')];
+  if(/pulley|wheel|drum|sheave|disc|rotor/.test(n)) return [Cy(u*.8,u*.35,'z',0,0,0,'S'),Hl(u*.25,u*.12,u*.4,'z',0,0,0,'D')];
+  if(/belt|chain/.test(n)) return [To(u*.9,u*.06,'z',0,0,0,'K')];
+  if(/coupling|coupler|cplg/.test(n)) return [Cy(u*.45,u*.4,'x',-u*.25,0,0,'S'),Cy(u*.45,u*.4,'x',u*.25,0,0,'Or')];
+  if(/sensor|switch|proximity|prox\b|transducer|encoder|thermocouple|probe|rtd|detector|limit/.test(n)) return [Cy(u*.18,u*.9,'x',0,0,0,'S'),Hx(u*.26,u*.1,'x',-u*.15,0,0,'S'),Cy(u*.08,u*.25,'x',u*.55,0,0,'Bk'),Tu([[u*.65,0,0],[u*1,u*.1,0],[u*1.3,-u*.1,0]],u*.05,'K')];
+  if(/filter|strainer|cartridge/.test(n)) return [Cy(u*.45,u*1.2,'y',0,0,0,'Gr'),Cy(u*.5,u*.18,'y',0,u*.65,0,'D')];
+  if(/hose|tube|line\b|pipe/.test(n)) return [Tu([[-u*1.2,0,0],[-u*.4,u*.4,0],[u*.4,-u*.2,0],[u*1.2,u*.2,0]],u*.12,'K')];
+  if(/fitting|elbow|\btee\b|union|nipple|plug|adapter|connector|ftg/.test(n)) return [Hx(u*.3,u*.25,'y',0,0,0,'Cr'),Cy(u*.18,u*.4,'y',0,u*.3,0,'S')];
+  if(/cable|harness|wire|cord/.test(n)) return [Tu([[-u,0,0],[-u*.3,u*.3,u*.2],[u*.3,-u*.3,-u*.2],[u,0,0]],u*.07,'K'),Bx(u*.3,u*.25,u*.25,-u*1.1,0,0,'Bk')];
+  if(/board|pcb|module|controller|card|plc|cpu|drive|amplifier|inverter/.test(n)) return [Bx(u*1.4,u*.08,u,0,0,0,'G'),...row(4,i=>[Bx(u*.22,u*.12,u*.22,-u*.4+i*u*.28,u*.1,-u*.2,'D')]),Bx(u*.6,u*.15,u*.15,0,u*.1,u*.35,'W')];
+  if(/relay|contactor|breaker|fuse|terminal/.test(n)) return [Bx(u*.5,u*.9,u*.7,0,0,0,'Gr'),Bx(u*.4,u*.2,u*.05,0,u*.25,u*.36,'W')];
+  if(/fan|blower|impeller/.test(n)) return [Cy(u*.8,u*.2,'z',0,0,0,'D'),...row(6,i=>{const t=i/6*Math.PI*2;return [Bx(u*.12,u*.6,u*.05,Math.cos(t)*u*.38,Math.sin(t)*u*.38,u*.12,'Gr')];})];
+  if(/heater|band|element/.test(n)) return [Hl(u*.7,u*.55,u*.35,'x',0,0,0,'Cu'),Bx(u*.2,u*.2,u*.2,0,u*.75,0,'D')];
+  if(/insert|cutter|end ?mill|drill|tap\b|blade|tool\b|holder|collet|chuck/.test(n)) return [Cy(u*.25,u*1.2,'y',0,0,0,'Cr'),Cy(u*.35,u*.4,'y',0,-u*.6,0,'D')];
+  if(/lamp|light|beacon|indicator/.test(n)) return [Cy(u*.25,u*.6,'y',0,0,0,'Gl'),Cy(u*.28,u*.2,'y',0,-u*.4,0,'D')];
+  if(/battery/.test(n)) return [Bx(u*.8,u*.5,u*.4,0,0,0,'D'),Bx(u*.1,u*.1,u*.1,-u*.25,u*.3,0,'R')];
+  if(/tank|reservoir|bin|tray/.test(n)) return [Bx(u*2,u*1.2,u*1.3,0,0,0,'P'),Bx(u*2.1,u*.1,u*1.4,0,u*.65,0,'S')];
+  if(/bracket|plate|cover|guard|panel|frame|flange|mount|support|base|housing|block|manifold|body|casting|channel|angle|spacer|clamp/.test(n)) return [Bx(u*1.8,u*.18,u*1.2,0,0,0,'P'),Bx(u*1.8,u*1,u*.18,0,u*.5,-u*.5,'P'),...row(2,i=>[Cy(u*.08,u*.2,'y',-u*.6+i*u*1.2,u*.1,0,'D')])];
+  if(/label|decal|nameplate|plate,? ?id|tag\b|sign/.test(n)) return [Bx(u*1,u*.03,u*.6,0,0,0,'Y')];
+  return [Bx(u*.9,u*.7,u*.7,0,0,0,'Gr')];
+}
+function bodyShapes(c,S){ // the parent component as a ghost body, size S
+  switch(c.shape){
+    case 'motor': case 'spindle': case 'cylinder': case 'pipe': return [Cy(S*.3,S,'x',0,0,0,'D')];
+    case 'tank': return [Bx(S,S*.55,S*.6,0,0,0,'P')];
+    case 'carousel': return [Cy(S*.45,S*.3,'z',0,0,0,'P')];
+    case 'cabinet': return [Bx(S*.7,S,S*.35,0,0,0,'W')];
+    default: return [Bx(S,S*.6,S*.6,0,0,0,'P')];
+  }
+}
+function partsView(c){
+  const parts=c.parts||[]; const n=parts.length; const S=Math.max(600,Math.min(1600,220*Math.sqrt(n)+400)), u=Math.max(40,Math.min(90,S/14));
+  const P2=[]; P2.push(['G',bodyShapes(c,S),[0,0,0],1]);
+  const rings=Math.ceil(n/12); let i=0;
+  for(let r=0;r<rings;r++){const cnt=Math.min(12,n-r*12), R=S*.75+r*u*3.2;
+    for(let k=0;k<cnt;k++,i++){const p=parts[i]; const t=k/cnt*Math.PI*2+r*.26; const dx=Math.cos(t), dz=Math.sin(t), dy=((k%3)-1)*.35;
+      const base=[dx*S*.15,dy*S*.15,dz*S*.15]; const sh=partShapes(p.name+' '+p.pn,u).map(s=>shift(s,...base));
+      P2.push([{t:p.ref,f:p.name,pn:p.pn,qty:p.qty,pi:i},sh,[dx*(R-S*.15),dy*S*.6,dz*(R-S*.15)],0]);}}
+  return {id:'x-'+c.id,t:c.name,kind:'parts',comp:c.id,parts:P2};
+}
+/* --- cabinet panel generator --- */
+const DEVK=[['plc',/plc|cpu|cnc|controller|processor|coupler|bus|rack/i,[120,200]],['io',/\bi\/?o\b|input|output|module|card|analog|digital/i,[90,130]],['safety',/safety|e-?stop relay|monitor/i,[25,110]],
+ ['drive',/drive|amplifier|servo|vfd|inverter|soft ?start/i,[160,320]],['psu',/power supply|psu|24 ?v|rectifier/i,[90,140]],['transformer',/transformer|xfmr/i,[180,170]],
+ ['breaker',/breaker|disconnect|isolator|mcb|mpcb|motor protect|switch-?disconnector/i,[54,95]],['fuse',/fuse/i,[20,85]],['contactor',/contactor|starter/i,[48,85]],['relay',/relay/i,[16,75]],
+ ['terminal',/terminal|strip|block|bus ?bar|busbar|distribution/i,[140,55]],['connector',/connector|plug|socket|receptacle/i,[70,70]],['switch',/ethernet|switch|router|gateway|network/i,[60,120]],
+ ['filter',/filter|emc|reactor|choke/i,[90,150]],['meter',/meter|thermostat|timer|counter|display|indicator|hmi/i,[60,60]],['fan',/fan|cooler|air ?con/i,[120,120]]];
+function devKind(d){const t=(d.kind+' '+d.func).toLowerCase(); for(const [k,re] of DEVK) if(k===d.kind||re.test(d.kind)) return k; for(const [k,re] of DEVK) if(re.test(t)) return k; return 'other';}
+const DEVSZ=Object.fromEntries(DEVK.map(([k,,s])=>[k,s])); DEVSZ.other=[60,60];
+const CG={
+ plc:(d)=>[Bx(d.w,d.h,110,d.x+d.w/2,d.y+d.h/2,55,'Gr'),Bx(d.w-12,d.h*.35,4,d.x+d.w/2,d.y+d.h*.7,112,'D'),...row(4,i=>[Bx(8,8,4,d.x+14+i*14,d.y+d.h*.25,112,i?'G':'Y')])],
+ io:(d)=>[Bx(d.w,d.h,80,d.x+d.w/2,d.y+d.h/2,40,'Gr'),...row(Math.max(1,Math.floor(d.w/13)),i=>[Bx(10,d.h*.6,4,d.x+8+i*13,d.y+d.h*.45,82,'D'),Bx(10,10,4,d.x+8+i*13,d.y+d.h-12,82,'Or')])],
+ safety:(d)=>[Bx(d.w,d.h,85,d.x+d.w/2,d.y+d.h/2,42,'Y'),Bx(d.w-6,12,4,d.x+d.w/2,d.y+d.h-14,87,'G')],
+ drive:(d)=>[Bx(d.w,d.h,240,d.x+d.w/2,d.y+d.h/2,120,'Y'),Bx(d.w-12,d.h*.5,4,d.x+d.w/2,d.y+d.h*.45,242,'D'),Bx(d.w*.5,24,4,d.x+d.w/2,d.y+d.h-30,242,'G')],
+ psu:(d)=>[Bx(d.w,d.h,120,d.x+d.w/2,d.y+d.h/2,60,'Gr'),...row(6,i=>[Bx(d.w*.8,5,3,d.x+d.w/2,d.y+d.h*.55+i*d.h*.06,121,'D')]),Bx(d.w*.8,22,6,d.x+d.w/2,d.y+16,122,'G')],
+ transformer:(d)=>[Bx(d.w,d.h,170,d.x+d.w/2,d.y+d.h/2,85,'Bk'),Bx(d.w*.5,d.h*.6,190,d.x+d.w/2,d.y+d.h*.5,85,'Cu'),Bx(d.w*.4,d.h*.3,4,d.x+d.w*.55,d.y+d.h*.55,182,'W')],
+ breaker:(d)=>[Bx(d.w,d.h,95,d.x+d.w/2,d.y+d.h/2,47,'W'),Bx(d.w*.3,d.h*.25,30,d.x+d.w/2,d.y+d.h*.55,110,'Bk'),Bx(d.w*.6,10,4,d.x+d.w/2,d.y+d.h*.86,97,'Gr')],
+ fuse:(d)=>[Bx(d.w-2,d.h,70,d.x+d.w/2,d.y+d.h/2,35,'W'),Bx(d.w*.5,d.h*.45,8,d.x+d.w/2,d.y+d.h/2,74,'Gr')],
+ contactor:(d)=>[Bx(d.w,d.h,90,d.x+d.w/2,d.y+d.h/2,45,'Bk'),Bx(d.w-10,d.h*.35,28,d.x+d.w/2,d.y+d.h*.5,104,'D'),Bx(d.w*.5,8,4,d.x+d.w/2,d.y+d.h-12,92,'B')],
+ relay:(d)=>[Bx(d.w-2,d.h,70,d.x+d.w/2,d.y+d.h/2,35,'Gr'),Bx(d.w-5,12,4,d.x+d.w/2,d.y+d.h-12,72,'B')],
+ terminal:(d)=>[...row(Math.max(4,Math.floor(d.w/6.2)),i=>[Bx(5.6,d.h,48,d.x+3+i*6.2,d.y+d.h/2,24,i%10===9?'Y':'Gr')]),Bx(d.w,8,6,d.x+d.w/2,d.y+d.h*.6,51,'W')],
+ connector:(d)=>[Bx(d.w,d.w,6,d.x+d.w/2,d.y+d.w/2,3,'S'),Cy(d.w*.4,40,'z',d.x+d.w/2,d.y+d.w/2,22,'Bk'),Cy(d.w*.34,60,'z',d.x+d.w/2,d.y+d.w/2,72,'D')],
+ switch:(d)=>[Bx(d.w,d.h,80,d.x+d.w/2,d.y+d.h/2,40,'W'),...row(5,i=>[Bx(d.w*.5,12,4,d.x+d.w/2,d.y+d.h*.15+i*d.h*.15,82,'D')])],
+ filter:(d)=>[Bx(d.w,d.h,110,d.x+d.w/2,d.y+d.h/2,55,'Gr'),...row(3,i=>[Cy(9,18,'z',d.x+d.w*(.25+i*.25),d.y+d.h-16,118,'S'),Cy(9,18,'z',d.x+d.w*(.25+i*.25),d.y+16,118,'S')])],
+ meter:(d)=>[Bx(d.w,d.h,50,d.x+d.w/2,d.y+d.h/2,25,'Bk'),Bx(d.w*.7,d.h*.4,4,d.x+d.w/2,d.y+d.h*.6,52,'W')],
+ fan:(d)=>[Bx(d.w,d.h,60,d.x+d.w/2,d.y+d.h/2,30,'W'),Cy(d.w*.4,10,'z',d.x+d.w/2,d.y+d.h/2,62,'D')],
+ other:(d)=>[Bx(d.w,d.h,70,d.x+d.w/2,d.y+d.h/2,35,'Gr')]
+};
+const KORDER=['plc','io','switch','safety','breaker','fuse','transformer','psu','drive','filter','contactor','relay','meter','fan','connector','other','terminal'];
+function cabinetView(c){
+  const cab=P.cabinets[c.id]; const W=Math.max(600,cab.w||1000); const devs=cab.devices.map((d,i)=>Object.assign({},d,{k:devKind(d),i}));
+  devs.sort((a,b)=>KORDER.indexOf(a.k)-KORDER.indexOf(b.k));
+  const rowsA=[]; let rowA=[], x=40;
+  devs.forEach(d=>{const [w,h]=DEVSZ[d.k]; if(x+w>W-40&&rowA.length){rowsA.push(rowA);rowA=[];x=40;} d.w=w; d.h=h; d.x=x; rowA.push(d); x+=w+(d.k===rowA[rowA.length-2]?.k?2:14);});
+  if(rowA.length) rowsA.push(rowA);
+  const rowH=rowsA.map(r=>Math.max(...r.map(d=>d.h))); const need=rowH.reduce((a,b)=>a+b+70,60); const H=Math.max(need,Math.min(cab.h||1200,need*1.35));
+  let y=H-50; const parts=[];
+  parts.push(['G',[Bx(W+40,H+40,6,0,0,-3,'Gr')],[0,0,0],0]);
+  parts.push(['G',[Bx(20,H+40,400,-W/2-30,0,194,'Bk'),Bx(20,H+40,400,W/2+30,0,194,'Bk'),Bx(W+80,20,400,0,H/2+30,194,'Bk'),Bx(W+80,20,400,0,-H/2-30,194,'Bk')],[0,0,-150],1]);
+  const ducts=[];
+  rowsA.forEach((r,ri)=>{const rh=rowH[ri]; y-=rh; r.forEach(d=>{d.y=y+(rh-d.h);}); ducts.push(Bx(W-60,10,8,0,y+rh*.5-H/2,4,'S'),Bx(W-60,36,55,0,y-34-H/2,28,'W')); y-=70;});
+  parts.push(['G',ducts,[0,0,0],0]);
+  const ioByDev={}; P.io.forEach(r=>{if(r.device) (ioByDev[r.device]=ioByDev[r.device]||[]).push(r.tag);});
+  devs.forEach(d=>{const dd=Object.assign({},d,{x:d.x-W/2,y:d.y-H/2}); const shapes=(CG[d.k]||CG.other)(dd);
+    d.ios=[...new Set([...d.io,...(ioByDev[d.tag]||[])])].filter(t=>IOT[t]);
+    parts.push([{t:d.tag,f:d.func||d.kind,pn:d.pn,dev:d},shapes,[0,0,d.k==='drive'?260:d.k==='terminal'?160:220],0]);});
+  return {id:'xc-'+c.id,t:c.name,kind:'cab',comp:c.id,parts,devs,W,H};
+}
+/* --- viewer --- */
+const exScene=new THREE.Scene();
+exScene.add(new THREE.HemisphereLight(0xffffff,0x8090a0,0.9));
+const exSun=new THREE.DirectionalLight(0xffffff,0.7); exSun.position.set(4,8,6); exScene.add(exSun);
+const exFill=new THREE.DirectionalLight(0xffffff,0.35); exFill.position.set(-6,3,-5); exScene.add(exFill);
+const exGrid=new THREE.GridHelper(20,40,0x888888,0x888888); exGrid.material.transparent=true; exGrid.material.opacity=.15; exScene.add(exGrid);
+const exRoot=new THREE.Group(); exScene.add(exRoot);
+const exEdge=new THREE.LineBasicMaterial({color:0x1b232c,transparent:true,opacity:.35});
+let EXV={}, COMPVIEWS={};
+let exMode=null, exParts=[], exT=0, exGoal=.75, exNames=false, mainPose=null, exBalloons=[];
+const chamCache={};
+function chamBox(w,h,d){const mn=Math.min(w,h,d); if(mn<.025) return new THREE.BoxGeometry(w,h,d);
+  const k=[w,h,d].map(x=>x.toFixed(4)).join(','); if(chamCache[k]) return chamCache[k];
+  const b=Math.min(.006,mn*.08), sh=new THREE.Shape(); sh.moveTo(-w/2+b,-h/2+b); sh.lineTo(w/2-b,-h/2+b); sh.lineTo(w/2-b,h/2-b); sh.lineTo(-w/2+b,h/2-b); sh.lineTo(-w/2+b,-h/2+b);
+  const g=new THREE.ExtrudeGeometry(sh,{depth:d-2*b,bevelEnabled:true,bevelThickness:b,bevelSize:b,bevelSegments:1,curveSegments:1}); g.translate(0,0,-(d-2*b)/2); g.computeVertexNormals();
+  return chamCache[k]=g;}
+function exMat(c,ghost){const col=XCOL[c]!==undefined?XCOL[c]:0xbfc6cd;const glass=c==='Gl';
+  return new THREE.MeshStandardMaterial({color:col,roughness:/S|Cr/.test(c)?.3:.55,metalness:/^(S|Cr|Gr)$/.test(c)?.6:.15,transparent:glass||ghost,opacity:glass?.35:ghost?.22:1,depthWrite:!(glass||ghost),side:glass?THREE.DoubleSide:THREE.FrontSide});}
+function exShape(s){
+  const k=s[0]; let g,m=new THREE.Vector3(),rot=null;
+  if(k==='b'){g=chamBox(Math.max(.5,s[1])/1000,Math.max(.5,s[2])/1000,Math.max(.5,s[3])/1000); m.set(s[4],s[5],s[6]); return [g,m,null,s[7]];}
+  if(k==='x'){g=new THREE.CylinderGeometry(s[1]/1000,s[1]/1000,s[2]/1000,6); m.set(s[4],s[5],s[6]); return [g,m,s[3],s[7]];}
+  if(k==='c'){g=new THREE.CylinderGeometry((s[9]||s[1])/1000,s[1]/1000,s[2]/1000,s[1]>60?48:28); m.set(s[4],s[5],s[6]); return [g,m,s[3],s[7]];}
+  if(k==='t'){g=new THREE.TorusGeometry(s[1]/1000,s[2]/1000,8,40); m.set(s[4],s[5],s[6]); return [g,m,'t'+s[3],s[7]];}
+  if(k==='h'){const ro=s[1]/1000,ri=s[2]/1000,l=s[3]/1000;g=new THREE.LatheGeometry([new THREE.Vector2(ri,-l/2),new THREE.Vector2(ro,-l/2),new THREE.Vector2(ro,l/2),new THREE.Vector2(ri,l/2),new THREE.Vector2(ri,-l/2)],40); m.set(s[5],s[6],s[7]); return [g,m,s[4],s[8]];}
+  if(k==='u'){const c=new THREE.CatmullRomCurve3(s[1].map(p=>new THREE.Vector3(p[0]/1000,p[1]/1000,p[2]/1000)));g=new THREE.TubeGeometry(c,40,s[2]/1000,8,false); return [g,new THREE.Vector3(),null,s[3],true];}
+  g=new THREE.BoxGeometry(.05,.05,.05); return [g,m,null,'Gr'];
+}
+function partInfo(view,ref){
+  if(ref==='G') return null;
+  const d=ref.dev; return {it:ref.t,d:ref.f||'',pn:ref.pn||'',qty:ref.qty||'',dev:d,col:d?(d.guess?'#b0412f':d.ios&&d.ios.length?'#1f4fb0':'#c46f12'):'#c46f12'};
+}
+function buildEx(id){
+  const view=EXV[id]; while(exRoot.children.length) exRoot.remove(exRoot.children[0]);
+  exBalloons.forEach(b=>b.el.remove()); exBalloons=[]; exParts=[];
+  view.parts.forEach((p,pi)=>{
+    const [ref,shapes,vec,ghost]=p; const info=partInfo(view,ref);
+    const grp=new THREE.Group(); exRoot.add(grp); const ms=[];
+    shapes.forEach(s=>{const [g,pos,rot,c,abs]=exShape(s); const mat=exMat(c,!!ghost); const mesh=new THREE.Mesh(g,mat);
+      if(!abs) mesh.position.set(pos.x/1000,pos.y/1000,pos.z/1000);
+      if(rot==='x') mesh.rotation.z=-Math.PI/2; else if(rot==='z') mesh.rotation.x=Math.PI/2; else if(rot==='tx') mesh.rotation.y=Math.PI/2; else if(rot==='ty') mesh.rotation.x=Math.PI/2;
+      if(s[0]!=='u'&&!ghost&&c!=='Gl'){const e=new THREE.LineSegments(new THREE.EdgesGeometry(g,30),exEdge); e.raycast=()=>{}; mesh.add(e);}
+      mesh.userData={pi,base:mesh.position.clone(),e0:mat.emissive.getHex()}; grp.add(mesh); ms.push(mesh);});
+    const part={pi,grp,meshes:ms,vec:new THREE.Vector3(vec[0]/1000,vec[1]/1000,vec[2]/1000),info};
+    exParts.push(part);
+    if(info){const el=document.createElement('button'); el.type='button'; el.className='balloon'; el.style.borderColor=info.col; el.dataset.pi=pi;
+      el.innerHTML=`<b>${esc(info.it)}</b><span>${esc(info.d.length>34?info.d.slice(0,33)+'…':info.d)}</span>`; el.title=`${info.it} · ${info.d}${info.pn?' · '+info.pn:''}`;
+      stage.appendChild(el); exBalloons.push({el,part});}
+  });
+  applyExplode(exGoal); const bb=new THREE.Box3().setFromObject(exRoot); applyExplode(0);
+  const c=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3()).length();
+  exGrid.position.set(c.x,bb.min.y-.05,c.z);
+  if(controls){controls.target.copy(c); controls.maxDistance=sz*6; controls.minDistance=sz*.05;}
+  camera.position.copy(c).add((view.kind==='cab'?new THREE.Vector3(.28,.22,1):new THREE.Vector3(.5,.38,.78)).normalize().multiplyScalar(sz*(view.kind==='cab'?1.55:1.3)));
+  exT=0; stageEl('exT').value=Math.round(exGoal*100);
+}
+function applyExplode(t){exParts.forEach(p=>p.meshes.forEach(m=>m.position.copy(m.userData.base).addScaledVector(p.vec,t)));}
+function exHighlight(pi){
+  AMB.set(amberHex());
+  exParts.forEach(p=>p.meshes.forEach(m=>{const on=p.pi===pi; m.material.emissive.copy(on?AMB:new THREE.Color(m.userData.e0)); m.material.emissiveIntensity=on?.55:0;}));
+  exBalloons.forEach(b=>b.el.classList.toggle('on',b.part.pi===pi));
+  document.querySelectorAll('[data-expi]').forEach(r=>r.classList.toggle('on',+r.dataset.expi===pi));
+  const v=EXV[exMode]; const cs=stageEl('cabsel'); if(cs&&v&&v.kind==='cab'){const p=v.parts[pi]; if(p&&typeof p[0]==='object') cs.innerHTML=devSel(p[0].dev);}
+  const r=document.querySelector(`#exlist [data-expi="${pi}"]`); if(r&&!matchMedia('(max-width:900px)').matches) r.scrollIntoView({block:'nearest'});
+}
+function enterEx(id){
+  if(!EXV[id]||!renderer) return;
+  if(!exMode) mainPose={t:controls.target.clone(),c:camera.position.clone()};
+  exMode=id; goal.t=null; goal.c=null;
+  stage.classList.add('exmode'); tags.forEach(t=>t.el.hidden=true);
+  exGoal=+stageEl('exT').value/100||.75; buildEx(id);
+  const v=EXV[id]; cur='c-'+v.comp; detail.innerHTML=v.kind==='cab'?renderCab(v):renderParts(v); detail.scrollTop=0;
+  highlightList();
+  try{history.replaceState(null,'','#'+id);}catch(e){}
+}
+function exitEx(){
+  if(!exMode) return; exMode=null; stage.classList.remove('exmode'); document.querySelector('.work').classList.remove('full'); stageEl('exFull').textContent='Expand'; stageEl('exFull').setAttribute('aria-pressed','false');
+  exBalloons.forEach(b=>b.el.remove()); exBalloons=[];
+  if(mainPose&&controls){controls.target.copy(mainPose.t); camera.position.copy(mainPose.c);} buildModelLimits();
+}
+function buildModelLimits(){ if(!controls) return; const span=HOME_C.distanceTo(HOME_T)/1.75; controls.minDistance=span*.15; controls.maxDistance=span*6; }
+function exFrame(){
+  exT+=(exGoal-exT)*.08; applyExplode(exT);
+  const w=stage.clientWidth,h=stage.clientHeight, bb=new THREE.Box3(), v=new THREE.Vector3();
+  exBalloons.forEach(b=>{bb.setFromObject(b.part.grp); bb.getCenter(v); v.y=bb.max.y; v.project(camera);
+    const vis=v.z<1&&Math.abs(v.x)<1.1&&Math.abs(v.y)<1.1; b.el.hidden=!vis; if(vis){b.el.style.left=((v.x+1)/2*w)+'px'; b.el.style.top=((1-v.y)/2*h)+'px';}});
+}
+stage.addEventListener('click',e=>{const b=e.target.closest('.balloon'); if(b){e.stopPropagation(); exHighlight(+b.dataset.pi);}});
+stageEl('exBack').addEventListener('click',()=>{const k=cur; exitEx(); if(k&&byKey[k]) select(k,true);});
+stageEl('exT').addEventListener('input',e=>{exGoal=+e.target.value/100;});
+let labelsOn=true; try{labelsOn=localStorage.getItem('mtb-labels')!=='off';}catch(e){}
+function setLabels(on){labelsOn=on; stage.classList.toggle('nolabels',!on); ['exLabels','mainLabels'].forEach(id=>{const b=stageEl(id); b.setAttribute('aria-pressed',String(on)); b.textContent=on?'Labels on':'Labels off';}); stageEl('exNames').disabled=!on; try{localStorage.setItem('mtb-labels',on?'on':'off');}catch(e){}}
+setLabels(labelsOn);
+stageEl('exLabels').addEventListener('click',()=>setLabels(!labelsOn));
+stageEl('mainLabels').addEventListener('click',()=>setLabels(!labelsOn));
+stageEl('exNames').addEventListener('click',e=>{exNames=!exNames; stage.classList.toggle('exnames',exNames); e.currentTarget.setAttribute('aria-pressed',String(exNames));});
+stageEl('exFull').addEventListener('click',e=>{const w=document.querySelector('.work');const on=!w.classList.contains('full');w.classList.toggle('full',on);e.currentTarget.setAttribute('aria-pressed',String(on));e.currentTarget.textContent=on?'Show details':'Expand';});
+stageEl('exReset').addEventListener('click',()=>{if(exMode) buildEx(exMode);});
+
+const ray=new THREE.Raycaster(), ndc=new THREE.Vector2(); let down=null;
+if(renderer){
+  renderer.domElement.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY];});
+  renderer.domElement.addEventListener('pointerup',e=>{
+    if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5) return;
+    const r=renderer.domElement.getBoundingClientRect(); ndc.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+    ray.setFromCamera(ndc,camera);
+    if(exMode){const ms=[];exParts.forEach(p=>{if(p.info) p.meshes.forEach(m=>ms.push(m));});const h=ray.intersectObjects(ms,false)[0]; if(h) exHighlight(h.object.userData.pi); return;}
+    const hit=ray.intersectObjects(pick.filter(m=>m.visible),false)[0];
+    if(hit){const id=hit.object.userData.id; select('c-'+id,true); if(COMPVIEWS[id]&&COMPVIEWS[id].length) enterEx(COMPVIEWS[id][0]);}
+  });
+}
+function themeScene(){
+  const cs=getComputedStyle(document.documentElement);
+  scene.background=new THREE.Color(cs.getPropertyValue('--scene').trim()||'#e3e7eb'); exScene.background=scene.background;
+  const dark=scene.background.getHSL({}).l<.3;
+  floor.material.color.set(dark?0x232a32:0xc9d0d8); edgeMat.color.set(dark?0x000000:0x1b232c); exEdge.color.set(dark?0x000000:0x1b232c);
+  if(hl.length) highlight(hl.slice());
+}
+themeScene();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',themeScene);
+new MutationObserver(themeScene).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+function resize(){if(!renderer) return; const w=stage.clientWidth,h=stage.clientHeight; if(!w||!h) return; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(stage); resize();
+const tmp=new THREE.Vector3(), tb=new THREE.Box3();
+(function loop(){
+  requestAnimationFrame(loop); if(!renderer) return;
+  if(goal.t){const d=tmp.copy(goal.t).sub(controls.target); if(d.length()<.002&&!goal.c) goal.t=null; else {d.multiplyScalar(.1); controls.target.add(d); if(!goal.c) camera.position.add(d);}}
+  if(goal.c){const d=tmp.copy(goal.c).sub(camera.position); if(d.length()<.003){goal.c=null;goal.t=null;} else camera.position.add(d.multiplyScalar(.1));}
+  controls.update();
+  if(exMode){renderer.render(exScene,camera); exFrame(); return;}
+  renderer.render(scene,camera);
+  const w=stage.clientWidth,h=stage.clientHeight;
+  tags.forEach(t=>{tb.makeEmpty(); (meshes[t.id]||[]).forEach(m=>{if(m.visible) tb.expandByObject(m);}); if(tb.isEmpty()){t.el.hidden=true;return;}
+    const p=new THREE.Vector3((tb.min.x+tb.max.x)/2,tb.max.y,(tb.min.z+tb.max.z)/2).project(camera);
+    const vis=p.z<1&&Math.abs(p.x)<1.05&&Math.abs(p.y)<1.05; t.el.hidden=!vis; if(vis){t.el.style.left=((p.x+1)/2*w)+'px'; t.el.style.top=((1-p.y)/2*h)+'px';}});
+})();
+
+/* ============================ INDEXES ============================ */
+let P=null, C={}, IOT={}, GROUPS={}, DEFS=[], byKey={};
+function procOf(name){return LIB.find(l=>l.match.test(name))||null;}
+function machineProcs(){const s=new Set(); P.meta.functions.forEach(f=>{const l=procOf(f); if(l) s.add(l.id);}); P.defects.forEach(d=>{const l=procOf(d.process); if(l) s.add(l.id);}); return s;}
+function kwComps(kws){if(!kws||!kws.length) return []; return P.components.filter(c=>{const h=(c.name+' '+c.desc).toLowerCase(); return kws.some(k=>h.includes(k));}).map(c=>c.id).slice(0,8);}
+function index(){
+  C={}; P.components.forEach(c=>{C[c.id]=c;});
+  IOT={}; P.io.forEach(r=>{IOT[r.tag]=r;});
+  GROUPS={}; P.groups.forEach(g=>{GROUPS[g.id]=g.name;});
+  DEFS=[];
+  P.defects.forEach(d=>{const l=procOf(d.process); DEFS.push(Object.assign({},d,{key:'d-'+d.id,procId:l?l.id:'own',procName:d.process,mats:d.material?d.material.split(/,\s*/):[]}));});
+  LIB.forEach(l=>l.defects.forEach(x=>{const [name,cat,looks,iso,causes,params,kw]=x;
+    DEFS.push({id:'lib-'+l.id+'-'+slug(name),key:'d-lib-'+l.id+'-'+slug(name),name,cat,looks,isolate:iso,causes:causes.map(c=>({area:c[0],cause:c[1],fix:c[2]})),params,comps:kwComps(kw),procId:l.id,procName:l.name,mats:l.materials,src:'library'});}));
+  P.components.forEach(c=>{c.key='c-'+c.id; c.faults=P.faults.filter(f=>f.comps.includes(c.id)); c.ios=P.io.filter(r=>P.cabinets[c.id]?false:(r.loc&&(r.loc.toLowerCase()===c.name.toLowerCase()))).map(r=>r.tag);
+    P.faults.forEach(f=>{if(f.comps.includes(c.id)) f.io.forEach(t=>{if(IOT[t]&&!c.ios.includes(t)) c.ios.push(t);});});
+    P.sequence.forEach(s=>{if(s.comps.includes(c.id)) [...s.inputs,...s.outputs].forEach(t=>{if(IOT[t]&&!c.ios.includes(t)&&IOT[t].loc&&c.name.toLowerCase().includes(IOT[t].loc.toLowerCase().split(' ')[0])) c.ios.push(t);});});
+    c.defs=DEFS.filter(d=>d.comps.includes(c.id));});
+  byKey={setup:{t:'setup'},io:{t:'iolist'}};
+  P.faults.forEach(f=>{f.key='f-'+f.id; byKey[f.key]={t:'fault',o:f};});
+  P.components.forEach(c=>{byKey[c.key]={t:'comp',o:c};});
+  P.sequence.forEach(s=>{s.key='s-'+s.id; byKey[s.key]={t:'seq',o:s};});
+  P.checks.forEach(s=>{s.key='k-'+s.id; byKey[s.key]={t:'check',o:s};});
+  P.reference.forEach(s=>{s.key='r-'+s.id; byKey[s.key]={t:'ref',o:s};});
+  DEFS.forEach(d=>{byKey[d.key]={t:'defect',o:d};});
+  EXV={}; COMPVIEWS={};
+  P.components.forEach(c=>{const vs=[];
+    if(P.cabinets[c.id]&&P.cabinets[c.id].devices.length){const v=cabinetView(c); EXV[v.id]=v; vs.push(v.id);}
+    if(c.parts.length){const v=partsView(c); EXV[v.id]=v; vs.push(v.id);}
+    COMPVIEWS[c.id]=vs;});
+}
+
+/* ============================ UI ============================ */
+let tab='machine', cat='all', proc='mine', mat='all', cur=null;
+const EFF={stop:['Stops the machine','stop'],warn:['Warning, keeps running','warn'],info:['Information','info']};
+const IOTYPE={DI:'Digital input',DO:'Digital output',AI:'Analog input',AO:'Analog output',TC:'Thermocouple'};
+function catChips(){
+  if(tab==='process'){cats.hidden=true;return;} cats.hidden=false;
+  if(tab==='machine'){
+    const gs=P.groups.filter(g=>P.faults.some(f=>f.group===g.id)||P.components.some(c=>c.group===g.id));
+    cats.innerHTML=['all',...gs.map(g=>g.id),'_comps'].map(k=>`<button class="chip" type="button" data-cat="${k}" aria-pressed="${cat===k}">${k==='all'?'All':k==='_comps'?'Components':esc(GROUPS[k])}</button>`).join('');
+  } else {
+    const mine=machineProcs(); const procs=[['mine','This machine'],['all','All processes'],...LIB.map(l=>[l.id,l.name])]; if(P.defects.some(d=>!procOf(d.process))) procs.splice(2,0,['own','From your documents']);
+    const mats=['all',...new Set(DEFS.filter(d=>procMatch(d)).flatMap(d=>d.mats))];
+    cats.innerHTML=`<div class="chiprow"><small>Machine function</small><div class="chips">${procs.map(([k,n])=>`<button class="chip" type="button" data-proc="${k}" aria-pressed="${proc===k}">${esc(n)}${k==='mine'&&!mine.size&&!P.defects.length?' (none set)':''}</button>`).join('')}</div></div>
+    <div class="chiprow"><small>Material</small><div class="chips">${mats.map(m=>`<button class="chip" type="button" data-mat="${esc(m)}" aria-pressed="${mat===m}">${m==='all'?'All':esc(m)}</button>`).join('')}</div></div>`;
+  }
+}
+function procMatch(d){if(proc==='all') return true; if(proc==='mine'){const m=machineProcs(); return d.src!=='library'||m.has(d.procId);} return d.procId===proc;}
+const fHay=f=>(f.title+' '+f.msg+' '+f.code+' '+f.causes.join(' ')+' '+f.checks.join(' ')+' '+f.comps.map(c=>C[c]?C[c].name:'').join(' ')+' '+f.io.join(' ')).toLowerCase();
+const dHay=d=>(d.name+' '+d.cat+' '+d.looks+' '+d.procName+' '+d.causes.map(c=>c.cause+' '+c.fix).join(' ')+' '+d.params.join(' ')).toLowerCase();
+function renderList(){
+  const s=q.value.trim().toLowerCase(); let html='', n=0;
+  if(tab==='machine'){
+    if(cat!=='_comps'){
+      const gs=[...P.groups.map(g=>g.id)]; if(P.faults.some(f=>!GROUPS[f.group])) gs.push('general');
+      gs.filter(k=>cat==='all'||cat===k).forEach(k=>{const items=P.faults.filter(f=>f.group===k&&(!s||fHay(f).includes(s))); if(!items.length) return; n+=items.length;
+        html+=`<div class="group-h">${esc(GROUPS[k]||'General')}</div>`+items.map(f=>`<button class="item" type="button" data-key="${f.key}" aria-current="${cur===f.key}"><span>${esc(f.title)}${f.msg?'<span class="msg" title="Has screen message text">HMI</span>':''}</span><small>${esc(f.code||'')}</small></button>`).join('');});
+    }
+    if(cat==='all'||cat==='_comps'||P.components.some(c=>c.group===cat)){
+      const items=P.components.filter(c=>(cat==='all'||cat==='_comps'||c.group===cat)&&(!s||(c.name+' '+c.desc).toLowerCase().includes(s)));
+      if(items.length) html+=`<div class="group-h">Components</div>`+items.map(c=>`<button class="item" type="button" data-key="${c.key}" aria-current="${cur===c.key}"><span>${esc(c.name)}</span><small>${COMPVIEWS[c.id].length?(P.cabinets[c.id]?'panel':c.parts.length+' parts'):''}</small></button>`).join('');
+    }
+    count.textContent=P.faults.length?`${n} of ${P.faults.length} faults · ${P.components.length} components`:`${P.components.length} components · no faults yet: add a manual in Setup`;
+  } else if(tab==='process'){
+    const ioHay=ids=>ids.map(t=>IOT[t]?t+' '+IOT[t].desc+' '+IOT[t].device:t).join(' ');
+    const sq=P.sequence.filter(x=>!s||(x.name+' '+x.desc+' '+x.ends+' '+ioHay([...x.inputs,...x.outputs])).toLowerCase().includes(s));
+    const ck=P.checks.filter(x=>!s||(x.name+' '+x.why+' '+x.steps.join(' ')).toLowerCase().includes(s));
+    const rf=P.reference.filter(x=>!s||(x.name+' '+x.intro+' '+x.rows.flat().join(' ')+' '+x.notes.join(' ')).toLowerCase().includes(s));
+    const ioMatch=P.io.length&&(!s||ioHay(P.io.map(r=>r.tag)).toLowerCase().includes(s));
+    n=sq.length+ck.length+rf.length;
+    if(sq.length) html+=`<div class="group-h">Machine sequence · I/O</div>`+sq.map(x=>`<button class="item" type="button" data-key="${x.key}" aria-current="${cur===x.key}"><span>${P.sequence.indexOf(x)+1}. ${esc(x.name)}</span><small>${x.inputs.length+x.outputs.length} pts</small></button>`).join('');
+    if(ck.length) html+=`<div class="group-h">Process checks</div>`+ck.map(x=>`<button class="item" type="button" data-key="${x.key}" aria-current="${cur===x.key}"><span>${esc(x.name)}</span><small></small></button>`).join('');
+    if(rf.length||ioMatch) html+=`<div class="group-h">Reference</div>`+rf.map(x=>`<button class="item" type="button" data-key="${x.key}" aria-current="${cur===x.key}"><span>${esc(x.name)}</span><small></small></button>`).join('')+(ioMatch?`<button class="item" type="button" data-key="io" aria-current="${cur==='io'}"><span>I/O list</span><small>${P.io.length} pts</small></button>`:'');
+    count.textContent=n||P.io.length?`Sequence, process checks and reference · ${P.io.length} I/O points`:'Nothing here yet: add manuals and electrical prints in Setup';
+  } else {
+    const items=DEFS.filter(d=>procMatch(d)&&(mat==='all'||d.mats.includes(mat))&&(!s||dHay(d).includes(s)));
+    n=items.length; const byProc={};
+    items.forEach(d=>{(byProc[d.procName]=byProc[d.procName]||[]).push(d);});
+    Object.entries(byProc).forEach(([pn,ds])=>{html+=`<div class="group-h">${esc(pn)}</div>`+ds.map(d=>`<button class="item" type="button" data-key="${d.key}" aria-current="${cur===d.key}"><span>${esc(d.name)}${d.src!=='library'?'<span class="ai" title="Built from your documents">own</span>':''}</span><small>${esc(d.cat)}</small></button>`).join('');});
+    if(!n&&proc==='mine') html=`<p class="group-h" style="text-transform:none;letter-spacing:0;font-family:var(--f-body);font-weight:400;font-size:13.5px">Set this machine's function (machining, welding, molding…) in Setup, or pick a process above.</p>`;
+    count.textContent=`${n} defects · general industry practice${P.defects.length?' + your documents':''}`;
+  }
+  list.innerHTML=html||'<p class="group-h">No matches</p>';
+}
+function highlightList(){list.querySelectorAll('[data-key]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.key===cur)));}
+const compChips=ids=>`<div class="chips">${ids.filter(i=>C[i]).map(i=>`<button class="chip" type="button" data-key="c-${i}">${esc(C[i].name)}</button>`).join('')}</div>`;
+const faultChips=a=>`<div class="chips">${a.map(f=>`<button class="chip" type="button" data-key="${f.key}">${esc(f.title)}</button>`).join('')}</div>`;
+const defChips=a=>`<div class="chips">${a.map(d=>`<button class="chip" type="button" data-key="${d.key}">${esc(d.name)}</button>`).join('')}</div>`;
+const ioRows=tags=>tags.filter(t=>IOT[t]).map(t=>{const o=IOT[t];return `<tr><td class="tg">${esc(o.tag)}</td><td><span class="ty ${esc(o.type)}" title="${esc(IOTYPE[o.type]||o.type)}">${esc(o.type||'—')}</span></td><td class="ds">${esc(o.desc)}</td><td class="mn">${esc(o.device||'—')}${o.wire?' · '+esc(o.wire):''}</td><td class="mn hidem">${esc(o.addr||o.loc||'—')}</td><td class="mn hidem">${esc(o.sheet||'—')}</td></tr>`;}).join('');
+const IOHEAD='<thead><tr><th>Tag</th><th>Type</th><th>Description</th><th>Device · wire</th><th class="hidem">Address / location</th><th class="hidem">Sheet</th></tr></thead>';
+const ioTable=(tags,title,sub)=>{tags=tags.filter(t=>IOT[t]);if(!tags.length) return '';return `<div class="blk"><h3>${title}${sub?`<em>${sub}</em>`:''}</h3><div class="tblwrap"><table class="iot">${IOHEAD}<tbody>${ioRows(tags)}</tbody></table></div></div>`;};
+const srcLine=()=>P.example?'Example data for demonstration. Open Setup & sources to build this page from your own machine documents.':`Built from: ${P.sources.length?P.sources.map(s=>esc(s.name)).join(', '):'documents added in Setup'}. Content extracted by Claude; check anything safety-critical against the original documents.`;
+const FOOT=()=>`<p class="foot">${srcLine()} Lock out and verify zero energy before working on the machine.</p>`;
+function woFault(f){return `${f.title}${f.code?' ('+f.code+')':''}\n${P.meta.name}${P.meta.serial?' · S/N '+P.meta.serial:''}${f.msg?'\nScreen: '+f.msg:''}\n\nPossible causes:\n${f.causes.map(x=>'- '+x).join('\n')}\n\nHow to check:\n${f.checks.map(x=>'- '+x).join('\n')}\n\nParts: ${f.comps.map(c=>C[c]?C[c].name:c).join(', ')}${f.io.length?'\n\nI/O to check:\n'+f.io.filter(t=>IOT[t]).map(t=>`- ${t} ${IOT[t].desc}${IOT[t].device?' ('+IOT[t].device+')':''}`).join('\n'):''}`;}
+function woDefect(d){return `${d.name} — ${d.procName}\n${P.meta.name}${P.meta.serial?' · S/N '+P.meta.serial:''}\n\n${d.looks}\n\nIsolate first:\n${d.isolate.map(x=>'- '+x).join('\n')}\n\nCauses and actions:\n${d.causes.map(c=>`- [${c.area}] ${c.cause} → ${c.fix}`).join('\n')}${d.params.length?'\n\nParameters to review: '+d.params.join(', '):''}`;}
+function renderFault(f){
+  const e=EFF[f.effect];
+  return `<article class="sheet">
+  <div><div class="eyebrow">${esc(GROUPS[f.group]||'General')}${f.code?' · '+esc(f.code):''}${f.src?' · '+esc(f.src):''}</div><h2>${esc(f.title)}</h2></div>
+  <div class="meta">${e?`<span class="pill ${e[1]}">${e[0]}</span>`:''}${f.msg?`<span class="pill hmi">Screen: ${esc(f.msg)}</span>`:''}<span class="pill info">${f.comps.length} part${f.comps.length===1?'':'s'} highlighted</span></div>
+  ${f.safety?`<div class="note danger"><b>Warning</b>${esc(f.safety)}</div>`:''}
+  <div class="cols">
+    <div class="blk"><h3>Possible causes</h3><ul>${f.causes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="blk"><h3>How to check</h3><ul>${f.checks.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+  </div>
+  ${f.comps.length?`<div class="blk"><h3>Parts</h3>${compChips(f.comps)}</div>`:''}
+  ${(()=>{const ds=DEFS.filter(d=>procMatch(d)&&d.comps.some(c=>f.comps.includes(c))).slice(0,10);return ds.length?`<div class="blk"><h3>Product defects linked to these parts</h3>${defChips(ds)}</div>`:'';})()}
+  ${ioTable(f.io,'I/O to check')}
+  <div class="actions"><button class="btn" type="button" data-copy="fault">Copy for work order</button></div>
+  <textarea id="woFallback" aria-label="Work order text" hidden readonly></textarea>
+  ${FOOT()}</article>`;
+}
+const AREAS={machine:'Machine',material:'Material',tooling:'Tooling',method:'Method',environment:'Environment'};
+function renderDefect(d){
+  const areas=[...new Set(d.causes.map(c=>c.area))];
+  const rel=P.faults.filter(f=>f.comps.some(c=>d.comps.includes(c))).slice(0,8);
+  return `<article class="sheet">
+  <div><div class="eyebrow">Defect · ${esc(d.procName)} · ${esc(d.mats.join(', '))} · ${d.src==='library'?'general industry practice':'from your documents'}</div><h2>${esc(d.name)}</h2></div>
+  ${d.looks?`<p class="lead">${esc(d.looks)}</p>`:''}
+  ${d.isolate.length?`<div class="blk"><h3>Isolate first</h3><ol>${d.isolate.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`:''}
+  <div class="note"><b>Method</b>Change one variable at a time, let the process settle, and record each change and its result. Confirm the cause with the isolation steps before adjusting.</div>
+  ${areas.map(a=>`<div class="blk"><h3>${esc(AREAS[a]||a)}</h3><div class="acts">${d.causes.filter(c=>c.area===a).map(c=>`<div class="act"><span class="what">${esc(c.cause)}</span><span class="fix">${esc(c.fix)}</span></div>`).join('')}</div></div>`).join('')}
+  ${d.params.length?`<div class="blk"><h3>Parameters to review</h3><div class="chips">${d.params.map(p=>`<span class="chip" style="cursor:default">${esc(p)}</span>`).join('')}</div></div>`:''}
+  <div class="blk"><h3>Machine parts involved</h3>${d.comps.length?compChips(d.comps):'<p style="margin:0;color:var(--muted)">No matching part on this machine model.</p>'}</div>
+  ${rel.length?`<div class="blk"><h3>Machine faults on those parts</h3>${faultChips(rel)}</div>`:''}
+  <div class="actions"><button class="btn" type="button" data-copy="defect">Copy for work order</button></div>
+  <textarea id="woFallback" aria-label="Work order text" hidden readonly></textarea>
+  <p class="foot">${d.src==='library'?'General troubleshooting practice for this process, not specific to your machine or material grade. Always check against the material supplier\'s datasheet and your process sheet.':srcLine()}</p></article>`;
+}
+function renderComp(c){
+  const vs=COMPVIEWS[c.id]||[];
+  return `<article class="sheet">
+  <div><div class="eyebrow">Machine part${c.group&&GROUPS[c.group]?' · '+esc(GROUPS[c.group]):''}${c.src?' · '+esc(c.src):''}</div><h2>${esc(c.name)}</h2></div>
+  ${c.desc?`<p class="lead">${esc(c.desc)}</p>`:''}
+  ${vs.length?`<div class="blk"><h3>Detailed views</h3><div class="exbtns">${vs.map(x=>`<button class="btn" type="button" data-ex="${x}">${EXV[x].kind==='cab'?'Cabinet layout · '+P.cabinets[c.id].devices.length+' devices':'Exploded view · '+c.parts.length+' parts'}</button>`).join('')}</div></div>`:`<p class="count" style="margin:0">No parts list or panel layout for this part yet. Add a BOM or electrical prints in Setup.</p>`}
+  ${c.auto?'<div class="note err"><b>Placement</b>No position found in the documents, so this part is placed beside the machine.</div>':''}
+  <div class="blk"><h3>Faults on this part (${c.faults.length})</h3>${c.faults.length?faultChips(c.faults):'<p style="margin:0;color:var(--muted)">None in the fault list.</p>'}</div>
+  ${c.defs.length?`<div class="blk"><h3>Product defects that involve it</h3>${defChips(c.defs.filter(procMatch).slice(0,12))}</div>`:''}
+  ${ioTable(c.ios,'I/O on this part')}
+  ${FOOT()}</article>`;
+}
+function renderParts(v){
+  const c=C[v.comp]; const vs=COMPVIEWS[c.id];
+  return `<article class="sheet">
+  <div><div class="eyebrow">Exploded view · ${c.parts.length} parts${c.parts[0]&&c.parts[0].dw?' · drawing '+esc(c.parts[0].dw):''}</div><h2>${esc(c.name)}</h2></div>
+  <div class="meta"><button class="chip" type="button" data-key="${c.key}">Part: ${esc(c.name)}</button>${vs.length>1?vs.filter(x=>x!==v.id).map(x=>`<button class="chip" type="button" data-ex="${x}">${EXV[x].kind==='cab'?'Cabinet layout':'Exploded view'}</button>`).join(''):''}</div>
+  ${c.faults.length?`<div class="blk"><h3>Faults on ${esc(c.name)} (${c.faults.length})</h3>${faultChips(c.faults)}</div>`:''}
+  <p class="count" style="margin:0">Tap a row or a balloon to highlight it. Shapes are generic stand-ins picked from each part's description; item numbers, part numbers and names are from the parts list.</p>
+  <div class="blk" id="exlist"><div class="tblwrap"><table class="iot bom"><thead><tr><th>Item</th><th>Qty</th><th>Part no.</th><th>Description</th></tr></thead><tbody>${v.parts.map((p,pi)=>typeof p[0]==='object'?`<tr class="lnk" data-expi="${pi}"><td class="tg">${esc(p[0].t)}</td><td class="mn">${esc(p[0].qty)}</td><td class="mn">${esc(p[0].pn)}</td><td class="ds">${esc(p[0].f)}</td></tr>`:'').join('')}</tbody></table></div></div>
+  ${FOOT()}</article>`;
+}
+function devSel(d){
+  return `<div class="blk cabsel"><h3>${esc(d.tag)} <em>${esc(d.kind||d.k)}${d.pn?' · '+esc(d.pn):''}</em></h3>
+  <p style="margin:0 0 6px">${esc(d.func)}</p>
+  ${d.guess?`<div class="note"><b>Verify</b>Position matched from a photo only; confirm the tag on the device label.</div>`:''}
+  ${d.ios.length?`<div class="tblwrap"><table class="iot">${IOHEAD}<tbody>${ioRows(d.ios)}</tbody></table></div>`:'<p class="count" style="margin:0">No I/O point listed for this device: power, distribution or protection.</p>'}</div>`;
+}
+const KNAME={plc:'Controllers and network',io:'I/O modules',switch:'Controllers and network',safety:'Safety devices',breaker:'Breakers and fuses',fuse:'Breakers and fuses',transformer:'Power supplies, drives and transformers',psu:'Power supplies, drives and transformers',drive:'Power supplies, drives and transformers',filter:'Power supplies, drives and transformers',contactor:'Contactors and relays',relay:'Contactors and relays',meter:'Other devices',fan:'Other devices',connector:'Terminals and connectors',terminal:'Terminals and connectors',other:'Other devices'};
+function renderCab(v){
+  const c=C[v.comp]; const vs=COMPVIEWS[c.id]; const pi={}; v.parts.forEach((p,i)=>{if(typeof p[0]==='object') pi[p[0].dev.i]=i;});
+  const groups={}; v.devs.forEach(d=>{(groups[KNAME[d.k]]=groups[KNAME[d.k]]||[]).push(d);});
+  return `<article class="sheet">
+  <div><div class="eyebrow">Cabinet layout · ${v.devs.length} devices</div><h2>${esc(c.name)}</h2></div>
+  <div class="meta"><button class="chip" type="button" data-key="${c.key}">Part: ${esc(c.name)}</button>${vs.filter(x=>x!==v.id).map(x=>`<button class="chip" type="button" data-ex="${x}">Exploded view</button>`).join('')}</div>
+  <div id="cabsel"><p class="count" style="margin:0">Tap a device in the 3D view or a row below for its function, wires and I/O.</p></div>
+  <div class="note"><b>Layout</b>Devices are grouped by type on the panel; positions follow the drawings or photos where the documents give them. Blue balloons carry I/O, orange are power or protection, red are photo matches to verify.</div>
+  <div id="exlist">${Object.entries(groups).map(([n,ds])=>`<div class="blk"><h3>${esc(n)} <em>${ds.length}</em></h3><div class="tblwrap"><table class="iot bom"><thead><tr><th>Tag</th><th>Function</th><th>I/O</th></tr></thead><tbody>${ds.map(d=>`<tr class="lnk" data-expi="${pi[d.i]}"><td class="tg">${esc(d.tag)}${d.guess?' ?':''}</td><td class="ds">${esc(d.func)}</td><td class="mn">${d.ios.length>3?d.ios.length+' pts':d.ios.join(' ')||'—'}</td></tr>`).join('')}</tbody></table></div></div>`).join('')}</div>
+  ${FOOT()}</article>`;
+}
+function renderSeq(x){
+  const i=P.sequence.indexOf(x), S=P.sequence;
+  return `<article class="sheet">
+  <div><div class="eyebrow">Machine sequence · step ${i+1} of ${S.length}</div><h2>${esc(x.name)}</h2></div>
+  ${x.desc?`<p class="lead">${esc(x.desc)}</p>`:''}
+  ${x.ends?`<div class="ends"><b>Ends when</b>${esc(x.ends)}</div>`:''}
+  ${x.hw.length?`<div class="note"><b>Hardwired</b>${x.hw.map(esc).join('<br>')}</div>`:''}
+  ${ioTable(x.inputs,'Inputs / permissives')}
+  ${ioTable(x.outputs,'Outputs')}
+  ${x.comps.length?`<div class="blk"><h3>Parts</h3>${compChips(x.comps)}</div>`:''}
+  <div class="actions">${i>0?`<button class="btn" type="button" data-key="${S[i-1].key}">Previous: ${esc(S[i-1].name)}</button>`:''}${i<S.length-1?`<button class="btn" type="button" data-key="${S[i+1].key}">Next: ${esc(S[i+1].name)}</button>`:''}</div>
+  ${FOOT()}</article>`;
+}
+function renderCheck(x){
+  return `<article class="sheet">
+  <div><div class="eyebrow">Process check${x.src?' · '+esc(x.src):''}</div><h2>${esc(x.name)}</h2></div>
+  ${x.why?`<p class="lead">${esc(x.why)}</p>`:''}
+  <div class="blk"><h3>Check</h3><ol>${x.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol></div>
+  ${x.comps.length?`<div class="blk"><h3>Parts</h3>${compChips(x.comps)}</div>`:''}
+  ${FOOT()}</article>`;
+}
+function renderRef(r){
+  return `<article class="sheet">
+  <div><div class="eyebrow">Reference</div><h2>${esc(r.name)}</h2></div>
+  ${r.intro?`<p class="lead">${esc(r.intro)}</p>`:''}
+  ${r.rows.length?`<dl class="kv">${r.rows.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:''}
+  ${r.notes.map(t=>`<div class="note"><b>Note</b>${esc(t)}</div>`).join('')}
+  ${ioTable(r.io,'I/O points')}
+  ${r.comps.length?`<div class="blk"><h3>Parts</h3>${compChips(r.comps)}</div>`:''}
+  ${FOOT()}</article>`;
+}
+function renderIoList(){
+  return `<article class="sheet">
+  <div><div class="eyebrow">Reference · electrical prints</div><h2>I/O list</h2></div>
+  <input type="search" id="ioq" placeholder="Filter: tag, description, device, sheet" aria-label="Filter I/O">
+  <div class="count" id="iocount"></div>
+  <div class="tblwrap"><table class="iot">${IOHEAD}<tbody id="iobody"></tbody></table></div>
+  ${FOOT()}</article>`;
+}
+function wireIoFilter(){
+  const bx=stageEl('ioq'), body=stageEl('iobody'), cnt=stageEl('iocount'); if(!bx) return;
+  const run=()=>{const t=bx.value.trim().toLowerCase(); const tags=P.io.filter(o=>!t||(o.tag+' '+o.desc+' '+o.device+' '+o.loc+' '+o.addr+' sheet '+o.sheet+' '+o.type+' '+o.wire).toLowerCase().includes(t)).map(o=>o.tag);
+    body.innerHTML=ioRows(tags); cnt.textContent=`${tags.length} of ${P.io.length} points`;};
+  bx.addEventListener('input',run); run();
+}
+function select(key,fromScene){
+  const it=byKey[key]; if(!it) return; cur=key; if(exMode) exitEx();
+  let ids=[], want=tab;
+  if(it.t==='setup'){detail.innerHTML=renderSetup(); wireSetup(); stageEl('setupBtn').setAttribute('aria-current','true');}
+  else stageEl('setupBtn').setAttribute('aria-current','false');
+  if(it.t==='fault'){detail.innerHTML=renderFault(it.o); ids=it.o.comps; want='machine';}
+  else if(it.t==='comp'){detail.innerHTML=renderComp(it.o); ids=[it.o.id]; if(tab==='process') want='machine';}
+  else if(it.t==='defect'){detail.innerHTML=renderDefect(it.o); ids=it.o.comps; want='defects';}
+  else if(it.t==='seq'){detail.innerHTML=renderSeq(it.o); ids=it.o.comps; want='process';}
+  else if(it.t==='check'){detail.innerHTML=renderCheck(it.o); ids=it.o.comps; want='process';}
+  else if(it.t==='ref'){detail.innerHTML=renderRef(it.o); ids=it.o.comps; want='process';}
+  else if(it.t==='iolist'){detail.innerHTML=renderIoList(); wireIoFilter(); want='process';}
+  if(want!==tab){tab=want; syncTabs();}
+  renderList(); highlight(ids); if(ids.length) focus(ids);
+  detail.scrollTop=0;
+  try{history.replaceState(null,'','#'+key);}catch(e){}
+  if(!fromScene&&it.t!=='setup'&&matchMedia('(max-width:900px)').matches) stage.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});
+  const act=list.querySelector('[aria-current="true"]'); if(act&&!matchMedia('(max-width:900px)').matches) act.scrollIntoView({block:'nearest'});
+}
+function syncTabs(){document.querySelectorAll('.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));catChips();q.placeholder=tab==='machine'?'Search faults, causes, parts':tab==='defects'?'Search defects, causes, fixes':'Search sequence, I/O, checks';}
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]'); if(!b) return; tab=b.dataset.tab; syncTabs(); renderList();});
+cats.addEventListener('click',e=>{const b=e.target.closest('[data-cat],[data-proc],[data-mat]'); if(!b) return; if(b.dataset.cat) cat=b.dataset.cat; if(b.dataset.proc){proc=b.dataset.proc; mat='all';} if(b.dataset.mat) mat=b.dataset.mat; catChips(); renderList();});
+q.addEventListener('input',renderList);
+document.addEventListener('click',e=>{
+  const x=e.target.closest('[data-ex]'); if(x){enterEx(x.dataset.ex); return;}
+  const r=e.target.closest('[data-expi]'); if(r&&exMode){exHighlight(+r.dataset.expi); return;}
+  const cp=e.target.closest('[data-copy]'); if(cp){const it=byKey[cur]; if(!it) return; const txt=it.t==='fault'?woFault(it.o):woDefect(it.o); const fb=stageEl('woFallback'); const label=cp.textContent;
+    const done=()=>{cp.textContent='Copied';setTimeout(()=>cp.textContent=label,1600);}; const fallback=()=>{fb.value=txt;fb.hidden=false;fb.focus();fb.select();cp.textContent='Select and copy the text below';};
+    try{navigator.clipboard.writeText(txt).then(done,fallback);}catch(err){fallback();} return;}
+  const b=e.target.closest('[data-key]'); if(b) select(b.dataset.key);
+});
+window.addEventListener('hashchange',()=>{const k=location.hash.slice(1); if(/^xc?-/.test(k)){if(k!==exMode&&EXV[k]) enterEx(k); return;} if(k&&k!==cur&&byKey[k]) select(k,true);});
+
+function applyProfile(raw,keepView){
+  P=normalize(raw); index();
+  stageEl('mName').textContent=P.meta.name||'Machine';
+  stageEl('mEyebrow').textContent=[P.meta.maker,P.meta.model,P.meta.serial?'S/N '+P.meta.serial:''].filter(Boolean).join(' · ')||'The Troubleshooter';
+  stageEl('exampleFlag').hidden=!P.example;
+  stageEl('tb').innerHTML=esc([P.meta.functions.join(', '),P.meta.materials.length?'Materials: '+P.meta.materials.join(', '):''].filter(Boolean).join(' · ')).toUpperCase();
+  document.title='The Troubleshooter'+(P.example?'':' · '+P.meta.name);
+  if(exMode) exitEx(); buildModel();
+  const k=keepView&&cur&&byKey[cur]?cur:null;
+  syncTabs();
+  if(k) select(k,true); else {const first=P.faults[0]?P.faults[0].key:P.components[0]?P.components[0].key:'setup'; select(first,true);}
+}
+/* ============================ WITHOUT CLAUDE: spreadsheet + other AI tools ============================ */
+const L=s=>arr(s).join('\n'), Ls=s=>arr(s).join(', ');
+const splitLines=v=>str(v).split(/\r?\n|\s*;\s*/).map(x=>x.replace(/^\s*[-•*]\s*/,'').trim()).filter(Boolean);
+const splitIds=v=>str(v).split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean);
+// one definition drives export, import and the downloadable template
+const SHEETS=[
+ {name:'Groups',help:'Troubleshooting areas used to group faults and components (e.g. Hydraulics, Safety and controls).',
+  cols:[['Group ID','id'],['Group name','name']],get:p=>p.groups,set:(p,r)=>p.groups=r},
+ {name:'Components',help:'Physical assemblies shown in 3D. Positions in mm: X left→right seen from the operator, Y front→rear, Z up from the floor. Center X/Y and Bottom Z place the part; Width/Depth/Height size it. Leave positions blank to place the part beside the machine.',
+  cols:[['Component ID','id'],['Name','name'],['Group ID','group'],['Shape','shape'],['Axis','axis'],['Color','color'],['Center X','box',0],['Center Y','box',1],['Bottom Z','box',2],['Width X','box',3],['Depth Y','box',4],['Height Z','box',5],['Description','desc'],['Source','src']],
+  get:p=>p.components,set:(p,r)=>p.components=r},
+ {name:'Faults',help:'Alarms and symptoms. Put one cause or check per line in a cell (Alt+Enter in Excel). Components and I/O tags: comma-separated IDs from the other sheets.',
+  cols:[['Fault ID','id'],['Title','title'],['Group ID','group'],['Alarm code','code'],['Effect','effect'],['Screen message','msg'],['Causes','causes','lines'],['Checks','checks','lines'],['Component IDs','comps','ids'],['I/O tags','io','ids'],['Safety warning','safety'],['Source','src']],
+  get:p=>p.faults,set:(p,r)=>p.faults=r},
+ {name:'IO',help:'Every PLC input and output from the electrical prints. Type: DI, DO, AI, AO or TC. Device = the field device tag the point wires to.',
+  cols:[['Tag','tag'],['Type','type'],['Description','desc'],['Device','device'],['Wire','wire'],['Address / card','addr'],['Location','loc'],['Sheet','sheet']],get:p=>p.io,set:(p,r)=>p.io=r},
+ {name:'Sequence',help:'Machine states in order, from power-up through a full cycle. Inputs/Outputs: comma-separated I/O tags.',
+  cols:[['Step ID','id'],['Step name','name'],['What happens','desc'],['Ends when','ends'],['Input tags','inputs','ids'],['Output tags','outputs','ids'],['Component IDs','comps','ids'],['Hardwired interlocks','hw','lines']],get:p=>p.sequence,set:(p,r)=>p.sequence=r},
+ {name:'Checks',help:'Process and routine checks: start-up, warm-up, changeover, inspection. One step per line.',
+  cols:[['Check ID','id'],['Name','name'],['Why it matters','why'],['Steps','steps','lines'],['Component IDs','comps','ids'],['Source','src']],get:p=>p.checks,set:(p,r)=>p.checks=r},
+ {name:'Reference',help:'Reference cards (specs, power, safety circuit). One row per line on a card; repeat the Card ID on each row. Use Label "Note" for a note.',
+  cols:[['Card ID','id'],['Card name','name'],['Intro','intro'],['Label','_k'],['Value','_v']],
+  get:p=>p.reference.flatMap(r=>{const rows=r.rows.map(([k,v])=>({id:r.id,name:r.name,intro:'',_k:k,_v:v})).concat(r.notes.map(n=>({id:r.id,name:r.name,intro:'',_k:'Note',_v:n}))); if(!rows.length) rows.push({id:r.id,name:r.name,_k:'',_v:''}); rows[0].intro=r.intro; return rows;}),
+  set:(p,rows)=>{const m={}; rows.forEach(r=>{const id=r.id||r.name; if(!id) return; const c=m[id]=m[id]||{id,name:r.name||id,intro:'',rows:[],notes:[]}; if(r.name) c.name=r.name; if(r.intro) c.intro=r.intro; if(/^note$/i.test(r._k)) c.notes.push(r._v); else if(r._k||r._v) c.rows.push([r._k,r._v]);}); p.reference=Object.values(m);}},
+ {name:'Parts',help:'Parts list for each component\'s exploded view. Item = balloon number on the drawing.',
+  cols:[['Component ID','_c'],['Item','ref'],['Description','name'],['Part number','pn'],['Qty','qty'],['Drawing','dw']],
+  get:p=>p.components.flatMap(c=>c.parts.map(x=>Object.assign({_c:c.id},x))),
+  set:(p,rows)=>{p.components.forEach(c=>c.parts=[]); rows.forEach(r=>{const c=p.components.find(c=>slug(c.id)===slug(r._c)); if(c) c.parts.push(r); else (p._warn=p._warn||[]).push(`Parts: component "${r._c}" not found`);});}},
+ {name:'Cabinet devices',help:'Devices on each electrical cabinet\'s back panel. Cabinet component ID must be a component with Shape "cabinet". Kind: plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan. Panel width/height (mm) only needed on the first row of each cabinet.',
+  cols:[['Cabinet component ID','_c'],['Tag','tag'],['Kind','kind'],['Function','func'],['Part number','pn'],['I/O tags','io','ids'],['Verify position (Y)','guess','yn'],['Panel width','_w'],['Panel height','_h']],
+  get:p=>Object.entries(p.cabinets).flatMap(([id,c])=>c.devices.map((d,i)=>Object.assign({_c:id,_w:i?'':c.w,_h:i?'':c.h},d))),
+  set:(p,rows)=>{p.cabinets={}; rows.forEach(r=>{if(!r._c) return; const c=p.cabinets[r._c]=p.cabinets[r._c]||{w:1000,h:1200,devices:[]}; if(+r._w) c.w=+r._w; if(+r._h) c.h=+r._h; if(r.tag) c.devices.push(r);});}},
+ {name:'Defects',help:'Product or output defects for this machine. Causes: one per line as  area | cause | fix  (area = machine, material, tooling, method or environment). The built-in defect library still applies; these add to it.',
+  cols:[['Defect ID','id'],['Name','name'],['Category','cat'],['Process','process'],['Material','material'],['What it looks like','looks'],['Isolate first','isolate','lines'],['Causes (area | cause | fix)','causes','causes'],['Parameters to review','params','lines'],['Component IDs','comps','ids'],['Source','src']],get:p=>p.defects,set:(p,r)=>p.defects=r}
+];
+const MACHINE_ROWS=[['Machine name','name'],['Maker','maker'],['Model','model'],['Serial number','serial'],['Machine function','functions'],['Materials processed','materials'],['Summary','summary']];
+const LISTS={Shape:SHAPES,Axis:['x','y','z'],Color:['frame','body','cab','steel','dark','yellow','blue','red','green','orange','white','copper'],Effect:['stop','warn','info'],Type:['DI','DO','AI','AO','TC'],Kind:['plc','io','safety','drive','psu','transformer','breaker','fuse','contactor','relay','terminal','connector','switch','filter','meter','fan','other']};
+function cellOut(o,[,k,t]){const v=o[k]; if(k==='box') return o.box&&!o.auto?o.box[t]:''; if(t==='lines') return L(v); if(t==='ids') return Ls(v); if(t==='yn') return v?'Y':'';
+  if(t==='causes') return arr(v).map(c=>`${c.area} | ${c.cause} | ${c.fix}`).join('\n'); return v==null?'':v;}
+function cellIn(row,[,k,t],obj){const v=row; if(k==='box'){if(v!==''&&v!=null&&isFinite(+v)){obj.box=obj.box||[null,null,null,null,null,null]; obj.box[t]=+v;} return;}
+  if(t==='lines') obj[k]=splitLines(v); else if(t==='ids') obj[k]=splitIds(v); else if(t==='yn') obj[k]=/^(y|yes|true|1|x)$/i.test(str(v).trim());
+  else if(t==='causes') obj[k]=str(v).split(/\r?\n/).map(l=>l.split('|').map(x=>x.trim())).filter(a=>a.join('')).map(a=>a.length>=3?{area:a[0].toLowerCase()||'machine',cause:a[1],fix:a.slice(2).join(' | ')}:{area:'machine',cause:a[0],fix:a[1]||''});
+  else obj[k]=str(v).trim();}
+const hnorm=s=>str(s).toLowerCase().replace(/[^a-z0-9]/g,'');
+let xlsxReady=null;
+function loadXLSX(){ if(window.XLSX) return Promise.resolve(window.XLSX); if(xlsxReady) return xlsxReady;
+  xlsxReady=new Promise((res,rej)=>{const s=document.createElement('script'); s.src=window.MTB_LIB?window.MTB_LIB+'xlsx.full.min.js':'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload=()=>res(window.XLSX); s.onerror=()=>{xlsxReady=null; rej(new Error('Spreadsheet library did not load'));}; document.head.appendChild(s);}); return xlsxReady;}
+function workbookFromProfile(X,p){
+  const wb=X.utils.book_new();
+  const intro=[['Machine troubleshooter workbook'],[''],['Fill in the sheets, save, then open the troubleshooter page → Setup & sources → Import spreadsheet.'],['Row 1 of every sheet is the header: keep the header text. Rows under it are data; add as many as you need.'],['IDs: short names with no spaces (e.g. spindle, coolant-pump). Faults, sequence steps, checks, parts and cabinet devices refer to components by these IDs.'],['Lists inside one cell: one item per line (Alt+Enter in Excel) or separated by semicolons. ID lists: separated by commas.'],['Allowed values:'],...Object.entries(LISTS).map(([k,v])=>['  '+k+': '+v.join(', ')]),[''],...SHEETS.map(s=>[s.name+': '+s.help])];
+  const wsI=X.utils.aoa_to_sheet(intro); wsI['!cols']=[{wch:140}]; X.utils.book_append_sheet(wb,wsI,'Instructions');
+  const wsM=X.utils.aoa_to_sheet([['Field','Value'],...MACHINE_ROWS.map(([n,k])=>[n,Array.isArray(p.meta[k])?p.meta[k].join(', '):p.meta[k]||''])]); wsM['!cols']=[{wch:24},{wch:80}]; X.utils.book_append_sheet(wb,wsM,'Machine');
+  SHEETS.forEach(s=>{const rows=s.get(p).map(o=>s.cols.map(c=>cellOut(o,c))); const ws=X.utils.aoa_to_sheet([s.cols.map(c=>c[0]),...rows]);
+    ws['!cols']=s.cols.map(c=>({wch:/Causes|Checks|Steps|Description|What|Function|Intro|Value|looks|Isolate/i.test(c[0])?50:/Name|Title|message/i.test(c[0])?30:14})); X.utils.book_append_sheet(wb,ws,s.name);});
+  return wb;
+}
+function profileFromWorkbook(X,wb){
+  const p=blankProfile(); const warn=[]; const names=wb.SheetNames; const find=n=>names.find(x=>hnorm(x)===hnorm(n));
+  const ms=find('Machine'); if(ms){X.utils.sheet_to_json(wb.Sheets[ms],{header:1,defval:''}).forEach(r=>{const f=MACHINE_ROWS.find(m=>hnorm(m[0])===hnorm(r[0])); if(f){const v=str(r[1]).trim(); p.meta[f[1]]=/functions|materials/.test(f[1])?splitIds(v):v;}});}
+  let found=ms?1:0;
+  SHEETS.forEach(s=>{const sn=find(s.name); if(!sn) return; found++;
+    const rows=X.utils.sheet_to_json(wb.Sheets[sn],{header:1,defval:'',raw:false}); if(!rows.length) return;
+    const head=rows[0].map(hnorm); const idx=s.cols.map(c=>head.indexOf(hnorm(c[0])));
+    s.cols.forEach((c,i)=>{if(idx[i]<0&&i<3) warn.push(`${s.name}: column "${c[0]}" is missing`);});
+    const objs=rows.slice(1).filter(r=>r.some(v=>str(v).trim())).map(r=>{const o={}; s.cols.forEach((c,i)=>{if(idx[i]>=0) cellIn(r[idx[i]],c,o);}); return o;});
+    s.set(p,objs);});
+  p.components.forEach(c=>{if(c.box&&c.box.some(v=>v==null)){if(c.box.slice(3).every(v=>v!=null)){c.box=c.box.map((v,i)=>v==null?(i===2?0:0):v);} else c.box=null;}});
+  if(!found) throw new Error('No sheets with the expected names (Machine, Components, Faults…) were found.');
+  return {raw:p,warn:warn.concat(p._warn||[])};
+}
+// what normalize() would silently drop: report it so the person can fix the sheet
+function checkRefs(raw){
+  const w=[]; const cids=new Set(arr(raw.components).map(c=>slug(c.id||c.name))); const tags=new Set(arr(raw.io).map(r=>str(r.tag)));
+  const chk=(where,ids)=>arr(ids).forEach(i=>{if(!cids.has(slug(i))) w.push(`${where}: component "${i}" is not on the Components sheet`);});
+  const chkIo=(where,ts)=>{if(!tags.size) return; arr(ts).forEach(t=>{if(!tags.has(str(t))) w.push(`${where}: I/O tag "${t}" is not on the IO sheet`);});};
+  arr(raw.faults).forEach(f=>{chk('Fault "'+(f.title||f.id)+'"',f.comps); chkIo('Fault "'+(f.title||f.id)+'"',f.io);});
+  arr(raw.sequence).forEach(s=>{chk('Sequence "'+s.name+'"',s.comps); chkIo('Sequence "'+s.name+'"',[...arr(s.inputs),...arr(s.outputs)]);});
+  arr(raw.checks).forEach(s=>chk('Check "'+s.name+'"',s.comps));
+  arr(raw.defects).forEach(s=>chk('Defect "'+s.name+'"',s.comps));
+  Object.entries(raw.cabinets||{}).forEach(([k,c])=>{if(!cids.has(slug(k))) w.push(`Cabinet devices: cabinet "${k}" is not on the Components sheet`); arr(c.devices).forEach(d=>chkIo('Device '+d.tag,d.io));});
+  arr(raw.components).forEach(c=>{if(!c.box) w.push(`Component "${c.name||c.id}" has no position, so it is placed beside the machine`);});
+  return w;
+}
+async function exportWorkbook(btn){
+  const msg=stageEl('impMsg'); try{const X=await loadXLSX(); const wb=workbookFromProfile(X,P); const buf=X.write(wb,{type:'array',bookType:'xlsx'});
+    const fn=slug(P.example?'troubleshooter-template':P.meta.name)+'.xlsx'; const blob=new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+    if(CAP.downloads){try{await CAP.downloads.save({filename:fn,data:blob}); return;}catch(e){if(e&&e.code==='declined') return; msg.textContent='This view could not save the file.'; return;}}
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fn; document.body.appendChild(a); a.click(); a.remove();}
+  catch(e){msg.textContent='The spreadsheet tool did not load. Check the internet connection and try again.';}
+}
+async function importWorkbook(file){
+  const msg=stageEl('impMsg'); msg.textContent='Reading spreadsheet…';
+  try{const X=await loadXLSX(); const wb=X.read(await file.arrayBuffer(),{type:'array'}); const {raw,warn}=profileFromWorkbook(X,wb);
+    raw.sources=[{name:file.name,kind:'spreadsheet',added:new Date().toISOString().slice(0,10)}]; await finishImport(raw,warn.concat(checkRefs(raw)));}
+  catch(e){msg.textContent=(e&&e.message?e.message+' ':'')+'Use a workbook saved with "Download spreadsheet".';}
+}
+let IMPORT_WARN=[];
+async function finishImport(raw,warn){
+  raw.example=false; IMPORT_WARN=warn||[]; DRAFT=null; applyProfile(raw); await saveProfile(); select('setup',true);
+  const n=stageEl('impReport'); if(n) n.scrollIntoView({block:'nearest'});
+}
+function parseLooseJson(t){t=str(t).trim(); const f=t.match(/```(?:json)?\s*([\s\S]*?)```/); if(f) t=f[1]; const a=t.indexOf('{'), b=t.lastIndexOf('}'); if(a<0||b<a) throw new Error('No JSON object found'); return JSON.parse(t.slice(a,b+1));}
+function aiPrompt(){
+  const m=P.example?{}:P.meta;
+  return `You are helping build a maintenance troubleshooting page for an industrial machine or appliance. Read the attached documents (manuals, mechanical drawings, electrical prints, parts lists, photos) and return ONE JSON object in exactly this format. Return only the JSON.
+
+Machine details already known: name "${m.name||''}", maker "${m.maker||''}", model "${m.model||''}", serial "${m.serial||''}", function "${(m.functions||[]).join(', ')}", materials "${(m.materials||[]).join(', ')}".
+
+{
+ "meta": {"name": "", "maker": "", "model": "", "serial": "", "functions": ["e.g. Injection molding, CNC machining, Welding, Sawing, Refrigeration"], "materials": ["e.g. Plastic, Metal, Wood"], "summary": "one or two sentences"},
+ "groups": [{"id": "hydraulics", "name": "Hydraulics"}],
+ "components": [{"id": "clamp-unit", "name": "Clamp unit", "group": "hydraulics", "shape": "box", "axis": "", "color": "", "box": [centerX, centerY, bottomZ, widthX, depthY, heightZ], "desc": "what it does", "src": "file p.N"}],
+ "faults": [{"id": "", "title": "", "group": "", "code": "", "effect": "stop|warn|info", "msg": "exact screen text", "causes": [""], "checks": [""], "comps": ["component ids"], "io": ["I/O tags"], "safety": "", "src": ""}],
+ "io": [{"tag": "I0.3", "type": "DI|DO|AI|AO|TC", "desc": "", "device": "SQ1", "wire": "", "addr": "", "loc": "", "sheet": ""}],
+ "sequence": [{"id": "", "name": "", "desc": "", "ends": "", "inputs": ["tags"], "outputs": ["tags"], "comps": ["ids"], "hw": ["hardwired interlocks"]}],
+ "checks": [{"id": "", "name": "", "why": "", "steps": [""], "comps": ["ids"], "src": ""}],
+ "reference": [{"id": "", "name": "", "intro": "", "rows": [["label", "value"]], "notes": [""]}],
+ "cabinets": {"<cabinet component id>": {"w": 1000, "h": 1200, "devices": [{"tag": "KM1", "kind": "contactor", "func": "", "pn": "", "io": ["tags"], "guess": false}]}},
+ "defects": [{"id": "", "name": "", "cat": "", "process": "", "material": "", "looks": "", "isolate": [""], "causes": [{"area": "machine|material|tooling|method|environment", "cause": "", "fix": ""}], "params": [""], "comps": ["ids"], "src": ""}]
+}
+
+Rules:
+- components: 10–35 physical assemblies a technician would recognize. Include each electrical cabinet (shape "cabinet") and guards (shape "guard" or "door"). shape is one of: ${SHAPES.join(', ')}. axis "x", "y" or "z" for round parts. color optional: frame, body, cab, steel, dark, yellow, blue, red, green, orange, white, copper.
+- box is in millimetres: x = left→right seen from the operator, y = front (operator side) → rear, z = up from the floor. [center x, center y, bottom z, width, depth, height]. Use drawing dimensions where given, realistic estimates otherwise.
+- ids are short lowercase slugs; every "comps" entry must be a component id, every "io" entry a tag from the "io" list.
+- faults: every alarm and troubleshooting symptom in the documents, with concrete checks.
+- io: every PLC input and output in the electrical prints, tags exactly as printed. kind for cabinet devices: plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan.
+- parts for exploded views go inside each component as "parts": [{"ref": "balloon no.", "name": "", "pn": "", "qty": "", "drawing": ""}].
+- Use only facts from the documents; never invent part numbers, alarm codes, wire numbers or I/O tags. Leave a section as [] if the documents don't cover it.
+- If your answer would be too long, return it in several replies and say which sections each covers; each reply must be a complete JSON object with only those sections.`;
+}
+async function importPasted(){
+  const ta=stageEl('pasteJson'), msg=stageEl('pasteMsg'); let obj;
+  try{obj=parseLooseJson(ta.value);}catch(e){msg.textContent='That is not valid JSON. Paste the whole reply, including the opening { and closing }.'; return;}
+  if(!obj||typeof obj!=='object'){msg.textContent='Nothing to import.'; return;}
+  // merge: sections present in the reply replace the same sections on the page; others are kept
+  const base=P.example?blankProfile():JSON.parse(JSON.stringify(P)); const keys=['meta','groups','components','faults','io','sequence','checks','reference','cabinets','defects'];
+  const got=keys.filter(k=>obj[k]!=null&&(!Array.isArray(obj[k])||obj[k].length||k==='faults'));
+  if(!got.length){msg.textContent='No known sections (meta, components, faults, io…) in that JSON.'; return;}
+  got.forEach(k=>{base[k]=k==='meta'?Object.assign({},base.meta,obj.meta):obj[k];});
+  if(obj.components&&!obj.parts&&P.components.length&&!P.example){ /* keep parts the new component list doesn't carry */ base.components.forEach(c=>{if(!c.parts){const o=P.components.find(x=>x.id===slug(c.id||c.name)); if(o&&o.parts.length) c.parts=o.parts;}});}
+  if(obj.parts&&typeof obj.parts==='object') base.components.forEach(c=>{const id=slug(c.id||c.name); if(obj.parts[id]) c.parts=obj.parts[id];});
+  base.sources=arr(base.sources).concat([{name:'Pasted from another AI tool ('+got.join(', ')+')',kind:'ai',added:new Date().toISOString().slice(0,10)}]);
+  ta.value=''; await finishImport(base,checkRefs(base));
+}
+/* ============================ SETUP: documents → Claude → profile ============================ */
+const CAP={db:null,sample:null,assets:null,downloads:null,limits:null,ready:false};
+const KINDS=[['manual','Manual / user guide'],['mech','Mechanical drawing'],['elec','Electrical prints'],['bom','BOM / parts list'],['photo-machine','Photo: machine'],['photo-cabinet','Photo: electrical cabinet'],['photo-plate','Photo: nameplate'],['other','Other']];
+let FILES=[]; let running=null; let saveState=''; let DRAFT=null;
+const STEPS=[
+ ['overview','Machine layout and components','Builds the 3D model and component list from manuals, drawings and photos'],
+ ['io','I/O list and electrical reference','Reads electrical prints for inputs, outputs, devices and wire numbers'],
+ ['seqcab','Machine sequence and cabinet layouts','Cycle steps with their I/O, plus panel devices for each cabinet'],
+ ['faults','Faults and troubleshooting','Alarms and symptoms with causes and checks from the manuals'],
+ ['parts','Parts lists for exploded views','Matches BOM lines to each component'],
+ ['checks','Process checks','Setup, start-up and routine checks from the manuals'],
+ ['defects','Product defects','Defects for the machine function and material, from the documents and industry practice']
+];
+let stepOn=Object.fromEntries(STEPS.map(s=>[s[0],true]));
+function guessKind(name,type){const n=name.toLowerCase();
+  if(/^image\//.test(type)) return /cab|panel|elec/.test(n)?'photo-cabinet':/plate|tag|label|serial/.test(n)?'photo-plate':'photo-machine';
+  if(/manual|guide|instruction|handbook|operat/.test(n)) return 'manual';
+  if(/wir|elec|schem|e-?plan|diagram/.test(n)) return 'elec';
+  if(/bom|parts|spare/.test(n)) return 'bom';
+  if(/drw|dwg|assy|assembly|layout|ga\b|drawing/.test(n)) return 'mech';
+  if(/\.(csv|xlsx?)$/.test(n)) return 'bom';
+  return 'manual';}
+const fmtSize=b=>b>1e6?(b/1e6).toFixed(1)+' MB':Math.max(1,Math.round(b/1e3))+' kB';
+function renderSetup(){
+  const m0=P.meta, can=!!CAP.sample; const ex=P.example&&!DRAFT;
+  const m=DRAFT?{name:DRAFT.name,maker:DRAFT.maker,model:DRAFT.model,serial:DRAFT.serial,functions:DRAFT.functions,materials:DRAFT.materials}:m0;
+  return `<article class="sheet">
+  <div><div class="eyebrow">Setup &amp; sources</div><h2>Build this page for your machine</h2></div>
+  <p class="lead">Add the machine's manuals, mechanical drawings, electrical prints, parts lists and photos. Claude reads them and fills in the 3D model, faults, I/O, sequence, process checks, exploded views and cabinet layouts. The Defects tab combines your documents with general practice for the machine's function and material.</p>
+  ${P.example?`<div class="note err"><b>Example data</b>The page is showing an example machine. Building from your documents replaces it for everyone who opens this page.</div>`:''}
+  ${CAP.ready&&!can?`<div class="note err"><b>Reading documents needs Claude</b>${window.claude?'This view can\'t ask Claude (you may be signed out).':'This copy of the page runs outside claude.ai, so it can\'t ask Claude to read documents.'} The Build button works in the claude.ai version of this template; here, fill in the spreadsheet or use another AI tool below.</div>`:''}
+  <div class="blk"><h3>Machine</h3>
+  <div class="form">
+    <label>Machine name<input type="text" id="fName" value="${esc(ex?'':m.name)}" placeholder="e.g. Press 14 or Line 3 freezer"></label>
+    <label>Maker<input type="text" id="fMaker" value="${esc(ex?'':m.maker)}"></label>
+    <label>Model<input type="text" id="fModel" value="${esc(ex?'':m.model)}"></label>
+    <label>Serial number<input type="text" id="fSerial" value="${esc(ex?'':m.serial)}"></label>
+    <label class="wide">Machine function<input type="text" id="fFunc" value="${esc(ex?'':m.functions.join(', '))}" placeholder="e.g. injection molding, CNC machining, welding, sawing, refrigeration"></label>
+    <label class="wide">Materials processed<input type="text" id="fMat" value="${esc(ex?'':m.materials.join(', '))}" placeholder="e.g. plastic (PP, ABS), metal (6061 aluminum), wood"></label>
+  </div>
+  <div class="actions"><button class="btn" type="button" id="saveMeta">Save machine details</button><span class="count" id="metaMsg"></span></div></div>
+
+  <div class="blk"><h3>Documents <em>${FILES.length} added</em></h3>
+  <div class="drop" id="drop"><p><b>Drop files here</b> or choose them. PDF, images (JPG, PNG), and text or CSV exports work. Large PDFs are fine: Claude reads the pages that matter for each step.</p>
+  <div class="actions"><label class="btn" for="fileIn" style="cursor:pointer">Choose files</label><input type="file" id="fileIn" multiple accept=".pdf,.txt,.csv,.md,.json,image/jpeg,image/png,image/webp" hidden></div></div>
+  ${FILES.length?`<div class="tblwrap files"><table class="iot"><thead><tr><th>File</th><th>Type</th><th class="hidem">Size</th><th>Status</th><th></th></tr></thead><tbody>${FILES.map((f,i)=>`<tr><td class="ds">${esc(f.name)}</td><td><select data-fkind="${i}" aria-label="Document type for ${esc(f.name)}">${KINDS.map(([k,n])=>`<option value="${k}"${f.kind===k?' selected':''}>${n}</option>`).join('')}</select></td><td class="mn hidem">${fmtSize(f.size)}${f.pages?' · '+f.pages+' p':''}</td><td class="mn">${esc(f.status)}</td><td><button class="chip" type="button" data-frm="${i}">Remove</button></td></tr>`).join('')}</tbody></table></div>`:''}
+  ${P.sources.length&&!P.example?`<p class="count" style="margin:0">Last build used: ${P.sources.map(s=>esc(s.name)).join(', ')}</p>`:''}
+  </div>
+
+  <div class="blk"><h3>Build with Claude</h3>
+  <ul class="steps">${STEPS.map(([k,n,d])=>`<li><label><input type="checkbox" data-step="${k}"${stepOn[k]?' checked':''}> <span>${n} <small>— ${d}</small></span></label></li>`).join('')}</ul>
+  <div class="actions"><button class="btn primary" type="button" id="runBuild"${!can||running?' disabled':''}>${running?'Building…':'Build from documents'}</button>${running?'<button class="btn" type="button" id="stopBuild">Stop</button>':''}<span class="count">${CAP.ready&&!can?(window.claude?'Sign in to Claude to build from documents.':'Building needs Claude: open this template in claude.ai to use it. Here, use the spreadsheet or another AI tool below.'):FILES.length?'':'Add documents first. With no documents, only the Defects step runs (from the machine function and material).'}</span></div>
+  <div class="log" id="log" ${LOG.length?'':'hidden'}>${LOG.map(l=>`<div class="${l[0]}">${esc(l[1])}</div>`).join('')}</div>
+  </div>
+
+  <div class="blk"><h3>Without Claude: fill in a spreadsheet</h3>
+  <ol>
+    <li>Download the spreadsheet. It holds what's on the page now${P.example?' (the example machine, so every sheet shows sample rows to overwrite)':''}, with an Instructions sheet.</li>
+    <li>Fill it in from your manuals and prints: copy I/O lists, alarm tables and parts lists straight in.</li>
+    <li>Import it here. The page checks that every fault, step and device points at a real component and I/O tag.</li>
+  </ol>
+  <div class="actions"><button class="btn" type="button" id="expXlsx">Download spreadsheet</button><label class="btn" for="xlsxIn" style="cursor:pointer">Import spreadsheet</label><input type="file" id="xlsxIn" accept=".xlsx,.xls,.ods" hidden></div></div>
+
+  <div class="blk"><h3>Without Claude: use another AI tool</h3>
+  <ol>
+    <li>Copy the instructions below and paste them into the AI tool your company allows, with the machine's documents attached.</li>
+    <li>Paste its reply into the box and load it. Sections in the reply replace the same sections here; the rest is kept, so you can do it in parts (for example faults first, then I/O).</li>
+  </ol>
+  <div class="actions"><button class="btn" type="button" id="copyPrompt">Copy instructions for the AI tool</button></div>
+  <textarea id="promptFallback" aria-label="Instructions for another AI tool" hidden readonly></textarea>
+  <textarea id="pasteJson" aria-label="Paste the AI tool's reply" placeholder="Paste the reply here (JSON)"></textarea>
+  <div class="actions"><button class="btn" type="button" id="loadPaste">Load reply</button><span class="count" id="pasteMsg"></span></div></div>
+
+  ${IMPORT_WARN.length?`<div class="blk" id="impReport"><h3>Import check <em>${IMPORT_WARN.length} item${IMPORT_WARN.length>1?'s':''} to fix</em></h3><div class="note err"><b>Not linked</b>${IMPORT_WARN.slice(0,40).map(esc).join('<br>')}${IMPORT_WARN.length>40?'<br>…and '+(IMPORT_WARN.length-40)+' more':''}</div></div>`:(LOG.length||!P.sources.length?'':`<p class="count" id="impReport" style="margin:0">Last import: all references link up.</p>`)}
+
+  <div class="blk"><h3>What's on the page now</h3>
+  <div class="stat">${[['Components',P.components.length],['Faults',P.faults.length],['I/O points',P.io.length],['Sequence steps',P.sequence.length],['Process checks',P.checks.length],['Cabinet layouts',Object.keys(P.cabinets).length],['Exploded views',P.components.filter(c=>c.parts.length).length],['Own defects',P.defects.length]].map(([k,v])=>`<div><b>${v}</b><small>${k}</small></div>`).join('')}</div>
+  <p class="count" style="margin:0" id="saveMsg">${esc(saveState)}</p></div>
+
+  <div class="blk"><h3>Profile file</h3>
+  <p class="lead" style="font-size:13px">Everything on the page lives in one profile. Download it to back it up or reuse it as a starting point for a similar machine; import one to load it here.</p>
+  <div class="actions"><button class="btn" type="button" id="expJson">Download profile</button><label class="btn" for="impIn" style="cursor:pointer">Import profile</label><input type="file" id="impIn" accept=".json,application/json" hidden>${P.example?'':`<button class="btn" type="button" id="loadEx">Show the example machine</button>`}<button class="btn danger" type="button" id="blank">Start blank</button></div>
+  <textarea id="expFallback" aria-label="Profile JSON" hidden readonly></textarea>
+  <span class="count" id="impMsg"></span></div>
+  <p class="foot">Claude reads your documents only when you press Build, using your Claude account. The spreadsheet and other-AI routes don't use Claude at all. The finished profile is saved with this page and shared with everyone who can open it. Uploaded files are kept with the page when you can edit it.</p>
+  </article>`;
+}
+let LOG=[];
+function log(cls,msg){LOG.push([cls,msg]); const el=stageEl('log'); if(el){el.hidden=false; const d=document.createElement('div'); d.className=cls; d.textContent=msg; el.appendChild(d); el.scrollTop=el.scrollHeight;}}
+function rerenderSetup(){if(cur==='setup'&&!exMode){const y=detail.scrollTop; detail.innerHTML=renderSetup(); wireSetup(); detail.scrollTop=y;}}
+function readMeta(){const v=id=>(stageEl(id)||{}).value||''; const split=s=>s.split(/[,;]\s*/).map(x=>x.trim()).filter(Boolean);
+  return {name:v('fName').trim(),maker:v('fMaker').trim(),model:v('fModel').trim(),serial:v('fSerial').trim(),functions:split(v('fFunc')),materials:split(v('fMat'))};}
+function wireSetup(){
+  const drop=stageEl('drop'), fi=stageEl('fileIn');
+  ['fName','fMaker','fModel','fSerial','fFunc','fMat'].forEach(id=>stageEl(id).addEventListener('input',()=>{DRAFT=readMeta();}));
+  if(drop&&fi){
+  fi.addEventListener('change',()=>{addFiles([...fi.files]); fi.value='';});
+  ['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault(); drop.classList.add('over');}));
+  ['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault(); drop.classList.remove('over');}));
+  drop.addEventListener('drop',e=>addFiles([...(e.dataTransfer?e.dataTransfer.files:[])]));
+  }
+  detail.querySelectorAll('[data-fkind]').forEach(s=>s.addEventListener('change',()=>{FILES[+s.dataset.fkind].kind=s.value;}));
+  detail.querySelectorAll('[data-frm]').forEach(b=>b.addEventListener('click',()=>{FILES.splice(+b.dataset.frm,1); rerenderSetup();}));
+  detail.querySelectorAll('[data-step]').forEach(c=>c.addEventListener('change',()=>{stepOn[c.dataset.step]=c.checked;}));
+  stageEl('saveMeta').addEventListener('click',async()=>{const m=readMeta(); const raw=P.example?blankProfile():JSON.parse(JSON.stringify(P)); Object.assign(raw.meta,m); if(!raw.meta.name) raw.meta.name='Untitled machine'; raw.example=false;
+    DRAFT=null; applyProfile(raw,true); const ok=await saveProfile(); const mm=stageEl('metaMsg'); if(mm) mm.textContent=ok?'Saved':'Saved for this view only';});
+  const rb=stageEl('runBuild'); if(rb) rb.addEventListener('click',runBuild);
+  const sb=stageEl('stopBuild'); if(sb) sb.addEventListener('click',()=>{if(running) running.abort();});
+  stageEl('expJson').addEventListener('click',exportProfile);
+  stageEl('expXlsx').addEventListener('click',exportWorkbook);
+  const xi=stageEl('xlsxIn'); xi.addEventListener('change',()=>{const f=xi.files[0]; xi.value=''; if(f) importWorkbook(f);});
+  stageEl('copyPrompt').addEventListener('click',e=>{const t=aiPrompt(), b=e.currentTarget, fb=stageEl('promptFallback');
+    const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy instructions for the AI tool',1600);}; const fall=()=>{fb.value=t;fb.hidden=false;fb.focus();fb.select();b.textContent='Select and copy the text below';};
+    try{navigator.clipboard.writeText(t).then(done,fall);}catch(err){fall();}});
+  stageEl('loadPaste').addEventListener('click',importPasted);
+  const imp=stageEl('impIn'); imp.addEventListener('change',async()=>{const f=imp.files[0]; if(!f) return; const msg=stageEl('impMsg');
+    try{const raw=JSON.parse(await f.text()); if(!raw||typeof raw!=='object'||!(raw.meta||raw.components)) throw new Error('not a profile'); await finishImport(raw,checkRefs(raw));}
+    catch(e){msg.textContent='That file is not a profile from this page. Choose a .json file saved with "Download profile".';}});
+  const le=stageEl('loadEx'); if(le) le.addEventListener('click',()=>{applyProfile(EXAMPLE); select('setup',true);});
+  stageEl('blank').addEventListener('click',e=>{const b=e.currentTarget; if(b.dataset.armed){applyProfile(blankProfile()); saveProfile(); select('setup',true);} else {b.dataset.armed='1'; b.textContent='Click again to clear everything';}});
+}
+function blankProfile(){return {meta:{name:'Untitled machine',functions:[],materials:[]},groups:[],components:[],faults:[],io:[],sequence:[],checks:[],reference:[],cabinets:{},defects:[],sources:[]};}
+async function addFiles(fs){
+  for(const f of fs){
+    if(f.size>200e6){log('err',`${f.name}: larger than 200 MB, skipped.`); continue;}
+    const e={id:Math.random().toString(36).slice(2),file:f,name:f.name,size:f.size,type:f.type,kind:guessKind(f.name,f.type),status:'Reading…',pages:0,text:[],pdf:null};
+    FILES.push(e); rerenderSetup();
+    try{await extract(e); e.status=e.pages?`${e.pages} page${e.pages>1?'s':''} read`:/^image\//.test(e.type)?'Image ready':'Ready';}
+    catch(err){e.status='Could not read'; console.warn(err);}
+    if(CAP.assets&&f.size<=20e6){try{const r=await CAP.assets.upload(f); e.assetId=r.id;}catch(err){/* kept in this session only */}}
+    rerenderSetup();
+  }
+}
+let pdfjsReady=null;
+function loadPdfjs(){
+  if(pdfjsReady) return pdfjsReady;
+  const add=src=>new Promise((res,rej)=>{const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('load '+src)); document.head.appendChild(s);});
+  const base=window.MTB_LIB?window.MTB_LIB+'pdfjs/':'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  pdfjsReady=add(base+'pdf.min.js').then(()=>add(base+'pdf.worker.min.js')).then(()=>{window.pdfjsLib.GlobalWorkerOptions.workerSrc=base+'pdf.worker.min.js'; return window.pdfjsLib;});
+  return pdfjsReady;
+}
+async function extract(e){
+  if(/pdf$/i.test(e.type)||/\.pdf$/i.test(e.name)){
+    const lib=await loadPdfjs(); const buf=await e.file.arrayBuffer();
+    const doc=await lib.getDocument({data:buf,isEvalSupported:false}).promise; e.pdf=doc; e.pages=doc.numPages;
+    for(let i=1;i<=doc.numPages;i++){const pg=await doc.getPage(i); const tc=await pg.getTextContent(); let last=null, out='';
+      tc.items.forEach(it=>{const y=it.transform?Math.round(it.transform[5]):0; if(last!==null&&Math.abs(y-last)>2) out+='\n'; else if(out&&!out.endsWith(' ')) out+=' '; out+=it.str; last=y;});
+      e.text.push(out.replace(/[ \t]+/g,' ').trim()); if(i%20===0){e.status=`Reading… ${i}/${doc.numPages}`; rerenderSetup();}}
+  } else if(/^image\//.test(e.type)){ e.pages=0; }
+  else { const t=await e.file.text(); for(let i=0;i<t.length;i+=6000) e.text.push(t.slice(i,i+6000)); e.pages=e.text.length; }
+}
+async function pageImage(e,i){
+  const pg=await e.pdf.getPage(i); const vp0=pg.getViewport({scale:1}); const sc=Math.min(2.2,1800/Math.max(vp0.width,vp0.height)); const vp=pg.getViewport({scale:sc});
+  const cv=document.createElement('canvas'); cv.width=Math.round(vp.width); cv.height=Math.round(vp.height); const ctx=cv.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height);
+  await pg.render({canvasContext:ctx,viewport:vp}).promise; return await new Promise(r=>cv.toBlob(r,'image/jpeg',.85));
+}
+// pick the most relevant pages from documents of the given kinds, within a character budget
+function excerpt(kinds,re,budget,perPage){
+  perPage=perPage||7000; const cand=[];
+  FILES.filter(f=>kinds.includes(f.kind)&&f.text.length).forEach(f=>f.text.forEach((t,i)=>{if(!t||t.length<20) return; const hits=re?(t.match(re)||[]).length:0; cand.push({f,i,t,score:hits*10/Math.sqrt(t.length/1000+1)+(i<3?2:0)});}));
+  cand.sort((a,b)=>b.score-a.score); let used=0; const pick=[];
+  for(const c of cand){const t=c.t.slice(0,perPage); if(used+t.length>budget) continue; pick.push(Object.assign(c,{t})); used+=t.length; if(used>budget*.97) break;}
+  pick.sort((a,b)=>a.f===b.f?a.i-b.i:FILES.indexOf(a.f)-FILES.indexOf(b.f));
+  return pick.map(c=>`=== ${c.f.name} · p.${c.i+1} ===\n${c.t}`).join('\n\n');
+}
+async function images(kinds,max,pdfPicker){
+  const out=[]; const lim=CAP.limits&&CAP.limits.images; if(!lim) return out; max=Math.min(max,lim.maxCount||max);
+  for(const f of FILES){ if(out.length>=max) break; if(!kinds.includes(f.kind)) continue;
+    if(/^image\//.test(f.type)){ if(f.size<=(lim.maxInputBytes||2e7)&&(!lim.mediaTypes||lim.mediaTypes.includes(f.type))) out.push({blob:f.file,name:f.name}); }
+    else if(f.pdf&&pdfPicker){ for(const i of pdfPicker(f)){ if(out.length>=max) break; try{out.push({blob:await pageImage(f,i),name:f.name+' p.'+i});}catch(err){} } }
+  }
+  return out;
+}
+const compList=()=>P.components.map(c=>`${c.id}: ${c.name}${c.desc?' — '+c.desc.slice(0,80):''}`).join('\n');
+const ioListTxt=()=>P.io.map(r=>`${r.tag} ${r.type} ${r.desc}${r.device?' ['+r.device+']':''}`).join('\n');
+const metaTxt=()=>{const m=P.meta;return `Machine: ${m.name}; maker ${m.maker||'?'}; model ${m.model||'?'}; serial ${m.serial||'?'}; function: ${m.functions.join(', ')||'unknown'}; materials: ${m.materials.join(', ')||'unknown'}.`;};
+async function ask(label,prompt,imgs){
+  if(running&&running.signal.aborted) throw {code:'cancelled'};
+  const lim=(CAP.limits&&CAP.limits.maxPromptBytes)||262144; const enc=new TextEncoder();
+  while(enc.encode(prompt).length>lim-2000) prompt=prompt.slice(0,Math.floor(prompt.length*.9));
+  const opts={signal:running.signal,modelTier:'complex',cache:false};
+  if(imgs&&imgs.length) opts.images=imgs.map(i=>i.blob);
+  let chars=0; const t0=Date.now(); const line=document.createElement('div'); line.className='run'; const el=stageEl('log'); if(el){el.appendChild(line);}
+  opts.onText=({text})=>{chars=text.length; line.textContent=`  …${label}: ${Math.round(chars/100)/10}k characters`;};
+  try{ const r=await CAP.sample.json(prompt,opts); line.remove(); return r; }
+  catch(e){ line.remove(); throw e; }
+}
+const RULES=`Reply with only JSON, no commentary. Use only facts from the documents; when a value is your inference (layout, a typical cause), keep it plausible and generic and never invent part numbers, alarm codes, wire numbers or I/O tags. Cite the source as "file p.N" in "src" fields where possible. Write in plain technician language.`;
+async function stepOverview(){
+  const txt=[excerpt(['manual'],/specification|overview|description|introduction|layout|dimension|install|general|component|assembl|identification|safety device|guard|cabinet|motor|pump|unit/gi,90000),
+    excerpt(['mech'],/assembly|layout|general arrangement|view|item|description/gi,30000),excerpt(['bom'],null,20000),excerpt(['elec'],/cabinet|panel|layout|enclosure|location/gi,15000)].filter(Boolean).join('\n\n');
+  const imgs=await images(['photo-machine','photo-plate','mech','photo-cabinet'],6,f=>f.kind==='mech'?[1]:[]);
+  const prompt=`You are building a 3D troubleshooting model of an industrial machine or appliance from its documents. ${metaTxt()}
+${imgs.length?`Images attached in order: ${imgs.map(i=>i.name).join(', ')}.`:''}
+Return JSON: {"meta":{"name","maker","model","serial","functions":[...],"materials":[...],"summary"},"groups":[{"id","name"}],"components":[{"id","name","group","shape","axis","color","box":[cx,cy,z0,w,d,h],"desc","src"}]}
+- meta: fill from the documents; keep the user's values when given (${JSON.stringify(P.meta)}). "functions" = what the machine does (e.g. "Injection molding", "CNC machining", "Welding", "Sawing", "Refrigeration"). "materials" = materials it processes (Plastic, Metal, Wood, Food…), empty for appliances that process nothing.
+- groups: 3–7 troubleshooting areas (e.g. "Power and drives", "Hydraulics", "Clamp", "Cooling", "Safety and controls").
+- components: 10–35 physical assemblies a technician would recognize, each in one group. Include every electrical cabinet as its own component with shape "cabinet", and guards/enclosures with shape "guard" or "door".
+- Coordinates in millimetres: x = left→right as seen from the operator side, y = front(operator)→rear, z = up from the floor. box = [center x, center y, bottom z, width along x, depth along y, height]. Use real dimensions from drawings/specs where given, otherwise realistic estimates, so the parts sit where they really are relative to each other.
+- shape one of: ${SHAPES.join(', ')}. axis = "x","y" or "z" for round parts (motor, spindle, cylinder, pipe, carousel). color optional: frame, body, cab, steel, dark, yellow, blue, red, green, orange, white, copper.
+- id: short lowercase slug. desc: one sentence on what it does.
+${RULES}
+
+DOCUMENTS:
+${txt||'(no text documents — use the images and machine details)'}`;
+  const r=await ask('layout',prompt,imgs);
+  if(!r||!Array.isArray(r.components)||!r.components.length) throw new Error('No components came back');
+  const raw=JSON.parse(JSON.stringify(P)); const um=readMetaSafe();
+  raw.meta=Object.assign({},raw.meta,r.meta||{},Object.fromEntries(Object.entries(um).filter(([k,v])=>Array.isArray(v)?v.length:v)));
+  raw.groups=r.groups||[]; raw.components=r.components; raw.example=false;
+  const keepFaults=raw.faults; P=normalize(raw); P.faults=keepFaults&&!RUN.fresh?P.faults:[]; index();
+  return `${P.components.length} components`;
+}
+function readMetaSafe(){try{return DRAFT||(stageEl('fName')?readMeta():{});}catch(e){return {};}}
+async function stepIO(){
+  const txt=excerpt(['elec'],/input|output|\bI\/O\b|\b[DA][IO]\b|PLC|card|module|terminal|relay|contactor|wire|sensor|switch|valve|solenoid|motor|address|%I|%Q|\bX\d|\bY\d/gi,170000,9000);
+  if(!txt) return 'skipped (no electrical prints)';
+  const prompt=`From these electrical prints, list the machine's control I/O points and electrical reference facts. ${metaTxt()}
+Components (use these ids):
+${compList()}
+Return JSON: {"io":[{"tag","type","desc","addr","device","loc","sheet","wire"}],"reference":[{"id","name","intro","rows":[[label,value]],"notes":[...],"io":[tags],"comps":[ids]}]}
+- io: every PLC/controller input and output you can find (up to 600). tag = the I/O address or tag exactly as printed (e.g. "I0.3", "X1.4", "A325", "%IX0.1"). type = DI, DO, AI, AO or TC. desc = the print's text for it. device = the field device tag it connects to (e.g. "SQ1", "-KF_A325"). loc = where the device is (component or area). sheet = sheet/page. wire = wire number if different from the tag.
+- reference: 3–10 short reference cards: power supply and voltages, main breakers and fuses, safety circuit (E-stop chain, door interlocks, safety relays), drives and motors, network/bus, and anything a technician needs to read the prints (wire-numbering convention, cross-reference format).
+${RULES}
+
+ELECTRICAL PRINTS:
+${txt}`;
+  const r=await ask('I/O',prompt);
+  const raw=JSON.parse(JSON.stringify(P)); raw.io=arr(r&&r.io); raw.reference=arr(r&&r.reference); P=normalize(raw); index();
+  return `${P.io.length} I/O points, ${P.reference.length} reference cards`;
+}
+async function stepSeqCab(){
+  const txt=[excerpt(['elec'],/cabinet|panel|layout|enclosure|terminal|breaker|contactor|relay|fuse|drive|power supply|transformer|module|sequence|cycle|interlock|permissive/gi,110000,8000),excerpt(['manual'],/sequence|cycle|operation|mode|step|start|automatic|semi|manual mode|interlock/gi,50000)].filter(Boolean).join('\n\n');
+  const imgs=await images(['photo-cabinet','elec'],6,f=>{const out=[];f.text.forEach((t,i)=>{if(out.length<2&&/layout|panel|cabinet|arrangement|backplate|mounting plate/i.test(t)) out.push(i+1);});return out;});
+  if(!txt&&!imgs.length) return 'skipped (no prints, manual or cabinet photos)';
+  const cabs=P.components.filter(c=>c.shape==='cabinet');
+  const prompt=`Describe the machine's operating sequence and the devices inside each electrical cabinet. ${metaTxt()}
+Components:
+${compList()}
+Cabinet components: ${cabs.map(c=>c.id).join(', ')||'none listed (pick the most likely component or skip cabinets)'}
+Known I/O tags (use exactly):
+${ioListTxt().slice(0,40000)}
+${imgs.length?`Images attached in order: ${imgs.map(i=>i.name).join(', ')}. Cabinet photos show device positions; match them to device tags from the prints.`:''}
+Return JSON: {"sequence":[{"id","name","desc","ends","inputs":[tags],"outputs":[tags],"comps":[ids],"hw":[...]}],"cabinets":{"<component id>":{"w","h","devices":[{"tag","kind","func","pn","io":[tags],"guess"}]}}}
+- sequence: 5–20 ordered machine states from power-up through a full cycle, with the inputs/permissives and outputs active in each. hw = hardwired interlocks that act outside the PLC. Leave inputs/outputs empty if no I/O list is known.
+- cabinets: for each cabinet component, its back-panel size in mm (w, h) and every device: tag as printed, kind (plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan), func = what it does on this machine, pn if printed, io = the I/O tags it drives or reads. guess=true when the cabinet a device is in is inferred.
+${RULES}
+
+DOCUMENTS:
+${txt}`;
+  const r=await ask('sequence and cabinets',prompt,imgs);
+  const raw=JSON.parse(JSON.stringify(P)); raw.sequence=arr(r&&r.sequence); raw.cabinets=(r&&r.cabinets)||{}; P=normalize(raw); index();
+  return `${P.sequence.length} sequence steps, ${Object.values(P.cabinets).reduce((a,c)=>a+c.devices.length,0)} cabinet devices`;
+}
+async function stepFaults(){
+  const txt=[excerpt(['manual'],/alarm|fault|error|troubleshoot|cause|remed|symptom|warning|code|reset|diagnos|problem|fail|will not|does not|check|abnormal|message/gi,170000,8000),excerpt(['elec'],/alarm|fault|interlock|monitor/gi,15000)].filter(Boolean).join('\n\n');
+  if(!txt) return 'skipped (no manual)';
+  const prompt=`Build the machine's fault list for maintenance technicians. ${metaTxt()}
+Groups: ${P.groups.map(g=>g.id+' = '+g.name).join('; ')}
+Components (use these ids):
+${compList()}
+Known I/O tags (use exactly):
+${ioListTxt().slice(0,30000)}
+Return JSON: {"faults":[{"id","title","group","code","effect","msg","causes":[...],"checks":[...],"comps":[ids],"io":[tags],"src","safety"}]}
+- 15–80 faults: every alarm/error message and every troubleshooting symptom in the documents. title = short plain description; msg = exact screen text if given; code = alarm number if given; effect = "stop" (stops machine or blocks motion), "warn" (keeps running) or "info".
+- causes from the documents first; checks = concrete steps to confirm each cause (what to measure, look at, or test), using the I/O tags and devices involved.
+- comps = the components involved; io = I/O tags to check. safety = a hazard warning if the check involves stored energy, heat, pressure or live voltage.
+${RULES}
+
+DOCUMENTS:
+${txt}`;
+  const r=await ask('faults',prompt);
+  const raw=JSON.parse(JSON.stringify(P)); raw.faults=arr(r&&r.faults); P=normalize(raw); index();
+  return `${P.faults.length} faults`;
+}
+async function stepParts(){
+  const txt=[excerpt(['bom'],null,120000,9000),excerpt(['mech'],/item|qty|part|description|bom|parts list/gi,60000,8000)].filter(Boolean).join('\n\n');
+  if(!txt) return 'skipped (no BOM or drawings)';
+  const prompt=`Match parts-list lines to the machine's components for exploded views. ${metaTxt()}
+Components (use these ids):
+${compList()}
+Return JSON: {"parts":{"<component id>":[{"ref","name","pn","qty","drawing"}]}}
+- For each component that has a parts list or assembly drawing BOM, up to 40 lines: ref = item/balloon number, name = description, pn = part number, qty, drawing = drawing number.
+- Skip components with no matching BOM. Do not invent part numbers.
+${RULES}
+
+DOCUMENTS:
+${txt}`;
+  const r=await ask('parts',prompt);
+  const raw=JSON.parse(JSON.stringify(P)); const parts=(r&&r.parts)||{}; raw.components.forEach(c=>{if(parts[c.id]) c.parts=parts[c.id];}); P=normalize(raw); index();
+  return `${P.components.filter(c=>c.parts.length).length} components with parts lists`;
+}
+async function stepChecks(){
+  const txt=excerpt(['manual'],/setup|set-up|start|operat|procedure|adjust|calibrat|maintenance|lubricat|check|inspect|daily|weekly|monthly|warm|purge|clean|change ?over/gi,150000,7000);
+  if(!txt) return 'skipped (no manual)';
+  const prompt=`Write process and routine checks for this machine. ${metaTxt()}
+Components (use these ids):
+${compList()}
+Return JSON: {"checks":[{"id","name","why","steps":[...],"comps":[ids],"src"}],"reference":[{"id","name","intro","rows":[[label,value]],"notes":[...]}]}
+- checks: 5–20 checks from the manual: start-up, warm-up, changeover, routine inspection and lubrication, calibration, first-article. steps = short imperative lines with values (pressures, temperatures, intervals) from the documents.
+- reference: 0–5 cards of specifications and settings (capacities, fluid types, torque values, intervals).
+${RULES}
+
+MANUAL:
+${txt}`;
+  const r=await ask('process checks',prompt);
+  const raw=JSON.parse(JSON.stringify(P)); raw.checks=arr(r&&r.checks); const ids=new Set(raw.reference.map(x=>slug(x.id||x.name))); arr(r&&r.reference).forEach(x=>{if(!ids.has(slug(x.id||x.name))) raw.reference.push(x);}); P=normalize(raw); index();
+  return `${P.checks.length} checks`;
+}
+async function stepDefects(){
+  const txt=excerpt(['manual','other'],/defect|quality|part|finish|surface|tolerance|scrap|reject|appearance|dimension|weld|cut|mold|short|flash|burr|porosity/gi,90000,7000);
+  const fn=P.meta.functions.join(', '), mt=P.meta.materials.join(', ');
+  if(!fn&&!txt) return 'skipped (set the machine function in Setup)';
+  const prompt=`List the product/output defects a technician on this machine troubleshoots, combining the documents with established industry practice for the process. ${metaTxt()}
+Machine function: ${fn||'from the documents'}; materials: ${mt||'from the documents'}.
+Components (use these ids to link causes to machine parts):
+${compList()}
+Return JSON: {"defects":[{"id","name","cat","process","material","looks","isolate":[...],"causes":[{"area","cause","fix"}],"params":[...],"comps":[ids],"src"}]}
+- 10–25 defects typical for this machine's function and material (for an appliance: the output problems, e.g. "Not cooling"). Prefer the documents' own defect tables; fill gaps with standard industry practice.
+- cat = short category (Fill, Surface, Dimensional, Internal, Edge, Performance…). looks = how to recognize it. isolate = 2–4 steps to narrow down the cause first. causes: area is machine, material, tooling, method or environment; fix = corrective action. params = settings to review. comps = this machine's components involved. src = "file p.N" or "industry practice".
+${RULES}
+
+DOCUMENTS:
+${txt||'(none — use industry practice for the function and material)'}`;
+  const r=await ask('defects',prompt);
+  const raw=JSON.parse(JSON.stringify(P)); raw.defects=arr(r&&r.defects); P=normalize(raw); index();
+  return `${P.defects.length} defects`;
+}
+const RUN={fresh:false};
+async function runBuild(){
+  if(running||!CAP.sample) return;
+  const um=DRAFT||readMeta(); DRAFT=um; if(P.example){const b=blankProfile(); b.meta=Object.assign(b.meta,um); if(!b.meta.name) b.meta.name='Untitled machine'; P=normalize(b); RUN.fresh=true;} else {Object.entries(um).forEach(([k,v])=>{if(Array.isArray(v)?v.length:v) P.meta[k]=v;}); RUN.fresh=false;}
+  index();
+  running=new AbortController(); LOG=[]; rerenderSetup();
+  log('', `Build started ${new Date().toLocaleTimeString()} · ${FILES.length} document${FILES.length===1?'':'s'}`);
+  const fns={overview:stepOverview,io:stepIO,seqcab:stepSeqCab,faults:stepFaults,parts:stepParts,checks:stepChecks,defects:stepDefects};
+  let okCount=0;
+  for(const [k,n] of STEPS){
+    if(!stepOn[k]) continue; if(running.signal.aborted) break;
+    if(k!=='overview'&&k!=='defects'&&!P.components.length){log('err',`${n}: skipped, no components yet (run "Machine layout" first).`); continue;}
+    log('run',`${n}…`);
+    try{const res=await fns[k](); log(/^skipped/.test(res)?'':'ok',`✓ ${n}: ${res}`); if(!/^skipped/.test(res)) okCount++;}
+    catch(e){const c=e&&e.code; log('err',`✗ ${n}: ${c==='cancelled'?'stopped':c==='rate_limited'?'usage limit reached, try again later':c==='not_granted'?'Claude access was declined':c==='invalid_json'?'the answer could not be read; try this step again on its own':(e&&e.message)||'failed'}`); if(c==='cancelled'||c==='not_granted'||c==='rate_limited') break;}
+  }
+  P.sources=FILES.map(f=>({name:f.name,kind:f.kind,assetId:f.assetId||'',pages:f.pages,size:f.size,added:new Date().toISOString().slice(0,10)})).concat(RUN.fresh?[]:P.sources.filter(s=>!FILES.some(f=>f.name===s.name)));
+  running=null; DRAFT=null;
+  if(okCount){const raw=JSON.parse(JSON.stringify(P)); raw.example=false; applyProfile(raw); const ok=await saveProfile(); log('ok',`Done. ${ok?'Saved with the page for everyone who opens it.':'Not saved to the page (this view cannot save). Download the profile to keep it.'}`);}
+  else log('err','Nothing was built.');
+  select('setup',true);
+}
+/* ---------- storage ---------- */
+let loadedStamp=null;
+async function saveProfile(){
+  const json=JSON.stringify(Object.assign({},P,{example:false})); const stamp=Date.now()+'-'+Math.random().toString(36).slice(2,7);
+  if(CAP.db){
+    try{const CH=180000, n=Math.ceil(json.length/CH);
+      for(let i=0;i<n;i++) await CAP.db.doc(`profile/c${i}`).set({s:json.slice(i*CH,(i+1)*CH),stamp});
+      await CAP.db.doc('profile/index').set({stamp,n,name:P.meta.name,updated:new Date().toISOString()});
+      loadedStamp=stamp; saveState=`Saved ${new Date().toLocaleString()}`; const sm=stageEl('saveMsg'); if(sm) sm.textContent=saveState; return true;}
+    catch(e){saveState=e&&e.code==='quota_exceeded'?'Not saved: the page storage is full. Download the profile instead.':'Not saved: you may only have view access to this page.'; const sm=stageEl('saveMsg'); if(sm) sm.textContent=saveState; return false;}
+  }
+  try{localStorage.setItem('mtb-profile',json); saveState='Saved in this browser only (page storage unavailable in this view).';}catch(e){saveState='Not saved in this view. Download the profile to keep it.';}
+  return false;
+}
+async function loadFromDb(stamp,n){
+  try{let s=''; for(let i=0;i<n;i++){const d=await CAP.db.doc(`profile/c${i}`).get(); if(!d.exists) return; const v=d.data(); if(v.stamp!==stamp) return; s+=v.s;}
+    loadedStamp=stamp; applyProfile(JSON.parse(s),true);}catch(e){console.warn('load',e);}
+}
+async function exportProfile(){
+  const json=JSON.stringify(Object.assign({},P,{example:false}),null,1); const fn=slug(P.meta.name||'machine')+'-troubleshooter.json';
+  if(CAP.downloads){try{await CAP.downloads.save({filename:fn,data:json}); return;}catch(e){if(e&&e.code==='declined') return;}}
+  if(!window.claude){try{const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([json],{type:'application/json'})); a.download=fn; document.body.appendChild(a); a.click(); a.remove(); return;}catch(e){}}
+  const fb=stageEl('expFallback'); fb.value=json; fb.hidden=false; fb.focus(); fb.select();
+  try{navigator.clipboard.writeText(json);}catch(e){}
+}
+/* ---------- start ---------- */
+const START=location.hash.slice(1);
+applyProfile(EXAMPLE);
+try{const ls=localStorage.getItem('mtb-profile'); if(ls) applyProfile(JSON.parse(ls));}catch(e){}
+(function(){const k=START; if(k&&byKey[k]) select(k,true); else if(/^xc?-/.test(k)&&EXV[k]) enterEx(k);})();
+(async function(){
+  const use=n=>window.claude&&window.claude.use?window.claude.use(n).catch(()=>null):Promise.resolve(null);
+  const [db,sample,assets,downloads]=await Promise.all([use('db'),use('sample'),use('assets'),use('downloads')]);
+  Object.assign(CAP,{db,sample,assets,downloads,ready:true});
+  if(sample){try{CAP.limits=await sample.limits();}catch(e){CAP.limits=null;}}
+  if(db){
+    const timer=setTimeout(()=>{saveState='Saved profile could not be reached yet; showing what is loaded.'; rerenderSetup();},10000);
+    db.doc('profile/index').onSnapshot(s=>{clearTimeout(timer); if(!s.exists) return; const v=s.data(); if(v.stamp&&v.stamp!==loadedStamp) loadFromDb(v.stamp,v.n||1);},()=>{clearTimeout(timer);});
+  }
+  if(!window.claude){ // hosted outside claude.ai (e.g. GitHub Pages): load profile.json published next to the page
+    try{const r=await fetch('profile.json',{cache:'no-cache'}); if(r.ok){const raw=await r.json(); let local=null; try{local=localStorage.getItem('mtb-profile');}catch(e){}
+      if(!local&&raw&&(raw.meta||raw.components)){raw.example=false; applyProfile(raw,true); saveState='Loaded profile.json from this site.';}}}catch(e){}
+  }
+  rerenderSetup();
+})();
+})();
+</script>
+
+<div class="toast" id="appToast" role="status" hidden></div>
+<script>
+(function(){
+  var btn=document.createElement('button'); btn.type='button'; btn.className='setupbtn'; btn.id='installBtn'; btn.textContent='Install app'; btn.hidden=true;
+  var row=document.querySelector('.idrow'); if(row) row.appendChild(btn);
+  var deferred=null;
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault(); deferred=e; btn.hidden=false;});
+  btn.addEventListener('click',function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.then(function(){deferred=null; btn.hidden=true;}); });
+  window.addEventListener('appinstalled',function(){btn.hidden=true; toast('The Troubleshooter is installed');});
+  function toast(t){var el=document.getElementById('appToast'); el.textContent=t; el.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(function(){el.hidden=true;},4000);}
+  window.addEventListener('offline',function(){toast('Offline: showing the saved copy');});
+  if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+    var had=!!navigator.serviceWorker.controller;
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+    navigator.serviceWorker.addEventListener('controllerchange',function(){ if(had) toast('Updated to the latest version. Reopen the app to use it.'); });
+  }
+})();
+</script>
+
+</body>
+</html>
