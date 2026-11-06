@@ -4,8 +4,8 @@ An installable web app for machine troubleshooting: 3D model, faults, I/O, seque
 
 ## Put it on GitHub Pages
 1. Create a repository (for example `the-troubleshooter`).
-2. Upload **everything in this folder**, keeping the `lib`, `fonts` and `icons` folders as they are.
-3. Add your machine's `profile.json` next to `index.html` (Setup & sources → Download profile, then rename the file). Without it, the app shows the example machine.
+2. Upload the repository contents, keeping `index.html` and `sw.js` at the root and the `lib`, `fonts` and `icons` folders inside `the-troubleshooter`.
+3. Add your machine's `profile.json` next to the root `index.html` (Setup & sources → Download profile, then rename the file). Without it, the app shows the example machine.
 4. Settings → Pages → Deploy from a branch → `main` / root → Save. The site is live at `https://<user>.github.io/<repo>/` in a minute or two.
 
 > GitHub Pages sites are public on most plans. Only GitHub Enterprise Cloud can limit a Pages site to your organization. Don't publish a profile built from confidential drawings on a public site.
