@@ -50,6 +50,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14
 .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);overflow-wrap:anywhere}
 h1{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1;margin:4px 0 0;letter-spacing:.01em;text-wrap:balance}
 .setupbtn{flex:none;font:600 12px var(--f-body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:4px;padding:6px 9px;cursor:pointer;white-space:nowrap}
+.mpick{display:flex;align-items:center;gap:8px;font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mpick select{flex:1;min-width:0;font:500 14px var(--f-body);color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:7px 8px;text-transform:none;letter-spacing:0}
+.mpick[hidden]{display:none}
 .setupbtn:hover,.setupbtn[aria-current="true"]{border-color:var(--ink);color:var(--ink)}
 .example{font:600 11px var(--f-body);letter-spacing:.04em;color:var(--warn);border:1px solid currentColor;border-radius:3px;padding:2px 6px;align-self:flex-start}
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:4px;overflow:hidden}
@@ -200,6 +203,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
         </div>
         <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
       </div>
+      <label class="mpick" id="mPickWrap" hidden><span>Machine</span><select id="mPick" aria-label="Choose a machine"></select></label>
       <span class="example" id="exampleFlag" hidden>Example data · replace with your documents</span>
       <div class="tabs" role="tablist">
         <button role="tab" data-tab="machine" aria-selected="true">Machine</button>
@@ -898,7 +902,9 @@ function buildEx(id){
   const c=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3()).length();
   exGrid.position.set(c.x,bb.min.y-.05,c.z);
   if(controls){controls.target.copy(c); controls.maxDistance=sz*6; controls.minDistance=sz*.05;}
-  camera.position.copy(c).add((view.kind==='cab'?new THREE.Vector3(.28,.22,1):new THREE.Vector3(.5,.38,.78)).normalize().multiplyScalar(sz*(view.kind==='cab'?1.55:1.3)));
+  // fit the exploded bounding sphere in whichever field of view (vertical or horizontal) is tighter, leaving room for balloons
+  const vf=camera.fov*Math.PI/180, hf=2*Math.atan(Math.tan(vf/2)*camera.aspect), fitD=(sz/2)/Math.sin(Math.min(vf,hf)/2)*(view.kind==='cab'?1.1:1.22);
+  camera.position.copy(c).add((view.kind==='cab'?new THREE.Vector3(.28,.22,1):new THREE.Vector3(.5,.38,.78)).normalize().multiplyScalar(Math.max(fitD,sz*.9)));
   exT=0; stageEl('exT').value=Math.round(exGoal*100);
 }
 function applyExplode(t){exParts.forEach(p=>p.meshes.forEach(m=>m.position.copy(m.userData.base).addScaledVector(p.vec,t)));}
@@ -1473,6 +1479,10 @@ function renderSetup(){
   <div class="stat">${[['Components',P.components.length],['Faults',P.faults.length],['I/O points',P.io.length],['Sequence steps',P.sequence.length],['Process checks',P.checks.length],['Cabinet layouts',Object.keys(P.cabinets).length],['Exploded views',P.components.filter(c=>c.parts.length).length],['Own defects',P.defects.length]].map(([k,v])=>`<div><b>${v}</b><small>${k}</small></div>`).join('')}</div>
   <p class="count" style="margin:0" id="saveMsg">${esc(saveState)}</p></div>
 
+  ${MLIB?`<div class="blk"><h3>Machine library on this site</h3>
+  <p class="lead" style="font-size:13px">${MLIB.length} machine${MLIB.length===1?'':'s'} listed in <code>machines.json</code>. Pick one from the Machine menu at the top left. ${LIBCUR?'Each machine has its own link: put it in a QR code on the machine so a scan opens straight to it.':'You are looking at a profile imported in this browser, not one from the library.'}</p>
+  ${LIBCUR?`<div class="actions"><button class="btn" type="button" id="copyLink">Copy link to this machine</button><span class="count" id="linkMsg"></span></div>`:''}
+  <p class="count" style="margin:0">To add a machine: Download profile below, upload the file to the repository, and add a line for it to <code>machines.json</code>. ${LIBCUR?'':'<button class="btn" type="button" id="libEntry">Copy the machines.json line for this profile</button>'}</p></div>`:''}
   <div class="blk"><h3>Profile file</h3>
   <p class="lead" style="font-size:13px">Everything on the page lives in one profile. Download it to back it up or reuse it as a starting point for a similar machine; import one to load it here.</p>
   <div class="actions"><button class="btn" type="button" id="expJson">Download profile</button><label class="btn" for="impIn" style="cursor:pointer">Import profile</label><input type="file" id="impIn" accept=".json,application/json" hidden>${P.example?'':`<button class="btn" type="button" id="loadEx">Show the example machine</button>`}<button class="btn danger" type="button" id="blank">Start blank</button></div>
@@ -1488,6 +1498,8 @@ function readMeta(){const v=id=>(stageEl(id)||{}).value||''; const split=s=>s.sp
   return {name:v('fName').trim(),maker:v('fMaker').trim(),model:v('fModel').trim(),serial:v('fSerial').trim(),functions:split(v('fFunc')),materials:split(v('fMat'))};}
 function wireSetup(){
   const drop=stageEl('drop'), fi=stageEl('fileIn');
+  const cl=stageEl('copyLink'); if(cl) cl.addEventListener('click',()=>{const u=libLink(LIBCUR); try{navigator.clipboard.writeText(u); stageEl('linkMsg').textContent='Copied: '+u;}catch(e){stageEl('linkMsg').textContent=u;}});
+  const lbe=stageEl('libEntry'); if(lbe) lbe.addEventListener('click',()=>{const t=`{"file": "${slug(P.meta.name||'machine')}-troubleshooter.json", "name": "${String(P.meta.name||'').replace(/"/g,"'")}", "group": ""}`; try{navigator.clipboard.writeText(t); lbe.textContent='Copied — paste it into machines.json';}catch(e){lbe.textContent=t;}});
   ['fName','fMaker','fModel','fSerial','fFunc','fMat'].forEach(id=>stageEl(id).addEventListener('input',()=>{DRAFT=readMeta();}));
   if(drop&&fi){
   fi.addEventListener('change',()=>{addFiles([...fi.files]); fi.value='';});
@@ -1756,7 +1768,7 @@ async function saveProfile(){
       loadedStamp=stamp; saveState=`Saved ${new Date().toLocaleString()}`; const sm=stageEl('saveMsg'); if(sm) sm.textContent=saveState; return true;}
     catch(e){saveState=e&&e.code==='quota_exceeded'?'Not saved: the page storage is full. Download the profile instead.':'Not saved: you may only have view access to this page.'; const sm=stageEl('saveMsg'); if(sm) sm.textContent=saveState; return false;}
   }
-  try{localStorage.setItem('mtb-profile',json); saveState='Saved in this browser only (page storage unavailable in this view).';}catch(e){saveState='Not saved in this view. Download the profile to keep it.';}
+  try{localStorage.setItem('mtb-profile',json); localStorage.setItem('mtb-source','local'); LIBCUR=''; if(qsM()) history.replaceState(null,'',location.pathname+location.hash); renderPicker(); saveState='Saved in this browser only (page storage unavailable in this view).';}catch(e){saveState='Not saved in this view. Download the profile to keep it.';}
   return false;
 }
 async function loadFromDb(stamp,n){
@@ -1770,6 +1782,33 @@ async function exportProfile(){
   const fb=stageEl('expFallback'); fb.value=json; fb.hidden=false; fb.focus(); fb.select();
   try{navigator.clipboard.writeText(json);}catch(e){}
 }
+/* ---------- machine library: machines.json next to the page (hosted copies) ---------- */
+let MLIB=null, LIBCUR='';
+const qsM=()=>{try{return new URLSearchParams(location.search).get('m')||'';}catch(e){return '';}};
+const libId=f=>slug(String(f).replace(/\.json$/i,'').replace(/-?(profile|troubleshooter)$/i,''));
+const libLink=id=>location.origin+location.pathname+'?m='+encodeURIComponent(id);
+const lsGet=k=>{try{return localStorage.getItem(k);}catch(e){return null;}}, lsSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+async function loadLibrary(){
+  try{const r=await fetch('machines.json',{cache:'no-cache'}); if(!r.ok) return null; const j=await r.json();
+    const list=arr(Array.isArray(j)?j:j.machines).map(x=>typeof x==='string'?{file:x}:x).filter(x=>x&&x.file)
+      .map(x=>({file:str(x.file),name:str(x.name||String(x.file).replace(/\.json$/i,'')),group:str(x.group),id:libId(x.id||x.file)}));
+    return list.length?list:null;}catch(e){return null;}
+}
+async function openLibMachine(it){
+  const r=await fetch(it.file,{cache:'no-cache'}); if(!r.ok) throw new Error(it.file+' was not found ('+r.status+')');
+  const raw=await r.json(); raw.example=false; applyProfile(raw); LIBCUR=it.id; lsSet('mtb-source','lib:'+it.id);
+  saveState=`Loaded "${it.name}" (${it.file}) from the machine library on this site.`;
+  if(START&&byKey[START]) select(START,true); else if(/^xc?-/.test(START)&&EXV[START]) enterEx(START);
+}
+function renderPicker(){
+  const w=stageEl('mPickWrap'), s=stageEl('mPick'); if(!w||!s) return; if(!MLIB){w.hidden=true; return;}
+  const groups={}; MLIB.forEach(x=>(groups[x.group||'']=groups[x.group||'']||[]).push(x));
+  const opt=x=>`<option value="${esc(x.id)}"${x.id===LIBCUR?' selected':''}>${esc(x.name)}</option>`;
+  s.innerHTML=(LIBCUR?'':`<option value="" selected>${lsGet('mtb-profile')?'Imported in this browser':'Choose a machine…'}</option>`)+
+    Object.entries(groups).map(([g,xs])=>g?`<optgroup label="${esc(g)}">${xs.map(opt).join('')}</optgroup>`:xs.map(opt).join('')).join('');
+  w.hidden=false;
+}
+stageEl('mPick').addEventListener('change',e=>{const id=e.target.value; if(!id) return; lsSet('mtb-source','lib:'+id); location.href=libLink(id);});
 /* ---------- start ---------- */
 const START=location.hash.slice(1);
 applyProfile(EXAMPLE);
@@ -1784,7 +1823,17 @@ try{const ls=localStorage.getItem('mtb-profile'); if(ls) applyProfile(JSON.parse
     const timer=setTimeout(()=>{saveState='Saved profile could not be reached yet; showing what is loaded.'; rerenderSetup();},10000);
     db.doc('profile/index').onSnapshot(s=>{clearTimeout(timer); if(!s.exists) return; const v=s.data(); if(v.stamp&&v.stamp!==loadedStamp) loadFromDb(v.stamp,v.n||1);},()=>{clearTimeout(timer);});
   }
-  if(!window.claude){ // hosted outside claude.ai (e.g. GitHub Pages): load profile.json published next to the page
+  if(!window.claude) MLIB=await loadLibrary();
+  if(MLIB){ // hosted with a machine library: ?m=<id> link > last machine picked > profile imported in this browser > first machine
+    const want=qsM(), src=lsGet('mtb-source')||'', local=lsGet('mtb-profile');
+    const pickId=want?libId(want):src.startsWith('lib:')?src.slice(4):(!local?MLIB[0].id:'');
+    const it=pickId?MLIB.find(x=>x.id===pickId):null;
+    if(want&&!it) saveState=`No machine "${want}" in machines.json; showing ${local?'the profile imported in this browser':'the first machine'}.`;
+    const go=it||(!local?MLIB[0]:null);
+    if(go){try{await openLibMachine(go);}catch(e){saveState='Could not load '+go.file+': '+e.message;}}
+    renderPicker();
+    setTimeout(()=>MLIB.forEach(x=>fetch(x.file,{cache:'no-cache'}).catch(()=>{})),4000); // warm the offline cache for every machine
+  } else if(!window.claude){ // hosted outside claude.ai (e.g. GitHub Pages): load profile.json published next to the page
     try{const r=await fetch('profile.json',{cache:'no-cache'}); if(r.ok){const raw=await r.json(); let local=null; try{local=localStorage.getItem('mtb-profile');}catch(e){}
       if(!local&&raw&&(raw.meta||raw.components)){raw.example=false; applyProfile(raw,true); saveState='Loaded profile.json from this site.';}}}catch(e){}
   }
