@@ -501,6 +501,22 @@ const str=s=>s==null?'':String(s);
 const num=(v,d)=>{const n=+v;return isFinite(n)?n:d;};
 const stageEl=id=>document.getElementById(id);
 const stage=stageEl('stage'), list=stageEl('list'), detail=stageEl('detail'), q=stageEl('q'), cats=stageEl('cats'), count=stageEl('count');
+const GEOT=['box','cyl','cone','sphere','torus','tube','extrude','lathe'];
+const nums=(a,n)=>{a=arr(a).map(v=>num(v,NaN)); return a.length>=n&&a.slice(0,n).every(isFinite)?a.slice(0,n):null;};
+function cleanPrim(g){ if(!g||typeof g!=='object') return null; const t=g.t==='cylinder'?'cyl':g.t; if(!GEOT.includes(t)) return null;
+  const o={t,p:nums(g.p,3)||[0,0,0]}; const r=nums(g.rot,3); if(r&&r.some(v=>v)) o.rot=r; if(g.c) o.c=str(g.c); if(g.glass) o.glass=1; if(g.guard) o.guard=1; if(g.edges===false) o.edges=false; if(+g.op>0&&+g.op<1) o.op=+g.op; if(g.nox) o.nox=1; if(g.exo) o.exo=1;
+  if(/^[xyz]$/.test(g.axis)) o.axis=g.axis; if(isFinite(+g.seg)) o.seg=Math.max(3,Math.min(96,+g.seg));
+  const pts2=a=>arr(a).map(q=>nums(q,2)).filter(Boolean);
+  if(t==='box'){o.s=nums(g.s,3); if(!o.s) return null;}
+  else if(t==='cyl'||t==='cone'){o.r=num(g.r,0); o.r2=num(g.r2,t==='cone'?0:o.r); o.l=num(g.l,0); if(!(o.l>0)||!(o.r>=0)) return null; if(isFinite(+g.ri)&&+g.ri>0) o.ri=+g.ri;}
+  else if(t==='sphere'){o.r=num(g.r,0); if(!(o.r>0)) return null; const sc=nums(g.sc,3); if(sc) o.sc=sc; if(isFinite(+g.cut)) o.cut=+g.cut;}
+  else if(t==='torus'){o.R=num(g.R,0); o.tube=num(g.tube,0); if(!(o.R>0&&o.tube>0)) return null; if(isFinite(+g.arc)) o.arc=+g.arc;}
+  else if(t==='tube'){o.pts=arr(g.pts).map(q=>nums(q,3)).filter(Boolean); o.r=num(g.r,10); if(o.pts.length<2) return null; if(g.closed) o.closed=1;}
+  else if(t==='extrude'){o.pts=pts2(g.pts); o.depth=num(g.depth,10); o.plane=/^(xz|xy|yz)$/.test(g.plane)?g.plane:'xz'; if(o.pts.length<3) return null; if(+g.bevel>0) o.bevel=+g.bevel; const h=arr(g.holes).map(pts2).filter(x=>x.length>=3); if(h.length) o.holes=h;}
+  else if(t==='lathe'){o.pts=pts2(g.pts); if(o.pts.length<2) return null;}
+  return o;}
+const hasGeo=c=>!!(c.geo&&c.geo.length||(c.parts||[]).some(p=>p.geo&&p.geo.length));
+const cleanGeo=a=>arr(a).map(cleanPrim).filter(Boolean).slice(0,600);
 const SHAPES=['base','box','column','table','spindle','motor','cylinder','cabinet','panel','guard','door','tank','hopper','conveyor','carousel','pump','fan','coil','compressor','pipe','unit'];
 
 function normalize(raw){
@@ -512,7 +528,8 @@ function normalize(raw){
   p.components=arr(p.components).filter(c=>c&&(c.name||c.id)).map(c=>{let id=slug(c.id||c.name); while(seen.has(id)) id+='-2'; seen.add(id);
     const b=arr(c.box).map(v=>num(v,NaN)); const box=b.length===6&&b.every(isFinite)?b:null;
     return {id,name:str(c.name||c.id),group:c.group?slug(c.group):'',shape:SHAPES.includes(c.shape)?c.shape:'box',axis:/^[xyz]$/.test(c.axis)?c.axis:'',color:str(c.color),box,desc:str(c.desc),src:str(c.src),
-      parts:arr(c.parts).filter(x=>x&&(x.name||x.pn)).map((x,i)=>({ref:str(x.ref||i+1),name:str(x.name||x.pn),pn:str(x.pn),qty:str(x.qty||''),dw:str(x.drawing||x.dw||'')}))};});
+      parts:arr(c.parts).filter(x=>x&&(x.name||x.pn)).map((x,i)=>({ref:str(x.ref||i+1),name:str(x.name||x.pn),pn:str(x.pn),qty:str(x.qty||''),dw:str(x.drawing||x.dw||''),geo:cleanGeo(x.geo),dir:nums(x.dir,3)}))
+      ,geo:cleanGeo(c.geo)};});
   const cids=new Set(p.components.map(c=>c.id));
   const fix=ids=>arr(ids).map(x=>slug(x)).filter(x=>cids.has(x));
   const gids=new Set(p.groups.map(g=>g.id));
@@ -576,9 +593,44 @@ function add(id,geo,mat,pos,o){
 }
 const box=(id,x0,x1,y0,y1,z0,z1,mat,o)=>add(id,new THREE.BoxGeometry(Math.max(1,x1-x0)/1000,Math.max(1,z1-z0)/1000,Math.max(1,y1-y0)/1000),mat,V((x0+x1)/2,(y0+y1)/2,(z0+z1)/2),o);
 function cyl(id,ax,x,y,z,r,len,mat,o,r2){const m=add(id,new THREE.CylinderGeometry((r2||r)/1000,r/1000,len/1000,36),mat,V(x,y,z),o); if(ax==='x') m.rotation.z=-Math.PI/2; else if(ax==='y') m.rotation.x=Math.PI/2; return m;}
+const matCache={};
+function matFor(pr,fallback){ const m0=matFor0(pr,fallback); if(!pr.op) return m0; const k='op'+m0.uuid+pr.op;
+  return matCache[k]=matCache[k]||Object.assign(m0.clone(),{transparent:true,opacity:pr.op,depthWrite:false,side:THREE.DoubleSide});}
+function matFor0(pr,fallback){ if(pr.glass) return MAT.glass; const c=pr.c; if(c&&MAT[c]) return MAT[c]; if(c&&COLORMAT[c]) return MAT[COLORMAT[c]];
+  if(c&&/^#?[0-9a-f]{6}$/i.test(c)){const k=c.replace('#','').toLowerCase(); return matCache[k]=matCache[k]||M(parseInt(k,16),{metalness:.25,roughness:.5});} return fallback||MAT.body;}
+const _qa=new THREE.Quaternion(), _ax={x:new THREE.Vector3(1,0,0),y:new THREE.Vector3(0,0,-1),z:new THREE.Vector3(0,1,0)};
+function primQuat(pr){const q=new THREE.Quaternion(); if(!pr.rot) return q; const [rx,ry,rz]=pr.rot.map(v=>v*Math.PI/180);
+  q.setFromAxisAngle(_ax.z,rz).multiply(_qa.setFromAxisAngle(_ax.y,ry)).multiply(new THREE.Quaternion().setFromAxisAngle(_ax.x,rx)); return q;}
+// one geometry primitive (world mm, x right / y rear / z up) -> three geometry centred on pr.p
+function primGeo(pr){
+  const k=1/1000, seg=pr.seg; let g;
+  const axRot=g=>{const a=pr.axis||'z'; if(a==='x') g.rotateZ(-Math.PI/2); else if(a==='y') g.rotateX(-Math.PI/2); return g;};
+  switch(pr.t){
+    case 'box': {const [w,d,h]=pr.s.map(v=>Math.max(.5,v)*k); g=(Math.min(w,d,h)>.03&&!pr.sharp)?chamBox(w,h,d).clone():new THREE.BoxGeometry(w,h,d); break;}
+    case 'cyl': case 'cone': {
+      if(pr.ri){const ro=pr.r*k,ri=pr.ri*k,l=pr.l*k; g=new THREE.LatheGeometry([new THREE.Vector2(ri,-l/2),new THREE.Vector2(ro,-l/2),new THREE.Vector2(ro,l/2),new THREE.Vector2(ri,l/2),new THREE.Vector2(ri,-l/2)],seg||40);}
+      else g=new THREE.CylinderGeometry(pr.r2*k,pr.r*k,pr.l*k,seg||(Math.max(pr.r,pr.r2)>60?48:24));
+      axRot(g); break;}
+    case 'sphere': g=new THREE.SphereGeometry(pr.r*k,seg||32,Math.round((seg||32)/2),0,Math.PI*2,0,pr.cut?Math.PI*pr.cut:Math.PI); if(pr.sc) g.scale(pr.sc[0],pr.sc[2],pr.sc[1]); axRot(g); break;
+    case 'torus': g=new THREE.TorusGeometry(pr.R*k,pr.tube*k,12,seg||48,pr.arc?pr.arc*Math.PI/180:Math.PI*2); g.rotateX(-Math.PI/2); axRot(g); break;
+    case 'tube': {const c=new THREE.CatmullRomCurve3(pr.pts.map(q=>new THREE.Vector3(q[0]*k,q[2]*k,-q[1]*k)),!!pr.closed,'catmullrom',.1);
+      g=new THREE.TubeGeometry(c,Math.min(200,pr.pts.length*12),pr.r*k,seg||10,!!pr.closed); break;}
+    case 'extrude': {const sh=new THREE.Shape(pr.pts.map(q=>new THREE.Vector2(q[0]*k,q[1]*k)));
+      (pr.holes||[]).forEach(h=>sh.holes.push(new THREE.Path(h.map(q=>new THREE.Vector2(q[0]*k,q[1]*k)))));
+      const b=Math.min((pr.bevel||0),pr.depth/2.2)*k, dep=Math.max(.0005,pr.depth*k-2*b);
+      g=new THREE.ExtrudeGeometry(sh,{depth:dep,bevelEnabled:b>0,bevelThickness:b,bevelSize:b,bevelSegments:b>0?3:1,curveSegments:8}); g.translate(0,0,-dep/2);
+      if(pr.plane==='xy') g.rotateX(-Math.PI/2); else if(pr.plane==='yz') g.rotateY(Math.PI/2); break;}
+    case 'lathe': g=new THREE.LatheGeometry(pr.pts.map(q=>new THREE.Vector2(Math.max(0,q[0])*k,q[1]*k)),seg||48); axRot(g); break;
+  }
+  g.computeVertexNormals&&pr.t!=='box'&&pr.t!=='extrude'&&g.computeVertexNormals();
+  return g;
+}
+function addPrim(id,pr,fallback){const g=primGeo(pr); if(!g) return; const mat=matFor(pr,fallback);
+  const m=add(id,g,mat,V(...pr.p),{guard:pr.guard,edges:pr.edges===false||pr.t==='tube'||pr.t==='sphere'?false:true}); m.quaternion.copy(primQuat(pr)); return m;}
 const COLORMAT={frame:'frame',body:'body',cab:'cab',steel:'steel',dark:'dark',yellow:'yellow',blue:'blue',red:'red',green:'green',orange:'orange',white:'white',copper:'copper',grey:'platen',gray:'platen'};
 const SHAPEMAT={base:'frame',column:'frame',table:'steel',spindle:'steel',motor:'dark',cylinder:'steel',cabinet:'cab',panel:'dark',tank:'platen',hopper:'white',conveyor:'platen',carousel:'platen',pump:'blue',fan:'dark',coil:'copper',compressor:'dark',pipe:'steel',unit:'body',box:'body'};
 function buildComp(c){
+  if(hasGeo(c)){const fb=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body']; c.geo.forEach(pr=>addPrim(c.id,pr,fb)); (c.parts||[]).forEach(p=>(p.geo||[]).forEach(pr=>{if(!pr.exo) addPrim(c.id,pr,fb);})); return;}
   const [cx,cy,z0,w,d,h]=c.box, x0=cx-w/2,x1=cx+w/2,y0=cy-d/2,y1=cy+d/2,z1=z0+h, id=c.id;
   const mat=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body'];
   const ax=c.axis||(w>=d&&w>=h?'x':d>=h?'y':'z'); const L=ax==='x'?w:ax==='y'?d:h; const R=Math.min(...[w,d,h].filter((v,i)=>i!==['x','y','z'].indexOf(ax)))/2;
@@ -612,8 +664,8 @@ function buildComp(c){
   }
 }
 function autoLayout(comps){
-  const missing=comps.filter(c=>!c.box); if(!missing.length) return;
-  const placed=comps.filter(c=>c.box); let x=placed.length?Math.max(...placed.map(c=>c.box[0]+c.box[3]/2))+400:0;
+  const missing=comps.filter(c=>!c.box&&!hasGeo(c)); if(!missing.length) return;
+  const placed=comps.filter(c=>c.box&&!hasGeo(c)); let x=placed.length?Math.max(...placed.map(c=>c.box[0]+c.box[3]/2))+400:0;
   missing.forEach((c,i)=>{const s=c.shape==='cabinet'?[800,500,1800]:c.shape==='guard'?[1200,1000,1600]:[500,500,500]; c.box=[x+s[0]/2,0,0,s[0],s[1],s[2]]; c.auto=true; x+=s[0]+250;});
 }
 function buildModel(){
@@ -715,7 +767,22 @@ function bodyShapes(c,S){ // the parent component as a ghost body, size S
     default: return [Bx(S,S*.6,S*.6,0,0,0,'P')];
   }
 }
+function geoBounds(prims){const b=new THREE.Box3(); prims.forEach(pr=>{try{const g=primGeo(pr); g.computeBoundingBox(); const bb=g.boundingBox.clone(); const m=new THREE.Matrix4().compose(V(...pr.p),primQuat(pr),new THREE.Vector3(1,1,1)); b.union(bb.applyMatrix4(m));}catch(e){}}); return b;}
+function partsViewGeo(c){
+  const parts=c.parts||[]; const body=(c.geo||[]).filter(pr=>!pr.nox); const all=[...body,...parts.flatMap(p=>p.geo||[])]; const bb=geoBounds(all); const ctr=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3());
+  const S=Math.max(sz.x,sz.y,sz.z)*1000, cw=[ctr.x*1000,-ctr.z*1000,ctr.y*1000]; const P2=[]; const fb=COLORMAT[c.color]||SHAPEMAT[c.shape]||'body';
+  if(body.length) P2.push(['G',body.map(pr=>['g',pr,cw,fb]),[0,0,0],1]);
+  const loose=parts.map((p,i)=>[p,i]).filter(([p])=>!(p.geo&&p.geo.length)); const u=Math.max(30,Math.min(90,S/16));
+  parts.forEach((p,i)=>{const info={t:p.ref,f:p.name,pn:p.pn,qty:p.qty,pi:i};
+    if(p.geo&&p.geo.length){const pb=geoBounds(p.geo).getCenter(new THREE.Vector3()); let d=p.dir;
+      if(!d){const v=pb.clone().sub(ctr); if(v.length()<1e-4) v.set(0,1,0); v.normalize().multiplyScalar(S*.45/1000); d=[v.x*1000,-v.z*1000,v.y*1000];}
+      P2.push([info,p.geo.map(pr=>['g',pr,cw,fb]),[d[0],d[2],-d[1]],0]);}
+    else {const k=loose.findIndex(([,j])=>j===i), n=loose.length, t=k/n*Math.PI*2, R=S*.7+(k%2)*u*2; const sh=partShapes(p.name+' '+p.pn,u);
+      P2.push([info,sh,[Math.cos(t)*R,S*.15+((k%3)-1)*u*1.5,Math.sin(t)*R],0]);}});
+  return {id:'x-'+c.id,t:c.name,kind:'parts',comp:c.id,parts:P2};
+}
 function partsView(c){
+  if(hasGeo(c)) return partsViewGeo(c);
   const parts=c.parts||[]; const n=parts.length; const S=Math.max(600,Math.min(1600,220*Math.sqrt(n)+400)), u=Math.max(40,Math.min(90,S/14));
   const P2=[]; P2.push(['G',bodyShapes(c,S),[0,0,0],1]);
   const rings=Math.ceil(n/12); let i=0;
@@ -810,7 +877,13 @@ function buildEx(id){
   view.parts.forEach((p,pi)=>{
     const [ref,shapes,vec,ghost]=p; const info=partInfo(view,ref);
     const grp=new THREE.Group(); exRoot.add(grp); const ms=[];
-    shapes.forEach(s=>{const [g,pos,rot,c,abs]=exShape(s); const mat=exMat(c,!!ghost); const mesh=new THREE.Mesh(g,mat);
+    shapes.forEach(s=>{
+      if(s[0]==='g'){const pr=s[1],cw=s[2]; let g; try{g=primGeo(pr);}catch(e){return;} const base=matFor(pr,MAT[s[3]]); const mat=base.clone();
+        if(ghost){mat.transparent=true; mat.opacity=Math.min(mat.opacity,.2); mat.depthWrite=false;}
+        const mesh=new THREE.Mesh(g,mat); mesh.position.copy(V(pr.p[0]-cw[0],pr.p[1]-cw[1],pr.p[2]-cw[2])); mesh.quaternion.copy(primQuat(pr));
+        if(!ghost&&!mat.transparent&&pr.t!=='tube'&&pr.t!=='sphere'&&pr.edges!==false){const e=new THREE.LineSegments(new THREE.EdgesGeometry(g,30),exEdge); e.raycast=()=>{}; mesh.add(e);}
+        mesh.userData={pi,base:mesh.position.clone(),e0:mat.emissive.getHex()}; grp.add(mesh); ms.push(mesh); return;}
+      const [g,pos,rot,c,abs]=exShape(s); const mat=exMat(c,!!ghost); const mesh=new THREE.Mesh(g,mat);
       if(!abs) mesh.position.set(pos.x/1000,pos.y/1000,pos.z/1000);
       if(rot==='x') mesh.rotation.z=-Math.PI/2; else if(rot==='z') mesh.rotation.x=Math.PI/2; else if(rot==='tx') mesh.rotation.y=Math.PI/2; else if(rot==='ty') mesh.rotation.x=Math.PI/2;
       if(s[0]!=='u'&&!ghost&&c!=='Gl'){const e=new THREE.LineSegments(new THREE.EdgesGeometry(g,30),exEdge); e.raycast=()=>{}; mesh.add(e);}
@@ -1056,7 +1129,7 @@ function renderParts(v){
   <div><div class="eyebrow">Exploded view · ${c.parts.length} parts${c.parts[0]&&c.parts[0].dw?' · drawing '+esc(c.parts[0].dw):''}</div><h2>${esc(c.name)}</h2></div>
   <div class="meta"><button class="chip" type="button" data-key="${c.key}">Part: ${esc(c.name)}</button>${vs.length>1?vs.filter(x=>x!==v.id).map(x=>`<button class="chip" type="button" data-ex="${x}">${EXV[x].kind==='cab'?'Cabinet layout':'Exploded view'}</button>`).join(''):''}</div>
   ${c.faults.length?`<div class="blk"><h3>Faults on ${esc(c.name)} (${c.faults.length})</h3>${faultChips(c.faults)}</div>`:''}
-  <p class="count" style="margin:0">Tap a row or a balloon to highlight it. Shapes are generic stand-ins picked from each part's description; item numbers, part numbers and names are from the parts list.</p>
+  <p class="count" style="margin:0">Tap a row or a balloon to highlight it. ${hasGeo(c)?(c.parts.every(p=>p.geo&&p.geo.length)?'Shapes and positions come from the profile\'s geometry':'Parts with geometry in the profile are drawn to it; the rest are generic stand-ins'):'Shapes are generic stand-ins picked from each part\'s description'}; item numbers, part numbers and names are from the parts list.</p>
   <div class="blk" id="exlist"><div class="tblwrap"><table class="iot bom"><thead><tr><th>Item</th><th>Qty</th><th>Part no.</th><th>Description</th></tr></thead><tbody>${v.parts.map((p,pi)=>typeof p[0]==='object'?`<tr class="lnk" data-expi="${pi}"><td class="tg">${esc(p[0].t)}</td><td class="mn">${esc(p[0].qty)}</td><td class="mn">${esc(p[0].pn)}</td><td class="ds">${esc(p[0].f)}</td></tr>`:'').join('')}</tbody></table></div></div>
   ${FOOT()}</article>`;
 }
@@ -1193,22 +1266,29 @@ const SHEETS=[
   get:p=>p.reference.flatMap(r=>{const rows=r.rows.map(([k,v])=>({id:r.id,name:r.name,intro:'',_k:k,_v:v})).concat(r.notes.map(n=>({id:r.id,name:r.name,intro:'',_k:'Note',_v:n}))); if(!rows.length) rows.push({id:r.id,name:r.name,_k:'',_v:''}); rows[0].intro=r.intro; return rows;}),
   set:(p,rows)=>{const m={}; rows.forEach(r=>{const id=r.id||r.name; if(!id) return; const c=m[id]=m[id]||{id,name:r.name||id,intro:'',rows:[],notes:[]}; if(r.name) c.name=r.name; if(r.intro) c.intro=r.intro; if(/^note$/i.test(r._k)) c.notes.push(r._v); else if(r._k||r._v) c.rows.push([r._k,r._v]);}); p.reference=Object.values(m);}},
  {name:'Parts',help:'Parts list for each component\'s exploded view. Item = balloon number on the drawing.',
-  cols:[['Component ID','_c'],['Item','ref'],['Description','name'],['Part number','pn'],['Qty','qty'],['Drawing','dw']],
+  cols:[['Component ID','_c'],['Item','ref'],['Description','name'],['Part number','pn'],['Qty','qty'],['Drawing','dw'],['Explode move X,Y,Z (mm)','dir','xyz']],
   get:p=>p.components.flatMap(c=>c.parts.map(x=>Object.assign({_c:c.id},x))),
   set:(p,rows)=>{p.components.forEach(c=>c.parts=[]); rows.forEach(r=>{const c=p.components.find(c=>slug(c.id)===slug(r._c)); if(c) c.parts.push(r); else (p._warn=p._warn||[]).push(`Parts: component "${r._c}" not found`);});}},
  {name:'Cabinet devices',help:'Devices on each electrical cabinet\'s back panel. Cabinet component ID must be a component with Shape "cabinet". Kind: plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan. Panel width/height (mm) only needed on the first row of each cabinet.',
   cols:[['Cabinet component ID','_c'],['Tag','tag'],['Kind','kind'],['Function','func'],['Part number','pn'],['I/O tags','io','ids'],['Verify position (Y)','guess','yn'],['Panel width','_w'],['Panel height','_h']],
   get:p=>Object.entries(p.cabinets).flatMap(([id,c])=>c.devices.map((d,i)=>Object.assign({_c:id,_w:i?'':c.w,_h:i?'':c.h},d))),
   set:(p,rows)=>{p.cabinets={}; rows.forEach(r=>{if(!r._c) return; const c=p.cabinets[r._c]=p.cabinets[r._c]||{w:1000,h:1200,devices:[]}; if(+r._w) c.w=+r._w; if(+r._h) c.h=+r._h; if(r.tag) c.devices.push(r);});}},
+ {name:'Geometry',help:'Optional detailed 3D shapes, in the same mm coordinates as Components (X right, Y rear, Z up). One shape per row as JSON. Leave Item blank for the component body, or give a Parts item number so that shape moves with the part in the exploded view. A component with rows here is drawn from them instead of its box. Shapes: {"t":"box","s":[w,d,h],"p":[x,y,z]} · {"t":"cyl","r":50,"r2":50,"l":200,"axis":"x","p":[..]} (cone: r2 = other-end radius; ri = bore radius) · {"t":"sphere","r":40} · {"t":"torus","R":180,"tube":15,"axis":"y"} · {"t":"tube","pts":[[x,y,z],...],"r":12} · {"t":"extrude","plane":"xz","pts":[[x,z],...],"depth":1800,"bevel":30} (plane xz = side outline pushed along Y; xy = plan outline pushed up; yz = end outline pushed along X) · {"t":"lathe","pts":[[radius,height],...],"axis":"y"}. Any shape takes "rot":[rx,ry,rz] in degrees, "c": a Color name or #rrggbb, "glass":true, "guard":true (hidden by Hide guards), "op":0.3 (see-through), "exo":true (only in the exploded view, for a part that is already drawn by another component), "nox":true (not in the exploded view).',
+  cols:[['Component ID','_c'],['Item','_r'],['Shape JSON','_j']],
+  get:p=>p.components.flatMap(c=>[...arr(c.geo).map(g=>({_c:c.id,_r:'',_j:JSON.stringify(g)})),...arr(c.parts).flatMap(x=>arr(x.geo).map(g=>({_c:c.id,_r:x.ref,_j:JSON.stringify(g)})))]),
+  set:(p,rows)=>{rows.forEach((r,i)=>{const c=p.components.find(c=>slug(c.id)===slug(r._c)); if(!c){(p._warn=p._warn||[]).push(`Geometry: component "${r._c}" not found`);return;}
+    let g; try{g=JSON.parse(r._j);}catch(e){(p._warn=p._warn||[]).push(`Geometry row ${i+2}: shape is not valid JSON`);return;}
+    if(r._r){const x=arr(c.parts).find(x=>str(x.ref)===str(r._r)); if(!x){(p._warn=p._warn||[]).push(`Geometry: item ${r._r} is not in ${r._c}'s parts`);return;} (x.geo=x.geo||[]).push(g);} else (c.geo=c.geo||[]).push(g);});}},
  {name:'Defects',help:'Product or output defects for this machine. Causes: one per line as  area | cause | fix  (area = machine, material, tooling, method or environment). The built-in defect library still applies; these add to it.',
   cols:[['Defect ID','id'],['Name','name'],['Category','cat'],['Process','process'],['Material','material'],['What it looks like','looks'],['Isolate first','isolate','lines'],['Causes (area | cause | fix)','causes','causes'],['Parameters to review','params','lines'],['Component IDs','comps','ids'],['Source','src']],get:p=>p.defects,set:(p,r)=>p.defects=r}
 ];
 const MACHINE_ROWS=[['Machine name','name'],['Maker','maker'],['Model','model'],['Serial number','serial'],['Machine function','functions'],['Materials processed','materials'],['Summary','summary']];
 const LISTS={Shape:SHAPES,Axis:['x','y','z'],Color:['frame','body','cab','steel','dark','yellow','blue','red','green','orange','white','copper'],Effect:['stop','warn','info'],Type:['DI','DO','AI','AO','TC'],Kind:['plc','io','safety','drive','psu','transformer','breaker','fuse','contactor','relay','terminal','connector','switch','filter','meter','fan','other']};
-function cellOut(o,[,k,t]){const v=o[k]; if(k==='box') return o.box&&!o.auto?o.box[t]:''; if(t==='lines') return L(v); if(t==='ids') return Ls(v); if(t==='yn') return v?'Y':'';
+function cellOut(o,[,k,t]){const v=o[k]; if(k==='box') return o.box&&!o.auto?o.box[t]:''; if(t==='lines') return L(v); if(t==='ids') return Ls(v); if(t==='yn') return v?'Y':''; if(t==='xyz') return v?arr(v).join(', '):'';
   if(t==='causes') return arr(v).map(c=>`${c.area} | ${c.cause} | ${c.fix}`).join('\n'); return v==null?'':v;}
 function cellIn(row,[,k,t],obj){const v=row; if(k==='box'){if(v!==''&&v!=null&&isFinite(+v)){obj.box=obj.box||[null,null,null,null,null,null]; obj.box[t]=+v;} return;}
-  if(t==='lines') obj[k]=splitLines(v); else if(t==='ids') obj[k]=splitIds(v); else if(t==='yn') obj[k]=/^(y|yes|true|1|x)$/i.test(str(v).trim());
+  if(t==='lines') obj[k]=splitLines(v); else if(t==='ids') obj[k]=splitIds(v); else if(t==='xyz'){const a=str(v).split(/[,;\s]+/).filter(Boolean).map(Number); if(a.length===3&&a.every(isFinite)) obj[k]=a;}
+  else if(t==='yn') obj[k]=/^(y|yes|true|1|x)$/i.test(str(v).trim());
   else if(t==='causes') obj[k]=str(v).split(/\r?\n/).map(l=>l.split('|').map(x=>x.trim())).filter(a=>a.join('')).map(a=>a.length>=3?{area:a[0].toLowerCase()||'machine',cause:a[1],fix:a.slice(2).join(' | ')}:{area:'machine',cause:a[0],fix:a[1]||''});
   else obj[k]=str(v).trim();}
 const hnorm=s=>str(s).toLowerCase().replace(/[^a-z0-9]/g,'');
@@ -1296,6 +1376,7 @@ Rules:
 - faults: every alarm and troubleshooting symptom in the documents, with concrete checks.
 - io: every PLC input and output in the electrical prints, tags exactly as printed. kind for cabinet devices: plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan.
 - parts for exploded views go inside each component as "parts": [{"ref": "balloon no.", "name": "", "pn": "", "qty": "", "drawing": ""}].
+- Optional detailed geometry: a component may also have "geo": a list of shapes in the same world mm coordinates, drawn instead of its box. Each shape: {"t":"box","s":[w,d,h],"p":[x,y,z centre]} · {"t":"cyl","r":R,"r2":other-end R,"l":length,"axis":"x|y|z","ri":bore} · {"t":"sphere","r":R,"sc":[sx,sy,sz]} · {"t":"torus","R":ring R,"tube":r,"axis":"x|y|z"} · {"t":"tube","pts":[[x,y,z],...],"r":r} (absolute points) · {"t":"extrude","plane":"xz|xy|yz","pts":[[u,v],...],"depth":d,"bevel":b} (xz = side outline in x,z pushed along y; xy = plan outline pushed up; yz = end outline pushed along x; centred on p) · {"t":"lathe","pts":[[radius,height],...],"axis":"x|y|z"}. Every shape may add "rot":[rx,ry,rz] degrees, "c":"steel|dark|…|#rrggbb", "glass":true, "guard":true (hidden with Hide guards), "op":0.3 (see-through), "exo":true (exploded view only, for a part another component already draws), "nox":true (left out of the exploded view). A part may carry its own "geo" (drawn in place, moves in the exploded view) and "dir":[x,y,z] = how far it moves when exploded, in mm. Use real dimensions from drawings.
 - Use only facts from the documents; never invent part numbers, alarm codes, wire numbers or I/O tags. Leave a section as [] if the documents don't cover it.
 - If your answer would be too long, return it in several replies and say which sections each covers; each reply must be a complete JSON object with only those sections.`;
 }
@@ -1450,7 +1531,7 @@ let pdfjsReady=null;
 function loadPdfjs(){
   if(pdfjsReady) return pdfjsReady;
   const add=src=>new Promise((res,rej)=>{const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('load '+src)); document.head.appendChild(s);});
-  const base=window.MTB_LIB?window.MTB_LIB:'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  const base=window.MTB_LIB?window.MTB_LIB+'':'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
   pdfjsReady=add(base+'pdf.min.js').then(()=>add(base+'pdf.worker.min.js')).then(()=>{window.pdfjsLib.GlobalWorkerOptions.workerSrc=base+'pdf.worker.min.js'; return window.pdfjsLib;});
   return pdfjsReady;
 }
@@ -1513,6 +1594,7 @@ Return JSON: {"meta":{"name","maker","model","serial","functions":[...],"materia
 - components: 10–35 physical assemblies a technician would recognize, each in one group. Include every electrical cabinet as its own component with shape "cabinet", and guards/enclosures with shape "guard" or "door".
 - Coordinates in millimetres: x = left→right as seen from the operator side, y = front(operator)→rear, z = up from the floor. box = [center x, center y, bottom z, width along x, depth along y, height]. Use real dimensions from drawings/specs where given, otherwise realistic estimates, so the parts sit where they really are relative to each other.
 - shape one of: ${SHAPES.join(', ')}. axis = "x","y" or "z" for round parts (motor, spindle, cylinder, pipe, carousel). color optional: frame, body, cab, steel, dark, yellow, blue, red, green, orange, white, copper.
+- Optional detailed geometry: a component may also have "geo": a list of shapes in the same world mm coordinates, drawn instead of its box. Each shape: {"t":"box","s":[w,d,h],"p":[x,y,z centre]} · {"t":"cyl","r":R,"r2":other-end R,"l":length,"axis":"x|y|z","ri":bore} · {"t":"sphere","r":R,"sc":[sx,sy,sz]} · {"t":"torus","R":ring R,"tube":r,"axis":"x|y|z"} · {"t":"tube","pts":[[x,y,z],...],"r":r} (absolute points) · {"t":"extrude","plane":"xz|xy|yz","pts":[[u,v],...],"depth":d,"bevel":b} (xz = side outline in x,z pushed along y; xy = plan outline pushed up; yz = end outline pushed along x; centred on p) · {"t":"lathe","pts":[[radius,height],...],"axis":"x|y|z"}. Every shape may add "rot":[rx,ry,rz] degrees, "c":"steel|dark|…|#rrggbb", "glass":true, "guard":true (hidden with Hide guards), "op":0.3 (see-through), "exo":true (exploded view only, for a part another component already draws), "nox":true (left out of the exploded view). A part may carry its own "geo" (drawn in place, moves in the exploded view) and "dir":[x,y,z] = how far it moves when exploded, in mm. Use real dimensions from drawings.
 - id: short lowercase slug. desc: one sentence on what it does.
 ${RULES}
 
