@@ -180,6 +180,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
 @media (max-width:900px){.work.full .stage{height:82vh}}
 .exbtns{display:flex;flex-wrap:wrap;gap:6px}
 .foot{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:76ch}
+.demo-label{flex:none;font:600 12px var(--f-body);color:#23d9cc;border:1px solid #238c88;border-radius:4px;padding:6px 9px;white-space:nowrap}
 /* setup */
 .form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 16px}
 .form label{display:flex;flex-direction:column;gap:4px;font:600 11px var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);min-width:0}
@@ -211,6 +212,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;font:500 13px var(--f-body);color:var(--panel);background:var(--fg);padding:9px 14px;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 @media (display-mode: standalone){.rail-head{padding-top:max(18px,env(safe-area-inset-top,0px))}}
 </style>
+<script src="demo-config.js"></script>
 </head>
 <body>
 
@@ -220,6 +222,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
       <div class="idrow">
         <img class="brand-header" src="rootio-header.png" alt="ROOT/IO — Industrial Diagnostic Intelligence" width="1400" height="350">
         <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
+         <span id="demoLabel" class="demo-label" hidden>Interactive Demo</span>
       </div>
       <div class="machine-heading">
         <div class="eyebrow" id="mEyebrow">Machine profile</div>
@@ -525,7 +528,11 @@ const slug=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-
 const arr=a=>Array.isArray(a)?a:(a==null||a===''?[]:[a]);
 const str=s=>s==null?'':String(s);
 const num=(v,d)=>{const n=+v;return isFinite(n)?n:d;};
+const DEMO_MODE = window.ROOTIO_DEMO_MODE !== false;
 const stageEl=id=>document.getElementById(id);
+const setupButton=stageEl('setupBtn'), demoLabel=stageEl('demoLabel');
+if(DEMO_MODE){setupButton.hidden=true;demoLabel.hidden=false;}
+
 const stage=stageEl('stage'), list=stageEl('list'), detail=stageEl('detail'), q=stageEl('q'), cats=stageEl('cats'), count=stageEl('count');
 const GEOT=['box','cyl','cone','sphere','torus','tube','extrude','lathe'];
 const nums=(a,n)=>{a=arr(a).map(v=>num(v,NaN)); return a.length>=n&&a.slice(0,n).every(isFinite)?a.slice(0,n):null;};
@@ -1231,10 +1238,11 @@ function wireIoFilter(){
   bx.addEventListener('input',run); run();
 }
 function select(key,fromScene){
+   if(DEMO_MODE && key==='setup') return;
   const it=byKey[key]; if(!it) return; cur=key; if(exMode) exitEx();
   let ids=[], want=tab;
-  if(it.t==='setup'){detail.innerHTML=renderSetup(); wireSetup(); stageEl('setupBtn').setAttribute('aria-current','true');}
-  else stageEl('setupBtn').setAttribute('aria-current','false');
+  if(it.t==='setup'){detail.innerHTML=renderSetup(); wireSetup(); setupButton.setAttribute('aria-current','true');}
+  else setupButton.setAttribute('aria-current','false');
   if(it.t==='fault'){detail.innerHTML=renderFault(it.o); ids=it.o.comps; want='machine';}
   else if(it.t==='comp'){detail.innerHTML=renderComp(it.o); ids=[it.o.id]; if(tab==='process') want='machine';}
   else if(it.t==='defect'){detail.innerHTML=renderDefect(it.o); ids=it.o.comps; want='defects';}
@@ -1261,7 +1269,7 @@ document.addEventListener('click',e=>{
     try{navigator.clipboard.writeText(txt).then(done,fallback);}catch(err){fallback();} return;}
   const b=e.target.closest('[data-key]'); if(b) select(b.dataset.key);
 });
-window.addEventListener('hashchange',()=>{const k=location.hash.slice(1); if(/^xc?-/.test(k)){if(k!==exMode&&EXV[k]) enterEx(k); return;} if(k&&k!==cur&&byKey[k]) select(k,true);});
+window.addEventListener('hashchange',()=>{const k=location.hash.slice(1); if(/^xc?-/.test(k)){if(k!==exMode&&EXV[k]) enterEx(k); return;} if(k&&k!==cur&&byKey[k]&&!(DEMO_MODE&&k==='setup')) select(k,true);});
 
 function applyProfile(raw,keepView){
   P=normalize(raw); index();
@@ -1273,7 +1281,7 @@ function applyProfile(raw,keepView){
   if(exMode) exitEx(); buildModel();
   const k=keepView&&cur&&byKey[cur]?cur:null;
   syncTabs();
-  if(k) select(k,true); else {const first=P.faults[0]?P.faults[0].key:P.components[0]?P.components[0].key:'setup'; select(first,true);}
+  if(k) select(k,true); else {const first=P.faults[0]?P.faults[0].key:P.components[0]?P.components[0].key:(DEMO_MODE?'io':'setup'); select(first,true);}
 }
 /* ============================ WITHOUT CLAUDE: spreadsheet + other AI tools ============================ */
 const L=s=>arr(s).join('\n'), Ls=s=>arr(s).join(', ');

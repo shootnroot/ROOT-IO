@@ -1,13 +1,10 @@
-ROOT /IO — Updated social sharing preview
+ROOT /IO Demo Mode
 
-Upload these two files into the ROOT of your GitHub Pages repository:
-  index.html (replace existing)
-  rootio-social-v3.png (new image)
+Upload index.html, demo-config.js, and sw.js to the root of your GitHub Pages repository. Replace index.html and sw.js.
 
-No service worker or manifest changes are needed.
+DEMO MODE ON (default): demo-config.js -> window.ROOTIO_DEMO_MODE = true;
+DEMO MODE OFF: change true to false, commit, and refresh/reopen the app.
 
-Verify after deployment:
-https://shootnroot.github.io/rootio-social-v3.png
+The Setup & sources button is hidden and navigation to its screen is blocked in demo mode. This is only a client-side UI control, NOT security or access control. Do not publish private machine data or credentials.
 
-The social preview may remain cached in messaging apps for some time.
-The website URL used in the metadata is https://shootnroot.github.io/.
+Existing social image rootio-social-v3.png should remain in your repository.
