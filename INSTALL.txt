@@ -1,0 +1,13 @@
+ROOT /IO — Updated social sharing preview
+
+Upload these two files into the ROOT of your GitHub Pages repository:
+  index.html (replace existing)
+  rootio-social-v3.png (new image)
+
+No service worker or manifest changes are needed.
+
+Verify after deployment:
+https://shootnroot.github.io/rootio-social-v3.png
+
+The social preview may remain cached in messaging apps for some time.
+The website URL used in the metadata is https://shootnroot.github.io/.
