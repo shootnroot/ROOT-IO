@@ -683,10 +683,11 @@ function buildModel(){
   HOME_C=HOME_T.clone().add(new THREE.Vector3(-.32,.42,1).normalize().multiplyScalar(span*1.75));
   BACK_C=HOME_T.clone().add(new THREE.Vector3(.4,.45,-1).normalize().multiplyScalar(span*1.75));
   const fs=span*4; floor.scale.set(fs,fs,1); floor.position.set(ctr.x,0,ctr.z);
-  if(grid) scene.remove(grid); const gs=Math.ceil(span*3); grid=new THREE.GridHelper(gs,gs,0x888888,0x888888); grid.position.set(ctr.x,0.002,ctr.z); grid.material.transparent=true; grid.material.opacity=.18; scene.add(grid);
+  if(grid) scene.remove(grid); const gs=Math.ceil(span*3); grid=new THREE.GridHelper(gs,Math.min(gs,120),0x888888,0x888888); grid.position.set(ctr.x,0.002,ctr.z); grid.material.transparent=true; grid.material.opacity=.18; scene.add(grid);
   sun.position.set(ctr.x-span*.6,span*2.2,ctr.z+span*1.2); sun.target.position.copy(ctr); Object.assign(sun.shadow.camera,{left:-span,right:span,top:span,bottom:-span,near:.1,far:span*6}); sun.shadow.camera.updateProjectionMatrix();
   fillL.position.set(ctr.x+span*2,span,ctr.z-span*1.5);
   if(controls){controls.minDistance=span*.15; controls.maxDistance=span*6; controls.target.copy(HOME_T);} camera.position.copy(HOME_C);
+  camera.near=Math.max(.05,span*.002); camera.far=Math.max(400,span*14); camera.updateProjectionMatrix(); // scale-aware clipping (a pump or a ship)
   guardsOn=true; stageEl('doors').textContent='Hide guards'; stageEl('doors').hidden=!guardMeshes.length;
 }
 
@@ -705,8 +706,10 @@ function focus(ids){
   const bb=new THREE.Box3(); let any=false;
   ids.forEach(id=>(meshes[id]||[]).forEach(m=>{if(m.visible){bb.expandByObject(m);any=true;}}));
   if(!any||!controls) return;
-  const c=bb.getCenter(new THREE.Vector3()); if(bb.getSize(new THREE.Vector3()).length()>HOME_C.distanceTo(HOME_T)*.6) c.lerp(HOME_T,.5);
+  const c=bb.getCenter(new THREE.Vector3()), size=bb.getSize(new THREE.Vector3()).length(), span=HOME_C.distanceTo(HOME_T)/1.75; if(size>span*1.05) c.lerp(HOME_T,.5);
   goal.t=c; goal.c=null;
+  // very large models (ships, plants): also move in so a small selected part fills the view
+  if(span>15&&size<span*.35){const dir=camera.position.clone().sub(controls.target).normalize(), want=Math.max(size*2.4,span*.12); if(camera.position.distanceTo(controls.target)>want*1.3) goal.c=c.clone().add(dir.multiplyScalar(want));}
 }
 stageEl('resetView').addEventListener('click',()=>{goal.t=HOME_T.clone();goal.c=HOME_C.clone();});
 stageEl('viewBack').addEventListener('click',e=>{const back=e.currentTarget.textContent==='Rear view';goal.t=HOME_T.clone();goal.c=(back?BACK_C:HOME_C).clone();e.currentTarget.textContent=back?'Front view':'Rear view';});
@@ -902,6 +905,8 @@ function buildEx(id){
   const c=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3()).length();
   exGrid.position.set(c.x,bb.min.y-.05,c.z);
   if(controls){controls.target.copy(c); controls.maxDistance=sz*6; controls.minDistance=sz*.05;}
+  camera.near=Math.max(.01,sz*.001); camera.far=Math.max(400,sz*12); camera.updateProjectionMatrix();
+  exGrid.scale.setScalar(Math.max(1,sz/12));
   // fit the exploded bounding sphere in whichever field of view (vertical or horizontal) is tighter, leaving room for balloons
   const vf=camera.fov*Math.PI/180, hf=2*Math.atan(Math.tan(vf/2)*camera.aspect), fitD=(sz/2)/Math.sin(Math.min(vf,hf)/2)*(view.kind==='cab'?1.1:1.22);
   camera.position.copy(c).add((view.kind==='cab'?new THREE.Vector3(.28,.22,1):new THREE.Vector3(.5,.38,.78)).normalize().multiplyScalar(Math.max(fitD,sz*.9)));
@@ -931,7 +936,7 @@ function exitEx(){
   exBalloons.forEach(b=>b.el.remove()); exBalloons=[];
   if(mainPose&&controls){controls.target.copy(mainPose.t); camera.position.copy(mainPose.c);} buildModelLimits();
 }
-function buildModelLimits(){ if(!controls) return; const span=HOME_C.distanceTo(HOME_T)/1.75; controls.minDistance=span*.15; controls.maxDistance=span*6; }
+function buildModelLimits(){ if(!controls) return; const span=HOME_C.distanceTo(HOME_T)/1.75; controls.minDistance=span*.15; controls.maxDistance=span*6; camera.near=Math.max(.05,span*.002); camera.far=Math.max(400,span*14); camera.updateProjectionMatrix(); }
 function exFrame(){
   exT+=(exGoal-exT)*.08; applyExplode(exT);
   const w=stage.clientWidth,h=stage.clientHeight, bb=new THREE.Box3(), v=new THREE.Vector3();
