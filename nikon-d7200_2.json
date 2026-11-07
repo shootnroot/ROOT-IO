@@ -1,0 +1,8476 @@
+{
+ "meta": {
+  "name": "Nikon D7200",
+  "maker": "Nikon Corporation",
+  "model": "D7200 (Model Name: N1406) digital SLR camera",
+  "serial": "",
+  "functions": [
+   "Digital still photography",
+   "HD movie recording"
+  ],
+  "materials": [],
+  "summary": "24.2 MP Nikon DX-format digital SLR (EXPEED 4) with F mount, 51-point AF, dual SD slots, built-in flash and Wi-Fi/NFC. Geometry is scaled from D7200 photos to the 135.5 × 106.5 × 76 mm spec; service part numbers come from the D7100 parts list (shared chassis) and are marked where D7200 internals differ."
+ },
+ "groups": [
+  {
+   "id": "body",
+   "name": "Body & chassis"
+  },
+  {
+   "id": "optics",
+   "name": "Optical path & imaging"
+  },
+  {
+   "id": "controls",
+   "name": "Controls"
+  },
+  {
+   "id": "display",
+   "name": "Displays & viewfinder"
+  },
+  {
+   "id": "power",
+   "name": "Power"
+  },
+  {
+   "id": "storage",
+   "name": "Memory cards"
+  },
+  {
+   "id": "flash",
+   "name": "Flash & accessory shoe"
+  },
+  {
+   "id": "io",
+   "name": "Connectors & wireless"
+  },
+  {
+   "id": "audio",
+   "name": "Audio"
+  },
+  {
+   "id": "lens",
+   "name": "Lens"
+  },
+  {
+   "id": "electronics",
+   "name": "Electronics"
+  }
+ ],
+ "components": [
+  {
+   "id": "rear-cover",
+   "name": "Rear cover unit",
+   "group": "body",
+   "shape": "guard",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    0.0,
+    12.0,
+    0.0,
+    131.4,
+    8.0,
+    102.5
+   ],
+   "desc": "Magnesium-alloy rear shell carrying the button column, multi selector and monitor opening (Fig.19).",
+   "src": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -60.0,
+       -51.25
+      ],
+      [
+       60.0,
+       -51.25
+      ],
+      [
+       65.7,
+       -45.25
+      ],
+      [
+       65.7,
+       34.75
+      ],
+      [
+       61.0,
+       40.75
+      ],
+      [
+       52.0,
+       41.75
+      ],
+      [
+       16.0,
+       42.75
+      ],
+      [
+       2.0,
+       51.25
+      ],
+      [
+       -29.0,
+       51.25
+      ],
+      [
+       -43.0,
+       42.75
+      ],
+      [
+       -61.0,
+       42.75
+      ],
+      [
+       -65.7,
+       36.75
+      ],
+      [
+       -65.7,
+       -45.25
+      ]
+     ],
+     "depth": 8,
+     "bevel": 1.5,
+     "p": [
+      0.0,
+      12,
+      51.25
+     ],
+     "c": "#1c1c1e",
+     "guard": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Rear cover unit",
+     "pn": "1F999-559",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         -60.0,
+         -51.25
+        ],
+        [
+         60.0,
+         -51.25
+        ],
+        [
+         65.7,
+         -45.25
+        ],
+        [
+         65.7,
+         34.75
+        ],
+        [
+         61.0,
+         40.75
+        ],
+        [
+         52.0,
+         41.75
+        ],
+        [
+         16.0,
+         42.75
+        ],
+        [
+         2.0,
+         51.25
+        ],
+        [
+         -29.0,
+         51.25
+        ],
+        [
+         -43.0,
+         42.75
+        ],
+        [
+         -61.0,
+         42.75
+        ],
+        [
+         -65.7,
+         36.75
+        ],
+        [
+         -65.7,
+         -45.25
+        ]
+       ],
+       "depth": 8,
+       "bevel": 1.5,
+       "p": [
+        0.0,
+        12,
+        51.25
+       ],
+       "c": "#1c1c1e",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -45,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Drip-proof / light-shield tapes (rear)",
+     "pn": "1K935-134",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19"
+    }
+   ]
+  },
+  {
+   "id": "front-cover",
+   "name": "Front cover unit",
+   "group": "body",
+   "shape": "guard",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -17.4,
+    60.5,
+    0.0,
+    96.7,
+    7.0,
+    102.5
+   ],
+   "desc": "Front shell around the lens mount; carries the Pv/Fn button rubbers (Fig.3).",
+   "src": "D7100_Parts_List.pdf Fig.3; NIKON_D7200_MANUAL.pdf p.2,3",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -42.65,
+       -51.25
+      ],
+      [
+       48.35,
+       -51.25
+      ],
+      [
+       48.35,
+       41.75
+      ],
+      [
+       33.35,
+       42.75
+      ],
+      [
+       19.35,
+       51.25
+      ],
+      [
+       -11.65,
+       51.25
+      ],
+      [
+       -25.65,
+       42.75
+      ],
+      [
+       -43.65,
+       42.75
+      ],
+      [
+       -48.35,
+       36.75
+      ],
+      [
+       -48.35,
+       -45.25
+      ]
+     ],
+     "depth": 7,
+     "bevel": 1.5,
+     "p": [
+      -17.35,
+      60.5,
+      51.25
+     ],
+     "c": "#1c1c1e",
+     "guard": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Front cover unit",
+     "pn": "1F999-549",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.3",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         -42.65,
+         -51.25
+        ],
+        [
+         48.35,
+         -51.25
+        ],
+        [
+         48.35,
+         41.75
+        ],
+        [
+         33.35,
+         42.75
+        ],
+        [
+         19.35,
+         51.25
+        ],
+        [
+         -11.65,
+         51.25
+        ],
+        [
+         -25.65,
+         42.75
+        ],
+        [
+         -43.65,
+         42.75
+        ],
+        [
+         -48.35,
+         36.75
+        ],
+        [
+         -48.35,
+         -45.25
+        ]
+       ],
+       "depth": 7,
+       "bevel": 1.5,
+       "p": [
+        -17.35,
+        60.5,
+        51.25
+       ],
+       "c": "#1c1c1e",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      40,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Rubber SW (Pv/Fn)",
+     "pn": "1K201-776",
+     "qty": "2",
+     "drawing": "D7100_Parts_List.pdf Fig.3"
+    }
+   ]
+  },
+  {
+   "id": "top-cover",
+   "name": "Top cover unit",
+   "group": "body",
+   "shape": "guard",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    0.0,
+    42.5,
+    82.8,
+    140.4,
+    65.0,
+    19.7
+   ],
+   "desc": "Top shell incl. pentaprism housing; holds mode dial, top LCD, power switch and main/sub dials (Fig.14–18).",
+   "src": "D7100_Parts_List.pdf Fig.14,15,16,17,18; NIKON_D7200_MANUAL.pdf p.1",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -65.7,
+       -32.5
+      ],
+      [
+       65.7,
+       -32.5
+      ],
+      [
+       65.7,
+       17.5
+      ],
+      [
+       61.0,
+       27.5
+      ],
+      [
+       50.0,
+       32.5
+      ],
+      [
+       38.0,
+       30.5
+      ],
+      [
+       31.0,
+       22.5
+      ],
+      [
+       -61.0,
+       21.5
+      ],
+      [
+       -65.7,
+       15.5
+      ]
+     ],
+     "depth": 8,
+     "bevel": 1.5,
+     "p": [
+      0.0,
+      42.5,
+      90
+     ],
+     "c": "#1c1c1e",
+     "guard": true,
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.2,
+     "l": 5,
+     "axis": "y",
+     "p": [
+      -67,
+      40,
+      86
+     ],
+     "c": "steel",
+     "guard": true,
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.2,
+     "l": 5,
+     "axis": "y",
+     "p": [
+      67,
+      40,
+      86
+     ],
+     "c": "steel",
+     "guard": true,
+     "nox": true
+    },
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       29.5,
+       -4.25
+      ],
+      [
+       15.5,
+       4.25
+      ],
+      [
+       -15.5,
+       4.25
+      ],
+      [
+       -29.5,
+       -4.25
+      ]
+     ],
+     "depth": 44,
+     "bevel": 2,
+     "p": [
+      -13.5,
+      36,
+      98.25
+     ],
+     "c": "#1c1c1e",
+     "guard": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Top cover unit",
+     "pn": "1F999-556",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xy",
+       "pts": [
+        [
+         -65.7,
+         -32.5
+        ],
+        [
+         65.7,
+         -32.5
+        ],
+        [
+         65.7,
+         17.5
+        ],
+        [
+         61.0,
+         27.5
+        ],
+        [
+         50.0,
+         32.5
+        ],
+        [
+         38.0,
+         30.5
+        ],
+        [
+         31.0,
+         22.5
+        ],
+        [
+         -61.0,
+         21.5
+        ],
+        [
+         -65.7,
+         15.5
+        ]
+       ],
+       "depth": 8,
+       "bevel": 1.5,
+       "p": [
+        0.0,
+        42.5,
+        90
+       ],
+       "c": "#1c1c1e",
+       "guard": true,
+       "exo": true
+      },
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         29.5,
+         -4.25
+        ],
+        [
+         15.5,
+         4.25
+        ],
+        [
+         -15.5,
+         4.25
+        ],
+        [
+         -29.5,
+         -4.25
+        ]
+       ],
+       "depth": 44,
+       "bevel": 2,
+       "p": [
+        -13.5,
+        36,
+        98.25
+       ],
+       "c": "#1c1c1e",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      50
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Eyelet for camera strap",
+     "pn": "1B002-961",
+     "qty": "2",
+     "drawing": "D7100_Parts_List.pdf Fig.14; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.2,
+       "l": 5,
+       "axis": "y",
+       "p": [
+        -67,
+        40,
+        86
+       ],
+       "c": "steel",
+       "guard": true,
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.2,
+       "l": 5,
+       "axis": "y",
+       "p": [
+        67,
+        40,
+        86
+       ],
+       "c": "steel",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      50
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Neck-strap ring / cover",
+     "pn": "1K100-035 / 1K080-005",
+     "qty": "2",
+     "drawing": "D7100_Parts_List.pdf Fig.6"
+    },
+    {
+     "ref": "",
+     "name": "Drip-proof tape",
+     "pn": "1K935-131",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14"
+    }
+   ]
+  },
+  {
+   "id": "bottom-cover",
+   "name": "Bottom cover unit & tripod socket",
+   "group": "body",
+   "shape": "guard",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    0.0,
+    42.5,
+    -1.5,
+    131.4,
+    67.0,
+    6.0
+   ],
+   "desc": "Base shell with 1/4 in. (ISO 1222) tripod socket; bottom plate unit carries the tripod boss (Fig.5, Fig.8).",
+   "src": "D7100_Parts_List.pdf Fig.5,8; NIKON_D7200_MANUAL.pdf p.3,358",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -63.0,
+       -33.5
+      ],
+      [
+       63.0,
+       -33.5
+      ],
+      [
+       65.7,
+       -28.5
+      ],
+      [
+       65.7,
+       17.5
+      ],
+      [
+       60.0,
+       29.5
+      ],
+      [
+       48.0,
+       33.5
+      ],
+      [
+       36.0,
+       30.5
+      ],
+      [
+       31.0,
+       21.5
+      ],
+      [
+       -61.0,
+       21.5
+      ],
+      [
+       -65.7,
+       15.5
+      ],
+      [
+       -65.7,
+       -28.5
+      ]
+     ],
+     "depth": 4,
+     "bevel": 1.5,
+     "p": [
+      0.0,
+      42.5,
+      2
+     ],
+     "c": "#1c1c1e",
+     "guard": true,
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.2,
+     "l": 6,
+     "axis": "z",
+     "p": [
+      -13.5,
+      36,
+      1.5
+     ],
+     "c": "steel",
+     "guard": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Bottom cover unit",
+     "pn": "1H998-692",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.5",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xy",
+       "pts": [
+        [
+         -63.0,
+         -33.5
+        ],
+        [
+         63.0,
+         -33.5
+        ],
+        [
+         65.7,
+         -28.5
+        ],
+        [
+         65.7,
+         17.5
+        ],
+        [
+         60.0,
+         29.5
+        ],
+        [
+         48.0,
+         33.5
+        ],
+        [
+         36.0,
+         30.5
+        ],
+        [
+         31.0,
+         21.5
+        ],
+        [
+         -61.0,
+         21.5
+        ],
+        [
+         -65.7,
+         15.5
+        ],
+        [
+         -65.7,
+         -28.5
+        ]
+       ],
+       "depth": 4,
+       "bevel": 1.5,
+       "p": [
+        0.0,
+        42.5,
+        2
+       ],
+       "c": "#1c1c1e",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -30
+     ]
+    },
+    {
+     "ref": "13",
+     "name": "Tripod socket (bottom plate unit)",
+     "pn": "1B003-067",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.8; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.2,
+       "l": 6,
+       "axis": "z",
+       "p": [
+        -13.5,
+        36,
+        1.5
+       ],
+       "c": "steel",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grip",
+   "name": "Grip unit",
+   "group": "body",
+   "shape": "guard",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    48.4,
+    44.2,
+    2.0,
+    34.7,
+    64.5,
+    90.0
+   ],
+   "desc": "Rubber-covered right-hand grip shell around the battery chamber (Fig.2).",
+   "src": "D7100_Parts_List.pdf Fig.2; NIKON_D7200_MANUAL.pdf p.3,4",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -17.35,
+       20.0
+      ],
+      [
+       -13.35,
+       28.0
+      ],
+      [
+       -2.35,
+       32.0
+      ],
+      [
+       9.65,
+       30.5
+      ],
+      [
+       15.65,
+       24.0
+      ],
+      [
+       17.35,
+       14.0
+      ],
+      [
+       17.35,
+       -30.0
+      ],
+      [
+       11.65,
+       -32.0
+      ],
+      [
+       -17.35,
+       -30.0
+      ]
+     ],
+     "depth": 90,
+     "bevel": 3,
+     "p": [
+      48.35,
+      44.0,
+      47
+     ],
+     "c": "#121212",
+     "guard": true,
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      22,
+      2,
+      3
+     ],
+     "p": [
+      46,
+      75.5,
+      70
+     ],
+     "c": "#c0392b",
+     "rot": [
+      0,
+      0,
+      -12
+     ],
+     "guard": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Grip unit",
+     "pn": "1H998-693",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.2",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xy",
+       "pts": [
+        [
+         -17.35,
+         20.0
+        ],
+        [
+         -13.35,
+         28.0
+        ],
+        [
+         -2.35,
+         32.0
+        ],
+        [
+         9.65,
+         30.5
+        ],
+        [
+         15.65,
+         24.0
+        ],
+        [
+         17.35,
+         14.0
+        ],
+        [
+         17.35,
+         -30.0
+        ],
+        [
+         11.65,
+         -32.0
+        ],
+        [
+         -17.35,
+         -30.0
+        ]
+       ],
+       "depth": 90,
+       "bevel": 3,
+       "p": [
+        48.35,
+        44.0,
+        47
+       ],
+       "c": "#121212",
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      40,
+      30,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Red grip accent (on grip unit)",
+     "pn": "",
+     "qty": "1",
+     "drawing": "photo",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        22,
+        2,
+        3
+       ],
+       "p": [
+        46,
+        75.5,
+        70
+       ],
+       "c": "#c0392b",
+       "rot": [
+        0,
+        0,
+        -12
+       ],
+       "guard": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      40,
+      30,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "if-cover",
+   "name": "Connector covers (I/F cover unit)",
+   "group": "io",
+   "shape": "door",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -67.5,
+    36.0,
+    14.0,
+    4.0,
+    44.0,
+    65.0
+   ],
+   "desc": "Left-side rubber covers over USB, external mic, HDMI (Type C), headphone and accessory terminal (Fig.2).",
+   "src": "D7100_Parts_List.pdf Fig.2; NIKON_D7200_MANUAL.pdf p.2,319",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      3,
+      44,
+      64
+     ],
+     "p": [
+      -67,
+      36,
+      46
+     ],
+     "c": "#121212",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      1.5,
+      16,
+      18
+     ],
+     "p": [
+      -68.8,
+      36,
+      70
+     ],
+     "c": "#121212",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      1.5,
+      16,
+      16
+     ],
+     "p": [
+      -68.8,
+      36,
+      48
+     ],
+     "c": "#121212",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      1.5,
+      16,
+      18
+     ],
+     "p": [
+      -68.8,
+      36,
+      26
+     ],
+     "c": "#121212",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "I/F cover unit",
+     "pn": "1H998-694",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.2",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        3,
+        44,
+        64
+       ],
+       "p": [
+        -67,
+        36,
+        46
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -45,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "USB/MIC connector cover",
+     "pn": "1K685-480",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.2; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1.5,
+        16,
+        18
+       ],
+       "p": [
+        -68.8,
+        36,
+        70
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -60,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "9",
+     "name": "HDMI connector cover",
+     "pn": "1K685-481",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.2; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1.5,
+        16,
+        16
+       ],
+       "p": [
+        -68.8,
+        36,
+        48
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -60,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "10",
+     "name": "Accessory terminal cover",
+     "pn": "1K685-483",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.2; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1.5,
+        16,
+        18
+       ],
+       "p": [
+        -68.8,
+        36,
+        26
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -60,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "15",
+     "name": "USB connector",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)"
+    },
+    {
+     "ref": "16",
+     "name": "HDMI connector",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)"
+    },
+    {
+     "ref": "14",
+     "name": "External microphone connector",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)"
+    },
+    {
+     "ref": "18",
+     "name": "Headphone connector",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)"
+    },
+    {
+     "ref": "17",
+     "name": "Accessory terminal",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)"
+    },
+    {
+     "ref": "",
+     "name": "USB cable",
+     "pn": "UC-E17",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.i"
+    }
+   ]
+  },
+  {
+   "id": "card-door",
+   "name": "Memory card slot cover (SD lid)",
+   "group": "storage",
+   "shape": "door",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    62.8,
+    29.5,
+    21.0,
+    11.5,
+    45.0,
+    46.0
+   ],
+   "desc": "Right-side lid over dual SD/SDHC/SDXC (UHS-I) slots; card access lamp on rear (Fig.4).",
+   "src": "D7100_Parts_List.pdf Fig.4; NIKON_D7200_MANUAL.pdf p.4,22",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      3,
+      40,
+      46
+     ],
+     "p": [
+      67,
+      32,
+      44
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      4,
+      34,
+      42
+     ],
+     "p": [
+      63,
+      32,
+      44
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      2,
+      1,
+      2
+     ],
+     "p": [
+      58,
+      7.5,
+      30
+     ],
+     "c": "#3cb043",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "18",
+     "name": "SD lid unit",
+     "pn": "1F999-552",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.4; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        3,
+        40,
+        46
+       ],
+       "p": [
+        67,
+        32,
+        44
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      45,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "SD cover unit (slot holder)",
+     "pn": "1F999-551",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.4",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        4,
+        34,
+        42
+       ],
+       "p": [
+        63,
+        32,
+        44
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      22,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Card indication label",
+     "pn": "1K088-171",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.4"
+    },
+    {
+     "ref": "19",
+     "name": "Memory card access lamp",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        2,
+        1,
+        2
+       ],
+       "p": [
+        58,
+        7.5,
+        30
+       ],
+       "c": "#3cb043",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -45,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "battery-door",
+   "name": "Battery-chamber lid & base covers",
+   "group": "power",
+   "shape": "door",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    20.5,
+    40.5,
+    -1.5,
+    81.0,
+    45.0,
+    2.0
+   ],
+   "desc": "Battery lid with latch under the grip; MB-D15 contact cover and power connector cover (Fig.5–6).",
+   "src": "D7100_Parts_List.pdf Fig.5,6; NIKON_D7200_MANUAL.pdf p.3,22",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      26,
+      38,
+      2
+     ],
+     "p": [
+      48,
+      44,
+      -0.5
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      20,
+      8,
+      1.5
+     ],
+     "p": [
+      -10,
+      22,
+      -0.4
+     ],
+     "c": "#121212",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "6",
+     "name": "Battery lid unit",
+     "pn": "1H998-703",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.6; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        26,
+        38,
+        2
+       ],
+       "p": [
+        48,
+        44,
+        -0.5
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -45
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "Battery lock lever",
+     "pn": "1K685-141",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.5; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)"
+    },
+    {
+     "ref": "9",
+     "name": "Power connector cover",
+     "pn": "1K685-482",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.5; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)"
+    },
+    {
+     "ref": "8",
+     "name": "Contact cover for optional MB-D15",
+     "pn": "1K685-479",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.6; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        20,
+        8,
+        1.5
+       ],
+       "p": [
+        -10,
+        22,
+        -0.4
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -40
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Battery label",
+     "pn": "1K111-202",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.6"
+    }
+   ]
+  },
+  {
+   "id": "inner-frame",
+   "name": "Main chassis frame",
+   "group": "body",
+   "shape": "base",
+   "axis": "",
+   "color": "steel",
+   "box": [
+    2.0,
+    36.0,
+    4.0,
+    118.0,
+    40.0,
+    84.0
+   ],
+   "desc": "Internal body frame carrying boards, battery box and mirror box (Fig.7–8; no part number set).",
+   "src": "D7100_Parts_List.pdf Fig.7,8",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      118,
+      40,
+      84
+     ],
+     "p": [
+      2,
+      36,
+      46
+     ],
+     "c": "#3a3a3c",
+     "op": 0.5
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Main chassis (no RP)",
+     "pn": "",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.7"
+    }
+   ]
+  },
+  {
+   "id": "mirror-box",
+   "name": "Mirror box (front body unit)",
+   "group": "optics",
+   "shape": "unit",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -6.0,
+    45.0,
+    14.0,
+    75.0,
+    34.0,
+    70.4
+   ],
+   "desc": "Front body/mirror box with mirror driving base and AF motor (Fig.9–11).",
+   "src": "D7100_Parts_List.pdf Fig.9,10,11",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      60,
+      34,
+      62
+     ],
+     "p": [
+      -13.5,
+      45,
+      53.4
+     ],
+     "c": "#2c2c2e"
+    },
+    {
+     "t": "box",
+     "s": [
+      14,
+      20,
+      40
+     ],
+     "p": [
+      24.5,
+      44,
+      60
+     ],
+     "c": "#4a4a4c",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 5,
+     "l": 16,
+     "axis": "z",
+     "p": [
+      22.5,
+      48,
+      22
+     ],
+     "c": "#8a8a8a",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Front body unit",
+     "pn": "1F999-554",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.9,10"
+    },
+    {
+     "ref": "",
+     "name": "Mirror driving base unit",
+     "pn": "1F999-555",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.11",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        14,
+        20,
+        40
+       ],
+       "p": [
+        24.5,
+        44,
+        60
+       ],
+       "c": "#4a4a4c",
+       "exo": true
+      }
+     ],
+     "dir": [
+      22,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "AF motor unit",
+     "pn": "1B061-439",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.11",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 5,
+       "l": 16,
+       "axis": "z",
+       "p": [
+        22.5,
+        48,
+        22
+       ],
+       "c": "#8a8a8a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      25,
+      0,
+      -15
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Aperture control base unit",
+     "pn": "1H998-706",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.11"
+    },
+    {
+     "ref": "",
+     "name": "Mirror driving lever unit",
+     "pn": "1B003-078",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.11"
+    },
+    {
+     "ref": "",
+     "name": "Metering FPC base unit",
+     "pn": "1B003-177",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    }
+   ]
+  },
+  {
+   "id": "lens-mount",
+   "name": "Lens mount (F bayonet)",
+   "group": "optics",
+   "shape": "cylinder",
+   "axis": "y",
+   "color": "steel",
+   "box": [
+    -18.5,
+    66.5,
+    20.9,
+    75.0,
+    7.0,
+    65.0
+   ],
+   "desc": "Nikon F bayonet with aperture coupling ring, lens contacts and lens release button (Fig.10).",
+   "src": "D7100_Parts_List.pdf Fig.10; NIKON_D7200_MANUAL.pdf p.2,3,349",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 32.5,
+     "l": 3,
+     "axis": "y",
+     "p": [
+      -13.5,
+      68.5,
+      53.4
+     ],
+     "c": "steel",
+     "ri": 22,
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 30,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -13.5,
+      66,
+      53.4
+     ],
+     "c": "#555",
+     "ri": 24,
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      12,
+      1,
+      3
+     ],
+     "p": [
+      2.5,
+      67,
+      73.4
+     ],
+     "c": "#c9a227",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 4.5,
+     "l": 4,
+     "axis": "y",
+     "p": [
+      -51.5,
+      65,
+      52.6
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "11",
+     "name": "Bayonet mount",
+     "pn": "1K404-164",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.10; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 32.5,
+       "l": 3,
+       "axis": "y",
+       "p": [
+        -13.5,
+        68.5,
+        53.4
+       ],
+       "c": "steel",
+       "ri": 22,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      70,
+      0
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Aperture coupling ring unit",
+     "pn": "1B002-804",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.10; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 30,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -13.5,
+        66,
+        53.4
+       ],
+       "c": "#555",
+       "ri": 24,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      50,
+      0
+     ]
+    },
+    {
+     "ref": "10",
+     "name": "Lens contact FPC unit (CPU contacts)",
+     "pn": "1H998-731",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.10; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        12,
+        1,
+        3
+       ],
+       "p": [
+        2.5,
+        67,
+        73.4
+       ],
+       "c": "#c9a227",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "11",
+     "name": "Lens release button unit",
+     "pn": "1H998-702",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.10; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4.5,
+       "l": 4,
+       "axis": "y",
+       "p": [
+        -51.5,
+        65,
+        52.6
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Bayonet mount spring",
+     "pn": "1K240-468",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.10"
+    },
+    {
+     "ref": "14",
+     "name": "Body cap",
+     "pn": "BF-1B",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.i,23"
+    }
+   ]
+  },
+  {
+   "id": "mirror",
+   "name": "Mirror unit",
+   "group": "optics",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    41.0,
+    33.4,
+    36.0,
+    3.1,
+    35.0
+   ],
+   "desc": "Quick-return main mirror with sub-mirror to the AF module (Fig.9).",
+   "src": "D7100_Parts_List.pdf Fig.9; NIKON_D7200_MANUAL.pdf p.2,350",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      36,
+      1.2,
+      26
+     ],
+     "p": [
+      -13.5,
+      42,
+      55.4
+     ],
+     "c": "steel",
+     "rot": [
+      45,
+      0,
+      0
+     ],
+     "op": 0.8,
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      20,
+      1,
+      12
+     ],
+     "p": [
+      -13.5,
+      40,
+      39.4
+     ],
+     "c": "steel",
+     "rot": [
+      -45,
+      0,
+      0
+     ],
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "2",
+     "name": "Mirror unit",
+     "pn": "1H998-740",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.9; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        36,
+        1.2,
+        26
+       ],
+       "p": [
+        -13.5,
+        42,
+        55.4
+       ],
+       "c": "steel",
+       "rot": [
+        45,
+        0,
+        0
+       ],
+       "op": 0.8,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      30
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Sub mirror measuring unit",
+     "pn": "1B003-073",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.9",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        20,
+        1,
+        12
+       ],
+       "p": [
+        -13.5,
+        40,
+        39.4
+       ],
+       "c": "steel",
+       "rot": [
+        -45,
+        0,
+        0
+       ],
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -18
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Main mirror shaft",
+     "pn": "1K360-430",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.9"
+    },
+    {
+     "ref": "",
+     "name": "Mirror setting unit",
+     "pn": "1H998-490",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.9"
+    }
+   ]
+  },
+  {
+   "id": "shutter",
+   "name": "Shutter plate / focal-plane shutter",
+   "group": "optics",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    29.2,
+    33.4,
+    46.0,
+    7.4,
+    40.0
+   ],
+   "desc": "Vertical-travel focal-plane shutter, 1/8000–30 s, X=1/250 s; shutter curtain is extremely thin (Fig.12).",
+   "src": "D7100_Parts_List.pdf Fig.12; NIKON_D7200_MANUAL.pdf p.351,329",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      46,
+      7,
+      40
+     ],
+     "p": [
+      -13.5,
+      29,
+      53.4
+     ],
+     "c": "#3d3d40",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      24,
+      0.4,
+      17
+     ],
+     "p": [
+      -13.5,
+      32.7,
+      53.4
+     ],
+     "c": "#777",
+     "op": 0.7,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Shutter plate unit",
+     "pn": "1F999-574",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.12",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        46,
+        7,
+        40
+       ],
+       "p": [
+        -13.5,
+        29,
+        53.4
+       ],
+       "c": "#3d3d40",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        24,
+        0.4,
+        17
+       ],
+       "p": [
+        -13.5,
+        32.7,
+        53.4
+       ],
+       "c": "#777",
+       "op": 0.7,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -15,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "MD PCB unit (shutter/mirror drive)",
+     "pn": "1S020-963",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.12"
+    }
+   ]
+  },
+  {
+   "id": "sensor",
+   "name": "Image sensor unit",
+   "group": "optics",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    23.7,
+    34.4,
+    44.0,
+    5.4,
+    38.0
+   ],
+   "desc": "D7200: 23.5 × 15.6 mm CMOS, 24.2 MP effective (D7100: 24.1 MP — different sensor unit). Vibrates to shed dust.",
+   "src": "D7100_Parts_List.pdf Fig.3; NIKON_D7200_MANUAL.pdf p.348,321",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      44,
+      5,
+      38
+     ],
+     "p": [
+      -13.5,
+      23.5,
+      53.4
+     ],
+     "c": "#2a2a2c",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      23.5,
+      0.5,
+      15.6
+     ],
+     "p": [
+      -13.5,
+      26.2,
+      53.4
+     ],
+     "c": "#3b2e5a",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Image sensor unit (D7100 part — D7200 sensor differs)",
+     "pn": "1H998-744",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.3",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        44,
+        5,
+        38
+       ],
+       "p": [
+        -13.5,
+        23.5,
+        53.4
+       ],
+       "c": "#2a2a2c",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        23.5,
+        0.5,
+        15.6
+       ],
+       "p": [
+        -13.5,
+        26.2,
+        53.4
+       ],
+       "c": "#3b2e5a",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -30,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Sensor alignment washers",
+     "pn": "6K050-084 / 6K050-085-1 / 6K050-086",
+     "qty": "n",
+     "drawing": "D7100_Parts_List.pdf Fig.3"
+    },
+    {
+     "ref": "",
+     "name": "Lumirror sheet T=0.1",
+     "pn": "1K103-331-1",
+     "qty": "n",
+     "drawing": "D7100_Parts_List.pdf Fig.3"
+    }
+   ]
+  },
+  {
+   "id": "af-module",
+   "name": "AF sensor unit",
+   "group": "optics",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    43.0,
+    7.5,
+    34.0,
+    22.0,
+    11.0
+   ],
+   "desc": "D7200: Multi-CAM 3500 II, 51 points (15 cross-type), –3 to +19 EV (D7100: –2 EV module).",
+   "src": "D7100_Parts_List.pdf Fig.12; NIKON_D7200_MANUAL.pdf p.353",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      34,
+      22,
+      11
+     ],
+     "p": [
+      -13.5,
+      43,
+      13
+     ],
+     "c": "#333",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "AF sensor unit (D7100 part — D7200 module differs)",
+     "pn": "1H998-723",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.12",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        34,
+        22,
+        11
+       ],
+       "p": [
+        -13.5,
+        43,
+        13
+       ],
+       "c": "#333",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -25
+     ]
+    }
+   ]
+  },
+  {
+   "id": "prism",
+   "name": "Pentaprism & viewfinder optics",
+   "group": "display",
+   "shape": "unit",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    38.0,
+    74.0,
+    40.0,
+    36.0,
+    26.0
+   ],
+   "desc": "Prism box with pentaprism, focusing screen, in-finder LCD and RGB metering sensor; ~100% coverage, 0.94× (Fig.13).",
+   "src": "D7100_Parts_List.pdf Fig.13; NIKON_D7200_MANUAL.pdf p.349,350",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      40,
+      34,
+      10
+     ],
+     "p": [
+      -13.5,
+      38,
+      79
+     ],
+     "c": "#2b2b2d"
+    },
+    {
+     "t": "extrude",
+     "plane": "yz",
+     "pts": [
+      [
+       -18.0,
+       -8.0
+      ],
+      [
+       18.0,
+       -8.0
+      ],
+      [
+       8.0,
+       8.0
+      ],
+      [
+       -12.0,
+       8.0
+      ]
+     ],
+     "depth": 30,
+     "bevel": 1,
+     "p": [
+      -13.5,
+      38.0,
+      92.0
+     ],
+     "c": "#9fb3c8",
+     "glass": true,
+     "op": 0.6,
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      25,
+      18,
+      0.8
+     ],
+     "p": [
+      -13.5,
+      40,
+      83
+     ],
+     "c": "#ccd6dd",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Prism box unit",
+     "pn": "1F999-561",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Penta prism",
+     "pn": "1G415-024",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "yz",
+       "pts": [
+        [
+         -18.0,
+         -8.0
+        ],
+        [
+         18.0,
+         -8.0
+        ],
+        [
+         8.0,
+         8.0
+        ],
+        [
+         -12.0,
+         8.0
+        ]
+       ],
+       "depth": 30,
+       "bevel": 1,
+       "p": [
+        -13.5,
+        38.0,
+        92.0
+       ],
+       "c": "#9fb3c8",
+       "glass": true,
+       "op": 0.6,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      30
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Focusing screen",
+     "pn": "1G950-119",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        25,
+        18,
+        0.8
+       ],
+       "p": [
+        -13.5,
+        40,
+        83
+       ],
+       "c": "#ccd6dd",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      18
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Focusing screen box unit",
+     "pn": "1H998-717",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Display prism",
+     "pn": "1G480-075",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Viewfinder LCD unit",
+     "pn": "1H998-737",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Metering FPC unit (RGB sensor)",
+     "pn": "1H998-728",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Finder frame",
+     "pn": "1K604-428",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Penta prism retainer",
+     "pn": "1K602-834",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    }
+   ]
+  },
+  {
+   "id": "eyepiece",
+   "name": "Viewfinder eyepiece, eyecup & diopter",
+   "group": "display",
+   "shape": "unit",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -10.8,
+    6.0,
+    70.0,
+    39.5,
+    16.0,
+    26.0
+   ],
+   "desc": "Eyepiece lens unit with diopter gear (–2 to +1 m⁻¹, eyepoint 19.5 mm) and DK-23 rubber eyecup.",
+   "src": "D7100_Parts_List.pdf Fig.1,6,13; NIKON_D7200_MANUAL.pdf p.4,25,349",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 8,
+     "l": 8,
+     "axis": "y",
+     "p": [
+      -13.5,
+      10,
+      84
+     ],
+     "c": "#9fb3c8",
+     "glass": true,
+     "nox": true
+    },
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -17.0,
+       -11.5
+      ],
+      [
+       17.0,
+       -11.5
+      ],
+      [
+       17.0,
+       11.5
+      ],
+      [
+       -17.0,
+       11.5
+      ]
+     ],
+     "depth": 10,
+     "bevel": 3,
+     "p": [
+      -13.5,
+      3,
+      81.5
+     ],
+     "c": "#121212",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3,
+     "l": 4,
+     "axis": "y",
+     "p": [
+      6,
+      8,
+      93
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Eyepiece lens unit",
+     "pn": "1H998-718",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 8,
+       "l": 8,
+       "axis": "y",
+       "p": [
+        -13.5,
+        10,
+        84
+       ],
+       "c": "#9fb3c8",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -40,
+      0
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Rubber eyecup (eyepiece mold unit)",
+     "pn": "1F998-383 / DK-23",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.6; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         -17.0,
+         -11.5
+        ],
+        [
+         17.0,
+         -11.5
+        ],
+        [
+         17.0,
+         11.5
+        ],
+        [
+         -17.0,
+         11.5
+        ]
+       ],
+       "depth": 10,
+       "bevel": 3,
+       "p": [
+        -13.5,
+        3,
+        81.5
+       ],
+       "c": "#121212",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -80,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Eyepiece mold unit",
+     "pn": "1H998-711",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.1"
+    },
+    {
+     "ref": "",
+     "name": "Diopter adj gear case unit",
+     "pn": "1H998-720",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.1"
+    },
+    {
+     "ref": "3",
+     "name": "Diopter adjustment knob",
+     "pn": "1K201-787",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.5; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3,
+       "l": 4,
+       "axis": "y",
+       "p": [
+        6,
+        8,
+        93
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -55,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Eyepiece cap",
+     "pn": "DK-5",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.i,70"
+    }
+   ]
+  },
+  {
+   "id": "monitor",
+   "name": "Rear TFT monitor",
+   "group": "display",
+   "shape": "panel",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -15.0,
+    5.8,
+    5.5,
+    78.0,
+    4.3,
+    57.0
+   ],
+   "desc": "3.2 in., approx. 1229k-dot TFT monitor (Fig.19).",
+   "src": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4,356",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      78,
+      4,
+      57
+     ],
+     "p": [
+      -15,
+      6,
+      34
+     ],
+     "c": "#0d0d10",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      71,
+      0.4,
+      50
+     ],
+     "p": [
+      -15,
+      3.9,
+      34
+     ],
+     "c": "#1b2433",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "7",
+     "name": "TFT monitor",
+     "pn": "1S570-046",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        78,
+        4,
+        57
+       ],
+       "p": [
+        -15,
+        6,
+        34
+       ],
+       "c": "#0d0d10",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        71,
+        0.4,
+        50
+       ],
+       "p": [
+        -15,
+        3.9,
+        34
+       ],
+       "c": "#1b2433",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -90,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Monitor retainer plate",
+     "pn": "1K604-416",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19"
+    }
+   ]
+  },
+  {
+   "id": "control-panel",
+   "name": "Top control panel LCD",
+   "group": "display",
+   "shape": "panel",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    34.0,
+    27.0,
+    93.6,
+    44.0,
+    26.0,
+    2.3
+   ],
+   "desc": "Top monochrome LCD; D7200 adds an exposure meter indicator and refined lettering vs D7100.",
+   "src": "D7100_Parts_List.pdf Fig.16,17; NIKON_D7200_MANUAL.pdf p.9",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      44,
+      26,
+      1.2
+     ],
+     "p": [
+      34,
+      27,
+      94.2
+     ],
+     "c": "#0e0e0e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      38.7,
+      20,
+      0.4
+     ],
+     "p": [
+      34,
+      27,
+      95
+     ],
+     "c": "#9aa58a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      40,
+      22,
+      0.6
+     ],
+     "p": [
+      34,
+      27,
+      95.6
+     ],
+     "c": "#cfd8cf",
+     "glass": true,
+     "op": 0.3,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "14",
+     "name": "Top LCD unit",
+     "pn": "1H998-736",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        44,
+        26,
+        1.2
+       ],
+       "p": [
+        34,
+        27,
+        94.2
+       ],
+       "c": "#0e0e0e",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        38.7,
+        20,
+        0.4
+       ],
+       "p": [
+        34,
+        27,
+        95
+       ],
+       "c": "#9aa58a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      70
+     ]
+    },
+    {
+     "ref": "",
+     "name": "LCD window",
+     "pn": "1K604-411",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.17",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        40,
+        22,
+        0.6
+       ],
+       "p": [
+        34,
+        27,
+        95.6
+       ],
+       "c": "#cfd8cf",
+       "glass": true,
+       "op": 0.3,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      85
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flash",
+   "name": "Built-in flash",
+   "group": "flash",
+   "shape": "unit",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -6.8,
+    40.1,
+    20.0,
+    73.5,
+    52.2,
+    82.5
+   ],
+   "desc": "Pop-up flash head, GN approx. 12 m (ISO 100), with flash PCB and main condenser (Fig.7, 17–18).",
+   "src": "D7100_Parts_List.pdf Fig.7,17,18; NIKON_D7200_MANUAL.pdf p.2,36,354",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       23.5,
+       -4.25
+      ],
+      [
+       14.5,
+       4.25
+      ],
+      [
+       -14.5,
+       4.25
+      ],
+      [
+       -23.5,
+       -4.25
+      ]
+     ],
+     "depth": 14,
+     "bevel": 2,
+     "p": [
+      -13.5,
+      57,
+      98.25
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      30,
+      0.8,
+      5.5
+     ],
+     "p": [
+      -13.5,
+      64.2,
+      98
+     ],
+     "c": "#e8e8e8",
+     "glass": true,
+     "op": 0.85,
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      3,
+      12,
+      6
+     ],
+     "p": [
+      0,
+      52,
+      96
+     ],
+     "c": "steel",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      3,
+      12,
+      6
+     ],
+     "p": [
+      -26,
+      52,
+      96
+     ],
+     "c": "steel",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      -40,
+      65,
+      85
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 8,
+     "l": 40,
+     "axis": "z",
+     "p": [
+      22,
+      22,
+      40
+     ],
+     "c": "#5a5a8a"
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "SB upper cover (flash head)",
+     "pn": "1K685-497",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.18; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         23.5,
+         -4.25
+        ],
+        [
+         14.5,
+         4.25
+        ],
+        [
+         -14.5,
+         4.25
+        ],
+        [
+         -23.5,
+         -4.25
+        ]
+       ],
+       "depth": 14,
+       "bevel": 2,
+       "p": [
+        -13.5,
+        57,
+        98.25
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        30,
+        0.8,
+        5.5
+       ],
+       "p": [
+        -13.5,
+        64.2,
+        98
+       ],
+       "c": "#e8e8e8",
+       "glass": true,
+       "op": 0.85,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      25,
+      55
+     ]
+    },
+    {
+     "ref": "",
+     "name": "SB lower cover unit",
+     "pn": "1B061-441",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.18"
+    },
+    {
+     "ref": "",
+     "name": "Flash pop-up arm",
+     "pn": "1K603-747 / 1K603-748",
+     "qty": "2",
+     "drawing": "D7100_Parts_List.pdf Fig.18",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        3,
+        12,
+        6
+       ],
+       "p": [
+        0,
+        52,
+        96
+       ],
+       "c": "steel",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        3,
+        12,
+        6
+       ],
+       "p": [
+        -26,
+        52,
+        96
+       ],
+       "c": "steel",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      15,
+      35
+     ]
+    },
+    {
+     "ref": "",
+     "name": "SB rotate shaft",
+     "pn": "1B002-791",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.18"
+    },
+    {
+     "ref": "",
+     "name": "SB PCB unit",
+     "pn": "1H998-729",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.17"
+    },
+    {
+     "ref": "",
+     "name": "SB release plate unit",
+     "pn": "1H998-742",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14"
+    },
+    {
+     "ref": "",
+     "name": "Main condenser unit (flash capacitor)",
+     "pn": "1H998-735",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.7"
+    },
+    {
+     "ref": "5",
+     "name": "Flash (M/Y) button",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        -40,
+        65,
+        85
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "accessory-shoe",
+   "name": "Accessory shoe",
+   "group": "flash",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    19.0,
+    102.4,
+    22.0,
+    20.0,
+    3.0
+   ],
+   "desc": "ISO 518 hot-shoe with sync/data contacts and safety lock (Fig.16).",
+   "src": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1,354",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      18.6,
+      18,
+      1.2
+     ],
+     "p": [
+      -13.5,
+      19,
+      104.8
+     ],
+     "c": "steel",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      22,
+      20,
+      2.4
+     ],
+     "p": [
+      -13.5,
+      19,
+      103.6
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "7",
+     "name": "Hot shoe",
+     "pn": "1K406-032-2",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        18.6,
+        18,
+        1.2
+       ],
+       "p": [
+        -13.5,
+        19,
+        104.8
+       ],
+       "c": "steel",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      85
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Hot shoe mold unit",
+     "pn": "1F998-400",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        22,
+        20,
+        2.4
+       ],
+       "p": [
+        -13.5,
+        19,
+        103.6
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      70
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Hot shoe spring",
+     "pn": "1K240-867",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16"
+    },
+    {
+     "ref": "",
+     "name": "Accessory shoe cover",
+     "pn": "BS-1",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.319"
+    }
+   ]
+  },
+  {
+   "id": "mode-dial",
+   "name": "Mode dial & release mode dial",
+   "group": "controls",
+   "shape": "cylinder",
+   "axis": "z",
+   "color": "dark",
+   "box": [
+    -50.0,
+    26.0,
+    91.0,
+    29.0,
+    29.0,
+    14.5
+   ],
+   "desc": "Stacked mode dial (top, with lock release) and release mode dial S/CL/CH/Q/self-timer/MUP (Fig.15).",
+   "src": "D7100_Parts_List.pdf Fig.15; NIKON_D7200_MANUAL.pdf p.1,6,8",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 12,
+     "l": 8,
+     "axis": "z",
+     "p": [
+      -50,
+      26,
+      99
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2.5,
+     "axis": "z",
+     "p": [
+      -50,
+      26,
+      104.2
+     ],
+     "c": "#444",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 14.5,
+     "l": 4,
+     "axis": "z",
+     "p": [
+      -50,
+      26,
+      93
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "3",
+     "name": "Mode dial unit",
+     "pn": "1F999-558",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.15; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 12,
+       "l": 8,
+       "axis": "z",
+       "p": [
+        -50,
+        26,
+        99
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      95
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Mode dial lock button",
+     "pn": "1K201-785",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2.5,
+       "axis": "z",
+       "p": [
+        -50,
+        26,
+        104.2
+       ],
+       "c": "#444",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      110
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Release mode dial unit",
+     "pn": "1H998-715",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.15; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 14.5,
+       "l": 4,
+       "axis": "z",
+       "p": [
+        -50,
+        26,
+        93
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      75
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Release mode dial lock release",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.1 (top view)"
+    },
+    {
+     "ref": "",
+     "name": "Click spring / plate",
+     "pn": "1K241-937 / 1K241-988",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.15"
+    },
+    {
+     "ref": "",
+     "name": "Contact brush unit",
+     "pn": "1H998-483",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.15"
+    }
+   ]
+  },
+  {
+   "id": "shutter-button",
+   "name": "Shutter-release button & power switch",
+   "group": "controls",
+   "shape": "cylinder",
+   "axis": "z",
+   "color": "dark",
+   "box": [
+    42.0,
+    57.5,
+    91.0,
+    29.0,
+    32.0,
+    7.0
+   ],
+   "desc": "Two-stage shutter-release inside the OFF/ON/illuminator power switch; movie-record, exposure-comp and metering buttons nearby (Fig.16).",
+   "src": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1,5",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 10,
+     "l": 3,
+     "axis": "z",
+     "p": [
+      46,
+      61,
+      92.5
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      7,
+      2.5
+     ],
+     "p": [
+      50,
+      70,
+      92.5
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 5.5,
+     "l": 4,
+     "axis": "z",
+     "p": [
+      46,
+      61,
+      96
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2,
+     "axis": "z",
+     "p": [
+      38,
+      51,
+      94.8
+     ],
+     "c": "#c0392b",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2,
+     "axis": "z",
+     "p": [
+      53,
+      49.5,
+      94.8
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2,
+     "axis": "z",
+     "p": [
+      31,
+      45,
+      94.8
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "10",
+     "name": "Power dial",
+     "pn": "1K201-775",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 10,
+       "l": 3,
+       "axis": "z",
+       "p": [
+        46,
+        61,
+        92.5
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "box",
+       "s": [
+        6,
+        7,
+        2.5
+       ],
+       "p": [
+        50,
+        70,
+        92.5
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      80
+     ]
+    },
+    {
+     "ref": "11",
+     "name": "Shutter-release button unit",
+     "pn": "1K201-774",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 5.5,
+       "l": 4,
+       "axis": "z",
+       "p": [
+        46,
+        61,
+        96
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      100
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Power SW base unit",
+     "pn": "1H998-708",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16"
+    },
+    {
+     "ref": "",
+     "name": "ON-OFF SW brush",
+     "pn": "1K241-486-1",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.16"
+    },
+    {
+     "ref": "9",
+     "name": "Movie-record button",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2,
+       "axis": "z",
+       "p": [
+        38,
+        51,
+        94.8
+       ],
+       "c": "#c0392b",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      65
+     ]
+    },
+    {
+     "ref": "12",
+     "name": "Exposure compensation (E) button",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2,
+       "axis": "z",
+       "p": [
+        53,
+        49.5,
+        94.8
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      65
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "Z/Q (metering) button",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2,
+       "axis": "z",
+       "p": [
+        31,
+        45,
+        94.8
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      65
+     ]
+    }
+   ]
+  },
+  {
+   "id": "main-dial",
+   "name": "Main command dial",
+   "group": "controls",
+   "shape": "cylinder",
+   "axis": "z",
+   "color": "dark",
+   "box": [
+    49.0,
+    10.0,
+    74.0,
+    18,
+    18,
+    6.0
+   ],
+   "desc": "Rear thumb dial (Fig.17).",
+   "src": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.4",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 9,
+     "l": 6,
+     "axis": "z",
+     "p": [
+      49,
+      10,
+      77
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "14",
+     "name": "Main command dial unit",
+     "pn": "1H998-710",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 9,
+       "l": 6,
+       "axis": "z",
+       "p": [
+        49,
+        10,
+        77
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -60,
+      15
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sub-dial",
+   "name": "Sub-command dial",
+   "group": "controls",
+   "shape": "cylinder",
+   "axis": "z",
+   "color": "dark",
+   "box": [
+    45.0,
+    73.0,
+    71.5,
+    18,
+    18,
+    5.0
+   ],
+   "desc": "Front finger dial on the grip (Fig.17).",
+   "src": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.3",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 9,
+     "l": 5,
+     "axis": "z",
+     "p": [
+      45,
+      73,
+      74
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "2",
+     "name": "Sub command dial unit",
+     "pn": "1H998-709",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 9,
+       "l": 5,
+       "axis": "z",
+       "p": [
+        45,
+        73,
+        74
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      10
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rear-controls",
+   "name": "Multi selector & rear-right controls",
+   "group": "controls",
+   "shape": "panel",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    32.9,
+    6.4,
+    8.1,
+    22.7,
+    3.7,
+    72.4
+   ],
+   "desc": "Multi selector with OK and focus selector lock, AE-L/AF-L, live view selector/button, info button (Fig.19).",
+   "src": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 8.5,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      35.7,
+      7,
+      46
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 4,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      35.7,
+      5.8,
+      46
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      2,
+      4
+     ],
+     "p": [
+      35.7,
+      7,
+      35
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 6.5,
+     "l": 1.5,
+     "axis": "y",
+     "p": [
+      35.7,
+      7.2,
+      23
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      35.7,
+      5.8,
+      23
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 4.5,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      26,
+      7,
+      76
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      29,
+      7,
+      11.6
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "15",
+     "name": "Multi selector",
+     "pn": "1K685-510",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 8.5,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        35.7,
+        7,
+        46
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "16",
+     "name": "OK button",
+     "pn": "1K685-512",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        35.7,
+        5.8,
+        46
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -85,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Multi selector rubber",
+     "pn": "1K685-511",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19"
+    },
+    {
+     "ref": "17",
+     "name": "Selector lock lever unit",
+     "pn": "1F999-560",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        6,
+        2,
+        4
+       ],
+       "p": [
+        35.7,
+        7,
+        35
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "22",
+     "name": "Live view selector",
+     "pn": "1K201-661",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 6.5,
+       "l": 1.5,
+       "axis": "y",
+       "p": [
+        35.7,
+        7.2,
+        23
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "20",
+     "name": "LV button",
+     "pn": "1K201-662",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        35.7,
+        5.8,
+        23
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -85,
+      0
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "AF/AE-L button",
+     "pn": "1K201-780",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4.5,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        26,
+        7,
+        76
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "13",
+     "name": "Info button",
+     "pn": "1K201-782",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        29,
+        7,
+        11.6
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "LV selector holder",
+     "pn": "1H998-273",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19"
+    },
+    {
+     "ref": "",
+     "name": "Rear FPC unit",
+     "pn": "1H998-730",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19"
+    }
+   ]
+  },
+  {
+   "id": "rear-buttons",
+   "name": "Rear-left button column",
+   "group": "controls",
+   "shape": "panel",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -52.2,
+    7.0,
+    8.2,
+    21.1,
+    2.0,
+    67.6
+   ],
+   "desc": "Playback and delete above; MENU, WB/help/protect, QUAL/zoom-in, ISO/zoom-out and i buttons beside the monitor (Fig.19).",
+   "src": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -56,
+      7,
+      72
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -45.5,
+      7,
+      72
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -59,
+      7,
+      57
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -59,
+      7,
+      46
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -59,
+      7,
+      36
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -59,
+      7,
+      26
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.8,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -59,
+      7,
+      12
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "6",
+     "name": "Playback / delete buttons",
+     "pn": "1K201-781",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -56,
+        7,
+        72
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -45.5,
+        7,
+        72
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "Rear push button rubber (MENU, W/S, X/T, L/U, i)",
+     "pn": "1K201-822",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -59,
+        7,
+        57
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -59,
+        7,
+        46
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -59,
+        7,
+        36
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -59,
+        7,
+        26
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3.8,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -59,
+        7,
+        12
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -70,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "front-controls",
+   "name": "Front buttons, AF-mode lever & IR window",
+   "group": "controls",
+   "shape": "panel",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -12.9,
+    66.2,
+    15.5,
+    83.7,
+    5.5,
+    70.6
+   ],
+   "desc": "Pv and Fn buttons by the grip; flash, BKT, AF-M lever with AF-mode button and IR receiver window beside the mount (Fig.3, 6, 11).",
+   "src": "D7100_Parts_List.pdf Fig.3,6,11; NIKON_D7200_MANUAL.pdf p.2,3",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 4,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      25,
+      65,
+      62
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 4,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      13,
+      65,
+      19.5
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      8,
+      4,
+      14
+     ],
+     "p": [
+      -50.7,
+      65.5,
+      25
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3,
+     "l": 2,
+     "axis": "y",
+     "p": [
+      -50.7,
+      68,
+      25
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 3.5,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      -43,
+      65,
+      77
+     ],
+     "c": "#1c1c1e",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      7,
+      0.8,
+      5
+     ],
+     "p": [
+      -48.5,
+      64.6,
+      83.6
+     ],
+     "c": "#3a0d0d",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "3",
+     "name": "Pv button",
+     "pn": "1K201-622",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.3; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        25,
+        65,
+        62
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Fn button",
+     "pn": "1K201-622",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.3; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        13,
+        65,
+        19.5
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "13",
+     "name": "AF-M lever unit (focus-mode selector + AF-mode button)",
+     "pn": "1H998-700",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.11; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        14
+       ],
+       "p": [
+        -50.7,
+        65.5,
+        25
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 3,
+       "l": 2,
+       "axis": "y",
+       "p": [
+        -50.7,
+        68,
+        25
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "D (BKT) button",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.5,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        -43,
+        65,
+        77
+       ],
+       "c": "#1c1c1e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Remote control window (IR receiver, front)",
+     "pn": "1K685-509",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.6; NIKON_D7200_MANUAL.pdf p.2 (front)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        7,
+        0.8,
+        5
+       ],
+       "p": [
+        -48.5,
+        64.6,
+        83.6
+       ],
+       "c": "#3a0d0d",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    },
+    {
+     "ref": "21",
+     "name": "Infrared receiver (rear)",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.4 (rear)"
+    }
+   ]
+  },
+  {
+   "id": "af-lamp",
+   "name": "AF-assist illuminator",
+   "group": "optics",
+   "shape": "cylinder",
+   "axis": "y",
+   "color": "white",
+   "box": [
+    22.0,
+    65.0,
+    80.4,
+    7.2,
+    2.5,
+    7.2
+   ],
+   "desc": "AF-assist (approx. 0.5–3 m), self-timer and red-eye lamp; may get hot with use (Fig.17).",
+   "src": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.3,335",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 3.6,
+     "l": 2.5,
+     "axis": "y",
+     "p": [
+      22,
+      65,
+      84
+     ],
+     "c": "#f2f2f2",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "AF assist lamp unit",
+     "pn": "1B061-367",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.17; NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 3.6,
+       "l": 2.5,
+       "axis": "y",
+       "p": [
+        22,
+        65,
+        84
+       ],
+       "c": "#f2f2f2",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      55,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "microphone",
+   "name": "Stereo microphone",
+   "group": "audio",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -13.5,
+    31.0,
+    102.5,
+    18.0,
+    4.0,
+    0.8
+   ],
+   "desc": "Built-in stereo microphone in front of the hot shoe (Fig.14).",
+   "src": "D7100_Parts_List.pdf Fig.14; NIKON_D7200_MANUAL.pdf p.1",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      18,
+      4,
+      0.8
+     ],
+     "p": [
+      -13.5,
+      31,
+      102.9
+     ],
+     "c": "#2a2a2a",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Microphone cover",
+     "pn": "1K604-415",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14; NIKON_D7200_MANUAL.pdf p.1 (top view)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        18,
+        4,
+        0.8
+       ],
+       "p": [
+        -13.5,
+        31,
+        102.9
+       ],
+       "c": "#2a2a2a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      65
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Microphone FPC unit",
+     "pn": "1F999-557",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.14"
+    }
+   ]
+  },
+  {
+   "id": "speaker",
+   "name": "Speaker",
+   "group": "audio",
+   "shape": "cylinder",
+   "axis": "y",
+   "color": "dark",
+   "box": [
+    56.5,
+    10.0,
+    10.9,
+    9.0,
+    3.0,
+    9.0
+   ],
+   "desc": "Movie playback speaker, rear lower right (Fig.19).",
+   "src": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4,5",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 4.5,
+     "l": 3,
+     "axis": "y",
+     "p": [
+      56.5,
+      10,
+      15.4
+     ],
+     "c": "#333",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "23",
+     "name": "Speaker",
+     "pn": "1S541-042",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.19; NIKON_D7200_MANUAL.pdf p.4 (rear)",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 4.5,
+       "l": 3,
+       "axis": "y",
+       "p": [
+        56.5,
+        10,
+        15.4
+       ],
+       "c": "#333",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -55,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "battery",
+   "name": "EN-EL15 battery",
+   "group": "power",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    48.0,
+    44.0,
+    2.0,
+    20.5,
+    40.0,
+    56.0
+   ],
+   "desc": "EN-EL15 Li-ion 7.0 V/1900 mAh (40 × 56 × 20.5 mm) in the grip; CIPA life approx. 1,110 shots on D7200 (950 on D7100).",
+   "src": "NIKON_D7200_MANUAL.pdf p.22,358,359",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      20.5,
+      40,
+      56
+     ],
+     "p": [
+      48,
+      44,
+      30
+     ],
+     "c": "#2e2e2e",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Rechargeable Li-ion battery",
+     "pn": "EN-EL15",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.i",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        20.5,
+        40,
+        56
+       ],
+       "p": [
+        48,
+        44,
+        30
+       ],
+       "c": "#2e2e2e",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -75
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Battery stopper plate",
+     "pn": "1K604-423",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.5"
+    },
+    {
+     "ref": "",
+     "name": "Battery charger",
+     "pn": "MH-25a",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.i,21"
+    },
+    {
+     "ref": "",
+     "name": "Battery pack (optional)",
+     "pn": "MB-D15",
+     "qty": "",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.319"
+    },
+    {
+     "ref": "",
+     "name": "Power connector / AC adapter (optional)",
+     "pn": "EP-5B / EH-5b",
+     "qty": "",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.319"
+    }
+   ]
+  },
+  {
+   "id": "electronics",
+   "name": "Main boards & flex circuits",
+   "group": "electronics",
+   "shape": "unit",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -2.5,
+    34.0,
+    16.0,
+    123.0,
+    40.0,
+    70.8
+   ],
+   "desc": "Main PCB beside the SD slots, DC/DC and power-drive boards, I/F board. D7200 uses EXPEED 4 (D7100: EXPEED 3) so main boards differ.",
+   "src": "D7100_Parts_List.pdf Fig.4,7,8",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      2,
+      40,
+      60
+     ],
+     "p": [
+      58,
+      34,
+      46
+     ],
+     "c": "#1f5d3a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      60,
+      1.6,
+      40
+     ],
+     "p": [
+      -13.5,
+      15,
+      40
+     ],
+     "c": "#1f5d3a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      30,
+      24,
+      1.6
+     ],
+     "p": [
+      -20,
+      30,
+      86
+     ],
+     "c": "#1f5d3a",
+     "nox": true
+    },
+    {
+     "t": "box",
+     "s": [
+      2,
+      30,
+      56
+     ],
+     "p": [
+      -63,
+      36,
+      46
+     ],
+     "c": "#1f5d3a",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "TOGO PCB unit (main board, D7100 part)",
+     "pn": "1F999-550",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.4",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        2,
+        40,
+        60
+       ],
+       "p": [
+        58,
+        34,
+        46
+       ],
+       "c": "#1f5d3a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      30,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "DC/DC ISC PCB unit",
+     "pn": "1S020-960 / 1S020-960-1",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.8",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        60,
+        1.6,
+        40
+       ],
+       "p": [
+        -13.5,
+        15,
+        40
+       ],
+       "c": "#1f5d3a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      -20,
+      -10
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Power drive PCB",
+     "pn": "1S020-962",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.7",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        30,
+        24,
+        1.6
+       ],
+       "p": [
+        -20,
+        30,
+        86
+       ],
+       "c": "#1f5d3a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      20
+     ]
+    },
+    {
+     "ref": "",
+     "name": "IF PCB unit",
+     "pn": "1H998-732",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.7",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        2,
+        30,
+        56
+       ],
+       "p": [
+        -63,
+        36,
+        46
+       ],
+       "c": "#1f5d3a",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -30,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Fuse",
+     "pn": "1S460-057",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.7"
+    },
+    {
+     "ref": "",
+     "name": "Front body FPC unit",
+     "pn": "1H998-734",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.12"
+    },
+    {
+     "ref": "",
+     "name": "Top cover FPC unit",
+     "pn": "1H998-727",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.15"
+    },
+    {
+     "ref": "",
+     "name": "Penta FPC unit",
+     "pn": "1S020-969",
+     "qty": "1",
+     "drawing": "D7100_Parts_List.pdf Fig.13"
+    },
+    {
+     "ref": "",
+     "name": "Harnesses",
+     "pn": "1S040-217 … 1S040-221",
+     "qty": "5",
+     "drawing": "D7100_Parts_List.pdf Fig.7,11,12"
+    }
+   ]
+  },
+  {
+   "id": "nfc",
+   "name": "N-Mark (NFC) & Wi-Fi",
+   "group": "io",
+   "shape": "box",
+   "axis": "",
+   "color": "dark",
+   "box": [
+    -66.0,
+    52.0,
+    57.0,
+    0.6,
+    10.0,
+    10.0
+   ],
+   "desc": "D7200-only built-in Wi-Fi (802.11b/g) and NFC; N-Mark on the left side. Not in the D7100 parts list.",
+   "src": "NIKON_D7200_MANUAL.pdf p.3,254,357",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      0.6,
+      10,
+      10
+     ],
+     "p": [
+      -66,
+      52,
+      62
+     ],
+     "c": "#555",
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "5",
+     "name": "N-Mark (NFC antenna)",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.3 (front/bottom)",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        0.6,
+        10,
+        10
+       ],
+       "p": [
+        -66,
+        52,
+        62
+       ],
+       "c": "#555",
+       "exo": true
+      }
+     ],
+     "dir": [
+      -25,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lens",
+   "name": "Kit lens AF-S DX 18–105mm f/3.5–5.6G ED VR",
+   "group": "lens",
+   "shape": "cylinder",
+   "axis": "y",
+   "color": "dark",
+   "box": [
+    -13.5,
+    114.5,
+    15.4,
+    76.0,
+    89.0,
+    76.0
+   ],
+   "desc": "Type G zoom, approx. 76 mm dia × 89 mm from mount flange, 420 g, 67 mm filter.",
+   "src": "NIKON_D7200_MANUAL.pdf p.23,360",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 31,
+     "l": 6,
+     "axis": "y",
+     "p": [
+      -13.5,
+      73,
+      53.4
+     ],
+     "c": "#202020",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 36,
+     "l": 30,
+     "axis": "y",
+     "p": [
+      -13.5,
+      91,
+      53.4
+     ],
+     "c": "#202020",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 38,
+     "l": 30,
+     "axis": "y",
+     "p": [
+      -13.5,
+      121,
+      53.4
+     ],
+     "c": "#121212",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 37,
+     "l": 23,
+     "axis": "y",
+     "p": [
+      -13.5,
+      147.5,
+      53.4
+     ],
+     "c": "#202020",
+     "nox": true
+    },
+    {
+     "t": "cyl",
+     "r": 29,
+     "l": 0.8,
+     "axis": "y",
+     "p": [
+      -13.5,
+      158.6,
+      53.4
+     ],
+     "c": "#26324a",
+     "glass": true,
+     "nox": true
+    }
+   ],
+   "parts": [
+    {
+     "ref": "",
+     "name": "Lens barrel",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.360",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 31,
+       "l": 6,
+       "axis": "y",
+       "p": [
+        -13.5,
+        73,
+        53.4
+       ],
+       "c": "#202020",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 36,
+       "l": 30,
+       "axis": "y",
+       "p": [
+        -13.5,
+        91,
+        53.4
+       ],
+       "c": "#202020",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 38,
+       "l": 30,
+       "axis": "y",
+       "p": [
+        -13.5,
+        121,
+        53.4
+       ],
+       "c": "#121212",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 37,
+       "l": 23,
+       "axis": "y",
+       "p": [
+        -13.5,
+        147.5,
+        53.4
+       ],
+       "c": "#202020",
+       "exo": true
+      },
+      {
+       "t": "cyl",
+       "r": 29,
+       "l": 0.8,
+       "axis": "y",
+       "p": [
+        -13.5,
+        158.6,
+        53.4
+       ],
+       "c": "#26324a",
+       "glass": true,
+       "exo": true
+      }
+     ],
+     "dir": [
+      0,
+      140,
+      0
+     ]
+    },
+    {
+     "ref": "",
+     "name": "Zoom ring",
+     "pn": "",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.26"
+    },
+    {
+     "ref": "",
+     "name": "Front lens cap",
+     "pn": "LC-67",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.370"
+    },
+    {
+     "ref": "",
+     "name": "Bayonet hood",
+     "pn": "HB-32",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.370"
+    },
+    {
+     "ref": "",
+     "name": "Flexible lens pouch",
+     "pn": "CL-1018",
+     "qty": "1",
+     "drawing": "NIKON_D7200_MANUAL.pdf p.370"
+    }
+   ]
+  }
+ ],
+ "faults": [
+  {
+   "id": "fee",
+   "title": "Lens aperture ring not at minimum",
+   "group": "lens",
+   "code": "FEE",
+   "effect": "stop",
+   "msg": "Control panel: FEE (flashes)",
+   "causes": [
+    "CPU lens aperture ring not set to minimum aperture (highest f-number)"
+   ],
+   "checks": [
+    "Set the aperture ring to minimum aperture (highest f-number).",
+    "To use the ring for aperture, set Custom Setting f5 > Aperture setting to Aperture ring."
+   ],
+   "comps": [
+    "lens",
+    "control-panel"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.341,334"
+  },
+  {
+   "id": "batt-low",
+   "title": "Low battery",
+   "group": "power",
+   "code": "",
+   "effect": "warn",
+   "msg": "Control panel & viewfinder: low-battery indicator",
+   "causes": [
+    "Battery charge low"
+   ],
+   "checks": [
+    "Ready a fully-charged spare battery."
+   ],
+   "comps": [
+    "battery",
+    "control-panel"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.341"
+  },
+  {
+   "id": "batt-exhausted",
+   "title": "Battery exhausted or cannot be used",
+   "group": "power",
+   "code": "",
+   "effect": "stop",
+   "msg": "Control panel & viewfinder: battery indicator (flashes)",
+   "causes": [
+    "Battery exhausted",
+    "Battery can not be used",
+    "Extremely exhausted Li-ion or third-party battery in camera or MB-D15"
+   ],
+   "checks": [
+    "Recharge or replace the battery.",
+    "Use only Nikon-approved batteries.",
+    "If battery cannot be used, contact Nikon-authorized service."
+   ],
+   "comps": [
+    "battery"
+   ],
+   "io": [],
+   "safety": "Use only batteries approved for this equipment; do not expose to flame or heat.",
+   "src": "NIKON_D7200_MANUAL.pdf p.341"
+  },
+  {
+   "id": "delta-f",
+   "title": "No lens / non-CPU lens without max aperture",
+   "group": "lens",
+   "code": "ΔF",
+   "effect": "info",
+   "msg": "Control panel: ΔF (aperture shown in stops from maximum)",
+   "causes": [
+    "No lens attached, or non-CPU lens attached without specifying maximum aperture"
+   ],
+   "checks": [
+    "Specify maximum aperture with Non-CPU lens data in the setup menu; aperture value will then be displayed."
+   ],
+   "comps": [
+    "lens",
+    "lens-mount"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.341,224"
+  },
+  {
+   "id": "f-dash",
+   "title": "No lens or non-CPU lens attached",
+   "group": "lens",
+   "code": "F--",
+   "effect": "stop",
+   "msg": "Control panel: F -- (flashes)",
+   "causes": [
+    "No lens attached",
+    "Non-CPU lens attached outside mode A or M"
+   ],
+   "checks": [
+    "Attach a non-IX NIKKOR lens; if a CPU lens is attached, remove and reattach it.",
+    "With a non-CPU lens, select mode A or M."
+   ],
+   "comps": [
+    "lens",
+    "lens-mount",
+    "mode-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.342"
+  },
+  {
+   "id": "af-fail",
+   "title": "Camera unable to focus",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "Viewfinder: ► ◄ (flashes)",
+   "causes": [
+    "Autofocus cannot focus on the subject"
+   ],
+   "checks": [
+    "Change composition or focus manually."
+   ],
+   "comps": [
+    "af-module",
+    "lens",
+    "eyepiece"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.342,96,97"
+  },
+  {
+   "id": "over",
+   "title": "Subject too bright — overexposure",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "Exposure indicators and shutter speed or aperture display flash",
+   "causes": [
+    "Subject too bright for current settings"
+   ],
+   "checks": [
+    "Use a lower ISO sensitivity.",
+    "P: use a third-party ND filter; S: increase shutter speed; A: choose smaller aperture; effects mode: choose another shooting mode."
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "control-panel"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.342"
+  },
+  {
+   "id": "under",
+   "title": "Subject too dark — underexposure",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "Exposure indicators and shutter speed or aperture display flash",
+   "causes": [
+    "Subject too dark for current settings"
+   ],
+   "checks": [
+    "Use a higher ISO sensitivity.",
+    "P: use flash; S: lower shutter speed; A: choose larger aperture."
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "control-panel",
+    "flash"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.342"
+  },
+  {
+   "id": "bulb-s",
+   "title": "Bulb selected in mode S",
+   "group": "controls",
+   "code": "bulb",
+   "effect": "stop",
+   "msg": "Control panel: bulb (flashes)",
+   "causes": [
+    "Bulb shutter speed selected in mode S"
+   ],
+   "checks": [
+    "Change shutter speed or select mode M."
+   ],
+   "comps": [
+    "mode-dial",
+    "main-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343,337"
+  },
+  {
+   "id": "time-s",
+   "title": "Time selected in mode S",
+   "group": "controls",
+   "code": "--",
+   "effect": "stop",
+   "msg": "Control panel: -- (flashes)",
+   "causes": [
+    "Time (--) shutter speed selected in mode S"
+   ],
+   "checks": [
+    "Change shutter speed or select mode M."
+   ],
+   "comps": [
+    "mode-dial",
+    "main-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343,337"
+  },
+  {
+   "id": "busy",
+   "title": "Processing in progress",
+   "group": "storage",
+   "code": "buSY",
+   "effect": "info",
+   "msg": "Control panel: buSY / Viewfinder: bSY (flash)",
+   "causes": [
+    "Camera processing images"
+   ],
+   "checks": [
+    "Wait until processing is complete."
+   ],
+   "comps": [
+    "control-panel"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343"
+  },
+  {
+   "id": "flash-under",
+   "title": "Flash indicator flashes after firing",
+   "group": "flash",
+   "code": "",
+   "effect": "warn",
+   "msg": "Viewfinder: flash indicator flashes for 3 s after flash fires",
+   "causes": [
+    "Photo may be underexposed"
+   ],
+   "checks": [
+    "Check photo in monitor; if underexposed, adjust settings and try again."
+   ],
+   "comps": [
+    "flash",
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343"
+  },
+  {
+   "id": "full",
+   "title": "Memory full / out of file numbers",
+   "group": "storage",
+   "code": "Full",
+   "effect": "stop",
+   "msg": "Control panel: FuLL / Viewfinder: FuL (flash)",
+   "causes": [
+    "Memory insufficient to record further photos at current settings",
+    "Camera has run out of file or folder numbers"
+   ],
+   "checks": [
+    "Reduce image quality or size.",
+    "Delete photographs after copying important images to a computer.",
+    "Insert a new memory card."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343,77,81,246"
+  },
+  {
+   "id": "err",
+   "title": "Camera malfunction",
+   "group": "body",
+   "code": "Err",
+   "effect": "stop",
+   "msg": "Control panel: Err (flashes)",
+   "causes": [
+    "Camera malfunction"
+   ],
+   "checks": [
+    "Release shutter.",
+    "Consult a Nikon-authorized service representative if the problem persists or appears frequently."
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "shutter-button"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.343"
+  },
+  {
+   "id": "no-card",
+   "title": "No memory card",
+   "group": "storage",
+   "code": "-E-",
+   "effect": "stop",
+   "msg": "No memory card. / Control panel: [-E-]",
+   "causes": [
+    "Camera cannot detect memory card"
+   ],
+   "checks": [
+    "Turn camera off and confirm that card is correctly inserted (slide in until it clicks)."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "Turn camera off before inserting or removing cards.",
+   "src": "NIKON_D7200_MANUAL.pdf p.344,22"
+  },
+  {
+   "id": "card-bad",
+   "title": "Memory card cannot be used",
+   "group": "storage",
+   "code": "CArd Err",
+   "effect": "stop",
+   "msg": "This memory card cannot be used. Card may be damaged. Insert another card. / Control panel: CArd, Err (flash)",
+   "causes": [
+    "Error accessing memory card",
+    "Unable to create new folder"
+   ],
+   "checks": [
+    "Use a Nikon-approved card.",
+    "Check that contacts are clean; if card is damaged, contact retailer or Nikon service.",
+    "Delete files or insert new card after copying important images."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.344,379"
+  },
+  {
+   "id": "eyefi",
+   "title": "Camera cannot control Eye-Fi card",
+   "group": "storage",
+   "code": "CArd Err",
+   "effect": "warn",
+   "msg": "Monitor: Eye-Fi icon / Control panel: CArd, Err (flash)",
+   "causes": [
+    "Camera can not control Eye-Fi card"
+   ],
+   "checks": [
+    "Check that Eye-Fi card firmware is up to date.",
+    "Copy files to a computer and format card, or insert new card."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.344,293"
+  },
+  {
+   "id": "card-locked",
+   "title": "Memory card locked",
+   "group": "storage",
+   "code": "CArd ---",
+   "effect": "stop",
+   "msg": "Memory card is locked. Slide lock to “write” position. / Control panel: CArd, --- (flash)",
+   "causes": [
+    "Memory card is write protected"
+   ],
+   "checks": [
+    "Slide card write-protect switch to “write” position."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,29"
+  },
+  {
+   "id": "eyefi-locked",
+   "title": "Eye-Fi card locked",
+   "group": "storage",
+   "code": "CArd Err",
+   "effect": "stop",
+   "msg": "Not available if Eye-Fi card is locked. / Control panel: CArd, Err (flash)",
+   "causes": [
+    "Eye-Fi card is write protected"
+   ],
+   "checks": [
+    "Slide card write-protect switch to “write” position."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,29"
+  },
+  {
+   "id": "for",
+   "title": "Card not formatted",
+   "group": "storage",
+   "code": "For",
+   "effect": "stop",
+   "msg": "This card is not formatted. Format the card. / Control panel: [For] (flashes)",
+   "causes": [
+    "Memory card not formatted for use in camera"
+   ],
+   "checks": [
+    "Format memory card (Setup menu > Format memory card, or hold O and Z buttons) or insert new card."
+   ],
+   "comps": [
+    "card-door",
+    "rear-buttons"
+   ],
+   "io": [],
+   "safety": "Formatting permanently deletes all data on the card.",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,22,289"
+  },
+  {
+   "id": "clock",
+   "title": "Clock has been reset",
+   "group": "body",
+   "code": "",
+   "effect": "info",
+   "msg": "Clock has been reset.",
+   "causes": [
+    "Camera clock is not set"
+   ],
+   "checks": [
+    "Set camera clock (Setup menu > Time zone and date)."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,24,290"
+  },
+  {
+   "id": "lv-hot",
+   "title": "Unable to start live view",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "Unable to start live view. Please wait.",
+   "causes": [
+    "Internal temperature of the camera is high"
+   ],
+   "checks": [
+    "Wait for internal circuits to cool before resuming live view."
+   ],
+   "comps": [
+    "rear-controls",
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,337"
+  },
+  {
+   "id": "no-images",
+   "title": "Folder contains no images",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "Folder contains no images.",
+   "causes": [
+    "No images on card or in folder(s) selected for playback"
+   ],
+   "checks": [
+    "Select a folder containing images from Playback folder, or insert a card containing images."
+   ],
+   "comps": [
+    "monitor",
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,266"
+  },
+  {
+   "id": "hidden",
+   "title": "All images are hidden",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "All images are hidden.",
+   "causes": [
+    "All photos in current folder are hidden"
+   ],
+   "checks": [
+    "Select another folder or use Hide image to allow at least one image to be displayed."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.345,266"
+  },
+  {
+   "id": "cant-display",
+   "title": "Cannot display this file",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "Cannot display this file.",
+   "causes": [
+    "File created or modified on a computer or different camera",
+    "File is corrupt"
+   ],
+   "checks": [
+    "File can not be played back on camera; view on a computer."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.346"
+  },
+  {
+   "id": "cant-select",
+   "title": "Cannot select this file",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "Cannot select this file.",
+   "causes": [
+    "Selected image can not be retouched (created with another device)"
+   ],
+   "checks": [
+    "Choose an image created with this camera."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.346"
+  },
+  {
+   "id": "movie-edit",
+   "title": "Movie cannot be edited",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "This movie cannot be edited.",
+   "causes": [
+    "Movie created with another device",
+    "Movie shorter than two seconds"
+   ],
+   "checks": [
+    "Only edit movies made with this camera that are at least two seconds long."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.346,182"
+  },
+  {
+   "id": "wifi-multi",
+   "title": "Multiple smart devices connecting",
+   "group": "io",
+   "code": "",
+   "effect": "info",
+   "msg": "Could not connect; multiple devices detected. Try again later.",
+   "causes": [
+    "Multiple smart devices attempting to connect simultaneously"
+   ],
+   "checks": [
+    "Wait a few minutes before trying again."
+   ],
+   "comps": [
+    "nfc"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.346"
+  },
+  {
+   "id": "wifi-err",
+   "title": "Wi-Fi error",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Error",
+   "causes": [
+    "Wi-Fi error"
+   ],
+   "checks": [
+    "Select Disable for Wi-Fi > Network connection, then select Enable again."
+   ],
+   "comps": [
+    "nfc"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.346,256"
+  },
+  {
+   "id": "net-hot",
+   "title": "Network unavailable — camera hot",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Network access not available until camera cools.",
+   "causes": [
+    "Internal temperature of the camera is high"
+   ],
+   "checks": [
+    "Turn camera off and try again after waiting for camera to cool."
+   ],
+   "comps": [
+    "nfc"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-check",
+   "title": "Printer error",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Check printer.",
+   "causes": [
+    "Printer error"
+   ],
+   "checks": [
+    "Check printer; to resume select Continue (if available). See printer manual."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-paper",
+   "title": "Paper size mismatch",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Check paper.",
+   "causes": [
+    "Paper in printer is not of selected size"
+   ],
+   "checks": [
+    "Insert paper of correct size and select Continue."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-jam",
+   "title": "Paper jam",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Paper jam.",
+   "causes": [
+    "Paper is jammed in printer"
+   ],
+   "checks": [
+    "Clear jam and select Continue."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-out",
+   "title": "Out of paper",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Out of paper.",
+   "causes": [
+    "Printer is out of paper"
+   ],
+   "checks": [
+    "Insert paper of selected size and select Continue."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-ink",
+   "title": "Ink error",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Check ink supply.",
+   "causes": [
+    "Ink error"
+   ],
+   "checks": [
+    "Check ink; to resume select Continue."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "prn-noink",
+   "title": "Out of ink",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "Out of ink.",
+   "causes": [
+    "Printer is out of ink"
+   ],
+   "checks": [
+    "Replace ink and select Continue."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.347"
+  },
+  {
+   "id": "charge-fast",
+   "title": "CHARGE lamp flashes quickly",
+   "group": "power",
+   "code": "",
+   "effect": "stop",
+   "msg": "Charger CHARGE lamp flashes about eight times a second",
+   "causes": [
+    "Battery temperature outside charging range",
+    "Charger or battery fault"
+   ],
+   "checks": [
+    "Confirm temperature is in range (charge indoors at 5–35 °C).",
+    "Unplug charger, remove and reinsert battery.",
+    "If problem persists, cease use and take battery and charger to retailer or Nikon service."
+   ],
+   "comps": [
+    "battery"
+   ],
+   "io": [],
+   "safety": "Cease use immediately if the fault persists.",
+   "src": "NIKON_D7200_MANUAL.pdf p.331"
+  },
+  {
+   "id": "mup-lowbatt",
+   "title": "Low battery with mirror raised",
+   "group": "power",
+   "code": "",
+   "effect": "warn",
+   "msg": "Beep sounds and self-timer lamp flashes while mirror is locked up",
+   "causes": [
+    "Battery running low during mirror lock-up for cleaning"
+   ],
+   "checks": [
+    "End cleaning or inspection immediately — shutter closes and mirror lowers after about two minutes."
+   ],
+   "comps": [
+    "battery",
+    "mirror",
+    "sensor",
+    "shutter",
+    "af-lamp"
+   ],
+   "io": [],
+   "safety": "Do not turn camera off or remove power while mirror is raised; the shutter curtain could be damaged.",
+   "src": "NIKON_D7200_MANUAL.pdf p.326"
+  },
+  {
+   "id": "no-response",
+   "title": "Camera on but does not respond",
+   "group": "power",
+   "code": "",
+   "effect": "stop",
+   "msg": "",
+   "causes": [
+    "Recording in progress",
+    "Camera hung"
+   ],
+   "checks": [
+    "Wait for recording to end.",
+    "Turn camera off; if it won't turn off, remove and reinsert battery or disconnect/reconnect AC adapter (data being recorded will be lost)."
+   ],
+   "comps": [
+    "battery",
+    "shutter-button"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333"
+  },
+  {
+   "id": "vf-blur",
+   "title": "Viewfinder out of focus",
+   "group": "display",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Diopter not adjusted for user's eye"
+   ],
+   "checks": [
+    "Rotate diopter control until AF area brackets are sharp.",
+    "If needed: AF-S, single-point AF, center point, focus on a high-contrast subject, then adjust diopter.",
+    "Optional DK-20C corrective lenses."
+   ],
+   "comps": [
+    "eyepiece"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333,25,319"
+  },
+  {
+   "id": "vf-dark",
+   "title": "Viewfinder is dark",
+   "group": "display",
+   "code": "",
+   "effect": "stop",
+   "msg": "",
+   "causes": [
+    "Battery exhausted or not inserted"
+   ],
+   "checks": [
+    "Insert a fully-charged battery."
+   ],
+   "comps": [
+    "battery",
+    "eyepiece"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333"
+  },
+  {
+   "id": "display-off",
+   "title": "Displays turn off without warning",
+   "group": "display",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Short standby timer or monitor off delay"
+   ],
+   "checks": [
+    "Choose longer delays for Custom Setting c2 (Standby timer) or c4 (Monitor off delay)."
+   ],
+   "comps": [
+    "monitor",
+    "control-panel"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333,279"
+  },
+  {
+   "id": "display-dim",
+   "title": "Control panel/viewfinder unresponsive and dim",
+   "group": "display",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Display response and brightness vary with temperature"
+   ],
+   "checks": [
+    "Normal behavior; warm the camera."
+   ],
+   "comps": [
+    "control-panel",
+    "eyepiece"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333"
+  },
+  {
+   "id": "vf-lines",
+   "title": "Fine lines around focus point / red display",
+   "group": "display",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Normal for this type of viewfinder"
+   ],
+   "checks": [
+    "No action — not a malfunction."
+   ],
+   "comps": [
+    "prism"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.333"
+  },
+  {
+   "id": "slow-on",
+   "title": "Camera takes time to turn on",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Many files or folders on card"
+   ],
+   "checks": [
+    "Delete files or folders."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334"
+  },
+  {
+   "id": "release-disabled",
+   "title": "Shutter release disabled",
+   "group": "controls",
+   "code": "",
+   "effect": "stop",
+   "msg": "",
+   "causes": [
+    "Memory card locked, full, or not inserted",
+    "f7 Slot empty release lock = Release locked with no card",
+    "Built-in flash charging",
+    "Camera not in focus",
+    "CPU lens aperture ring not at highest f-number",
+    "Non-CPU lens attached outside mode A or M",
+    "Mode dial turned to S after bulb/time selected in M"
+   ],
+   "checks": [
+    "Check card is inserted, unlocked and has space.",
+    "Check Custom Setting f7.",
+    "Wait for flash to charge.",
+    "Focus or switch to manual focus.",
+    "Lock aperture ring at minimum or set f5 Aperture setting.",
+    "Select mode A or M for non-CPU lenses; choose a new shutter speed in S."
+   ],
+   "comps": [
+    "shutter-button",
+    "card-door",
+    "flash",
+    "lens",
+    "mode-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334,337"
+  },
+  {
+   "id": "slow-release",
+   "title": "Slow response to shutter-release",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Exposure delay mode enabled"
+   ],
+   "checks": [
+    "Select Off for Custom Setting d4 (Exposure delay mode)."
+   ],
+   "comps": [
+    "shutter-button"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334,280"
+  },
+  {
+   "id": "remote-fail",
+   "title": "No photo with ML-L3 remote",
+   "group": "controls",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "Remote battery dead",
+    "Remote control mode Off",
+    "Flash charging",
+    "c5 Remote on duration elapsed",
+    "Bright light interfering"
+   ],
+   "checks": [
+    "Replace remote battery.",
+    "Choose an option other than Off for Remote control mode (ML-L3).",
+    "Wait for flash; reactivate remote mode; shade the IR receiver."
+   ],
+   "comps": [
+    "front-controls",
+    "flash"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334,156,279"
+  },
+  {
+   "id": "out-of-focus",
+   "title": "Photos are out of focus",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "Focus-mode selector not at AF",
+    "Autofocus unable to focus"
+   ],
+   "checks": [
+    "Rotate focus-mode selector to AF.",
+    "Use manual focus or focus lock."
+   ],
+   "comps": [
+    "front-controls",
+    "af-module",
+    "lens"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334,83,93,97"
+  },
+  {
+   "id": "focus-nolock",
+   "title": "Focus does not lock on half-press",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "AF-C selected, or moving subject in AF-A"
+   ],
+   "checks": [
+    "Use AE-L/AF-L button to lock focus."
+   ],
+   "comps": [
+    "rear-controls",
+    "af-module"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.334"
+  },
+  {
+   "id": "no-focus-point",
+   "title": "Cannot select focus point",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Focus selector lock engaged",
+    "Auto-area AF or face-priority AF",
+    "Playback or menus in use",
+    "Standby timer off"
+   ],
+   "checks": [
+    "Unlock focus selector lock.",
+    "Choose another AF-area mode.",
+    "Exit playback/menus.",
+    "Press shutter-release halfway to start standby timer."
+   ],
+   "comps": [
+    "rear-controls"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,89"
+  },
+  {
+   "id": "no-af-mode",
+   "title": "Cannot select AF mode / AF-area mode",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Manual focus selected"
+   ],
+   "checks": [
+    "Set focus-mode selector to AF."
+   ],
+   "comps": [
+    "front-controls"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,83,97"
+  },
+  {
+   "id": "one-shot",
+   "title": "Only one shot per press in continuous mode",
+   "group": "flash",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Built-in flash fires"
+   ],
+   "checks": [
+    "Continuous shooting is not available with built-in flash; lower the flash."
+   ],
+   "comps": [
+    "flash",
+    "mode-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,148"
+  },
+  {
+   "id": "size-locked",
+   "title": "Image size cannot be changed",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Image quality set to NEF (RAW)"
+   ],
+   "checks": [
+    "Select a JPEG image quality."
+   ],
+   "comps": [
+    "rear-buttons"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,77"
+  },
+  {
+   "id": "slow-record",
+   "title": "Camera slow to record photos",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Long exposure noise reduction on"
+   ],
+   "checks": [
+    "Turn long exposure NR off."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,271"
+  },
+  {
+   "id": "af-lamp-off",
+   "title": "AF-assist illuminator does not light",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "AF-C mode or continuous-servo in AF-A",
+    "Non-center focus point (non auto-area)",
+    "Live view active",
+    "a9 Built-in AF-assist illuminator = Off",
+    "Illuminator overheated and turned off"
+   ],
+   "checks": [
+    "Choose AF-S and center focus point.",
+    "Exit live view.",
+    "Set a9 to On.",
+    "Wait for illuminator to cool."
+   ],
+   "comps": [
+    "af-lamp"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,277"
+  },
+  {
+   "id": "smudges",
+   "title": "Smudges appear in photographs",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "Dirty lens elements",
+    "Foreign matter on image sensor"
+   ],
+   "checks": [
+    "Clean front and rear lens elements.",
+    "Perform image sensor cleaning."
+   ],
+   "comps": [
+    "lens",
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.335,321"
+  },
+  {
+   "id": "noise",
+   "title": "Noise (bright spots, fog, lines) in photos",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "High ISO",
+    "Long exposures",
+    "High internal temperature",
+    "Some optional flashes at high ISO",
+    "Active D-Lighting/Flat/extreme Picture Control"
+   ],
+   "checks": [
+    "Lower ISO sensitivity.",
+    "Use Long exposure NR for exposures slower than 1 s.",
+    "Turn camera off and let it cool.",
+    "Set High ISO NR to High/Normal/Low."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.336,271,275"
+  },
+  {
+   "id": "flicker",
+   "title": "Flicker or banding in live view",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Flicker reduction does not match AC supply frequency"
+   ],
+   "checks": [
+    "Set Flicker reduction to match local AC frequency (Auto/50 Hz/60 Hz)."
+   ],
+   "comps": [
+    "monitor",
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.336,290"
+  },
+  {
+   "id": "bright-bands",
+   "title": "Bright regions or bands in live view",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Flashing sign, flash or brief light source used during live view"
+   ],
+   "checks": [
+    "Avoid brief light sources during live view."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.336"
+  },
+  {
+   "id": "no-sound",
+   "title": "No sound recorded with movies",
+   "group": "audio",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "Microphone sensitivity set to Microphone off"
+   ],
+   "checks": [
+    "Change Microphone sensitivity in the movie shooting menu."
+   ],
+   "comps": [
+    "microphone"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.336,273"
+  },
+  {
+   "id": "lv-ends",
+   "title": "Live view ends unexpectedly or will not start",
+   "group": "optics",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "High ambient temperature",
+    "Extended live view or movie use",
+    "Extended continuous shooting"
+   ],
+   "checks": [
+    "Wait for internal circuits to cool and try again (camera may feel warm — not a malfunction)."
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "rear-controls"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.337"
+  },
+  {
+   "id": "lv-artifacts",
+   "title": "Image artifacts during live view",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Zoomed view through lens",
+    "Frame size/rate in movies",
+    "Rising internal temperature"
+   ],
+   "checks": [
+    "Exit live view when camera is not in use."
+   ],
+   "comps": [
+    "monitor",
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.337,38,166"
+  },
+  {
+   "id": "menu-gray",
+   "title": "Menu item cannot be selected",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Option not available in current mode/settings or with no memory card",
+    "Battery info unavailable on AC adapter power"
+   ],
+   "checks": [
+    "Change mode or settings; insert a memory card."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.337,340"
+  },
+  {
+   "id": "speed-range",
+   "title": "Full range of shutter speeds not available",
+   "group": "flash",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Flash in use"
+   ],
+   "checks": [
+    "Set Custom Setting e1 Flash sync speed to 1/320 s (Auto FP) or 1/250 s (Auto FP) with compatible flash units."
+   ],
+   "comps": [
+    "flash",
+    "accessory-shoe"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.337,282"
+  },
+  {
+   "id": "colors",
+   "title": "Colors are unnatural",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "White balance does not match light source",
+    "Picture Control settings"
+   ],
+   "checks": [
+    "Adjust white balance.",
+    "Adjust Set Picture Control settings."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,111,130"
+  },
+  {
+   "id": "wb-measure",
+   "title": "Cannot measure white balance",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Subject too dark or too bright"
+   ],
+   "checks": [
+    "Use a correctly lit reference subject."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,123"
+  },
+  {
+   "id": "wb-source",
+   "title": "Image cannot be preset WB source",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Image not created with D7200"
+   ],
+   "checks": [
+    "Use an image taken with this camera."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,127"
+  },
+  {
+   "id": "wb-bkt",
+   "title": "White balance bracketing unavailable",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "NEF (RAW) or NEF+JPEG quality selected",
+    "Multiple exposure in effect"
+   ],
+   "checks": [
+    "Select JPEG quality; end multiple exposure."
+   ],
+   "comps": [
+    "front-controls"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,77,211"
+  },
+  {
+   "id": "pc-vary",
+   "title": "Picture Control effects differ between images",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "A (auto) selected for sharpening, clarity, contrast or saturation"
+   ],
+   "checks": [
+    "Choose a fixed setting for consistent results."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,133"
+  },
+  {
+   "id": "meter-locked",
+   "title": "Metering cannot be changed",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Autoexposure lock in effect"
+   ],
+   "checks": [
+    "Release AE lock."
+   ],
+   "comps": [
+    "rear-controls"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,107"
+  },
+  {
+   "id": "no-ev-comp",
+   "title": "Exposure compensation cannot be used",
+   "group": "controls",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Camera is in mode M"
+   ],
+   "checks": [
+    "Choose another mode."
+   ],
+   "comps": [
+    "mode-dial"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338"
+  },
+  {
+   "id": "long-exp-noise",
+   "title": "Reddish noise in long time-exposures",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Long exposure NR off"
+   ],
+   "checks": [
+    "Enable long exposure noise reduction."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,271"
+  },
+  {
+   "id": "raw-noplay",
+   "title": "NEF (RAW) image not played back",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Photo taken at NEF + JPEG"
+   ],
+   "checks": [
+    "Only the JPEG copy is displayed; view RAW on computer."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,77"
+  },
+  {
+   "id": "other-cam",
+   "title": "Pictures from other cameras not displayed correctly",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Recorded with other makes of camera"
+   ],
+   "checks": [
+    "View on a computer."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338"
+  },
+  {
+   "id": "some-hidden",
+   "title": "Some images not displayed in playback",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Playback folder not set to All"
+   ],
+   "checks": [
+    "Select All for Playback folder."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.338,266"
+  },
+  {
+   "id": "rotate",
+   "title": "Portrait photos shown in landscape",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Rotate tall off",
+    "Auto image rotation off when shot",
+    "Camera pointed up/down",
+    "Shown in image review"
+   ],
+   "checks": [
+    "Select On for Rotate tall.",
+    "Set Auto image rotation On."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339,267,290"
+  },
+  {
+   "id": "cant-delete",
+   "title": "Cannot delete picture",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Picture protected",
+    "Memory card locked"
+   ],
+   "checks": [
+    "Remove protection.",
+    "Unlock card."
+   ],
+   "comps": [
+    "card-door",
+    "rear-buttons"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339,245,29"
+  },
+  {
+   "id": "cant-retouch",
+   "title": "Cannot retouch picture",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Photo cannot be further edited with this camera"
+   ],
+   "checks": [
+    "Edit on a computer."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339,346"
+  },
+  {
+   "id": "print-order",
+   "title": "Cannot change print order",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Memory card full",
+    "Memory card locked"
+   ],
+   "checks": [
+    "Delete pictures; unlock card."
+   ],
+   "comps": [
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339"
+  },
+  {
+   "id": "print-raw",
+   "title": "Cannot select photo for printing",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Photo is NEF (RAW)"
+   ],
+   "checks": [
+    "Transfer to computer and print with Capture NX-D, or use NEF (RAW) processing to save as JPEG."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339,302"
+  },
+  {
+   "id": "hdmi-none",
+   "title": "Photo not displayed on HD video device",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "HDMI cable not connected"
+   ],
+   "checks": [
+    "Confirm that HDMI cable is connected."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339"
+  },
+  {
+   "id": "hdmi-cec",
+   "title": "No response to HDMI-CEC TV remote",
+   "group": "io",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Device control off",
+    "TV HDMI-CEC settings"
+   ],
+   "checks": [
+    "Select On for HDMI > Device control in setup menu.",
+    "Adjust TV HDMI-CEC settings."
+   ],
+   "comps": [
+    "if-cover"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339,292"
+  },
+  {
+   "id": "no-transfer",
+   "title": "Cannot transfer photos to computer",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "OS not compatible with camera or transfer software"
+   ],
+   "checks": [
+    "Use a card reader to copy photos."
+   ],
+   "comps": [
+    "if-cover",
+    "card-door"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.339"
+  },
+  {
+   "id": "dust-off",
+   "title": "Image Dust Off has no effect",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Dust reference data recorded before/after a different sensor cleaning"
+   ],
+   "checks": [
+    "Record new Dust Off reference data after each image sensor cleaning."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.340"
+  },
+  {
+   "id": "raw-diff",
+   "title": "Computer shows NEF images differently",
+   "group": "storage",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Third-party software ignores Picture Controls, Active D-Lighting, vignette control"
+   ],
+   "checks": [
+    "Use Capture NX-D."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.340"
+  },
+  {
+   "id": "no-ssid",
+   "title": "Smart device does not show camera SSID",
+   "group": "io",
+   "code": "",
+   "effect": "warn",
+   "msg": "",
+   "causes": [
+    "Wi-Fi network connection disabled"
+   ],
+   "checks": [
+    "Select Enable for Wi-Fi > Network connection.",
+    "Turn smart device Wi-Fi off and on."
+   ],
+   "comps": [
+    "nfc"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.340,251"
+  },
+  {
+   "id": "nfc-fail",
+   "title": "Cannot connect using NFC",
+   "group": "io",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "NFC connection failed"
+   ],
+   "checks": [
+    "Choose another connection method."
+   ],
+   "comps": [
+    "nfc"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.340,251,254"
+  },
+  {
+   "id": "date-wrong",
+   "title": "Date of recording is not correct",
+   "group": "body",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Camera clock less accurate than most clocks"
+   ],
+   "checks": [
+    "Check clock regularly and reset as necessary."
+   ],
+   "comps": [
+    "monitor"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.340"
+  },
+  {
+   "id": "clean-disabled",
+   "title": "Image sensor cleaning temporarily disabled",
+   "group": "optics",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Cleaning performed several times in succession (circuit protection)",
+    "Flash charging at startup",
+    "Controls used during startup"
+   ],
+   "checks": [
+    "Wait a short time and try again."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "io": [],
+   "safety": "",
+   "src": "NIKON_D7200_MANUAL.pdf p.323"
+  }
+ ],
+ "io": [],
+ "sequence": [
+  {
+   "id": "power-on",
+   "name": "Power on",
+   "desc": "Rotate power switch to ON; control panel lights; image sensor vibrates to remove dust if Clean at startup is selected. First power-on shows language and clock setup.",
+   "ends": "Camera ready; standby timer running",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "shutter-button",
+    "control-panel",
+    "sensor",
+    "shutter"
+   ],
+   "hw": [
+    "Startup cleaning skipped if flash is charging or controls are used"
+   ]
+  },
+  {
+   "id": "half-press",
+   "name": "Half-press: meter and focus",
+   "desc": "Pressing shutter-release halfway starts the standby timer, meters exposure and focuses (AF-S locks focus).",
+   "ends": "In-focus indicator; focus locked in AF-S",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "shutter-button",
+    "af-module",
+    "lens",
+    "af-lamp"
+   ],
+   "hw": [
+    "Focus point selectable only when standby timer is on"
+   ]
+  },
+  {
+   "id": "release",
+   "name": "Shutter release",
+   "desc": "Full press releases the shutter and records the image to the memory card; the memory card access lamp indicates card access.",
+   "ends": "Image written to card",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "shutter-button",
+    "mirror",
+    "sensor",
+    "shutter",
+    "card-door"
+   ],
+   "hw": [
+    "Release disabled: card locked/full/absent (f7), flash charging, not in focus, aperture ring not at minimum, non-CPU lens outside A/M"
+   ]
+  },
+  {
+   "id": "live-view",
+   "name": "Live view",
+   "desc": "Rotate live view selector to photo or movie and press the live view button; monitor shows the view through the lens with contrast-detect AF.",
+   "ends": "Live view ends when exited, or automatically if internal temperature is high",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "rear-controls",
+    "monitor",
+    "mirror",
+    "sensor",
+    "shutter"
+   ],
+   "hw": [
+    "Live view ends automatically at high internal temperature"
+   ]
+  },
+  {
+   "id": "movie",
+   "name": "Movie recording",
+   "desc": "In movie live view press movie-record button; records MOV H.264 with built-in or external stereo mic.",
+   "ends": "Recording ends",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "shutter-button",
+    "microphone",
+    "monitor"
+   ],
+   "hw": []
+  },
+  {
+   "id": "clean-now",
+   "name": "Image sensor cleaning (Clean now)",
+   "desc": "Setup menu > Clean image sensor > Clean now; camera checks then vibrates sensor; busy indicator flashes.",
+   "ends": "Setup menu displayed",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "sensor",
+    "shutter",
+    "monitor"
+   ],
+   "hw": [
+    "Do not remove power until cleaning ends",
+    "Repeated cleaning temporarily disabled"
+   ]
+  },
+  {
+   "id": "mirror-lockup",
+   "name": "Lock mirror up for cleaning",
+   "desc": "Setup menu > Lock mirror up for cleaning > Start; full press raises mirror and opens shutter to expose sensor.",
+   "ends": "Turning camera off lowers mirror and closes shutter",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "mirror",
+    "sensor",
+    "shutter",
+    "battery"
+   ],
+   "hw": [
+    "Only available above low battery level",
+    "Low battery: beep + self-timer lamp, shutter closes after ~2 min"
+   ]
+  },
+  {
+   "id": "charging",
+   "name": "Battery charging",
+   "desc": "Insert EN-EL15 in MH-25a and plug in; CHARGE lamp flashes while charging; an exhausted battery fully charges in approx. 2 h 35 min.",
+   "ends": "Charging complete",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "battery"
+   ],
+   "hw": [
+    "Will not charge below 0 °C or above 60 °C battery temperature"
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "id": "first-steps",
+   "name": "Battery & card installation",
+   "why": "Correct installation avoids no-card and battery errors.",
+   "steps": [
+    "Confirm power switch is OFF.",
+    "Insert battery, using it to hold the orange latch aside, until latch locks.",
+    "Insert one card in slot 1; slide in until it clicks.",
+    "Close covers."
+   ],
+   "comps": [
+    "battery",
+    "battery-door",
+    "card-door"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.22"
+  },
+  {
+   "id": "charge",
+   "name": "Charge EN-EL15 battery",
+   "why": "A fully-charged battery is required for normal use and for sensor cleaning.",
+   "steps": [
+    "Insert battery in MH-25a and plug in.",
+    "CHARGE lamp flashes while charging; about 2 h 35 min from empty.",
+    "Charge indoors at 5–35 °C.",
+    "If CHARGE lamp flashes about 8×/s, check temperature, unplug, reinsert battery."
+   ],
+   "comps": [
+    "battery"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.21,331"
+  },
+  {
+   "id": "diopter",
+   "name": "Viewfinder diopter adjustment",
+   "why": "Fixes blurred viewfinder image.",
+   "steps": [
+    "Rotate diopter adjustment control until AF area brackets are sharp.",
+    "Keep fingers/fingernails clear of your eye."
+   ],
+   "comps": [
+    "eyepiece"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.25,333"
+  },
+  {
+   "id": "clean-now",
+   "name": "Image sensor cleaning — Clean now",
+   "why": "Removes dust that shows as smudges.",
+   "steps": [
+    "Hold camera base down.",
+    "Setup menu > Clean image sensor > Clean now > OK.",
+    "Do not remove power until setup menu returns."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.321"
+  },
+  {
+   "id": "clean-auto",
+   "name": "Set automatic sensor cleaning",
+   "why": "Keeps sensor clean at each power cycle.",
+   "steps": [
+    "Setup menu > Clean image sensor > Clean at startup/shutdown.",
+    "Choose startup, shutdown, both, or off."
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.322"
+  },
+  {
+   "id": "manual-clean",
+   "name": "Manual sensor inspection (blower only)",
+   "why": "For dust the vibration cleaning cannot remove. Nikon recommends service personnel do this.",
+   "steps": [
+    "Insert fully-charged battery or AC adapter EH-5b + EP-5B.",
+    "Turn off and remove lens.",
+    "Turn on; Setup menu > Lock mirror up for cleaning > OK.",
+    "Press shutter-release fully to raise mirror.",
+    "Inspect sensor in light.",
+    "Remove dust with a blower only — no blower-brush; never touch or wipe the sensor.",
+    "Turn camera off; replace lens or body cap."
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "mirror",
+    "lens-mount",
+    "battery"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.324,325,326"
+  },
+  {
+   "id": "format",
+   "name": "Format memory card",
+   "why": "Clears For/card errors and prepares a card.",
+   "steps": [
+    "Setup menu > Format memory card > choose slot > Yes, or hold O and Z buttons together then press again.",
+    "Back up images first — all data is deleted.",
+    "Do not turn off or remove battery/card while formatting."
+   ],
+   "comps": [
+    "card-door",
+    "rear-buttons"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.289"
+  },
+  {
+   "id": "two-button-reset",
+   "name": "Two-button reset",
+   "why": "Restores default shooting settings when behavior seems wrong.",
+   "steps": [
+    "Hold W (S) and E buttons (green dots) together for more than two seconds.",
+    "Control panel turns off briefly while settings reset."
+   ],
+   "comps": [
+    "rear-buttons",
+    "shutter-button"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.194"
+  },
+  {
+   "id": "body-clean",
+   "name": "Clean body, lens, mirror and monitor",
+   "why": "Prevents dirt entering camera and image defects.",
+   "steps": [
+    "Body: blower, then soft dry cloth; after beach use wipe with cloth lightly dampened in distilled water and dry.",
+    "Lens/mirror/viewfinder: blower; lens cleaner on soft cloth for fingerprints.",
+    "Monitor: blower, then soft cloth or chamois, no pressure.",
+    "No alcohol, thinner or volatile chemicals.",
+    "Never touch the shutter curtain."
+   ],
+   "comps": [
+    "inner-frame",
+    "lens",
+    "mirror",
+    "monitor",
+    "sensor",
+    "shutter"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.320,329"
+  },
+  {
+   "id": "storage",
+   "name": "Long-term storage",
+   "why": "Prevents mold, battery leakage and damage.",
+   "steps": [
+    "Remove battery, replace terminal cover, store cool and dry (15–25 °C).",
+    "Store camera dry and ventilated in a bag with desiccant; avoid >60% humidity, >50 °C or <–10 °C, mothballs, strong EM fields.",
+    "Monthly: turn camera on and release shutter a few times.",
+    "Every six months: run battery flat in camera before storing."
+   ],
+   "comps": [
+    "battery",
+    "inner-frame"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.320,329,330"
+  },
+  {
+   "id": "service",
+   "name": "Periodic inspection & service",
+   "why": "Precision device requiring regular servicing.",
+   "steps": [
+    "Have camera inspected by retailer or Nikon-authorized service every 1–2 years.",
+    "Have it serviced every 3–5 years (more often for professional use).",
+    "Include lenses and flash units."
+   ],
+   "comps": [
+    "inner-frame",
+    "lens",
+    "flash"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.327"
+  }
+ ],
+ "reference": [
+  {
+   "id": "specs-body",
+   "name": "Camera specifications",
+   "intro": "Key D7200 specifications.",
+   "rows": [
+    [
+     "Type",
+     "Single-lens reflex digital camera"
+    ],
+    [
+     "Lens mount",
+     "Nikon F mount (AF coupling and AF contacts)"
+    ],
+    [
+     "Format",
+     "Nikon DX; approx. 1.5× focal length vs FX"
+    ],
+    [
+     "Effective pixels",
+     "24.2 million"
+    ],
+    [
+     "Sensor",
+     "23.5 × 15.6 mm CMOS, 24.72 million total pixels"
+    ],
+    [
+     "Media",
+     "SD, SDHC, SDXC (UHS-I); dual slots"
+    ],
+    [
+     "Shutter",
+     "1/8000–30 s, bulb, time; X=1/250 s"
+    ],
+    [
+     "Frame rate (DX, JPEG/12-bit)",
+     "CL 1–6 fps, CH 6 fps"
+    ],
+    [
+     "ISO",
+     "100–25600 (+ Hi BW1/BW2 monochrome)"
+    ],
+    [
+     "Autofocus",
+     "Multi-CAM 3500 II, 51 points, 15 cross-type"
+    ],
+    [
+     "Monitor",
+     "3.2 in., approx. 1229k dots"
+    ],
+    [
+     "Movie",
+     "1920×1080 up to 60p (1.3× crop), MOV H.264"
+    ],
+    [
+     "Wireless",
+     "IEEE 802.11b/g, NFC"
+    ],
+    [
+     "Dimensions",
+     "Approx. 135.5 × 106.5 × 76 mm"
+    ],
+    [
+     "Weight",
+     "Approx. 765 g with battery and card; 675 g body only"
+    ],
+    [
+     "Operating environment",
+     "0–40 °C, 85% humidity or less (no condensation)"
+    ]
+   ],
+   "notes": [
+    "All figures per CIPA guidelines with fully-charged battery."
+   ]
+  },
+  {
+   "id": "d7100-vs-d7200",
+   "name": "D7100 vs D7200 (parts-list carry-over)",
+   "intro": "The D7100 service parts list is used for the shared chassis; these items differ.",
+   "rows": [
+    [
+     "Body, covers, dials, ports",
+     "Same layout, dimensions and weather-sealed magnesium-alloy build"
+    ],
+    [
+     "Wi-Fi / NFC",
+     "D7200 only (N-Mark on left side)"
+    ],
+    [
+     "Top LCD",
+     "D7200 adds exposure meter indicator; refined lettering"
+    ],
+    [
+     "Image sensor",
+     "D7100 24.1 MP → D7200 24.2 MP (different image sensor unit)"
+    ],
+    [
+     "Processor",
+     "EXPEED 3 → EXPEED 4 (main board differs)"
+    ],
+    [
+     "Buffer",
+     "~6 → ~18 lossless 14-bit RAW; ~33 → up to 100 JPEG"
+    ],
+    [
+     "AF module",
+     "51-point; –2 EV → –3 EV (Multi-CAM 3500 II)"
+    ],
+    [
+     "Battery life (EN-EL15, CIPA)",
+     "950 → 1,110 shots"
+    ]
+   ],
+   "notes": [
+    "D7100 part numbers (D7100_Parts_List.pdf, VBA36001) fit shared mechanical parts; confirm with Nikon service before ordering sensor, AF or board parts.",
+    "Comparison figures supplied by the user, not from the D7200 manual."
+   ]
+  },
+  {
+   "id": "specs-power",
+   "name": "Battery & charger",
+   "intro": "EN-EL15 and MH-25a data.",
+   "rows": [
+    [
+     "Battery",
+     "EN-EL15 Li-ion, 7.0 V / 1900 mAh, approx. 88 g"
+    ],
+    [
+     "Charger input (N. America)",
+     "AC 120 V, 60 Hz, 0.2 A"
+    ],
+    [
+     "Charger input (other)",
+     "AC 100–240 V, 50/60 Hz"
+    ],
+    [
+     "Charger output",
+     "DC 8.4 V / 1.2 A"
+    ],
+    [
+     "Charging time",
+     "Approx. 2 h 35 min at 25 °C from empty"
+    ],
+    [
+     "Charging temperature",
+     "5–35 °C (no charge below 0 °C or above 60 °C)"
+    ],
+    [
+     "Optional power",
+     "MB-D15 battery pack; EH-5b AC adapter with EP-5B power connector"
+    ]
+   ],
+   "notes": [
+    "Use only batteries approved for this equipment."
+   ]
+  },
+  {
+   "id": "specs-lens",
+   "name": "Kit lens 18–105mm",
+   "intro": "AF-S DX NIKKOR 18–105mm f/3.5–5.6G ED VR.",
+   "rows": [
+    [
+     "Elements",
+     "15 in 11 groups (1 ED, 1 aspherical)"
+    ],
+    [
+     "Angle of view",
+     "76°–15° 20´"
+    ],
+    [
+     "Min focus",
+     "0.45 m"
+    ],
+    [
+     "Diaphragm",
+     "7 rounded blades"
+    ],
+    [
+     "Aperture range",
+     "f/3.5–22 (18 mm); f/5.6–38 (105 mm)"
+    ],
+    [
+     "Filter size",
+     "67 mm"
+    ],
+    [
+     "Dimensions",
+     "Approx. 76 mm dia × 89 mm"
+    ],
+    [
+     "Weight",
+     "Approx. 420 g"
+    ]
+   ],
+   "notes": [
+    "Other kit lenses covered: 18–140mm (67 mm filter, 490 g), 18–200mm VR II (72 mm filter)."
+   ]
+  },
+  {
+   "id": "package",
+   "name": "Package contents",
+   "intro": "Items supplied with the camera.",
+   "rows": [
+    [
+     "Battery",
+     "EN-EL15 with terminal cover"
+    ],
+    [
+     "Charger",
+     "MH-25a"
+    ],
+    [
+     "Rubber eyecup",
+     "DK-23"
+    ],
+    [
+     "Body cap",
+     "BF-1B"
+    ],
+    [
+     "Eyepiece cap",
+     "DK-5"
+    ],
+    [
+     "USB cable",
+     "UC-E17"
+    ],
+    [
+     "Strap",
+     "AN-DC1 BK"
+    ]
+   ],
+   "notes": [
+    "Memory cards sold separately."
+   ]
+  },
+  {
+   "id": "indicators",
+   "name": "Control-panel error codes",
+   "intro": "Quick key to flashing indicators.",
+   "rows": [
+    [
+     "FEE",
+     "Aperture ring not at minimum"
+    ],
+    [
+     "F --",
+     "No lens / non-CPU lens"
+    ],
+    [
+     "bulb / --",
+     "Bulb or time selected in mode S"
+    ],
+    [
+     "buSY",
+     "Processing"
+    ],
+    [
+     "FuLL",
+     "Card full / out of file numbers"
+    ],
+    [
+     "Err",
+     "Camera malfunction"
+    ],
+    [
+     "[-E-]",
+     "No memory card"
+    ],
+    [
+     "CArd Err",
+     "Card cannot be used / Eye-Fi problem"
+    ],
+    [
+     "CArd ---",
+     "Card locked"
+    ],
+    [
+     "[For]",
+     "Card not formatted"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "id": "model-coords",
+   "name": "3D model coordinates",
+   "intro": "How the model is laid out.",
+   "rows": [
+    [
+     "Origin",
+     "x=0 body centre; y=0 rear of eyecup; z=0 base"
+    ],
+    [
+     "Lens axis",
+     "x −13.5, z 53.4 mm"
+    ],
+    [
+     "Mount flange",
+     "y ≈ 70 mm; sensor plane ≈ 23.5 mm (46.5 mm flange distance)"
+    ],
+    [
+     "Grip front",
+     "y = 76 mm"
+    ],
+    [
+     "Top of hot shoe",
+     "z ≈ 105 mm"
+    ]
+   ],
+   "notes": [
+    "Positions measured from the supplied D7200 front/top/rear photos; covers are marked as guards so 'Hide guards' shows the internals."
+   ]
+  }
+ ],
+ "cabinets": {},
+ "defects": [
+  {
+   "id": "dust",
+   "name": "Dust smudges",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Dark spots or smudges in the same place on every photo, most visible at small apertures.",
+   "isolate": [
+    "Photograph a plain bright surface at a small aperture.",
+    "Swap lenses — if spots stay, it is the sensor."
+   ],
+   "causes": [
+    {
+     "area": "machine",
+     "cause": "Foreign matter on image sensor",
+     "fix": "Clean now; then manual blower cleaning or Nikon service"
+    },
+    {
+     "area": "tooling",
+     "cause": "Dirty front/rear lens elements",
+     "fix": "Clean lens with blower and lens cleaner"
+    },
+    {
+     "area": "method",
+     "cause": "Lens changes in dusty places",
+     "fix": "Change lenses away from dust; replace body cap promptly"
+    }
+   ],
+   "params": [
+    "Clean image sensor",
+    "Image Dust Off ref photo"
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "lens",
+    "lens-mount"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.335,321,327"
+  },
+  {
+   "id": "noise",
+   "name": "Noise / bright spots / fog",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Randomly-spaced bright pixels, fog or lines, especially at high ISO or long exposures.",
+   "isolate": [
+    "Compare low vs high ISO shots.",
+    "Check whether camera is hot."
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "High ISO sensitivity",
+     "fix": "Lower ISO; set High ISO NR"
+    },
+    {
+     "area": "method",
+     "cause": "Exposures slower than 1 s",
+     "fix": "Enable Long exposure NR"
+    },
+    {
+     "area": "environment",
+     "cause": "High internal temperature",
+     "fix": "Turn camera off and let it cool"
+    }
+   ],
+   "params": [
+    "ISO sensitivity",
+    "Long exposure NR",
+    "High ISO NR",
+    "Active D-Lighting"
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.336,338"
+  },
+  {
+   "id": "blur",
+   "name": "Out-of-focus photos",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Subject is soft or the wrong area is sharp.",
+   "isolate": [
+    "Check focus-mode selector position.",
+    "Check AF mode and focus point."
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "Focus-mode selector at M",
+     "fix": "Rotate to AF"
+    },
+    {
+     "area": "machine",
+     "cause": "AF cannot focus on subject",
+     "fix": "Use manual focus or focus lock"
+    },
+    {
+     "area": "tooling",
+     "cause": "Lens-specific focus offset",
+     "fix": "AF fine-tune only when required"
+    }
+   ],
+   "params": [
+    "AF mode",
+    "AF-area mode",
+    "AF fine-tune"
+   ],
+   "comps": [
+    "af-module",
+    "lens",
+    "front-controls"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.334,292"
+  },
+  {
+   "id": "color",
+   "name": "Unnatural colors",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Color cast or colors inconsistent between frames.",
+   "isolate": [
+    "Check white balance setting vs light source.",
+    "Check Picture Control auto settings."
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "White balance not matched to light",
+     "fix": "Adjust white balance"
+    },
+    {
+     "area": "method",
+     "cause": "Picture Control A (auto) parameters",
+     "fix": "Choose fixed settings"
+    }
+   ],
+   "params": [
+    "White balance",
+    "Set Picture Control"
+   ],
+   "comps": [
+    "sensor",
+    "shutter"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.338"
+  },
+  {
+   "id": "banding",
+   "name": "Flicker / banding",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Horizontal bands or flicker in live view or movies under artificial light.",
+   "isolate": [
+    "Check lighting type and local AC frequency."
+   ],
+   "causes": [
+    {
+     "area": "environment",
+     "cause": "Fluorescent or mercury-vapor lighting",
+     "fix": "Set Flicker reduction to match AC frequency"
+    },
+    {
+     "area": "environment",
+     "cause": "Flashing light source",
+     "fix": "Avoid brief light sources during live view"
+    }
+   ],
+   "params": [
+    "Flicker reduction"
+   ],
+   "comps": [
+    "sensor",
+    "shutter",
+    "monitor"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.336,290"
+  },
+  {
+   "id": "vignetting",
+   "name": "Flash shadow / vignetting",
+   "cat": "Image quality",
+   "process": "Digital photography",
+   "material": "Image",
+   "looks": "Dark curved shadow at bottom of flash photos.",
+   "isolate": [
+    "Check if a lens hood is fitted.",
+    "Check subject distance."
+   ],
+   "causes": [
+    {
+     "area": "tooling",
+     "cause": "Lens hood blocks built-in flash",
+     "fix": "Remove lens hood when using built-in flash"
+    },
+    {
+     "area": "method",
+     "cause": "Subject closer than 0.6 m",
+     "fix": "Keep subject at least 0.6 m away"
+    }
+   ],
+   "params": [
+    "Zoom position",
+    "Subject distance"
+   ],
+   "comps": [
+    "flash",
+    "lens"
+   ],
+   "src": "NIKON_D7200_MANUAL.pdf p.369,370"
+  }
+ ]
+}
