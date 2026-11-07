@@ -1,0 +1,10 @@
+[
+ {"file": "haas-umc750-profile.json", "name": "Haas UMC-750 5-axis machining center", "group": "Manufacturing"},
+ {"file": "fanuc-lrmate200id-profile.json", "name": "FANUC LR Mate 200iD robot", "group": "Manufacturing"},
+ {"file": "mep806b-60kw-tqg-profile.json", "name": "MEP-806B 60 kW generator", "group": "Power"},
+ {"file": "toyota-camry-25-profile.json", "name": "Toyota Camry 2.5L (XV70)", "group": "Vehicles and outdoor"},
+ {"file": "honda-hrn216-profile.json", "name": "Honda HRN216 lawn mower", "group": "Vehicles and outdoor"},
+ {"file": "samsung-rf28r7351sr-profile.json", "name": "Samsung RF28R7351SR refrigerator", "group": "Appliances"},
+ {"file": "uss-missouri-bb63-profile.json", "name": "USS Missouri (BB-63) battleship", "group": "Ships"},
+ {"file": "p51d-mustang-profile.json", "name": "P-51D Mustang", "group": "Aircraft"}
+]

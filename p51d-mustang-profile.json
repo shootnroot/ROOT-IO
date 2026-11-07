@@ -1,0 +1,4661 @@
+{
+ "meta": {
+  "name": "P-51D Mustang",
+  "maker": "North American Aviation",
+  "model": "P-51D (Packard V-1650-7 Merlin)",
+  "serial": "",
+  "functions": [
+   "Aircraft operation",
+   "Aircraft maintenance"
+  ],
+  "materials": [
+   "Aluminum alloy airframe"
+  ],
+  "summary": "Single-seat WWII fighter: Packard V-1650-7 Merlin V-12 (two-stage, two-speed supercharger, aftercooler, injection carburetor), Hamilton Standard four-blade constant-speed propeller, ventral radiator scoop, hydraulic landing gear and flaps, 24 V DC electrics. Limits and procedures from the AN 01-60JE-1 pilot's handbook; guns are drawn for layout only. Many are flown today as warbirds \u2014 their current flight manual, maintenance manuals and inspection program govern."
+ },
+ "groups": [
+  {
+   "id": "engine",
+   "name": "Engine and propeller"
+  },
+  {
+   "id": "cool",
+   "name": "Cooling and oil"
+  },
+  {
+   "id": "fuel",
+   "name": "Fuel"
+  },
+  {
+   "id": "hyd",
+   "name": "Hydraulics, gear and flaps"
+  },
+  {
+   "id": "elec",
+   "name": "Electrical and instruments"
+  },
+  {
+   "id": "air",
+   "name": "Airframe and controls"
+  }
+ ],
+ "components": [
+  {
+   "id": "airframe",
+   "name": "Airframe (fuselage, wing, tail)",
+   "group": "air",
+   "shape": "guard",
+   "color": "body",
+   "desc": "All-metal semi-monocoque fuselage, laminar-flow wing (span 37 ft / 11.28 m, 5\u00b0 dihedral), bubble canopy. Overall length 32 ft 3 in (9.83 m), height 12 ft 2 in (3.71 m). Fuselage and wing skins are drawn see-through; Hide guards removes them.",
+   "src": "Pima Air & Space Museum \u2014 P-51D specifications; AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       330,
+       0
+      ],
+      [
+       420,
+       -100
+      ],
+      [
+       500,
+       -820
+      ],
+      [
+       545,
+       -1620
+      ],
+      [
+       590,
+       -2520
+      ],
+      [
+       615,
+       -4020
+      ],
+      [
+       580,
+       -5120
+      ],
+      [
+       470,
+       -6520
+      ],
+      [
+       330,
+       -7820
+      ],
+      [
+       200,
+       -8820
+      ],
+      [
+       90,
+       -9390
+      ],
+      [
+       0,
+       -9450
+      ]
+     ],
+     "p": [
+      2162.0,
+      0,
+      2341.2
+     ],
+     "axis": "x",
+     "c": "#c3c8cd",
+     "sc": [
+      1,
+      0.72,
+      1
+     ],
+     "op": 0.35,
+     "guard": true,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "sphere",
+     "r": 560,
+     "p": [
+      -1734.0,
+      0,
+      2079.3
+     ],
+     "sc": [
+      1.75,
+      0.78,
+      0.62
+     ],
+     "glass": true,
+     "cut": 0.5,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      60,
+      760,
+      120
+     ],
+     "p": [
+      -797.6,
+      0,
+      2392.2
+     ],
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      38.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       120,
+       0
+      ],
+      [
+       -2520,
+       0
+      ],
+      [
+       -2160,
+       -5640
+      ],
+      [
+       -1500,
+       -5680
+      ],
+      [
+       -780,
+       -5600
+      ]
+     ],
+     "depth": 300,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#c3c8cd",
+     "bevel": 90,
+     "rot": [
+      -5,
+      -11.5,
+      0
+     ],
+     "op": 0.35,
+     "guard": true
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       120,
+       0
+      ],
+      [
+       -2520,
+       0
+      ],
+      [
+       -2160,
+       5640
+      ],
+      [
+       -1500,
+       5680
+      ],
+      [
+       -780,
+       5600
+      ]
+     ],
+     "depth": 300,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#c3c8cd",
+     "bevel": 90,
+     "rot": [
+      5,
+      -11.5,
+      0
+     ],
+     "op": 0.35,
+     "guard": true
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -5480,
+       0
+      ],
+      [
+       -6870,
+       0
+      ],
+      [
+       -6630,
+       2000
+      ],
+      [
+       -6130,
+       2010
+      ],
+      [
+       -5830,
+       1500
+      ]
+     ],
+     "depth": 110,
+     "p": [
+      -319.4,
+      0,
+      1897.6
+     ],
+     "c": "#c3c8cd",
+     "bevel": 30,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -5480,
+       0
+      ],
+      [
+       -6870,
+       0
+      ],
+      [
+       -6630,
+       -2000
+      ],
+      [
+       -6130,
+       -2010
+      ],
+      [
+       -5830,
+       -1500
+      ]
+     ],
+     "depth": 110,
+     "p": [
+      -319.4,
+      0,
+      1897.6
+     ],
+     "c": "#c3c8cd",
+     "bevel": 30,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -4430,
+       2230
+      ],
+      [
+       -6030,
+       2950
+      ],
+      [
+       -6480,
+       3400
+      ],
+      [
+       -6780,
+       3430
+      ],
+      [
+       -6930,
+       3200
+      ],
+      [
+       -6910,
+       2000
+      ],
+      [
+       -6230,
+       2050
+      ]
+     ],
+     "depth": 110,
+     "p": [
+      71.4,
+      0,
+      -23.0
+     ],
+     "c": "#c3c8cd",
+     "bevel": 30,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    }
+   ],
+   "box": [
+    2162.0,
+    0.0,
+    1277.3,
+    18900.0,
+    11360,
+    2129.7
+   ]
+  },
+  {
+   "id": "scoop",
+   "name": "Radiator scoop and exit flap",
+   "group": "cool",
+   "shape": "unit",
+   "color": "steel",
+   "desc": "Ventral air scoop housing the oil cooler (front) and the combined engine/aftercooler radiator; the exit flap at the rear controls airflow. Normal control is AUTOMATIC; manual OPEN/CLOSE and an emergency release are provided.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -1250,
+       1240
+      ],
+      [
+       -1700,
+       1170
+      ],
+      [
+       -3050,
+       1170
+      ],
+      [
+       -3650,
+       1330
+      ],
+      [
+       -3650,
+       1430
+      ],
+      [
+       -1250,
+       1340
+      ]
+     ],
+     "depth": 600,
+     "p": [
+      71.4,
+      0,
+      -23.0
+     ],
+     "c": "#c3c8cd",
+     "bevel": 90,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      40,
+      520,
+      260
+     ],
+     "p": [
+      -1428.5,
+      0,
+      1029.1
+     ],
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      40,
+      560,
+      300
+     ],
+     "p": [
+      -3748.6,
+      0,
+      444.8
+     ],
+     "c": "#c3c8cd",
+     "rot": [
+      0,
+      13.5,
+      0
+     ]
+    }
+   ],
+   "box": [
+    -2473.6,
+    0.0,
+    294.8,
+    2590.0,
+    600.0,
+    1112.2
+   ]
+  },
+  {
+   "id": "controls",
+   "name": "Flight controls (ailerons, elevators, rudder, flaps)",
+   "group": "air",
+   "shape": "unit",
+   "color": "steel",
+   "desc": "Cable-operated ailerons, elevators and rudder with trim tabs; hydraulic split flaps. Flap limits: 10\u00b0 400, 20\u00b0 275, 30\u00b0 225, 40\u00b0 180, 50\u00b0 165 mph IAS.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -2520,
+       -3300
+      ],
+      [
+       -2180,
+       -5500
+      ],
+      [
+       -2420,
+       -5520
+      ],
+      [
+       -2780,
+       -3300
+      ]
+     ],
+     "depth": 120,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      -5,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -2520,
+       -450
+      ],
+      [
+       -2520,
+       -3250
+      ],
+      [
+       -2900,
+       -3250
+      ],
+      [
+       -2900,
+       -450
+      ]
+     ],
+     "depth": 120,
+     "p": [
+      -211.7,
+      0,
+      1368.5
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      -5,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -6870,
+       0
+      ],
+      [
+       -6630,
+       -2000
+      ],
+      [
+       -7080,
+       -1900
+      ],
+      [
+       -7080,
+       -200
+      ]
+     ],
+     "depth": 80,
+     "p": [
+      -319.4,
+      0,
+      1897.6
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -2520,
+       3300
+      ],
+      [
+       -2180,
+       5500
+      ],
+      [
+       -2420,
+       5520
+      ],
+      [
+       -2780,
+       3300
+      ]
+     ],
+     "depth": 120,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      5,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -2520,
+       450
+      ],
+      [
+       -2520,
+       3250
+      ],
+      [
+       -2900,
+       3250
+      ],
+      [
+       -2900,
+       450
+      ]
+     ],
+     "depth": 120,
+     "p": [
+      -211.7,
+      0,
+      1368.5
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      5,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -6870,
+       0
+      ],
+      [
+       -6630,
+       2000
+      ],
+      [
+       -7080,
+       1900
+      ],
+      [
+       -7080,
+       200
+      ]
+     ],
+     "depth": 80,
+     "p": [
+      -319.4,
+      0,
+      1897.6
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xz",
+     "pts": [
+      [
+       -6930,
+       3200
+      ],
+      [
+       -6910,
+       2000
+      ],
+      [
+       -7260,
+       2050
+      ],
+      [
+       -7310,
+       3100
+      ]
+     ],
+     "depth": 80,
+     "p": [
+      71.4,
+      0,
+      -23.0
+     ],
+     "c": "#aeb4ba",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -1119.6,
+       0,
+       1316.4
+      ],
+      [
+       -3207.3,
+       60,
+       1044.7
+      ],
+      [
+       -6814.3,
+       60,
+       566.0
+      ]
+     ],
+     "r": 6,
+     "c": "#9aa2a9"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -1123.5,
+       0,
+       1336.0
+      ],
+      [
+       -3211.3,
+       -60,
+       1064.3
+      ],
+      [
+       -6884.1,
+       -60,
+       909.0
+      ]
+     ],
+     "r": 6,
+     "c": "#9aa2a9"
+    }
+   ],
+   "box": [
+    -4259.5,
+    0.0,
+    566.0,
+    6279.8,
+    11040,
+    2611.0
+   ]
+  },
+  {
+   "id": "cockpit",
+   "name": "Cockpit, instruments and controls",
+   "group": "elec",
+   "shape": "panel",
+   "color": "dark",
+   "desc": "Engine and flight instruments on the main panel; throttle quadrant (throttle, propeller, mixture) and the supercharger, radiator flap, gear and flap controls on the left; electrical switches on the right.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      500,
+      500,
+      80
+     ],
+     "p": [
+      -1747.4,
+      0,
+      1392.8
+     ],
+     "c": "#4b5158",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      90,
+      480,
+      700
+     ],
+     "p": [
+      -2091.5,
+      0,
+      1679.9
+     ],
+     "c": "#4b5158",
+     "rot": [
+      0,
+      -23.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      60,
+      720,
+      360
+     ],
+     "p": [
+      -808.2,
+      0,
+      2043.1
+     ],
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -1276.5,
+       0,
+       1335.5
+      ],
+      [
+       -1435.2,
+       0,
+       1864.5
+      ]
+     ],
+     "r": 18,
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      300,
+      120,
+      120
+     ],
+     "p": [
+      -1450.3,
+      330,
+      1688.0
+     ],
+     "c": "#3d4248",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      350,
+      120,
+      100
+     ],
+     "p": [
+      -1495.3,
+      -330,
+      1658.4
+     ],
+     "c": "#3d4248",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    }
+   ],
+   "box": [
+    -1457.3,
+    0.0,
+    1329.9,
+    1358.3,
+    780.0,
+    893.2
+   ]
+  },
+  {
+   "id": "engine",
+   "name": "Packard V-1650-7 Merlin",
+   "group": "engine",
+   "shape": "motor",
+   "color": "steel",
+   "desc": "60\u00b0 V-12, liquid-cooled, 1,649 cu in, two-stage two-speed supercharger with aftercooler and injection carburetor; 1,490 hp take-off. Take-off and military: 61 in. Hg at 3,000 rpm (5 / 15 min). WEP 67 in. Hg (late airplanes, 5 min). Max continuous 2,700 rpm; max cruise 2,400 rpm; max diving 3,240 rpm.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version); Pima Air & Space Museum \u2014 P-51D specifications",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      2000,
+      40,
+      40
+     ],
+     "p": [
+      1123.7,
+      -330,
+      1701.4
+     ],
+     "c": "#9aa2a9",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      2000,
+      40,
+      40
+     ],
+     "p": [
+      1123.7,
+      330,
+      1701.4
+     ],
+     "c": "#9aa2a9",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       119.3,
+       -330,
+       1497.0
+      ],
+      [
+       -247.6,
+       -380,
+       1544.9
+      ]
+     ],
+     "r": 30,
+     "c": "#9aa2a9"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       119.3,
+       330,
+       1497.0
+      ],
+      [
+       -247.6,
+       380,
+       1544.9
+      ]
+     ],
+     "r": 30,
+     "c": "#9aa2a9"
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Crankcase and crankshaft",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1500,
+        420,
+        330
+       ],
+       "p": [
+        1063.9,
+        0,
+        1995.4
+       ],
+       "c": "#8d959d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -700
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Cylinder blocks (A and B banks)",
+     "pn": "",
+     "qty": "2",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1300,
+        230,
+        330
+       ],
+       "p": [
+        1061.1,
+        -190,
+        2260.1
+       ],
+       "c": "#8d959d",
+       "rot": [
+        -30,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        1300,
+        230,
+        330
+       ],
+       "p": [
+        1061.1,
+        190,
+        2260.1
+       ],
+       "c": "#8d959d",
+       "rot": [
+        30,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      500
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Cam covers",
+     "pn": "",
+     "qty": "2",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        1350,
+        170,
+        90
+       ],
+       "p": [
+        1029.2,
+        -285,
+        2416.9
+       ],
+       "c": "#1d1f22",
+       "rot": [
+        -30,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        1350,
+        170,
+        90
+       ],
+       "p": [
+        1029.2,
+        285,
+        2416.9
+       ],
+       "c": "#1d1f22",
+       "rot": [
+        30,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      1000
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Propeller reduction gear",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "lathe",
+       "pts": [
+        [
+         380,
+         0
+        ],
+        [
+         360,
+         160
+        ],
+        [
+         260,
+         260
+        ],
+        [
+         110,
+         300
+        ],
+        [
+         0,
+         300
+        ]
+       ],
+       "p": [
+        1946.4,
+        0,
+        2297.4
+       ],
+       "axis": "x",
+       "c": "#7d858d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      700,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Two-stage, two-speed supercharger",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 330,
+       "l": 380,
+       "p": [
+        176.7,
+        0,
+        1916.9
+       ],
+       "axis": "x",
+       "c": "#a7b0b8",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "cyl",
+       "r": 270,
+       "l": 240,
+       "p": [
+        -83.8,
+        0,
+        1843.5
+       ],
+       "axis": "x",
+       "c": "#a7b0b8",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -800,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Aftercooler",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        300,
+        420,
+        260
+       ],
+       "p": [
+        424.7,
+        0,
+        2253.1
+       ],
+       "c": "#7d858d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -300,
+      0,
+      700
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "Injection carburetor and air scoop",
+     "pn": "Bendix-Stromberg",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        380,
+        260,
+        220
+       ],
+       "p": [
+        266.5,
+        0,
+        1476.0
+       ],
+       "c": "#7d858d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "extrude",
+       "plane": "yz",
+       "pts": [
+        [
+         130.0,
+         30.0
+        ],
+        [
+         126.2,
+         49.1
+        ],
+        [
+         115.4,
+         65.4
+        ],
+        [
+         99.1,
+         76.2
+        ],
+        [
+         80.0,
+         80.0
+        ],
+        [
+         -80.0,
+         80.0
+        ],
+        [
+         -99.1,
+         76.2
+        ],
+        [
+         -115.4,
+         65.4
+        ],
+        [
+         -126.2,
+         49.1
+        ],
+        [
+         -130.0,
+         30.0
+        ],
+        [
+         -130.0,
+         -30.0
+        ],
+        [
+         -126.2,
+         -49.1
+        ],
+        [
+         -115.4,
+         -65.4
+        ],
+        [
+         -99.1,
+         -76.2
+        ],
+        [
+         -80.0,
+         -80.0
+        ],
+        [
+         80.0,
+         -80.0
+        ],
+        [
+         99.1,
+         -76.2
+        ],
+        [
+         115.4,
+         -65.4
+        ],
+        [
+         126.2,
+         -49.1
+        ],
+        [
+         130.0,
+         -30.0
+        ]
+       ],
+       "depth": 500,
+       "p": [
+        686.2,
+        0,
+        1469.5
+       ],
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -200,
+      0,
+      -800
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "Magnetos",
+     "pn": "",
+     "qty": "2",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 70,
+       "l": 160,
+       "p": [
+        354.4,
+        -260,
+        2147.0
+       ],
+       "axis": "x",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "cyl",
+       "r": 70,
+       "l": 160,
+       "p": [
+        354.4,
+        260,
+        2147.0
+       ],
+       "axis": "x",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -200,
+      0,
+      900
+     ]
+    },
+    {
+     "ref": "9",
+     "name": "Engine coolant pump",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 110,
+       "l": 120,
+       "p": [
+        395.3,
+        0,
+        1645.1
+       ],
+       "axis": "y",
+       "c": "#7d858d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -600,
+      -500
+     ]
+    },
+    {
+     "ref": "10",
+     "name": "Exhaust stacks",
+     "pn": "",
+     "qty": "12",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1696.6,
+         -300,
+         2522.1
+        ],
+        [
+         1655.2,
+         -430,
+         2574.9
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1476.1,
+         -300,
+         2477.2
+        ],
+        [
+         1434.8,
+         -430,
+         2530.0
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1255.6,
+         -300,
+         2432.4
+        ],
+        [
+         1214.3,
+         -430,
+         2485.2
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1035.2,
+         -300,
+         2387.5
+        ],
+        [
+         993.8,
+         -430,
+         2440.3
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         814.7,
+         -300,
+         2342.7
+        ],
+        [
+         773.3,
+         -430,
+         2395.5
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         594.2,
+         -300,
+         2297.8
+        ],
+        [
+         552.8,
+         -430,
+         2350.6
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1696.6,
+         300,
+         2522.1
+        ],
+        [
+         1655.2,
+         430,
+         2574.9
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1476.1,
+         300,
+         2477.2
+        ],
+        [
+         1434.8,
+         430,
+         2530.0
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1255.6,
+         300,
+         2432.4
+        ],
+        [
+         1214.3,
+         430,
+         2485.2
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         1035.2,
+         300,
+         2387.5
+        ],
+        [
+         993.8,
+         430,
+         2440.3
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         814.7,
+         300,
+         2342.7
+        ],
+        [
+         773.3,
+         430,
+         2395.5
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         594.2,
+         300,
+         2297.8
+        ],
+        [
+         552.8,
+         430,
+         2350.6
+        ]
+       ],
+       "r": 32,
+       "c": "#6d4c41"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      650
+     ]
+    },
+    {
+     "ref": "11",
+     "name": "Propeller governor",
+     "pn": "Hamilton Standard",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 55,
+       "l": 140,
+       "p": [
+        1783.0,
+        220,
+        2498.8
+       ],
+       "axis": "z",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      300,
+      500,
+      500
+     ]
+    },
+    {
+     "ref": "12",
+     "name": "Starter",
+     "pn": "24 V",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 70,
+       "l": 260,
+       "p": [
+        326.4,
+        -200,
+        1733.1
+       ],
+       "axis": "x",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -400,
+      -700,
+      -300
+     ]
+    },
+    {
+     "ref": "13",
+     "name": "Generator",
+     "pn": "24 V",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 80,
+       "l": 260,
+       "p": [
+        295.0,
+        230,
+        1736.9
+       ],
+       "axis": "x",
+       "c": "#1d1f22",
+       "exo": 1,
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -400,
+      700,
+      -300
+     ]
+    },
+    {
+     "ref": "14",
+     "name": "Engine-driven hydraulic pump",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 55,
+       "l": 150,
+       "p": [
+        297.3,
+        -110,
+        1625.1
+       ],
+       "axis": "x",
+       "c": "#2f6db3",
+       "exo": 1,
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -500,
+      -400,
+      -700
+     ]
+    }
+   ],
+   "box": [
+    999.4,
+    0.0,
+    1366.0,
+    2494.0,
+    860,
+    1311.4
+   ]
+  },
+  {
+   "id": "propeller",
+   "name": "Propeller (Hamilton Standard four-blade)",
+   "group": "engine",
+   "shape": "unit",
+   "color": "dark",
+   "desc": "Constant-speed, hydromatic four-blade propeller, 11 ft 2 in (3.40 m) diameter, controlled by the governor. Runaway propeller can exceed 3,600 rpm: throttle back to keep 3,240 rpm and slow to about 140 mph IAS.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Spinner",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "lathe",
+       "pts": [
+        [
+         330,
+         0
+        ],
+        [
+         320,
+         120
+        ],
+        [
+         260,
+         260
+        ],
+        [
+         150,
+         360
+        ],
+        [
+         0,
+         420
+        ]
+       ],
+       "p": [
+        2122.8,
+        0,
+        2333.3
+       ],
+       "axis": "x",
+       "c": "#c0392b",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      700,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Hub and dome (pitch-change)",
+     "pn": "Hamilton Standard hydromatic",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 170,
+       "l": 320,
+       "p": [
+        2211.0,
+        0,
+        2351.2
+       ],
+       "axis": "x",
+       "c": "#9aa2a9",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      350,
+      0,
+      0
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Blades",
+     "pn": "",
+     "qty": "4",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        70,
+        240,
+        1440
+       ],
+       "p": [
+        2075.7,
+        -678.8,
+        3016.4
+       ],
+       "c": "#2b2f33",
+       "rot": [
+        45,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        72,
+        242,
+        120
+       ],
+       "p": [
+        1979.8,
+        -1159.7,
+        3487.6
+       ],
+       "c": "#f2c230",
+       "rot": [
+        45,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        70,
+        240,
+        1440
+       ],
+       "p": [
+        2346.3,
+        -678.8,
+        1686.0
+       ],
+       "c": "#2b2f33",
+       "rot": [
+        135,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        72,
+        242,
+        120
+       ],
+       "p": [
+        2442.2,
+        -1159.7,
+        1214.8
+       ],
+       "c": "#f2c230",
+       "rot": [
+        135,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        70,
+        240,
+        1440
+       ],
+       "p": [
+        2346.3,
+        678.8,
+        1686.0
+       ],
+       "c": "#2b2f33",
+       "rot": [
+        225,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        72,
+        242,
+        120
+       ],
+       "p": [
+        2442.2,
+        1159.7,
+        1214.8
+       ],
+       "c": "#f2c230",
+       "rot": [
+        225,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        70,
+        240,
+        1440
+       ],
+       "p": [
+        2075.7,
+        678.8,
+        3016.4
+       ],
+       "c": "#2b2f33",
+       "rot": [
+        315,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        72,
+        242,
+        120
+       ],
+       "p": [
+        1979.8,
+        1159.7,
+        3487.6
+       ],
+       "c": "#f2c230",
+       "rot": [
+        315,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      150,
+      0,
+      0
+     ]
+    }
+   ],
+   "box": [
+    2122.8,
+    0.0,
+    966.0,
+    840.0,
+    2561.4,
+    2770.4
+   ]
+  },
+  {
+   "id": "cooling",
+   "name": "Coolant system (radiator, header tank, pumps)",
+   "group": "cool",
+   "shape": "coil",
+   "color": "copper",
+   "desc": "Separate pumps, expansion tanks and radiator cores for the engine and the supercharger aftercooler. Coolant Type D (70% water / 30% glycol); Type C below -12 \u00b0C. Coolant temperature 100\u2013110 \u00b0C desired, 121 \u00b0C maximum.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       1837.6,
+       0,
+       2581.4
+      ],
+      [
+       -247.6,
+       150,
+       1544.9
+      ],
+      [
+       -1373.7,
+       150,
+       1060.6
+      ],
+      [
+       -2563.5,
+       120,
+       890.0
+      ]
+     ],
+     "r": 40,
+     "c": "#e0b020"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -2857.5,
+       -120,
+       830.2
+      ],
+      [
+       -1369.7,
+       -150,
+       1041.0
+      ],
+      [
+       -231.6,
+       -150,
+       1466.5
+      ],
+      [
+       395.3,
+       0,
+       1645.1
+      ]
+     ],
+     "r": 40,
+     "c": "#e0b020"
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Radiator core (engine and aftercooler sections)",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        300,
+        560,
+        420
+       ],
+       "p": [
+        -2710.5,
+        0,
+        860.1
+       ],
+       "c": "#b87333",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        80,
+        540,
+        400
+       ],
+       "p": [
+        -2514.5,
+        0,
+        900.0
+       ],
+       "c": "#8b5a3c",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -700
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Coolant header tank",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         150.0,
+         40.0
+        ],
+        [
+         145.4,
+         63.0
+        ],
+        [
+         132.4,
+         82.4
+        ],
+        [
+         113.0,
+         95.4
+        ],
+        [
+         90.0,
+         100.0
+        ],
+        [
+         -90.0,
+         100.0
+        ],
+        [
+         -113.0,
+         95.4
+        ],
+        [
+         -132.4,
+         82.4
+        ],
+        [
+         -145.4,
+         63.0
+        ],
+        [
+         -150.0,
+         40.0
+        ],
+        [
+         -150.0,
+         -40.0
+        ],
+        [
+         -145.4,
+         -63.0
+        ],
+        [
+         -132.4,
+         -82.4
+        ],
+        [
+         -113.0,
+         -95.4
+        ],
+        [
+         -90.0,
+         -100.0
+        ],
+        [
+         90.0,
+         -100.0
+        ],
+        [
+         113.0,
+         -95.4
+        ],
+        [
+         132.4,
+         -82.4
+        ],
+        [
+         145.4,
+         -63.0
+        ],
+        [
+         150.0,
+         -40.0
+        ]
+       ],
+       "depth": 520,
+       "p": [
+        1933.4,
+        0,
+        2662.1
+       ],
+       "c": "#a7b0b8",
+       "exo": 1,
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      400,
+      0,
+      500
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Coolant pump",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 110,
+       "l": 120,
+       "p": [
+        395.3,
+        0,
+        1645.1
+       ],
+       "axis": "y",
+       "c": "#7d858d",
+       "exo": 1,
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -500,
+      0
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Radiator exit flap and actuator",
+     "pn": "electric actuator",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        40,
+        560,
+        300
+       ],
+       "p": [
+        -3748.6,
+        0,
+        444.8
+       ],
+       "c": "#c3c8cd",
+       "rot": [
+        0,
+        13.5,
+        0
+       ]
+      },
+      {
+       "t": "cyl",
+       "r": 25,
+       "l": 300,
+       "p": [
+        -3549.4,
+        0,
+        720.0
+       ],
+       "axis": "x",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      -600,
+      0,
+      -300
+     ]
+    }
+   ],
+   "box": [
+    -965.5,
+    0.0,
+    294.8,
+    5606.2,
+    560.0,
+    2286.6
+   ]
+  },
+  {
+   "id": "oil",
+   "name": "Oil system and oil cooler",
+   "group": "cool",
+   "shape": "tank",
+   "color": "dark",
+   "desc": "Oil tank ahead of the firewall, oil cooler at the front of the radiator scoop with its own exit flap. 21 US gal capacity, grade 1120. Oil pressure 70\u201380 psi desired (min 50, max 105); temperature 70\u201380 \u00b0C desired, 105 \u00b0C max.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Oil tank",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "yz",
+       "pts": [
+        [
+         280.0,
+         50.0
+        ],
+        [
+         273.9,
+         80.6
+        ],
+        [
+         256.6,
+         106.6
+        ],
+        [
+         230.6,
+         123.9
+        ],
+        [
+         200.0,
+         130.0
+        ],
+        [
+         -200.0,
+         130.0
+        ],
+        [
+         -230.6,
+         123.9
+        ],
+        [
+         -256.6,
+         106.6
+        ],
+        [
+         -273.9,
+         80.6
+        ],
+        [
+         -280.0,
+         50.0
+        ],
+        [
+         -280.0,
+         -50.0
+        ],
+        [
+         -273.9,
+         -80.6
+        ],
+        [
+         -256.6,
+         -106.6
+        ],
+        [
+         -230.6,
+         -123.9
+        ],
+        [
+         -200.0,
+         -130.0
+        ],
+        [
+         200.0,
+         -130.0
+        ],
+        [
+         230.6,
+         -123.9
+        ],
+        [
+         256.6,
+         -106.6
+        ],
+        [
+         273.9,
+         -80.6
+        ],
+        [
+         280.0,
+         -50.0
+        ]
+       ],
+       "depth": 450,
+       "p": [
+        -194.1,
+        0,
+        1984.3
+       ],
+       "c": "#4b5158",
+       "bevel": 20,
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      300,
+      0,
+      500
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Oil cooler",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 170,
+       "l": 260,
+       "p": [
+        -1967.6,
+        0,
+        970.4
+       ],
+       "axis": "x",
+       "c": "#b87333",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -500
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Oil lines",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -150.3,
+         120,
+         1768.8
+        ],
+        [
+         -785.7,
+         120,
+         1180.3
+        ],
+        [
+         -1869.6,
+         80,
+         990.4
+        ]
+       ],
+       "r": 22,
+       "c": "#6d4c41"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -1869.6,
+         -80,
+         990.4
+        ],
+        [
+         -785.7,
+         -120,
+         1180.3
+        ],
+        [
+         242.4,
+         -100,
+         1644.5
+        ]
+       ],
+       "r": 22,
+       "c": "#6d4c41"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -200
+     ]
+    }
+   ],
+   "box": [
+    -927.6,
+    0.0,
+    800.4,
+    2340.0,
+    560.0,
+    1313.9
+   ]
+  },
+  {
+   "id": "fuel",
+   "name": "Fuel system",
+   "group": "fuel",
+   "shape": "tank",
+   "color": "red",
+   "desc": "Two self-sealing wing tanks (92 US gal each), an 85 gal fuselage tank aft of the cockpit and two 75 gal drop tanks. Booster pumps in the tanks (10\u201314 psi), selector valve, strainer, engine-driven pump: 16\u201318 psi desired at the carburetor (16 min, 19 max). 100/130 grade. Use fuselage fuel first down to about 25 gal; no aerobatics with more than 40 gal in it.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -150,
+       -350
+      ],
+      [
+       -150,
+       -2000
+      ],
+      [
+       -1500,
+       -2000
+      ],
+      [
+       -1500,
+       -350
+      ]
+     ],
+     "depth": 230,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#7d2f2f",
+     "rot": [
+      -5,
+      -11.5,
+      0
+     ],
+     "op": 0.6
+    },
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       0,
+       -1300
+      ],
+      [
+       180,
+       -1100
+      ],
+      [
+       190,
+       600
+      ],
+      [
+       0,
+       900
+      ]
+     ],
+     "p": [
+      -647.8,
+      -2300,
+      1004.2
+     ],
+     "axis": "x",
+     "c": "#7d858d",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "extrude",
+     "plane": "xy",
+     "pts": [
+      [
+       -150,
+       350
+      ],
+      [
+       -150,
+       2000
+      ],
+      [
+       -1500,
+       2000
+      ],
+      [
+       -1500,
+       350
+      ]
+     ],
+     "depth": 230,
+     "p": [
+      -223.7,
+      0,
+      1427.3
+     ],
+     "c": "#7d2f2f",
+     "rot": [
+      5,
+      -11.5,
+      0
+     ],
+     "op": 0.6
+    },
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       0,
+       -1300
+      ],
+      [
+       180,
+       -1100
+      ],
+      [
+       190,
+       600
+      ],
+      [
+       0,
+       900
+      ]
+     ],
+     "p": [
+      -647.8,
+      2300,
+      1004.2
+     ],
+     "axis": "x",
+     "c": "#7d858d",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      500,
+      650,
+      650
+     ],
+     "p": [
+      -2620.2,
+      0,
+      1419.3
+     ],
+     "c": "#7d2f2f",
+     "op": 0.6,
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 70,
+     "l": 150,
+     "p": [
+      -917.6,
+      -200,
+      1326.9
+     ],
+     "axis": "z",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      120,
+      80
+     ],
+     "p": [
+      -1335.5,
+      0,
+      1374.6
+     ],
+     "c": "#2f6db3",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -899.6,
+       -350,
+       1238.7
+      ],
+      [
+       -917.6,
+       0,
+       1326.9
+      ],
+      [
+       266.5,
+       0,
+       1476.0
+      ]
+     ],
+     "r": 10,
+     "c": "#2f6db3"
+    }
+   ],
+   "box": [
+    -1109.0,
+    0.0,
+    814.2,
+    3522.4,
+    4980,
+    930.1
+   ]
+  },
+  {
+   "id": "gear",
+   "name": "Landing gear",
+   "group": "hyd",
+   "shape": "unit",
+   "color": "steel",
+   "desc": "Hydraulically retracted main gear (inward into the wing) with 27 in tires and hydraulic brakes, plus a retractable, lockable tail wheel (6\u00b0 steerable with the stick aft, full-swivel with it forward). Do not extend above 170 mph IAS. Warning light and horn if the throttle is closed with the gear not locked down.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       180,
+       -85
+      ],
+      [
+       300,
+       -90
+      ],
+      [
+       343,
+       -50
+      ],
+      [
+       343,
+       50
+      ],
+      [
+       300,
+       90
+      ],
+      [
+       180,
+       85
+      ]
+     ],
+     "p": [
+      150.0,
+      1803,
+      343.0
+     ],
+     "axis": "y",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ],
+     "nox": 1
+    },
+    {
+     "t": "cyl",
+     "r": 185,
+     "l": 140,
+     "p": [
+      150.0,
+      1803,
+      343.0
+     ],
+     "axis": "y",
+     "c": "#d0d5da",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ],
+     "nox": 1
+    },
+    {
+     "t": "cyl",
+     "r": 150,
+     "l": 40,
+     "p": [
+      150.0,
+      1713,
+      343.0
+     ],
+     "axis": "y",
+     "c": "#7d858d",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ],
+     "nox": 1
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       138.0,
+       1720,
+       401.8
+      ],
+      [
+       -37.1,
+       1680,
+       1363.2
+      ]
+     ],
+     "r": 55,
+     "c": "#9aa2a9",
+     "nox": 1
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       39.0,
+       1700,
+       888.8
+      ],
+      [
+       -101.8,
+       1300,
+       1329.6
+      ]
+     ],
+     "r": 25,
+     "c": "#9aa2a9",
+     "nox": 1
+    },
+    {
+     "t": "box",
+     "s": [
+      900,
+      20,
+      600
+     ],
+     "p": [
+      68.9,
+      1870,
+      741.8
+     ],
+     "c": "#c3c8cd",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ],
+     "nox": 1
+    },
+    {
+     "t": "cyl",
+     "r": 35,
+     "l": 450,
+     "p": [
+      -164.4,
+      1350,
+      1286.3
+     ],
+     "axis": "y",
+     "c": "#2f6db3",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ],
+     "nox": 1
+    },
+    {
+     "t": "cyl",
+     "r": 130,
+     "l": 90,
+     "p": [
+      -6296.5,
+      0,
+      130
+     ],
+     "axis": "y",
+     "c": "#1d1f22",
+     "nox": 1
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -6296.5,
+       0,
+       130
+      ],
+      [
+       -6176.5,
+       0,
+       440.7
+      ]
+     ],
+     "r": 30,
+     "c": "#9aa2a9",
+     "nox": 1
+    }
+   ],
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Main wheel and tire (right)",
+     "pn": "27 in",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "lathe",
+       "pts": [
+        [
+         180,
+         -85
+        ],
+        [
+         300,
+         -90
+        ],
+        [
+         343,
+         -50
+        ],
+        [
+         343,
+         50
+        ],
+        [
+         300,
+         90
+        ],
+        [
+         180,
+         85
+        ]
+       ],
+       "p": [
+        150.0,
+        -1803,
+        343.0
+       ],
+       "axis": "y",
+       "c": "#1d1f22",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      },
+      {
+       "t": "cyl",
+       "r": 185,
+       "l": 140,
+       "p": [
+        150.0,
+        -1803,
+        343.0
+       ],
+       "axis": "y",
+       "c": "#d0d5da",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -900,
+      0
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Brake assembly",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 150,
+       "l": 40,
+       "p": [
+        150.0,
+        -1713,
+        343.0
+       ],
+       "axis": "y",
+       "c": "#7d858d",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -500,
+      250
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Shock strut and side brace",
+     "pn": "oleo",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         138.0,
+         -1720,
+         401.8
+        ],
+        [
+         -37.1,
+         -1680,
+         1363.2
+        ]
+       ],
+       "r": 55,
+       "c": "#9aa2a9"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         39.0,
+         -1700,
+         888.8
+        ],
+        [
+         -101.8,
+         -1300,
+         1329.6
+        ]
+       ],
+       "r": 25,
+       "c": "#9aa2a9"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      600
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Gear door",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        900,
+        20,
+        600
+       ],
+       "p": [
+        68.9,
+        -1870,
+        741.8
+       ],
+       "c": "#c3c8cd",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -400,
+      -300
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Retraction actuator",
+     "pn": "",
+     "qty": "1",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 35,
+       "l": 450,
+       "p": [
+        -164.4,
+        -1350,
+        1286.3
+       ],
+       "axis": "y",
+       "c": "#2f6db3",
+       "rot": [
+        0,
+        -11.5,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      300,
+      500
+     ]
+    }
+   ],
+   "box": [
+    -2953.8,
+    0.0,
+    0.0,
+    6945.4,
+    3786,
+    1363.2
+   ]
+  },
+  {
+   "id": "hydraulics",
+   "name": "Hydraulic system",
+   "group": "hyd",
+   "shape": "pump",
+   "color": "blue",
+   "desc": "Engine-driven pump, reservoir on the firewall, selector valves and actuators for gear, gear doors and flaps. Pressure 800\u20131,100 psi at 2,300 rpm.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      200,
+      250,
+      300
+     ],
+     "p": [
+      -346.3,
+      -280,
+      1728.9
+     ],
+     "c": "#2f6db3",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -316.4,
+       -280,
+       1581.9
+      ],
+      [
+       297.3,
+       -110,
+       1625.1
+      ]
+     ],
+     "r": 12,
+     "c": "#2f6db3"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -316.4,
+       -280,
+       1581.9
+      ],
+      [
+       -193.8,
+       -1350,
+       1280.3
+      ],
+      [
+       -193.8,
+       1350,
+       1280.3
+      ]
+     ],
+     "r": 10,
+     "c": "#2f6db3"
+    },
+    {
+     "t": "cyl",
+     "r": 40,
+     "l": 300,
+     "p": [
+      -1963.6,
+      0,
+      950.8
+     ],
+     "axis": "y",
+     "c": "#2f6db3",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    }
+   ],
+   "box": [
+    -853.1,
+    0.0,
+    910.8,
+    2300.9,
+    2700,
+    968.1
+   ]
+  },
+  {
+   "id": "electrical",
+   "name": "Electrical system (24 V DC)",
+   "group": "elec",
+   "shape": "cabinet",
+   "color": "dark",
+   "desc": "24 V DC with an engine-driven generator and a 34 Ah battery behind the pilot; external power preferred for starting. Ammeter 100 A maximum at 2,300 rpm.",
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      280,
+      180,
+      230
+     ],
+     "p": [
+      -3179.1,
+      0,
+      1407.7
+     ],
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      250,
+      120,
+      300
+     ],
+     "p": [
+      -479.5,
+      300,
+      1681.4
+     ],
+     "c": "#3d4248",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -3155.2,
+       0,
+       1290.1
+      ],
+      [
+       -1717.5,
+       200,
+       1245.8
+      ],
+      [
+       -463.5,
+       300,
+       1603.0
+      ],
+      [
+       295.0,
+       230,
+       1736.9
+      ]
+     ],
+     "r": 8,
+     "c": "#1d1f22"
+    }
+   ],
+   "box": [
+    -1512.0,
+    135.0,
+    1245.8,
+    3614.1,
+    450.0,
+    585.6
+   ]
+  },
+  {
+   "id": "guns",
+   "name": "Wing guns (layout only)",
+   "group": "air",
+   "shape": "unit",
+   "color": "dark",
+   "desc": "Six .50 caliber machine guns, three in each wing. Shown for layout only.",
+   "src": "Pima Air & Space Museum \u2014 P-51D specifications",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -555.8,
+      -2300,
+      1554.8
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      130.2,
+      -2300,
+      1694.4
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -559.8,
+      -2530,
+      1574.5
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      126.2,
+      -2530,
+      1714.1
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -563.8,
+      -2760,
+      1594.3
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      122.1,
+      -2760,
+      1733.9
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -555.8,
+      2300,
+      1554.8
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      130.2,
+      2300,
+      1694.4
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -559.8,
+      2530,
+      1574.5
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      126.2,
+      2530,
+      1714.1
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 16,
+     "l": 1500,
+     "p": [
+      -563.8,
+      2760,
+      1594.3
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 120,
+     "p": [
+      122.1,
+      2760,
+      1733.9
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "rot": [
+      0,
+      -11.5,
+      0
+     ]
+    }
+   ],
+   "box": [
+    -559.8,
+    0.0,
+    1538.8,
+    1508.0,
+    5572,
+    221.1
+   ]
+  }
+ ],
+ "faults": [
+  {
+   "id": "coolant-hot",
+   "title": "Coolant temperature high",
+   "group": "cool",
+   "code": "",
+   "effect": "warn",
+   "msg": "Coolant temperature above 110 \u00b0C (121 \u00b0C maximum)",
+   "causes": [
+    "Radiator exit flap not opening (actuator, switch, AUTOMATIC control)",
+    "Low coolant or a leak (glycol smell, white vapor)",
+    "Long ground running or climbing at low airspeed",
+    "Coolant pump or header tank fault"
+   ],
+   "checks": [
+    "In flight: switch the flap to manual OPEN; if the temperature stays high 20\u201330 s, pull the emergency release (opens to at least 7 in; cannot be reset in flight)",
+    "On the ground: limit taxi and run time, face into wind, open the flap",
+    "Check coolant level, mix (Type D 70/30) and leaks at hoses, header tank and pump",
+    "Test the flap actuator in manual OPEN and CLOSE"
+   ],
+   "comps": [
+    "cooling",
+    "scoop"
+   ],
+   "io": [
+    "COOL-T",
+    "RAD-FLAP",
+    "RAD-SW"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": "Hot coolant is under pressure \u2014 let it cool before opening the header tank."
+  },
+  {
+   "id": "oil-press",
+   "title": "Low oil pressure",
+   "group": "cool",
+   "code": "",
+   "effect": "stop",
+   "msg": "Oil pressure below 50 psi within 30 s of start, or below 70 psi running",
+   "causes": [
+    "Low oil quantity",
+    "Oil too cold or diluted",
+    "Pump or relief valve fault",
+    "Gauge or line fault"
+   ],
+   "checks": [
+    "On start: no 50 psi within 30 s \u2014 shut down and investigate",
+    "Check oil quantity (21 gal system) and for leaks",
+    "Check dilution use (3 min maximum)"
+   ],
+   "comps": [
+    "oil",
+    "engine"
+   ],
+   "io": [
+    "OIL-P",
+    "OIL-T"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "oil-hot",
+   "title": "Oil temperature high",
+   "group": "cool",
+   "code": "",
+   "effect": "warn",
+   "msg": "Oil temperature above 80 \u00b0C (105 \u00b0C maximum)",
+   "causes": [
+    "Oil cooler flap not opening",
+    "Oil cooler blocked or low airflow",
+    "Low oil quantity"
+   ],
+   "checks": [
+    "Open the oil cooler flap (manual)",
+    "Reduce power and increase airspeed",
+    "On the ground: inspect the oil cooler core for blockage"
+   ],
+   "comps": [
+    "oil",
+    "scoop"
+   ],
+   "io": [
+    "OIL-T",
+    "RAD-FLAP"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "fuel-press",
+   "title": "Low fuel pressure",
+   "group": "fuel",
+   "code": "",
+   "effect": "warn",
+   "msg": "Fuel pressure below 16 psi",
+   "causes": [
+    "Tank run dry or wrong tank selected",
+    "Booster pump off or failed",
+    "Vapor lock at altitude or in hot weather",
+    "Clogged strainer"
+   ],
+   "checks": [
+    "Select a tank with fuel and switch the booster pump ON",
+    "At altitude, keep booster pumps on",
+    "Clean the strainer and check the engine-driven pump relief setting"
+   ],
+   "comps": [
+    "fuel",
+    "engine"
+   ],
+   "io": [
+    "FUEL-P",
+    "BOOST",
+    "FUEL-SEL"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "blower",
+   "title": "Supercharger won't shift to high blower",
+   "group": "engine",
+   "code": "",
+   "effect": "warn",
+   "msg": "Power falls off above the shift altitude; amber blower light stays off",
+   "causes": [
+    "Aneroid control fault (fails safe to low blower; amber light goes out)",
+    "Blower switch not in AUTOMATIC",
+    "Electrical fault in the shift circuit"
+   ],
+   "checks": [
+    "Check the switch is in AUTOMATIC; test with the switch in high on the ground per the handbook",
+    "Shift is automatic at about 15,700\u201319,700 ft airplane altitude (V-1650-7), back down about 1,500 ft lower",
+    "Avoid below 2,000 rpm in high blower"
+   ],
+   "comps": [
+    "engine",
+    "electrical"
+   ],
+   "io": [
+    "BLOWER-LT",
+    "BLOWER-SW",
+    "MAP"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "runaway",
+   "title": "Runaway propeller (overspeed)",
+   "group": "engine",
+   "code": "",
+   "effect": "stop",
+   "msg": "RPM above 3,240 and rising",
+   "causes": [
+    "Governor failure",
+    "Loss of oil pressure to the propeller"
+   ],
+   "checks": [
+    "Throttle back to hold 3,240 rpm, slow to about 140 mph IAS",
+    "Land as soon as practical; inspect governor and propeller"
+   ],
+   "comps": [
+    "propeller",
+    "engine"
+   ],
+   "io": [
+    "RPM"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": "Treat the propeller as live whenever the airplane is near anyone: magnetos can fire with a broken P-lead. Ignition OFF and stay out of the arc when pulling it through."
+  },
+  {
+   "id": "hard-start",
+   "title": "Hard starting or won't start",
+   "group": "engine",
+   "code": "",
+   "effect": "stop",
+   "msg": "Engine cranks but won't fire, or fires and dies",
+   "causes": [
+    "Overprimed or underprimed",
+    "Weak battery \u2014 use external power",
+    "Ignition or starter fault",
+    "Liquid lock in lower cylinders (prop not pulled through)"
+   ],
+   "checks": [
+    "Pull the propeller through 8 blades before start, ignition OFF",
+    "Prime 3\u20134 s cold, 1 s hot",
+    "Use external power where possible",
+    "Mixture idle cut-off until it fires, then AUTO RICH/RUN"
+   ],
+   "comps": [
+    "engine",
+    "electrical",
+    "fuel"
+   ],
+   "io": [
+    "START",
+    "IGN",
+    "PRIME"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": "Treat the propeller as live whenever the airplane is near anyone: magnetos can fire with a broken P-lead. Ignition OFF and stay out of the arc when pulling it through."
+  },
+  {
+   "id": "plug-foul",
+   "title": "Rough running after idle / plug fouling",
+   "group": "engine",
+   "code": "",
+   "effect": "warn",
+   "msg": "Rough engine or large mag drop after taxi or idle",
+   "causes": [
+    "Long idling at low rpm fouls plugs (rich, cold)",
+    "Oil-fouled plugs in the lower bank"
+   ],
+   "checks": [
+    "Avoid long idling; warm up at 1,300 rpm",
+    "Clear with a brief run-up per the handbook before the mag check",
+    "If it persists, pull and service the plugs"
+   ],
+   "comps": [
+    "engine"
+   ],
+   "io": [
+    "RPM",
+    "IGN"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version); general warbird and Merlin maintenance practice \u2014 the aircraft's own manuals and inspection program govern",
+   "safety": ""
+  },
+  {
+   "id": "hyd-low",
+   "title": "Low hydraulic pressure",
+   "group": "hyd",
+   "code": "",
+   "effect": "warn",
+   "msg": "Hydraulic pressure below 800 psi",
+   "causes": [
+    "Low reservoir level or leak",
+    "Engine-driven pump failure",
+    "Relief valve fault"
+   ],
+   "checks": [
+    "Check reservoir level and look for leaks at actuators and lines",
+    "Plan for emergency gear extension"
+   ],
+   "comps": [
+    "hydraulics",
+    "gear"
+   ],
+   "io": [
+    "HYD-P"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "gear-ext",
+   "title": "Gear won't extend or lock down",
+   "group": "hyd",
+   "code": "",
+   "effect": "stop",
+   "msg": "Red light or horn with the gear selected down",
+   "causes": [
+    "Hydraulic failure",
+    "Gear door not opening",
+    "Tail wheel not locking"
+   ],
+   "checks": [
+    "Select DOWN and yaw the airplane to swing the gear out",
+    "If still unsafe, pull the fairing door emergency knob and yaw again",
+    "If the tail wheel doesn't lock, increase speed or pull a brief positive-g pull-out"
+   ],
+   "comps": [
+    "gear",
+    "hydraulics"
+   ],
+   "io": [
+    "GEAR-LT",
+    "GEAR-HORN",
+    "GEAR-SEL"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "generator",
+   "title": "Generator not charging",
+   "group": "elec",
+   "code": "",
+   "effect": "warn",
+   "msg": "Ammeter shows no charge or voltage low",
+   "causes": [
+    "Generator switch off",
+    "Generator, voltage regulator or reverse-current relay fault",
+    "Broken lead"
+   ],
+   "checks": [
+    "Check the generator switch and the ammeter at 2,300 rpm",
+    "Reduce electrical load and plan to land",
+    "On the ground: test the generator, regulator and relay"
+   ],
+   "comps": [
+    "electrical",
+    "engine"
+   ],
+   "io": [
+    "AMP",
+    "GEN-SW"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "suction",
+   "title": "Suction out of range",
+   "group": "elec",
+   "code": "",
+   "effect": "warn",
+   "msg": "Suction not 3.75\u20134.25 in. Hg at 2,300 rpm",
+   "causes": [
+    "Vacuum pump or relief valve fault",
+    "Leaking or blocked lines or instrument filters"
+   ],
+   "checks": [
+    "Cross-check the gyro instruments",
+    "Adjust the relief valve; replace filters"
+   ],
+   "comps": [
+    "cockpit"
+   ],
+   "io": [
+    "SUCT"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  },
+  {
+   "id": "engine-fail",
+   "title": "Engine failure",
+   "group": "engine",
+   "code": "",
+   "effect": "stop",
+   "msg": "Power loss",
+   "causes": [
+    "Fuel starvation (tank empty or selector)",
+    "Coolant loss and overheat",
+    "Ignition failure"
+   ],
+   "checks": [
+    "Follow the handbook: keep airspeed, drop external stores, fuel shut-off and battery off",
+    "Belly-land unless a long runway is available; flaps about 30\u00b0 with 20\u00b0 in reserve"
+   ],
+   "comps": [
+    "engine",
+    "fuel",
+    "cooling"
+   ],
+   "io": [
+    "RPM",
+    "MAP",
+    "FUEL-P"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "safety": ""
+  }
+ ],
+ "io": [
+  {
+   "tag": "MAP",
+   "type": "AI",
+   "desc": "Manifold pressure (61 in. Hg take-off/military; 67 WEP)",
+   "device": "Manifold pressure gauge",
+   "loc": "engine",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "RPM",
+   "type": "AI",
+   "desc": "Engine rpm (3,000 take-off; 3,240 max dive)",
+   "device": "Tachometer",
+   "loc": "engine",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "COOL-T",
+   "type": "AI",
+   "desc": "Coolant temperature (100\u2013110 \u00b0C; 121 \u00b0C max)",
+   "device": "Coolant temp gauge",
+   "loc": "cooling",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "OIL-T",
+   "type": "AI",
+   "desc": "Oil temperature (70\u201380 \u00b0C; 105 \u00b0C max)",
+   "device": "Oil temp gauge",
+   "loc": "oil",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "OIL-P",
+   "type": "AI",
+   "desc": "Oil pressure (70\u201380 psi; 50 min, 105 max)",
+   "device": "Oil pressure gauge",
+   "loc": "oil",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "FUEL-P",
+   "type": "AI",
+   "desc": "Fuel pressure (16\u201318 psi; 19 max)",
+   "device": "Fuel pressure gauge",
+   "loc": "fuel",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "HYD-P",
+   "type": "AI",
+   "desc": "Hydraulic pressure (800\u20131,100 psi at 2,300 rpm)",
+   "device": "Hydraulic gauge",
+   "loc": "hydraulics",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "SUCT",
+   "type": "AI",
+   "desc": "Suction (3.75\u20134.25 in. Hg at 2,300 rpm)",
+   "device": "Suction gauge",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "AMP",
+   "type": "AI",
+   "desc": "Ammeter (100 A max at 2,300 rpm)",
+   "device": "Ammeter",
+   "loc": "electrical",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "FUEL-Q",
+   "type": "AI",
+   "desc": "Fuel quantity per tank",
+   "device": "Fuel gauges",
+   "loc": "fuel",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "RAD-FLAP",
+   "type": "AI",
+   "desc": "Radiator / oil cooler flap position",
+   "device": "Flap indicators",
+   "loc": "scoop",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "BLOWER-LT",
+   "type": "DO",
+   "desc": "Amber light: high blower engaged",
+   "device": "Indicator light",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "GEAR-LT",
+   "type": "DO",
+   "desc": "Landing gear position / warning light",
+   "device": "Indicator light",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "GEAR-HORN",
+   "type": "DO",
+   "desc": "Gear warning horn (throttle closed, gear not down)",
+   "device": "Horn",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "IGN",
+   "type": "DI",
+   "desc": "Ignition switch (OFF / L / R / BOTH)",
+   "device": "Ignition switch",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "START",
+   "type": "DI",
+   "desc": "Starter switch",
+   "device": "Starter switch",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "PRIME",
+   "type": "DI",
+   "desc": "Primer switch",
+   "device": "Primer",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "BOOST",
+   "type": "DI",
+   "desc": "Fuel booster pump switch",
+   "device": "Booster switch",
+   "loc": "fuel",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "FUEL-SEL",
+   "type": "DI",
+   "desc": "Fuel selector valve",
+   "device": "Selector",
+   "loc": "fuel",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "BLOWER-SW",
+   "type": "DI",
+   "desc": "Supercharger switch (AUTOMATIC / LOW / HIGH)",
+   "device": "Blower switch",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "RAD-SW",
+   "type": "DI",
+   "desc": "Radiator flap switch (AUTOMATIC / OPEN / CLOSE / OFF)",
+   "device": "Flap switch",
+   "loc": "cockpit",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "GEAR-SEL",
+   "type": "DI",
+   "desc": "Landing gear handle",
+   "device": "Gear handle",
+   "loc": "hydraulics",
+   "sheet": "AN 01-60JE-1"
+  },
+  {
+   "tag": "GEN-SW",
+   "type": "DI",
+   "desc": "Generator switch",
+   "device": "Switch panel",
+   "loc": "electrical",
+   "sheet": "AN 01-60JE-1"
+  }
+ ],
+ "sequence": [
+  {
+   "id": "pre",
+   "name": "Before starting",
+   "desc": "Walkaround, fuel and oil quantities, coolant level, propeller pulled through 8 blades with ignition OFF.",
+   "ends": "Ready to start",
+   "inputs": [
+    "FUEL-Q"
+   ],
+   "outputs": [],
+   "comps": [
+    "engine",
+    "fuel",
+    "oil",
+    "cooling",
+    "propeller"
+   ]
+  },
+  {
+   "id": "start",
+   "name": "Start",
+   "desc": "External power, generator ON, throttle START, prop full increase, booster ON (10\u201314 psi), prime, ignition BOTH, starter. Mixture to RUN when it fires; 50 psi oil within 30 s.",
+   "ends": "Engine running",
+   "inputs": [
+    "IGN",
+    "START",
+    "PRIME",
+    "BOOST",
+    "OIL-P"
+   ],
+   "outputs": [],
+   "comps": [
+    "engine",
+    "electrical",
+    "fuel"
+   ]
+  },
+  {
+   "id": "warm",
+   "name": "Warm-up and run-up",
+   "desc": "Warm up at 1,300 rpm until oil temperature rises and pressure is steady; run-up checks of magnetos, propeller, blower, hydraulic pressure and suction.",
+   "ends": "Ready for take-off",
+   "inputs": [
+    "OIL-T",
+    "COOL-T",
+    "HYD-P",
+    "SUCT",
+    "AMP"
+   ],
+   "outputs": [],
+   "comps": [
+    "engine",
+    "cooling",
+    "hydraulics"
+   ]
+  },
+  {
+   "id": "takeoff",
+   "name": "Take-off and climb",
+   "desc": "61 in. Hg, 3,000 rpm (5 min). Gear up; radiator flaps AUTOMATIC; blower shifts to high automatically.",
+   "ends": "Climbing",
+   "inputs": [
+    "MAP",
+    "RPM",
+    "GEAR-SEL"
+   ],
+   "outputs": [
+    "BLOWER-LT"
+   ],
+   "comps": [
+    "engine",
+    "gear",
+    "scoop"
+   ]
+  },
+  {
+   "id": "cruise",
+   "name": "Cruise",
+   "desc": "Max cruise 2,400 rpm; min recommended 1,600 rpm (2,000 in high blower). Fuselage tank first down to about 25 gal, then alternate wing tanks.",
+   "ends": "Cruise",
+   "inputs": [
+    "RPM",
+    "MAP",
+    "FUEL-Q"
+   ],
+   "outputs": [],
+   "comps": [
+    "engine",
+    "fuel"
+   ]
+  },
+  {
+   "id": "land",
+   "name": "Landing and shutdown",
+   "desc": "Gear below 170 mph IAS, flaps within limits; after landing clear the engine, mixture idle cut-off, switches off.",
+   "ends": "Shut down",
+   "inputs": [
+    "GEAR-SEL",
+    "GEAR-LT"
+   ],
+   "outputs": [
+    "GEAR-HORN"
+   ],
+   "comps": [
+    "gear",
+    "controls",
+    "engine"
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "id": "walk",
+   "name": "Preflight walkaround",
+   "why": "Most in-flight problems are visible on the ground.",
+   "steps": [
+    "Coolant, oil and fuel levels; drain sumps",
+    "Look for coolant and oil leaks under the cowling and scoop",
+    "Tires, brakes, struts and gear doors",
+    "Propeller blades for nicks; spinner secure",
+    "Control surfaces free; hinges and cables"
+   ],
+   "comps": [
+    "cooling",
+    "oil",
+    "fuel",
+    "gear",
+    "propeller",
+    "controls"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version); general warbird and Merlin maintenance practice \u2014 the aircraft's own manuals and inspection program govern"
+  },
+  {
+   "id": "runup",
+   "name": "Run-up",
+   "why": "Catches ignition, propeller and blower faults before flight.",
+   "steps": [
+    "Magneto check at the handbook rpm; compare drops",
+    "Propeller governor exercise",
+    "Blower high-position check per handbook",
+    "Hydraulic 800\u20131,100 psi and suction 3.75\u20134.25 at 2,300 rpm"
+   ],
+   "comps": [
+    "engine",
+    "propeller",
+    "hydraulics"
+   ],
+   "src": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)"
+  },
+  {
+   "id": "post",
+   "name": "Post-flight",
+   "why": "Leaks and damage show up while things are hot.",
+   "steps": [
+    "Look for fresh coolant, oil and hydraulic leaks",
+    "Check exhaust stacks for cracks",
+    "Note any rough running or overtemperature in the log"
+   ],
+   "comps": [
+    "engine",
+    "cooling",
+    "hydraulics"
+   ],
+   "src": "general warbird and Merlin maintenance practice \u2014 the aircraft's own manuals and inspection program govern"
+  }
+ ],
+ "reference": [
+  {
+   "id": "data",
+   "name": "Airplane data",
+   "intro": "P-51D.",
+   "rows": [
+    [
+     "Span",
+     "37 ft (11.28 m)"
+    ],
+    [
+     "Length",
+     "32 ft 3 in (9.83 m)"
+    ],
+    [
+     "Height",
+     "12 ft 2 in (3.71 m)"
+    ],
+    [
+     "Loaded weight",
+     "About 11,600 lb"
+    ],
+    [
+     "Engine",
+     "Packard V-1650-7 Merlin, 1,490 hp"
+    ],
+    [
+     "Propeller",
+     "Hamilton Standard 4-blade, 11 ft 2 in"
+    ],
+    [
+     "Fuel",
+     "2 \u00d7 92 gal wing, 85 gal fuselage, 2 \u00d7 75 gal drop tanks; 100/130"
+    ],
+    [
+     "Oil",
+     "21 US gal, grade 1120"
+    ],
+    [
+     "Electrical",
+     "24 V DC, 34 Ah battery"
+    ]
+   ],
+   "notes": "Sources: Pima Air & Space Museum; AN 01-60JE-1."
+  },
+  {
+   "id": "limits",
+   "name": "Engine limits",
+   "intro": "From the AN 01-60JE-1 power plant chart.",
+   "rows": [
+    [
+     "Take-off",
+     "61 in. Hg, 3,000 rpm, 5 min"
+    ],
+    [
+     "Military",
+     "61 in. Hg, 3,000 rpm, 15 min"
+    ],
+    [
+     "WEP (late)",
+     "67 in. Hg, 3,000 rpm, 5 min"
+    ],
+    [
+     "Max continuous",
+     "2,700 rpm"
+    ],
+    [
+     "Max cruise",
+     "2,400 rpm"
+    ],
+    [
+     "Max dive",
+     "3,240 rpm"
+    ],
+    [
+     "Coolant",
+     "100\u2013110 \u00b0C; 121 \u00b0C max"
+    ],
+    [
+     "Oil temp",
+     "70\u201380 \u00b0C; 105 \u00b0C max"
+    ],
+    [
+     "Oil pressure",
+     "70\u201380 psi; 50 min; 105 max"
+    ],
+    [
+     "Fuel pressure",
+     "16\u201318 psi; 19 max"
+    ]
+   ],
+   "notes": ""
+  },
+  {
+   "id": "speeds",
+   "name": "Airspeed limits",
+   "intro": "Indicated airspeed, mph.",
+   "rows": [
+    [
+     "Gear extension",
+     "170"
+    ],
+    [
+     "Flaps 10\u00b0 / 20\u00b0 / 30\u00b0 / 40\u00b0 / 50\u00b0",
+     "400 / 275 / 225 / 180 / 165"
+    ],
+    [
+     "Maximum",
+     "305 IAS or 0.75 Mach"
+    ],
+    [
+     "Take-off",
+     "95 (9,000 lb) to 110 (11,000 lb)"
+    ]
+   ],
+   "notes": ""
+  }
+ ],
+ "cabinets": {
+  "electrical": {
+   "w": 600,
+   "h": 400,
+   "devices": [
+    {
+     "tag": "Battery relay",
+     "kind": "relay",
+     "func": "Battery disconnect"
+    },
+    {
+     "tag": "Voltage regulator",
+     "kind": "psu",
+     "func": "Generator voltage regulation",
+     "io": [
+      "AMP"
+     ]
+    },
+    {
+     "tag": "Reverse-current relay",
+     "kind": "relay",
+     "func": "Disconnects the generator below battery voltage",
+     "io": [
+      "GEN-SW"
+     ]
+    },
+    {
+     "tag": "Starter relay",
+     "kind": "relay",
+     "func": "Starter engagement",
+     "io": [
+      "START"
+     ]
+    },
+    {
+     "tag": "Circuit protection",
+     "kind": "breaker",
+     "func": "Branch circuit protection",
+     "guess": true
+    },
+    {
+     "tag": "External power receptacle",
+     "kind": "connector",
+     "func": "Ground power for starting"
+    }
+   ]
+  }
+ },
+ "defects": [
+  {
+   "id": "corrosion",
+   "name": "Corrosion of aluminum structure",
+   "cat": "Structure",
+   "process": "Aircraft maintenance",
+   "material": "Aluminum alloy",
+   "looks": "White powdery deposits, blistered paint, exfoliation along fastener rows, especially in the scoop, wheel wells and lower fuselage.",
+   "isolate": [
+    "Remove panels and inspect low points where water and coolant collect"
+   ],
+   "causes": [
+    {
+     "area": "environment",
+     "cause": "Moisture and coolant/glycol spills",
+     "fix": "Clean, treat and re-protect; fix leaks"
+    },
+    {
+     "area": "material",
+     "cause": "Damaged protective coating",
+     "fix": "Strip, treat and refinish"
+    }
+   ],
+   "params": [
+    "Inspection interval"
+   ],
+   "comps": [
+    "airframe",
+    "scoop",
+    "gear"
+   ]
+  },
+  {
+   "id": "coolant-leak",
+   "name": "Coolant leaks at Merlin joints and hoses",
+   "cat": "Engine",
+   "process": "Aircraft maintenance",
+   "material": "Glycol/water coolant",
+   "looks": "Glycol smell, white residue, wet hoses or drips under the scoop.",
+   "isolate": [
+    "Pressure-test the cooling system cold"
+   ],
+   "causes": [
+    {
+     "area": "machine",
+     "cause": "Aged hoses and clamps",
+     "fix": "Replace hoses and clamps"
+    },
+    {
+     "area": "method",
+     "cause": "Overheat events",
+     "fix": "Inspect after any overtemperature"
+    }
+   ],
+   "params": [
+    "Coolant level",
+    "Coolant temperature"
+   ],
+   "comps": [
+    "cooling",
+    "engine"
+   ]
+  },
+  {
+   "id": "fatigue",
+   "name": "Fatigue cracks at fittings and gear attach points",
+   "cat": "Structure",
+   "process": "Aircraft maintenance",
+   "material": "Aluminum alloy / steel fittings",
+   "looks": "Hairline cracks at bolt holes and fitting radii; fretting.",
+   "isolate": [
+    "Dye-penetrant or eddy-current inspection"
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "Hard landings and high-g maneuvers",
+     "fix": "Record and inspect after events"
+    },
+    {
+     "area": "material",
+     "cause": "Age of original parts",
+     "fix": "Inspection program and replacement"
+    }
+   ],
+   "params": [
+    "Hours",
+    "Landings"
+   ],
+   "comps": [
+    "gear",
+    "airframe"
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "name": "AN 01-60JE-1 Pilot's Handbook, P-51D and K (avialogs.com text version)",
+   "kind": "manual"
+  },
+  {
+   "name": "Pima Air & Space Museum \u2014 P-51D specifications",
+   "kind": "other"
+  },
+  {
+   "name": "Maintenance guidance supplemented with general warbird practice where the pilot's handbook is silent",
+   "kind": "other"
+  }
+ ]
+}

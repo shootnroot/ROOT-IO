@@ -1,0 +1,3939 @@
+{
+ "meta": {
+  "name": "RF28R7351SR French Door Refrigerator",
+  "maker": "Samsung",
+  "model": "RF28R7351SR",
+  "serial": "",
+  "functions": [
+   "Refrigeration (appliance)"
+  ],
+  "materials": [],
+  "summary": "28 cu ft French-door refrigerator with Twin Cooling, a full-width Flex Zone drawer, ice and water dispenser and an inverter (BLDC) compressor on R600a. Error codes from Samsung; test modes and check values from a sister model's troubleshooting manual. 3D model drawn to the published outside dimensions; internal parts placed from the service manual figures."
+ },
+ "groups": [
+  {
+   "id": "cooling",
+   "name": "Cooling and compressor"
+  },
+  {
+   "id": "airflow",
+   "name": "Fans and airflow"
+  },
+  {
+   "id": "defrost",
+   "name": "Defrost"
+  },
+  {
+   "id": "ice",
+   "name": "Ice and water"
+  },
+  {
+   "id": "control",
+   "name": "Controls and power"
+  }
+ ],
+ "components": [
+  {
+   "id": "cabinet",
+   "name": "Cabinet shell",
+   "group": "control",
+   "shape": "guard",
+   "box": [
+    0.0,
+    38.0,
+    -5.0,
+    909.0,
+    816.0,
+    1783.0
+   ],
+   "desc": "Insulated outer cabinet. Front corners carry warm refrigerant pipe to stop condensation, so they feel warm. Outside: 908 W \u00d7 1,778 H (1,749 without hinges) \u00d7 746 mm deep without doors, 927 mm with doors.",
+   "src": "Samsung RF28R7351SR user manual",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      45,
+      746,
+      1729
+     ],
+     "p": [
+      -432.0,
+      73.0,
+      884.5
+     ],
+     "c": "#c7ccd1",
+     "guard": true,
+     "op": 0.3
+    },
+    {
+     "t": "box",
+     "s": [
+      45,
+      746,
+      1729
+     ],
+     "p": [
+      432.0,
+      73.0,
+      884.5
+     ],
+     "c": "#c7ccd1",
+     "guard": true,
+     "op": 0.3
+    },
+    {
+     "t": "box",
+     "s": [
+      908,
+      746,
+      45
+     ],
+     "p": [
+      0,
+      73.0,
+      1727
+     ],
+     "c": "#c7ccd1",
+     "guard": true,
+     "op": 0.3
+    },
+    {
+     "t": "box",
+     "s": [
+      908,
+      30,
+      1729
+     ],
+     "p": [
+      0,
+      431,
+      884.5
+     ],
+     "c": "#8d959d",
+     "guard": true,
+     "op": 0.3
+    },
+    {
+     "t": "box",
+     "s": [
+      818,
+      556,
+      60
+     ],
+     "p": [
+      0,
+      -22.0,
+      80
+     ],
+     "c": "#c7ccd1",
+     "guard": true,
+     "op": 0.3
+    },
+    {
+     "t": "box",
+     "s": [
+      868,
+      20,
+      300
+     ],
+     "p": [
+      0,
+      133.0,
+      868
+     ],
+     "c": "#eef0f2",
+     "op": 0.5,
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      868,
+      20,
+      40
+     ],
+     "p": [
+      0,
+      -290,
+      550
+     ],
+     "c": "#eef0f2"
+    },
+    {
+     "t": "box",
+     "s": [
+      868,
+      20,
+      40
+     ],
+     "p": [
+      0,
+      -290,
+      862
+     ],
+     "c": "#eef0f2"
+    },
+    {
+     "t": "box",
+     "s": [
+      828,
+      30,
+      60
+     ],
+     "p": [
+      0,
+      -310,
+      30
+     ],
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      60,
+      30
+     ],
+     "p": [
+      -374.0,
+      -340,
+      1763
+     ],
+     "c": "#b9c0c7"
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      60,
+      30
+     ],
+     "p": [
+      374.0,
+      -340,
+      1763
+     ],
+     "c": "#b9c0c7"
+    },
+    {
+     "t": "cyl",
+     "r": 20,
+     "l": 30,
+     "p": [
+      -394.0,
+      -240,
+      10
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 20,
+     "l": 30,
+     "p": [
+      -394.0,
+      366,
+      10
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 20,
+     "l": 30,
+     "p": [
+      394.0,
+      -240,
+      10
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 20,
+     "l": 30,
+     "p": [
+      394.0,
+      366,
+      10
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    }
+   ]
+  },
+  {
+   "id": "fridge-doors",
+   "name": "French doors and gaskets",
+   "group": "cooling",
+   "shape": "door",
+   "box": [
+    0.0,
+    -330.0,
+    870.0,
+    906.0,
+    180.0,
+    879.0
+   ],
+   "desc": "Two fridge doors; the left door holds the dispenser and ice maker. Gaskets must seal fully or fans frost up.",
+   "src": "Samsung support: refrigerator error codes",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      450.0,
+      80,
+      879
+     ],
+     "p": [
+      -228.0,
+      -340,
+      1309.5
+     ],
+     "c": "#c7ccd1",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      414.0,
+      10,
+      839
+     ],
+     "p": [
+      -228.0,
+      -302,
+      1309.5
+     ],
+     "c": "#1d1f22",
+     "guard": true
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -40,
+       -380,
+       1050
+      ],
+      [
+       -40,
+       -420,
+       1070
+      ],
+      [
+       -40,
+       -420,
+       1549
+      ],
+      [
+       -40,
+       -380,
+       1569
+      ]
+     ],
+     "r": 13,
+     "c": "#b9c0c7",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      -228.0,
+      -270,
+      1020
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      -228.0,
+      -270,
+      1320
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      -228.0,
+      -270,
+      1570
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    },
+    {
+     "t": "box",
+     "s": [
+      450.0,
+      80,
+      879
+     ],
+     "p": [
+      228.0,
+      -340,
+      1309.5
+     ],
+     "c": "#c7ccd1",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      414.0,
+      10,
+      839
+     ],
+     "p": [
+      228.0,
+      -302,
+      1309.5
+     ],
+     "c": "#1d1f22",
+     "guard": true
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       40,
+       -380,
+       1050
+      ],
+      [
+       40,
+       -420,
+       1070
+      ],
+      [
+       40,
+       -420,
+       1549
+      ],
+      [
+       40,
+       -380,
+       1569
+      ]
+     ],
+     "r": 13,
+     "c": "#b9c0c7",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      228.0,
+      -270,
+      1020
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      228.0,
+      -270,
+      1320
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    },
+    {
+     "t": "box",
+     "s": [
+      384.0,
+      60,
+      50
+     ],
+     "p": [
+      228.0,
+      -270,
+      1570
+     ],
+     "c": "#dde3e8",
+     "op": 0.6
+    }
+   ]
+  },
+  {
+   "id": "flex",
+   "name": "Flex Zone drawer",
+   "group": "cooling",
+   "shape": "box",
+   "color": "steel",
+   "box": [
+    0.0,
+    -72.5,
+    563.0,
+    902.0,
+    685.0,
+    296.0
+   ],
+   "desc": "Full-width middle drawer (3.8 cu ft) with its own temperature setting, fed by a motor damper.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      902,
+      75,
+      296
+     ],
+     "p": [
+      0,
+      -338,
+      711.0
+     ],
+     "c": "#c7ccd1",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      848,
+      8,
+      262
+     ],
+     "p": [
+      0,
+      -301,
+      711.0
+     ],
+     "c": "#1d1f22",
+     "guard": true
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -300,
+       -377,
+       812
+      ],
+      [
+       -300,
+       -415,
+       822
+      ],
+      [
+       300,
+       -415,
+       822
+      ],
+      [
+       300,
+       -377,
+       812
+      ]
+     ],
+     "r": 12,
+     "c": "#b9c0c7",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      788,
+      560,
+      242
+     ],
+     "p": [
+      0,
+      -10.0,
+      701.0
+     ],
+     "c": "#dde3e8",
+     "op": 0.55
+    }
+   ]
+  },
+  {
+   "id": "freezer",
+   "name": "Freezer drawer",
+   "group": "cooling",
+   "shape": "box",
+   "color": "steel",
+   "box": [
+    0.0,
+    -117.5,
+    28.0,
+    902.0,
+    595.0,
+    517.0
+   ],
+   "desc": "Bottom freezer drawer (8.4 cu ft).",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      902,
+      75,
+      517
+     ],
+     "p": [
+      0,
+      -338,
+      286.5
+     ],
+     "c": "#c7ccd1",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      848,
+      8,
+      483
+     ],
+     "p": [
+      0,
+      -301,
+      286.5
+     ],
+     "c": "#1d1f22",
+     "guard": true
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -300,
+       -377,
+       498
+      ],
+      [
+       -300,
+       -415,
+       508
+      ],
+      [
+       300,
+       -415,
+       508
+      ],
+      [
+       300,
+       -377,
+       498
+      ]
+     ],
+     "r": 12,
+     "c": "#b9c0c7",
+     "guard": true
+    },
+    {
+     "t": "box",
+     "s": [
+      788,
+      470,
+      463
+     ],
+     "p": [
+      0,
+      -55.0,
+      276.5
+     ],
+     "c": "#dde3e8",
+     "op": 0.55
+    }
+   ]
+  },
+  {
+   "id": "panel",
+   "name": "Display panel (panel PCB)",
+   "group": "control",
+   "shape": "panel",
+   "color": "dark",
+   "box": [
+    -227.0,
+    -383.5,
+    1505.0,
+    170.0,
+    9.0,
+    110.0
+   ],
+   "desc": "Blue LED touch display on the door; shows error codes and is used for test, load and diagnostic modes.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      170,
+      6,
+      110
+     ],
+     "p": [
+      -227.0,
+      -382,
+      1560
+     ],
+     "c": "#16324f"
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      4,
+      16
+     ],
+     "p": [
+      -227.0,
+      -386,
+      1585
+     ],
+     "c": "#5dade2"
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      4,
+      16
+     ],
+     "p": [
+      -227.0,
+      -386,
+      1550
+     ],
+     "c": "#5dade2"
+    }
+   ]
+  },
+  {
+   "id": "dispenser",
+   "name": "Ice and water dispenser",
+   "group": "ice",
+   "shape": "panel",
+   "color": "dark",
+   "box": [
+    -227.0,
+    -382.5,
+    1035.0,
+    250.0,
+    55.0,
+    330.0
+   ],
+   "desc": "One-lever dispenser in the left door, with the ice route motor and dispenser panel PCB.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      250,
+      30,
+      330
+     ],
+     "p": [
+      -227.0,
+      -370,
+      1200
+     ],
+     "c": "#2b2f33"
+    },
+    {
+     "t": "box",
+     "s": [
+      160,
+      20,
+      120
+     ],
+     "p": [
+      -227.0,
+      -390,
+      1260
+     ],
+     "c": "#9aa2a9",
+     "rot": [
+      -10,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      220,
+      40,
+      20
+     ],
+     "p": [
+      -227.0,
+      -390,
+      1045
+     ],
+     "c": "#3d4248"
+    },
+    {
+     "t": "cyl",
+     "r": 8,
+     "l": 40,
+     "p": [
+      -227.0,
+      -370,
+      1320
+     ],
+     "axis": "z",
+     "c": "#9aa2a9"
+    }
+   ]
+  },
+  {
+   "id": "icemaker",
+   "name": "Ice maker and ice room",
+   "group": "ice",
+   "shape": "unit",
+   "color": "white",
+   "box": [
+    -227.0,
+    -221.0,
+    1260,
+    300.0,
+    238.0,
+    450.0
+   ],
+   "desc": "In-door ice maker with its own ice room fan, ice bucket and ice duct/pipe heaters.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Ice maker assembly",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        260,
+        110,
+        80
+       ],
+       "p": [
+        -227.0,
+        -200,
+        1600
+       ],
+       "c": "#e8e8e8"
+      },
+      {
+       "t": "box",
+       "s": [
+        240,
+        100,
+        20
+       ],
+       "p": [
+        -227.0,
+        -200,
+        1560
+       ],
+       "c": "#cfd8dc"
+      }
+     ],
+     "dir": [
+      0,
+      260,
+      220
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Ice maker sensor",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 5,
+       "l": 40,
+       "p": [
+        -117.0,
+        -160,
+        1560
+       ],
+       "axis": "x",
+       "c": "#1d1f22"
+      }
+     ],
+     "dir": [
+      200,
+      260,
+      120
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Ice room fan",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 45,
+       "l": 30,
+       "p": [
+        -327.0,
+        -160,
+        1660
+       ],
+       "axis": "y",
+       "c": "#1d1f22"
+      },
+      {
+       "t": "box",
+       "s": [
+        100,
+        30,
+        100
+       ],
+       "p": [
+        -327.0,
+        -140,
+        1660
+       ],
+       "c": "#5d646b"
+      }
+     ],
+     "dir": [
+      -220,
+      300,
+      200
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Ice bucket",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xy",
+       "pts": [
+        [
+         125.0,
+         80.0
+        ],
+        [
+         123.5,
+         87.7
+        ],
+        [
+         119.1,
+         94.1
+        ],
+        [
+         112.7,
+         98.5
+        ],
+        [
+         105.0,
+         100.0
+        ],
+        [
+         -105.0,
+         100.0
+        ],
+        [
+         -112.7,
+         98.5
+        ],
+        [
+         -119.1,
+         94.1
+        ],
+        [
+         -123.5,
+         87.7
+        ],
+        [
+         -125.0,
+         80.0
+        ],
+        [
+         -125.0,
+         -80.0
+        ],
+        [
+         -123.5,
+         -87.7
+        ],
+        [
+         -119.1,
+         -94.1
+        ],
+        [
+         -112.7,
+         -98.5
+        ],
+        [
+         -105.0,
+         -100.0
+        ],
+        [
+         105.0,
+         -100.0
+        ],
+        [
+         112.7,
+         -98.5
+        ],
+        [
+         119.1,
+         -94.1
+        ],
+        [
+         123.5,
+         -87.7
+        ],
+        [
+         125.0,
+         -80.0
+        ]
+       ],
+       "depth": 190,
+       "p": [
+        -227.0,
+        -210,
+        1440
+       ],
+       "c": "#dde3e8",
+       "op": 0.7
+      }
+     ],
+     "dir": [
+      0,
+      360,
+      -40
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Ice bucket heater",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        240,
+        4,
+        160
+       ],
+       "p": [
+        -227.0,
+        -104,
+        1440
+       ],
+       "c": "#e0b020"
+      }
+     ],
+     "dir": [
+      0,
+      520,
+      0
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Ice duct (pipe) heater",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -227.0,
+         -280,
+         1350
+        ],
+        [
+         -227.0,
+         -310,
+         1300
+        ],
+        [
+         -227.0,
+         -340,
+         1260
+        ]
+       ],
+       "r": 14,
+       "c": "#e0b020"
+      }
+     ],
+     "dir": [
+      0,
+      160,
+      -220
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "Ice route motor",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 30,
+       "l": 60,
+       "p": [
+        -107.0,
+        -230,
+        1420
+       ],
+       "axis": "x",
+       "c": "#1d1f22"
+      }
+     ],
+     "dir": [
+      260,
+      200,
+      -120
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "Ice room door",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        280,
+        10,
+        330
+       ],
+       "p": [
+        -227.0,
+        -285,
+        1470
+       ],
+       "c": "#dde3e8"
+      }
+     ],
+     "dir": [
+      0,
+      -260,
+      0
+     ]
+    }
+   ],
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      300,
+      6,
+      360
+     ],
+     "p": [
+      -227.0,
+      -294,
+      1450
+     ],
+     "c": "#dde3e8",
+     "op": 0.5
+    }
+   ]
+  },
+  {
+   "id": "water-filter",
+   "name": "Water filter",
+   "group": "ice",
+   "shape": "cylinder",
+   "axis": "x",
+   "color": "white",
+   "box": [
+    0.0,
+    -117.5,
+    898,
+    64,
+    295.0,
+    64
+   ],
+   "desc": "Slim filter between the crisper drawers.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 30,
+     "l": 260,
+     "p": [
+      0,
+      -100,
+      930
+     ],
+     "axis": "y",
+     "c": "#e8e8e8"
+    },
+    {
+     "t": "cyl",
+     "r": 32,
+     "l": 30,
+     "p": [
+      0,
+      -250,
+      930
+     ],
+     "axis": "y",
+     "c": "#2f6db3"
+    }
+   ]
+  },
+  {
+   "id": "fridge-evap",
+   "name": "Fridge evaporator and fan",
+   "group": "airflow",
+   "shape": "coil",
+   "box": [
+    0.0,
+    316.0,
+    940.0,
+    800.0,
+    112.0,
+    710.0
+   ],
+   "desc": "Fridge-side evaporator (Twin Cooling) and fridge fan behind the rear cover. Fan fault shows 22E/22C.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      700,
+      50,
+      420
+     ],
+     "p": [
+      0,
+      346,
+      1150
+     ],
+     "c": "#b9c0c7",
+     "op": 0.85
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       970.0
+      ],
+      [
+       340.0,
+       372,
+       970.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       1042.0
+      ],
+      [
+       340.0,
+       372,
+       1042.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       1114.0
+      ],
+      [
+       340.0,
+       372,
+       1114.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       1186.0
+      ],
+      [
+       340.0,
+       372,
+       1186.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       1258.0
+      ],
+      [
+       340.0,
+       372,
+       1258.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -340.0,
+       372,
+       1330.0
+      ],
+      [
+       340.0,
+       372,
+       1330.0
+      ]
+     ],
+     "r": 5,
+     "c": "#b87333"
+    },
+    {
+     "t": "cyl",
+     "r": 70,
+     "l": 30,
+     "p": [
+      0,
+      296,
+      1440
+     ],
+     "axis": "y",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      800,
+      12,
+      700
+     ],
+     "p": [
+      0,
+      266,
+      1300
+     ],
+     "c": "#eef0f2",
+     "op": 0.45,
+     "guard": true
+    }
+   ]
+  },
+  {
+   "id": "freezer-evap",
+   "name": "Freezer evaporator and fan",
+   "group": "airflow",
+   "shape": "coil",
+   "box": [
+    0.0,
+    358.0,
+    175,
+    800.0,
+    136.0,
+    440
+   ],
+   "desc": "Freezer evaporator with its fan and defrost heater. Fan fault shows 21E, usually from frost.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Freezer evaporator coil",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        700,
+        50,
+        300
+       ],
+       "p": [
+        0,
+        366,
+        380
+       ],
+       "c": "#b9c0c7",
+       "op": 0.85
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         260.0
+        ],
+        [
+         340.0,
+         392,
+         260.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         308.0
+        ],
+        [
+         340.0,
+         392,
+         308.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         356.0
+        ],
+        [
+         340.0,
+         392,
+         356.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         404.0
+        ],
+        [
+         340.0,
+         392,
+         404.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         452.0
+        ],
+        [
+         340.0,
+         392,
+         452.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340.0,
+         392,
+         500.0
+        ],
+        [
+         340.0,
+         392,
+         500.0
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      }
+     ],
+     "dir": [
+      0,
+      300,
+      0
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Freezer fan motor",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 30,
+       "l": 50,
+       "p": [
+        0,
+        341,
+        540
+       ],
+       "axis": "y",
+       "c": "#1d1f22"
+      }
+     ],
+     "dir": [
+      0,
+      -200,
+      260
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Fan blade",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 75,
+       "l": 12,
+       "p": [
+        0,
+        311,
+        540
+       ],
+       "axis": "y",
+       "c": "#7f8c8d"
+      },
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        60
+       ],
+       "p": [
+        0.0,
+        311,
+        580.0
+       ],
+       "c": "#7f8c8d",
+       "rot": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        60
+       ],
+       "p": [
+        38.0,
+        311,
+        552.4
+       ],
+       "c": "#7f8c8d",
+       "rot": [
+        0,
+        72,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        60
+       ],
+       "p": [
+        23.5,
+        311,
+        507.6
+       ],
+       "c": "#7f8c8d",
+       "rot": [
+        0,
+        144,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        60
+       ],
+       "p": [
+        -23.5,
+        311,
+        507.6
+       ],
+       "c": "#7f8c8d",
+       "rot": [
+        0,
+        216,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        8,
+        4,
+        60
+       ],
+       "p": [
+        -38.0,
+        311,
+        552.4
+       ],
+       "c": "#7f8c8d",
+       "rot": [
+        0,
+        288,
+        0
+       ]
+      }
+     ],
+     "dir": [
+      0,
+      -360,
+      260
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Freezer defrost heater",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -340,
+         376,
+         225
+        ],
+        [
+         340,
+         376,
+         225
+        ],
+        [
+         340,
+         376,
+         240
+        ],
+        [
+         -340,
+         376,
+         240
+        ]
+       ],
+       "r": 6,
+       "c": "#c0392b"
+      }
+     ],
+     "dir": [
+      0,
+      200,
+      -200
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Freezer defrost sensor",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 6,
+       "l": 40,
+       "p": [
+        300,
+        386,
+        400
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      }
+     ],
+     "dir": [
+      250,
+      200,
+      0
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Bimetal thermal protector",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        30,
+        15,
+        40
+       ],
+       "p": [
+        -300,
+        386,
+        260
+       ],
+       "c": "#7d858d"
+      }
+     ],
+     "dir": [
+      -250,
+      200,
+      -60
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "Evaporator cover",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        780,
+        10,
+        400
+       ],
+       "p": [
+        0,
+        306,
+        390
+       ],
+       "c": "#eef0f2"
+      }
+     ],
+     "dir": [
+      0,
+      -560,
+      0
+     ]
+    },
+    {
+     "ref": "8",
+     "name": "Drain pan",
+     "geo": [
+      {
+       "t": "extrude",
+       "plane": "xz",
+       "pts": [
+        [
+         -360,
+         0
+        ],
+        [
+         360,
+         0
+        ],
+        [
+         330,
+         -40
+        ],
+        [
+         -330,
+         -40
+        ]
+       ],
+       "depth": 120,
+       "p": [
+        0,
+        366,
+        215
+       ],
+       "c": "#bdc3c7"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -300
+     ]
+    }
+   ],
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      800,
+      12,
+      420
+     ],
+     "p": [
+      0,
+      296,
+      400
+     ],
+     "c": "#eef0f2",
+     "op": 0.45,
+     "guard": true
+    }
+   ]
+  },
+  {
+   "id": "damper",
+   "name": "Motor damper (Flex Zone air)",
+   "group": "airflow",
+   "shape": "unit",
+   "color": "dark",
+   "box": [
+    2.5,
+    336.0,
+    650.0,
+    205.0,
+    50.0,
+    100.0
+   ],
+   "desc": "Opens and closes cold air to the Flex Zone.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      200,
+      50,
+      100
+     ],
+     "p": [
+      0,
+      336,
+      700
+     ],
+     "c": "#e8e8e8"
+    },
+    {
+     "t": "cyl",
+     "r": 20,
+     "l": 30,
+     "p": [
+      90,
+      336,
+      700
+     ],
+     "axis": "x",
+     "c": "#1d1f22"
+    }
+   ]
+  },
+  {
+   "id": "defrost",
+   "name": "Defrost heaters and sensors",
+   "group": "defrost",
+   "shape": "unit",
+   "color": "copper",
+   "box": [
+    0.0,
+    381.5,
+    942.5,
+    660,
+    21,
+    35.0
+   ],
+   "desc": "Freezer and fridge/Flex defrost heaters with defrost sensors and a bimetal thermal protector (opens at 60 \u00b0C/140 \u00b0F, closes at 40 \u00b0C/104 \u00b0F).",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -330,
+       371,
+       950
+      ],
+      [
+       330,
+       371,
+       950
+      ],
+      [
+       330,
+       371,
+       965
+      ],
+      [
+       -330,
+       371,
+       965
+      ]
+     ],
+     "r": 5,
+     "c": "#c0392b"
+    },
+    {
+     "t": "cyl",
+     "r": 6,
+     "l": 35,
+     "p": [
+      0,
+      386,
+      960
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    }
+   ]
+  },
+  {
+   "id": "compressor",
+   "name": "Inverter compressor",
+   "group": "cooling",
+   "shape": "compressor",
+   "color": "dark",
+   "box": [
+    22.0,
+    326.0,
+    -145,
+    644,
+    220.0,
+    385.0
+   ],
+   "desc": "Reciprocating BLDC compressor NF54M7151AN/E01, R600a (70 g). Driven by the inverter PCB.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "parts": [
+    {
+     "ref": "1",
+     "name": "Compressor",
+     "pn": "NF54M7151AN/E01",
+     "geo": [
+      {
+       "t": "lathe",
+       "pts": [
+        [
+         0,
+         0
+        ],
+        [
+         85,
+         0
+        ],
+        [
+         95,
+         30
+        ],
+        [
+         95,
+         120
+        ],
+        [
+         80,
+         160
+        ],
+        [
+         0,
+         175
+        ]
+       ],
+       "p": [
+        180,
+        326,
+        30
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         180,
+         326,
+         200
+        ],
+        [
+         180,
+         386,
+         230
+        ],
+        [
+         60,
+         406,
+         230
+        ]
+       ],
+       "r": 5,
+       "c": "#b87333"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      260
+     ]
+    },
+    {
+     "ref": "2",
+     "name": "Inverter PCB",
+     "pn": "",
+     "geo": [
+      {
+       "t": "box",
+       "s": [
+        150,
+        20,
+        110
+       ],
+       "p": [
+        -330,
+        426,
+        100
+       ],
+       "c": "#2e7d32",
+       "exo": 1
+      }
+     ],
+     "dir": [
+      -200,
+      200,
+      0
+     ]
+    },
+    {
+     "ref": "3",
+     "name": "Compressor-room fan motor",
+     "pn": "",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 40,
+       "l": 50,
+       "p": [
+        -150,
+        356,
+        130
+       ],
+       "axis": "y",
+       "c": "#1d1f22",
+       "exo": 1
+      }
+     ],
+     "dir": [
+      -200,
+      0,
+      200
+     ]
+    },
+    {
+     "ref": "4",
+     "name": "Condenser",
+     "pn": "",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -280,
+         396,
+         50
+        ],
+        [
+         -280,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -250,
+         396,
+         50
+        ],
+        [
+         -250,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -220,
+         396,
+         50
+        ],
+        [
+         -220,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -190,
+         396,
+         50
+        ],
+        [
+         -190,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -160,
+         396,
+         50
+        ],
+        [
+         -160,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      },
+      {
+       "t": "tube",
+       "pts": [
+        [
+         -130,
+         396,
+         50
+        ],
+        [
+         -130,
+         396,
+         220
+        ]
+       ],
+       "r": 5,
+       "c": "#2b2f33",
+       "exo": 1
+      }
+     ],
+     "dir": [
+      -300,
+      160,
+      0
+     ]
+    },
+    {
+     "ref": "5",
+     "name": "Drier",
+     "pn": "",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 14,
+       "l": 120,
+       "p": [
+        330,
+        386,
+        180
+       ],
+       "axis": "z",
+       "c": "#b87333"
+      }
+     ],
+     "dir": [
+      200,
+      160,
+      160
+     ]
+    },
+    {
+     "ref": "6",
+     "name": "Mounting grommet",
+     "pn": "",
+     "geo": [
+      {
+       "t": "cyl",
+       "r": 16,
+       "l": 18,
+       "p": [
+        90,
+        256,
+        38
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      },
+      {
+       "t": "cyl",
+       "r": 16,
+       "l": 18,
+       "p": [
+        90,
+        396,
+        38
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      },
+      {
+       "t": "cyl",
+       "r": 16,
+       "l": 18,
+       "p": [
+        270,
+        256,
+        38
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      },
+      {
+       "t": "cyl",
+       "r": 16,
+       "l": 18,
+       "p": [
+        270,
+        396,
+        38
+       ],
+       "axis": "z",
+       "c": "#1d1f22"
+      }
+     ],
+     "dir": [
+      0,
+      0,
+      -160
+     ]
+    },
+    {
+     "ref": "7",
+     "name": "Wire harness",
+     "pn": "",
+     "geo": [
+      {
+       "t": "tube",
+       "pts": [
+        [
+         270,
+         326,
+         110
+        ],
+        [
+         320,
+         406,
+         160
+        ],
+        [
+         -300,
+         426,
+         170
+        ]
+       ],
+       "r": 4,
+       "c": "#e8e8e8"
+      }
+     ],
+     "dir": [
+      0,
+      260,
+      0
+     ]
+    }
+   ],
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      300,
+      220,
+      10
+     ],
+     "p": [
+      180,
+      326,
+      25
+     ],
+     "c": "#5d646b"
+    }
+   ]
+  },
+  {
+   "id": "condenser",
+   "name": "Condenser and compressor-room fan",
+   "group": "cooling",
+   "shape": "fan",
+   "axis": "y",
+   "box": [
+    -160.0,
+    353.5,
+    20.0,
+    240.0,
+    85.0,
+    220.0
+   ],
+   "desc": "Condenser and machine-compartment cooling fan at the bottom rear. Dust here causes warm temperatures.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -280,
+       396,
+       50
+      ],
+      [
+       -280,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -250,
+       396,
+       50
+      ],
+      [
+       -250,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -220,
+       396,
+       50
+      ],
+      [
+       -220,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -190,
+       396,
+       50
+      ],
+      [
+       -190,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -160,
+       396,
+       50
+      ],
+      [
+       -160,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -130,
+       396,
+       50
+      ],
+      [
+       -130,
+       396,
+       220
+      ]
+     ],
+     "r": 5,
+     "c": "#2b2f33"
+    },
+    {
+     "t": "cyl",
+     "r": 40,
+     "l": 50,
+     "p": [
+      -150,
+      356,
+      130
+     ],
+     "axis": "y",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 90,
+     "l": 8,
+     "p": [
+      -150,
+      326,
+      130
+     ],
+     "axis": "y",
+     "c": "#7f8c8d"
+    },
+    {
+     "t": "box",
+     "s": [
+      220,
+      10,
+      220
+     ],
+     "p": [
+      -150,
+      316,
+      130
+     ],
+     "c": "#5d646b",
+     "op": 0.5
+    }
+   ]
+  },
+  {
+   "id": "inverter",
+   "name": "Inverter PCB",
+   "group": "control",
+   "shape": "unit",
+   "color": "green",
+   "box": [
+    -330.0,
+    430.5,
+    40.0,
+    160.0,
+    29.0,
+    120.0
+   ],
+   "desc": "Drives the compressor; source of compressor current, stall and voltage errors (83E, 84C, 85E, 86E).",
+   "src": "Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      150,
+      20,
+      110
+     ],
+     "p": [
+      -330,
+      426,
+      100
+     ],
+     "c": "#2e7d32"
+    },
+    {
+     "t": "box",
+     "s": [
+      160,
+      10,
+      120
+     ],
+     "p": [
+      -330,
+      440,
+      100
+     ],
+     "c": "#5d646b"
+    }
+   ]
+  },
+  {
+   "id": "electric-box",
+   "name": "Electric box (main PCB)",
+   "group": "control",
+   "shape": "cabinet",
+   "color": "body",
+   "box": [
+    0.0,
+    381.5,
+    1455.0,
+    420.0,
+    69.0,
+    250.0
+   ],
+   "desc": "Main PCB and power supply (SMPS) that read the sensors and drive fans, heaters, valves and the damper. Position approximate.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      420,
+      60,
+      250
+     ],
+     "p": [
+      0,
+      386,
+      1580
+     ],
+     "c": "#e8e8e8"
+    },
+    {
+     "t": "box",
+     "s": [
+      380,
+      10,
+      210
+     ],
+     "p": [
+      0,
+      352,
+      1580
+     ],
+     "c": "#2e7d32"
+    }
+   ]
+  },
+  {
+   "id": "water-valve",
+   "name": "Water valve and tank",
+   "group": "ice",
+   "shape": "unit",
+   "color": "blue",
+   "box": [
+    79.0,
+    93.0,
+    45.0,
+    612.0,
+    766.0,
+    1455.0
+   ],
+   "desc": "Inlet water valve feeding the filter, water tank, dispenser and ice maker.",
+   "src": "Samsung RF28R7351 service manual (summary and contents)",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      110,
+      60,
+      70
+     ],
+     "p": [
+      330,
+      406,
+      80
+     ],
+     "c": "#e8e8e8"
+    },
+    {
+     "t": "cyl",
+     "r": 10,
+     "l": 40,
+     "p": [
+      330,
+      456,
+      80
+     ],
+     "axis": "y",
+     "c": "#2f6db3"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       330,
+       376,
+       110
+      ],
+      [
+       380,
+       326,
+       600
+      ],
+      [
+       380,
+       146,
+       1400
+      ],
+      [
+       -227.0,
+       -290,
+       1500
+      ]
+     ],
+     "r": 4,
+     "c": "#2f6db3"
+    }
+   ]
+  },
+  {
+   "id": "sensors",
+   "name": "Temperature sensors",
+   "group": "control",
+   "shape": "unit",
+   "color": "white",
+   "box": [
+    384.0,
+    33.0,
+    280.0,
+    12.0,
+    438,
+    1340.0
+   ],
+   "desc": "Thermistors for freezer, fridge, Flex Zone, defrost, ambient, ice maker and ice room. Read as a voltage at the main PCB.",
+   "src": "Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "geo": [
+    {
+     "t": "cyl",
+     "r": 6,
+     "l": 40,
+     "p": [
+      384.0,
+      246,
+      1400
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 6,
+     "l": 40,
+     "p": [
+      384.0,
+      246,
+      700
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 6,
+     "l": 40,
+     "p": [
+      384.0,
+      246,
+      300
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "cyl",
+     "r": 6,
+     "l": 40,
+     "p": [
+      384.0,
+      -180,
+      1600
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    }
+   ]
+  }
+ ],
+ "faults": [
+  {
+   "id": "21e",
+   "title": "Freezer fan error",
+   "group": "airflow",
+   "code": "21E",
+   "effect": "warn",
+   "msg": "21E",
+   "causes": [
+    "Fan blocked by frost (door left open, gasket gap)",
+    "Freezer fan motor failed"
+   ],
+   "checks": [
+    "Make sure the freezer drawer closes and the gasket seals all round",
+    "Manually defrost (unplug with doors open for a few hours) and see if it returns",
+    "Sister model: fan supply at the main PCB fan connector should be 7\u201312 V when running"
+   ],
+   "comps": [
+    "freezer-evap",
+    "freezer",
+    "fridge-doors"
+   ],
+   "io": [
+    "FAN-F"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "22e",
+   "title": "Fridge fan error",
+   "group": "airflow",
+   "code": "22E / 22C",
+   "effect": "warn",
+   "msg": "22E",
+   "causes": [
+    "Fridge door left open long enough to frost the fan",
+    "Fridge fan motor failed"
+   ],
+   "checks": [
+    "Unplug, leave the doors open a few hours to thaw, then restart",
+    "If it returns: fridge fan supply 7\u201312 V when running (sister model)",
+    "Check the fridge door gaskets"
+   ],
+   "comps": [
+    "fridge-evap",
+    "fridge-doors"
+   ],
+   "io": [
+    "FAN-R"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "5e",
+   "title": "Defrost sensor error",
+   "group": "defrost",
+   "code": "5E",
+   "effect": "warn",
+   "msg": "5E",
+   "causes": [
+    "Defrost sensor open or shorted, or its connector loose"
+   ],
+   "checks": [
+    "Sister model: sensor reads open above 100 k\u03a9, shorted below 2 k\u03a9",
+    "Check the sensor voltage at the main PCB sensor connector (about 1.0\u20134.5 V when good)"
+   ],
+   "comps": [
+    "defrost",
+    "sensors"
+   ],
+   "io": [
+    "S-RD",
+    "S-FD"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": "Unplug the refrigerator before measuring resistance; the inverter and power supply carry line voltage."
+  },
+  {
+   "id": "8e",
+   "title": "Ice maker (freezer) sensor error",
+   "group": "ice",
+   "code": "8E",
+   "effect": "warn",
+   "msg": "8E",
+   "causes": [
+    "Ice maker sensor open or shorted"
+   ],
+   "checks": [
+    "Check the sensor and its wiring; replace the sensor or ice maker as needed"
+   ],
+   "comps": [
+    "icemaker",
+    "sensors"
+   ],
+   "io": [
+    "S-IM"
+   ],
+   "src": "Samsung support: refrigerator error codes",
+   "safety": ""
+  },
+  {
+   "id": "14e",
+   "title": "Ice maker sensor error",
+   "group": "ice",
+   "code": "14E",
+   "effect": "warn",
+   "msg": "14E",
+   "causes": [
+    "Fridge ice maker sensor fault or wiring"
+   ],
+   "checks": [
+    "Sister model: ice maker sensor voltage about 1.0\u20134.5 V at the main PCB",
+    "Replace the ice maker sensor"
+   ],
+   "comps": [
+    "icemaker",
+    "sensors"
+   ],
+   "io": [
+    "S-IM"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "33e",
+   "title": "Ice pipe heater error",
+   "group": "ice",
+   "code": "33E",
+   "effect": "warn",
+   "msg": "33E",
+   "causes": [
+    "Ice duct (pipe) heater open"
+   ],
+   "checks": [
+    "Sister model: ice duct heater about 135 \u03a9 \u00b17% (unplugged)",
+    "Check the heater connector"
+   ],
+   "comps": [
+    "icemaker",
+    "dispenser"
+   ],
+   "io": [
+    "HTR-ID"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": "Unplug the refrigerator before measuring resistance; the inverter and power supply carry line voltage."
+  },
+  {
+   "id": "39e",
+   "title": "Ice maker function error",
+   "group": "ice",
+   "code": "39E / 39C",
+   "effect": "warn",
+   "msg": "39E",
+   "causes": [
+    "Ice maker jammed (ice clumps) or its motor/switch failed",
+    "Water not reaching the ice maker"
+   ],
+   "checks": [
+    "Clear any ice jam and reseat the ice bucket",
+    "Check water supply and the filter",
+    "Sister model guidance: replace the ice maker, reconnect power and recheck"
+   ],
+   "comps": [
+    "icemaker",
+    "water-valve",
+    "water-filter"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "40e",
+   "title": "Ice room fan error",
+   "group": "ice",
+   "code": "40E / 40C",
+   "effect": "warn",
+   "msg": "40E",
+   "causes": [
+    "Ice room fan frosted or failed",
+    "Ice room door not closing"
+   ],
+   "checks": [
+    "Check the ice room door seal",
+    "Sister model: ice room fan supply 7\u201312 V when running"
+   ],
+   "comps": [
+    "icemaker"
+   ],
+   "io": [
+    "FAN-IR"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "76c",
+   "title": "Water in the Autofill compartment",
+   "group": "ice",
+   "code": "76C",
+   "effect": "info",
+   "msg": "76C",
+   "causes": [
+    "Water leaking into the Autofill pitcher compartment"
+   ],
+   "checks": [
+    "Follow Samsung's leak guide: check the Autofill pitcher seating and lines"
+   ],
+   "comps": [
+    "water-valve",
+    "fridge-doors"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes",
+   "safety": ""
+  },
+  {
+   "id": "83e",
+   "title": "Compressor abnormal current",
+   "group": "cooling",
+   "code": "83E",
+   "effect": "stop",
+   "msg": "83E",
+   "causes": [
+    "Compressor wiring loose",
+    "Inverter PCB fault (solder, shorted part)",
+    "Compressor or sealed-system fault"
+   ],
+   "checks": [
+    "Power off at the breaker for 60 seconds, restore, and see if it returns",
+    "Check the compressor wire connections at the inverter",
+    "Sister model: check the inverter's DC 15 V output (fault if under 13.5 V)"
+   ],
+   "comps": [
+    "compressor",
+    "inverter"
+   ],
+   "io": [
+    "COMP"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": "Unplug the refrigerator before measuring resistance; the inverter and power supply carry line voltage."
+  },
+  {
+   "id": "84c",
+   "title": "Compressor lock (stall)",
+   "group": "cooling",
+   "code": "84C",
+   "effect": "stop",
+   "msg": "84C",
+   "causes": [
+    "Compressor mechanically locked or stalling",
+    "Low input voltage",
+    "Inverter PCB fault"
+   ],
+   "checks": [
+    "Check the outlet voltage under load",
+    "Reset by removing power for 60 seconds",
+    "If it repeats, the compressor or inverter needs a technician"
+   ],
+   "comps": [
+    "compressor",
+    "inverter"
+   ],
+   "io": [
+    "COMP"
+   ],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": "Unplug the refrigerator before measuring resistance; the inverter and power supply carry line voltage."
+  },
+  {
+   "id": "85e",
+   "title": "Compressor low voltage (brown-out)",
+   "group": "control",
+   "code": "85E",
+   "effect": "warn",
+   "msg": "85E",
+   "causes": [
+    "Supply voltage dropped (sister model trips at about 106 VAC or lower)",
+    "Extension cord or shared circuit"
+   ],
+   "checks": [
+    "Measure outlet voltage while the compressor starts",
+    "Plug directly into a dedicated outlet",
+    "Reset by removing power for 60 seconds"
+   ],
+   "comps": [
+    "inverter"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  },
+  {
+   "id": "86e",
+   "title": "Compressor over-voltage (surge)",
+   "group": "control",
+   "code": "86E",
+   "effect": "warn",
+   "msg": "86E",
+   "causes": [
+    "Voltage surge on the supply"
+   ],
+   "checks": [
+    "Reset by removing power for 60 seconds",
+    "If frequent, have the circuit checked"
+   ],
+   "comps": [
+    "inverter"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes",
+   "safety": ""
+  },
+  {
+   "id": "88-88",
+   "title": "Communication error at start-up",
+   "group": "control",
+   "code": "88 88",
+   "effect": "warn",
+   "msg": "88 88",
+   "causes": [
+    "Power interrupted while the controls were booting"
+   ],
+   "checks": [
+    "Remove power for 60 seconds and restore",
+    "If it returns, check the main-to-panel harness"
+   ],
+   "comps": [
+    "electric-box",
+    "panel"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes",
+   "safety": ""
+  },
+  {
+   "id": "pc-er",
+   "title": "Panel communication error",
+   "group": "control",
+   "code": "PC ER / PC CH",
+   "effect": "warn",
+   "msg": "PC ER",
+   "causes": [
+    "Loose harness between the door panel and main PCB (connector above the door hinge)"
+   ],
+   "checks": [
+    "Power off, disconnect and reconnect the harness above the door, restore power",
+    "Sister model: if the cable is good, the main or panel PCB is replaced"
+   ],
+   "comps": [
+    "panel",
+    "electric-box",
+    "fridge-doors"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes; Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": "Unplug the refrigerator before measuring resistance; the inverter and power supply carry line voltage."
+  },
+  {
+   "id": "demo",
+   "title": "Display shows OF OF / not cooling (demo mode)",
+   "group": "control",
+   "code": "OF OF",
+   "effect": "info",
+   "msg": "OF OF",
+   "causes": [
+    "Cooling Off / Demo / Shop mode turned on"
+   ],
+   "checks": [
+    "Hold the top two left-side buttons for 5\u20138 seconds until a chime sounds",
+    "Some models need the top right button too",
+    "Check it doesn't come back"
+   ],
+   "comps": [
+    "panel"
+   ],
+   "io": [],
+   "src": "Samsung support: refrigerator error codes",
+   "safety": ""
+  },
+  {
+   "id": "warm",
+   "title": "Fridge or freezer too warm",
+   "group": "cooling",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Temperature set too high, or Energy Saver on",
+    "Unit in sun or near heat, or too little clearance",
+    "Condenser dusty or compressor-room fan stopped",
+    "Fan frosted (see 21E/22E), defrost fault",
+    "Door gasket leak"
+   ],
+   "checks": [
+    "Check the set temperatures and Energy Saver",
+    "Check clearance: 2 in at top and rear, 3\u00be in at the sides",
+    "Clean the condenser area and check the fan runs",
+    "Look for frost on the rear covers (defrost problem)"
+   ],
+   "comps": [
+    "condenser",
+    "compressor",
+    "fridge-evap",
+    "freezer-evap",
+    "fridge-doors"
+   ],
+   "io": [],
+   "src": "Samsung RF28R7351SR user manual; Samsung RF28R7351 service manual (summary and contents)",
+   "safety": ""
+  },
+  {
+   "id": "over-cool",
+   "title": "Fridge freezing food",
+   "group": "cooling",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Temperature set too low",
+    "Food blocking the vents",
+    "Damper stuck open (Flex Zone)"
+   ],
+   "checks": [
+    "Raise the setting",
+    "Keep food away from the vents",
+    "Check the Flex Zone temperature setting"
+   ],
+   "comps": [
+    "damper",
+    "fridge-evap",
+    "flex"
+   ],
+   "io": [],
+   "src": "Samsung RF28R7351SR user manual",
+   "safety": ""
+  },
+  {
+   "id": "no-power",
+   "title": "Refrigerator not running at all",
+   "group": "control",
+   "code": "",
+   "effect": "stop",
+   "msg": "",
+   "causes": [
+    "Power cord loose or breaker tripped",
+    "Main PCB or SMPS fault"
+   ],
+   "checks": [
+    "Check the plug and breaker",
+    "Check for any display on the panel"
+   ],
+   "comps": [
+    "electric-box"
+   ],
+   "io": [],
+   "src": "Samsung RF28R7351SR user manual",
+   "safety": ""
+  },
+  {
+   "id": "no-ice",
+   "title": "No ice or slow ice",
+   "group": "ice",
+   "code": "",
+   "effect": "info",
+   "msg": "",
+   "causes": [
+    "Ice maker turned off",
+    "Freezer set too warm",
+    "Water tank or filter frozen or blocked",
+    "Ice clumps jamming the bucket"
+   ],
+   "checks": [
+    "Wait 12 hours after emptying the bucket",
+    "Check the Ice Maker Off icon and freezer setting",
+    "Check the water supply and filter"
+   ],
+   "comps": [
+    "icemaker",
+    "water-filter",
+    "water-valve"
+   ],
+   "io": [],
+   "src": "Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)",
+   "safety": ""
+  }
+ ],
+ "io": [
+  {
+   "tag": "S-F",
+   "type": "AI",
+   "desc": "Freezer sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 1\u20133 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-R",
+   "type": "AI",
+   "desc": "Fridge sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 1\u20135 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-FD",
+   "type": "AI",
+   "desc": "Freezer defrost sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 1\u20134 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-RD",
+   "type": "AI",
+   "desc": "Fridge defrost sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 1\u20136 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-AMB",
+   "type": "AI",
+   "desc": "Ambient sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 1\u20132 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-CV",
+   "type": "AI",
+   "desc": "Flex Zone (convertible) sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 11\u201312 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-IM",
+   "type": "AI",
+   "desc": "Ice maker sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN90 3\u20138 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "S-IR",
+   "type": "AI",
+   "desc": "Ice room sensor (thermistor; good reading about 1.0\u20134.5 V)",
+   "device": "Main PCB",
+   "addr": "CN30 10\u201311 (sister model)",
+   "loc": "Temperature sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "FAN-F",
+   "type": "DO",
+   "desc": "Freezer fan (7\u201312 V when running)",
+   "device": "Main PCB",
+   "addr": "CN74 1\u20134 (sister model)",
+   "loc": "Freezer evaporator and fan",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "FAN-R",
+   "type": "DO",
+   "desc": "Fridge fan (7\u201312 V)",
+   "device": "Main PCB",
+   "addr": "CN74 1\u20133 (sister model)",
+   "loc": "Fridge evaporator and fan",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "FAN-C",
+   "type": "DO",
+   "desc": "Compressor-room fan (7\u201312 V)",
+   "device": "Main PCB",
+   "addr": "CN74 1\u20136 (sister model)",
+   "loc": "Condenser and compressor-room fan",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "FAN-CV",
+   "type": "DO",
+   "desc": "Flex Zone fan (7\u201312 V)",
+   "device": "Main PCB",
+   "addr": "CN74 1\u20135 (sister model)",
+   "loc": "Motor damper (Flex Zone air)",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "FAN-IR",
+   "type": "DO",
+   "desc": "Ice room fan (7\u201312 V)",
+   "device": "Main PCB",
+   "addr": "CN52 1\u20136 (sister model)",
+   "loc": "Ice maker and ice room",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "HTR-F",
+   "type": "DO",
+   "desc": "Freezer defrost heater (about 63 \u03a9 \u00b17%, model-dependent)",
+   "device": "Main PCB",
+   "addr": "CN70 (sister model)",
+   "loc": "Defrost heaters and sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "HTR-CV",
+   "type": "DO",
+   "desc": "Flex Zone defrost heater (about 63 \u03a9 \u00b17%)",
+   "device": "Main PCB",
+   "addr": "CN70 (sister model)",
+   "loc": "Defrost heaters and sensors",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "HTR-ID",
+   "type": "DO",
+   "desc": "Ice duct heater (about 135 \u03a9 \u00b17%)",
+   "device": "Main PCB",
+   "addr": "CN51 4\u20136 (sister model)",
+   "loc": "Ice maker and ice room",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "HTR-IB",
+   "type": "DO",
+   "desc": "Ice bucket heater (about 135 \u03a9 \u00b17%)",
+   "device": "Main PCB",
+   "addr": "CN51 4\u20137 (sister model)",
+   "loc": "Ice maker and ice room",
+   "sheet": "sister TS"
+  },
+  {
+   "tag": "COMP",
+   "type": "DO",
+   "desc": "Compressor run command to inverter",
+   "device": "Main PCB",
+   "addr": "inverter link (sister model)",
+   "loc": "Inverter PCB",
+   "sheet": "sister TS"
+  }
+ ],
+ "sequence": [
+  {
+   "id": "power",
+   "name": "Power-up self-check",
+   "desc": "After plugging in or an outage, all icons flash while the controls run a self-diagnostic, then normal display returns.",
+   "ends": "Display shows set temperatures",
+   "inputs": [
+    "S-AMB"
+   ],
+   "outputs": [],
+   "comps": [
+    "electric-box",
+    "panel"
+   ]
+  },
+  {
+   "id": "cool",
+   "name": "Cooling",
+   "desc": "Main PCB reads the cabinet sensors and runs the inverter compressor and fans at the speed needed.",
+   "ends": "Cabinet temperatures reach setpoint",
+   "inputs": [
+    "S-F",
+    "S-R",
+    "S-CV",
+    "S-AMB"
+   ],
+   "outputs": [
+    "COMP",
+    "FAN-F",
+    "FAN-R",
+    "FAN-C"
+   ],
+   "comps": [
+    "compressor",
+    "condenser",
+    "fridge-evap",
+    "freezer-evap",
+    "inverter"
+   ]
+  },
+  {
+   "id": "flex",
+   "name": "Flex Zone control",
+   "desc": "The motor damper and Flex fan meter cold air into the Flex Zone drawer to hold its selected mode.",
+   "ends": "Flex Zone at its setting",
+   "inputs": [
+    "S-CV"
+   ],
+   "outputs": [
+    "FAN-CV"
+   ],
+   "comps": [
+    "damper",
+    "flex"
+   ]
+  },
+  {
+   "id": "defrost",
+   "name": "Defrost",
+   "desc": "Automatic defrost: freezer every 12\u201323 h, fridge every 6\u201311 h. Heaters run until the defrost sensor ends the cycle; a bimetal protector cuts out at 60 \u00b0C as a backup.",
+   "ends": "Defrost sensor reaches its end temperature",
+   "inputs": [
+    "S-FD",
+    "S-RD"
+   ],
+   "outputs": [
+    "HTR-F",
+    "HTR-CV"
+   ],
+   "comps": [
+    "defrost",
+    "freezer-evap",
+    "fridge-evap"
+   ]
+  },
+  {
+   "id": "ice",
+   "name": "Ice making",
+   "desc": "The ice maker fills, freezes with the ice room fan, and harvests into the bucket; heaters keep the duct and bucket from freezing up.",
+   "ends": "Bucket full",
+   "inputs": [
+    "S-IM",
+    "S-IR"
+   ],
+   "outputs": [
+    "FAN-IR",
+    "HTR-ID",
+    "HTR-IB"
+   ],
+   "comps": [
+    "icemaker",
+    "water-valve"
+   ]
+  },
+  {
+   "id": "dispense",
+   "name": "Dispensing",
+   "desc": "Pressing the lever opens the water valve or runs the ice route motor.",
+   "ends": "Lever released",
+   "inputs": [],
+   "outputs": [],
+   "comps": [
+    "dispenser",
+    "water-valve",
+    "water-filter"
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "id": "install",
+   "name": "Installation checks",
+   "why": "Poor clearance and leveling cause warm temperatures and door seal problems.",
+   "steps": [
+    "Level, hard floor rated for 660 lb",
+    "Clearance: at least 2 in at top and rear, 3\u00be in at the sides",
+    "Keep away from direct sun and heat sources"
+   ],
+   "comps": [
+    "cabinet",
+    "condenser"
+   ],
+   "src": "Samsung RF28R7351 service manual (summary and contents); Samsung RF28R7351SR user manual"
+  },
+  {
+   "id": "condenser-clean",
+   "name": "Clean the machine compartment",
+   "why": "Dust on the condenser and fan makes the compressor work harder.",
+   "steps": [
+    "Unplug the unit",
+    "Remove the rear lower cover and vacuum the condenser and fan",
+    "Check the compressor-room fan spins freely"
+   ],
+   "comps": [
+    "condenser",
+    "compressor"
+   ],
+   "src": "industry practice"
+  },
+  {
+   "id": "gaskets",
+   "name": "Door gasket check",
+   "why": "Leaking gaskets frost the fans (21E/22E) and warm the cabinet.",
+   "steps": [
+    "Close each door on a strip of paper; it should hold firmly all round",
+    "Clean gaskets with mild soap; replace if torn"
+   ],
+   "comps": [
+    "fridge-doors",
+    "freezer",
+    "flex"
+   ],
+   "src": "Samsung support: refrigerator error codes"
+  },
+  {
+   "id": "filter",
+   "name": "Water filter replacement",
+   "why": "An old filter slows water and ice.",
+   "steps": [
+    "Replace the filter at the interval in the user manual, or when the filter indicator asks",
+    "Flush water through the dispenser after replacing"
+   ],
+   "comps": [
+    "water-filter"
+   ],
+   "src": "Samsung RF28R7351SR user manual"
+  },
+  {
+   "id": "diag",
+   "name": "Read stored error codes (sister-model button combos)",
+   "why": "Shows codes that come and go.",
+   "steps": [
+    "Hold Freezer + Fridge for 6 s until the screen blinks; keep holding until errors show",
+    "Load mode: hold Freezer + Fridge + Flex Zone for 6 s to see which loads are on",
+    "Test mode: hold Freezer + Flex Zone for 6 s, then step through forced modes with Flex Zone; FD forces defrost",
+    "Confirm the button combinations on this model's tech sheet (inside the unit) before relying on them"
+   ],
+   "comps": [
+    "panel",
+    "electric-box"
+   ],
+   "src": "Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model \u2014 verify on this model's tech sheet)"
+  },
+  {
+   "id": "reset",
+   "name": "Power reset",
+   "why": "Clears voltage and communication codes.",
+   "steps": [
+    "Unplug or switch off the breaker for 60 seconds, then restore",
+    "Don't unplug just to clear other codes: it can hide the cause"
+   ],
+   "comps": [
+    "electric-box"
+   ],
+   "src": "Samsung support: refrigerator error codes"
+  }
+ ],
+ "reference": [
+  {
+   "id": "specs",
+   "name": "Specifications",
+   "intro": "From the service manual summary.",
+   "rows": [
+    [
+     "Capacity",
+     "27.93 cu ft: fridge 15.71, freezer 8.42, Flex Zone 3.80"
+    ],
+    [
+     "Cooling",
+     "Twin Cooling with Surround Multi Flow"
+    ],
+    [
+     "Refrigerant",
+     "R600a, 70 g (2.46 oz)"
+    ],
+    [
+     "Compressor",
+     "Reciprocating BLDC (inverter), NF54M7151AN/E01"
+    ],
+    [
+     "Power",
+     "115 V / 60 Hz (North America)"
+    ],
+    [
+     "Defrost",
+     "Automatic: freezer 12\u201323 h, fridge 6\u201311 h"
+    ],
+    [
+     "Defrost protector",
+     "Bimetal: off at 60 \u00b0C / 140 \u00b0F, on at 40 \u00b0C / 104 \u00b0F"
+    ],
+    [
+     "Size",
+     "35\u00be in W \u00d7 36\u00bd in D (with handles) \u00d7 70 in H"
+    ]
+   ],
+   "notes": [
+    "R600a is flammable: sealed-system work needs a technician certified for hydrocarbon refrigerants."
+   ]
+  },
+  {
+   "id": "checks",
+   "name": "Sensor and load check values",
+   "intro": "From the sister model's troubleshooting manual; confirm on this model's tech sheet.",
+   "rows": [
+    [
+     "Sensor good",
+     "About 1.0\u20134.5 V at the main PCB sensor connector"
+    ],
+    [
+     "Sensor open / shorted",
+     "Above 100 k\u03a9 / below 2 k\u03a9"
+    ],
+    [
+     "Fan running",
+     "7\u201312 V at the fan connector"
+    ],
+    [
+     "Freezer / Flex defrost heater",
+     "About 63 \u03a9 \u00b17% (varies with supply voltage)"
+    ],
+    [
+     "Ice duct, ice bucket, door heaters",
+     "About 135 \u03a9 \u00b17%"
+    ],
+    [
+     "Low-voltage trip (85E)",
+     "About 106 VAC"
+    ],
+    [
+     "Inverter DC output",
+     "15 V nominal; fault if under 13.5 V"
+    ]
+   ],
+   "notes": [
+    "Measure DC voltages to the PCB's GND point, not the chassis."
+   ],
+   "io": [
+    "S-F",
+    "S-R",
+    "FAN-F",
+    "FAN-R",
+    "HTR-F"
+   ]
+  },
+  {
+   "id": "codes",
+   "name": "Error code quick list",
+   "intro": "From Samsung's support page.",
+   "rows": [
+    [
+     "5E",
+     "Defrost sensor"
+    ],
+    [
+     "8E, 14E",
+     "Ice maker sensors"
+    ],
+    [
+     "21E",
+     "Freezer fan"
+    ],
+    [
+     "22E / 22C",
+     "Fridge fan"
+    ],
+    [
+     "33E",
+     "Ice pipe heater"
+    ],
+    [
+     "39E / 39C",
+     "Ice maker function"
+    ],
+    [
+     "40E / 40C",
+     "Ice room fan"
+    ],
+    [
+     "83E / 84C",
+     "Compressor current / lock"
+    ],
+    [
+     "85E / 86E",
+     "Low / high voltage"
+    ],
+    [
+     "88 88, PC ER",
+     "Communication"
+    ],
+    [
+     "OF OF",
+     "Demo (cooling off) mode"
+    ]
+   ],
+   "notes": [
+    "Request service for any code not listed."
+   ]
+  }
+ ],
+ "cabinets": {
+  "electric-box": {
+   "w": 420,
+   "h": 300,
+   "devices": [
+    {
+     "tag": "Main PCB",
+     "kind": "plc",
+     "func": "Reads sensors, runs fans, heaters, damper, valves and the compressor command",
+     "io": [
+      "S-F",
+      "S-R",
+      "S-AMB"
+     ]
+    },
+    {
+     "tag": "SMPS",
+     "kind": "psu",
+     "func": "Switching power supply for the control boards (line voltage present)"
+    },
+    {
+     "tag": "CN30",
+     "kind": "connector",
+     "func": "Cabinet temperature sensors (sister-model pinout)",
+     "io": [
+      "S-F",
+      "S-R",
+      "S-FD",
+      "S-RD",
+      "S-AMB",
+      "S-CV",
+      "S-IR"
+     ]
+    },
+    {
+     "tag": "CN74",
+     "kind": "connector",
+     "func": "Freezer, fridge, compressor-room and Flex fans",
+     "io": [
+      "FAN-F",
+      "FAN-R",
+      "FAN-C",
+      "FAN-CV"
+     ]
+    },
+    {
+     "tag": "CN70",
+     "kind": "connector",
+     "func": "Defrost heaters",
+     "io": [
+      "HTR-F",
+      "HTR-CV"
+     ]
+    },
+    {
+     "tag": "CN51",
+     "kind": "connector",
+     "func": "Ice duct, ice bucket and door heaters",
+     "io": [
+      "HTR-ID",
+      "HTR-IB"
+     ]
+    },
+    {
+     "tag": "CN52",
+     "kind": "connector",
+     "func": "Ice room fan",
+     "io": [
+      "FAN-IR"
+     ]
+    },
+    {
+     "tag": "CN90",
+     "kind": "connector",
+     "func": "Ice maker sensor and motor",
+     "io": [
+      "S-IM"
+     ]
+    },
+    {
+     "tag": "Inverter link",
+     "kind": "connector",
+     "func": "Communication and run command to the inverter PCB (44 on sister model)",
+     "io": [
+      "COMP"
+     ]
+    },
+    {
+     "tag": "Panel link",
+     "kind": "connector",
+     "func": "Harness to the door display (PC ER when loose)"
+    }
+   ]
+  }
+ },
+ "defects": [
+  {
+   "id": "ice-clumps",
+   "name": "Ice clumps or ice stuck in the bucket",
+   "cat": "Ice",
+   "process": "Refrigeration (appliance)",
+   "material": "",
+   "looks": "Cubes fused together; dispenser won't push ice.",
+   "isolate": [
+    "Check whether ice is used regularly",
+    "Check the ice bucket heater"
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "Ice not used for long periods",
+     "fix": "Empty the bucket periodically"
+    },
+    {
+     "area": "machine",
+     "cause": "Ice bucket or duct heater failed",
+     "fix": "Check heater resistance (about 135 \u03a9 on the sister model)"
+    },
+    {
+     "area": "environment",
+     "cause": "Door opened often in humid conditions",
+     "fix": "Reduce door openings"
+    }
+   ],
+   "params": [
+    "Freezer setting"
+   ],
+   "comps": [
+    "icemaker",
+    "dispenser"
+   ],
+   "src": "industry practice"
+  },
+  {
+   "id": "slow-water",
+   "name": "Slow or no water from dispenser",
+   "cat": "Water",
+   "process": "Refrigeration (appliance)",
+   "material": "",
+   "looks": "Dispenser trickles or stops.",
+   "isolate": [
+    "Check flow with the filter removed (bypass if supported)"
+   ],
+   "causes": [
+    {
+     "area": "machine",
+     "cause": "Clogged water filter",
+     "fix": "Replace the filter"
+    },
+    {
+     "area": "machine",
+     "cause": "Frozen water tank or line",
+     "fix": "Raise the fridge temperature slightly; let it thaw"
+    },
+    {
+     "area": "environment",
+     "cause": "Low house water pressure",
+     "fix": "Check supply pressure and the saddle valve"
+    }
+   ],
+   "params": [
+    "Fridge temperature"
+   ],
+   "comps": [
+    "water-filter",
+    "water-valve",
+    "dispenser"
+   ],
+   "src": "Samsung troubleshooting guidance"
+  },
+  {
+   "id": "frost-drawer",
+   "name": "Frost inside the freezer drawer",
+   "cat": "Performance",
+   "process": "Refrigeration (appliance)",
+   "material": "",
+   "looks": "Frost on food and drawer walls.",
+   "isolate": [
+    "Check the drawer closes fully and the gasket seals"
+   ],
+   "causes": [
+    {
+     "area": "method",
+     "cause": "Drawer left open or blocked by food",
+     "fix": "Rearrange contents so it closes"
+    },
+    {
+     "area": "machine",
+     "cause": "Gasket torn or dirty",
+     "fix": "Clean or replace the gasket"
+    },
+    {
+     "area": "machine",
+     "cause": "Defrost not working",
+     "fix": "Check defrost heater and sensor"
+    }
+   ],
+   "params": [],
+   "comps": [
+    "freezer",
+    "defrost"
+   ],
+   "src": "industry practice"
+  }
+ ],
+ "sources": [
+  {
+   "name": "Samsung support: refrigerator error codes",
+   "kind": "other"
+  },
+  {
+   "name": "Samsung RF28R7351 service manual (iFixit; summary and contents)",
+   "kind": "manual"
+  },
+  {
+   "name": "Samsung RF28K9380/RF22K9381 troubleshooting manual (sister model, ManualMachine)",
+   "kind": "manual"
+  },
+  {
+   "name": "Samsung RF28R7351SR user manual (ManualsLib)",
+   "kind": "manual"
+  },
+  {
+   "name": "Samsung RF28R7351SR dimensions and capacities (ajmadison.com)",
+   "kind": "other"
+  }
+ ]
+}
