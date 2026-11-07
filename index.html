@@ -10,9 +10,9 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Troubleshooter">
+<meta name="apple-mobile-web-app-title" content="ROOT /IO">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>The Troubleshooter</title>
+<title>ROOT /IO</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
 @font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:500;font-display:swap;src:url(barlow-semi-condensed-latin-500-normal.woff2) format("woff2")}
@@ -198,7 +198,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
     <div class="rail-head">
       <div class="idrow">
         <div>
-          <div class="eyebrow" id="mEyebrow">The Troubleshooter</div>
+          <div class="eyebrow" id="mEyebrow">ROOT /IO</div>
           <h1 id="mName">Machine</h1>
         </div>
         <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
@@ -1244,10 +1244,10 @@ window.addEventListener('hashchange',()=>{const k=location.hash.slice(1); if(/^x
 function applyProfile(raw,keepView){
   P=normalize(raw); index();
   stageEl('mName').textContent=P.meta.name||'Machine';
-  stageEl('mEyebrow').textContent=[P.meta.maker,P.meta.model,P.meta.serial?'S/N '+P.meta.serial:''].filter(Boolean).join(' · ')||'The Troubleshooter';
+  stageEl('mEyebrow').textContent=[P.meta.maker,P.meta.model,P.meta.serial?'S/N '+P.meta.serial:''].filter(Boolean).join(' · ')||'ROOT /IO';
   stageEl('exampleFlag').hidden=!P.example;
   stageEl('tb').innerHTML=esc([P.meta.functions.join(', '),P.meta.materials.length?'Materials: '+P.meta.materials.join(', '):''].filter(Boolean).join(' · ')).toUpperCase();
-  document.title='The Troubleshooter'+(P.example?'':' · '+P.meta.name);
+  document.title='ROOT /IO'+(P.example?'':' · '+P.meta.name);
   if(exMode) exitEx(); buildModel();
   const k=keepView&&cur&&byKey[cur]?cur:null;
   syncTabs();
@@ -1856,7 +1856,7 @@ try{const ls=localStorage.getItem('mtb-profile'); if(ls) applyProfile(JSON.parse
   var deferred=null;
   window.addEventListener('beforeinstallprompt',function(e){e.preventDefault(); deferred=e; btn.hidden=false;});
   btn.addEventListener('click',function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.then(function(){deferred=null; btn.hidden=true;}); });
-  window.addEventListener('appinstalled',function(){btn.hidden=true; toast('The Troubleshooter is installed');});
+  window.addEventListener('appinstalled',function(){btn.hidden=true; toast('ROOT /IO is installed');});
   function toast(t){var el=document.getElementById('appToast'); el.textContent=t; el.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(function(){el.hidden=true;},4000);}
   window.addEventListener('offline',function(){toast('Offline: showing the saved copy');});
   if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){

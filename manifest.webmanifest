@@ -1,29 +1,29 @@
 {
- "name": "The Troubleshooter",
- "short_name": "Troubleshooter",
- "description": "Machine troubleshooting: 3D model, faults, I/O, sequence, exploded views, cabinet layouts and product defects.",
- "start_url": "./",
- "scope": "./",
- "display": "standalone",
- "orientation": "any",
- "background_color": "#11151a",
- "theme_color": "#1f2a36",
- "icons": [
-  {
-   "src": "icon-192.png",
-   "sizes": "192x192",
-   "type": "image/png"
-  },
-  {
-   "src": "icon-512.png",
-   "sizes": "512x512",
-   "type": "image/png"
-  },
-  {
-   "src": "maskable-512.png",
-   "sizes": "512x512",
-   "type": "image/png",
-   "purpose": "maskable"
-  }
- ]
+  "name": "ROOT /IO",
+  "short_name": "ROOT IO",
+  "description": "ROOT /IO — Industrial Diagnostic Intelligence. Machine troubleshooting, 3D models, faults, I/O, sequences and product defects.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#11151a",
+  "theme_color": "#1f2a36",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
