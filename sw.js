@@ -1,5 +1,5 @@
 /* The Troubleshooter: offline support. Bump VERSION (or upload any changed file) to roll out an update. */
-const VERSION='tts-flat-08057a58e8';
+const VERSION='tts-flat-af58a02433';
 const CORE=[
  "./",
  "OrbitControls.js",
