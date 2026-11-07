@@ -1,5 +1,5 @@
 /* ROOT /IO: offline support. Bump VERSION (or upload any changed file) to roll out an update. */
-const VERSION='rootio-brand-v1';
+const VERSION='rootio-header-v2';
 const CORE=[
  "./",
  "OrbitControls.js",
@@ -16,6 +16,7 @@ const CORE=[
  "icon-192.png",
  "icon-512.png",
  "index.html",
+ "rootio-header.png",
  "manifest.webmanifest",
  "maskable-512.png",
  "pdf.min.js",

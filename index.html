@@ -47,6 +47,11 @@ body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14
 .rail-head{display:flex;flex-direction:column;gap:12px;padding-block:18px 12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;border-bottom:1px solid var(--line)}
 .idrow{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
 .idrow>div{min-width:0}
+.brand-header{display:block;width:min(100%,220px);height:auto;object-fit:contain;min-width:0;align-self:center}
+.idrow{align-items:center}
+.idrow .setupbtn{font-size:11px;padding:6px 7px}
+.machine-heading{min-width:0}
+
 .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);overflow-wrap:anywhere}
 h1{font-family:var(--f-display);font-weight:700;font-size:28px;line-height:1;margin:4px 0 0;letter-spacing:.01em;text-wrap:balance}
 .setupbtn{flex:none;font:600 12px var(--f-body);color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:4px;padding:6px 9px;cursor:pointer;white-space:nowrap}
@@ -197,11 +202,12 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
   <aside class="rail">
     <div class="rail-head">
       <div class="idrow">
-        <div>
-          <div class="eyebrow" id="mEyebrow">ROOT /IO</div>
-          <h1 id="mName">Machine</h1>
-        </div>
+        <img class="brand-header" src="rootio-header.png" alt="ROOT/IO — Industrial Diagnostic Intelligence" width="1400" height="350">
         <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
+      </div>
+      <div class="machine-heading">
+        <div class="eyebrow" id="mEyebrow">Machine profile</div>
+        <h1 id="mName">Machine</h1>
       </div>
       <label class="mpick" id="mPickWrap" hidden><span>Machine</span><select id="mPick" aria-label="Choose a machine"></select></label>
       <span class="example" id="exampleFlag" hidden>Example data · replace with your documents</span>
