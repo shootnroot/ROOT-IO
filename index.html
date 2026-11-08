@@ -116,7 +116,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tag{color:#1a1206}}
 
 .detail{overflow-y:auto;min-height:0;padding-block:20px 40px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-.sheet{max-width:900px;min-width:0;display:flex;flex-direction:column;gap:18px;overflow-wrap:anywhere}
+.sheet{max-width:900px;display:flex;flex-direction:column;gap:18px}
 .sheet h2{font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.05;margin:4px 0 0;text-wrap:balance}
 .lead{margin:0;max-width:72ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -211,19 +211,6 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;font:500 13px var(--f-body);color:var(--panel);background:var(--fg);padding:9px 14px;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);max-width:calc(100% - 32px)}
 @media (display-mode: standalone){.rail-head{padding-top:max(18px,env(safe-area-inset-top,0px))}}
-.modeltools{position:absolute;z-index:5;left:12px;right:12px;bottom:34px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;pointer-events:none}
-.modeltools>*{pointer-events:auto;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:6px 9px}
-.modeltools label{display:flex;align-items:center;gap:7px;font-size:12px}
-.modeltools input{width:100px;min-height:28px;margin:0}
-.modeltools output{font-family:var(--f-mono);font-size:11px;min-width:34px}
-.exmode .modeltools{display:none}
-.dimension-tag{position:absolute;pointer-events:none;transform:translate(-50%,-50%);font:11px var(--f-mono);background:var(--panel);color:var(--ink);border:1px solid var(--ink);padding:3px 6px;border-radius:3px;white-space:nowrap}
-.assembly-tree,.assembly-tree ul{list-style:none;padding-left:18px;margin:5px 0;border-left:1px solid var(--line)}
-.assembly-tree{padding:0;border:0}
-.assembly-tree button{margin:3px 0;min-height:32px}
-.evidence{font:11px var(--f-mono);color:var(--warn)}
-.evidence.verified{color:var(--ok)}
-@media(max-width:600px){.modeltools{gap:4px;bottom:42px}.modeltools>*{padding:3px 6px}.modeltools label{flex:1}.modeltools input{flex:1;min-width:55px}.dimension-tag{font-size:10px}.stage:has(.modeltools:not([hidden])){min-height:390px}}
 </style>
 <script src="demo-config.js"></script>
 </head>
@@ -271,11 +258,6 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
         <button id="doors" type="button">Hide guards</button>
         <button id="viewBack" type="button">Rear view</button>
       </div>
-      <div class="modeltools" id="modelTools" hidden>
-        <button class="chip" type="button" data-key="model">Assembly tree &amp; dimensions</button>
-        <label>Assembly explode <input id="modelExplode" type="range" min="0" max="100" value="0" aria-label="Assembly explode amount"><output id="modelAmount">0%</output></label>
-        <button class="chip" id="modelDimensions" type="button" aria-pressed="false">Dimensions</button>
-      </div>
       <div class="overlay tb" id="tb"></div>
       <div class="overlay hint">Tap a part for its exploded view and faults · drag to orbit · pinch or scroll to zoom</div>
     </div>
@@ -284,7 +266,6 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
 </div>
 <script src="three.min.js"></script>
 <script src="OrbitControls.js"></script>
-<script src="machine-model.js"></script>
 <script>window.MTB_LIB="./";</script>
 <script>
 (function(){
@@ -556,7 +537,7 @@ const stage=stageEl('stage'), list=stageEl('list'), detail=stageEl('detail'), q=
 const GEOT=['box','cyl','cone','sphere','torus','tube','extrude','lathe'];
 const nums=(a,n)=>{a=arr(a).map(v=>num(v,NaN)); return a.length>=n&&a.slice(0,n).every(isFinite)?a.slice(0,n):null;};
 function cleanPrim(g){ if(!g||typeof g!=='object') return null; const t=g.t==='cylinder'?'cyl':g.t; if(!GEOT.includes(t)) return null;
-  const o={t,p:nums(g.p,3)||[0,0,0]}; const r=nums(g.rot,3); if(r&&r.some(v=>v)) o.rot=r; if(g.c) o.c=str(g.c); if(g.glass) o.glass=1; if(g.guard) o.guard=1; if(g.edges===false) o.edges=false; if(+g.op>0&&+g.op<1) o.op=+g.op; if(g.nox) o.nox=1; {const sc=nums(g.sc,3); if(sc&&sc.every(v=>v>0)) o.sc=sc;} if(g.exo) o.exo=1; if(g.sharp) o.sharp=true;
+  const o={t,p:nums(g.p,3)||[0,0,0]}; const r=nums(g.rot,3); if(r&&r.some(v=>v)) o.rot=r; if(g.c) o.c=str(g.c); if(g.glass) o.glass=1; if(g.guard) o.guard=1; if(g.edges===false) o.edges=false; if(+g.op>0&&+g.op<1) o.op=+g.op; if(g.nox) o.nox=1; {const sc=nums(g.sc,3); if(sc&&sc.every(v=>v>0)) o.sc=sc;} if(g.exo) o.exo=1;
   if(/^[xyz]$/.test(g.axis)) o.axis=g.axis; if(isFinite(+g.seg)) o.seg=Math.max(3,Math.min(96,+g.seg));
   const pts2=a=>arr(a).map(q=>nums(q,2)).filter(Boolean);
   if(t==='box'){o.s=nums(g.s,3); if(!o.s) return null;}
@@ -579,8 +560,8 @@ function normalize(raw){
   const seen=new Set();
   p.components=arr(p.components).filter(c=>c&&(c.name||c.id)).map(c=>{let id=slug(c.id||c.name); while(seen.has(id)) id+='-2'; seen.add(id);
     const b=arr(c.box).map(v=>num(v,NaN)); const box=b.length===6&&b.every(isFinite)?b:null;
-    return {id,assemblyOnly:!!c.assemblyOnly,parent:c.parent?slug(c.parent):'',explode:nums(c.explode,3),evidence:c.evidence,dimensions:c.dimensions,name:str(c.name||c.id),group:c.group?slug(c.group):'',shape:SHAPES.includes(c.shape)?c.shape:'box',axis:/^[xyz]$/.test(c.axis)?c.axis:'',color:str(c.color),box,desc:str(c.desc),src:str(c.src),
-      parts:arr(c.parts).filter(x=>x&&(x.name||x.pn)).map((x,i)=>({ref:str(x.ref||i+1),componentId:x.componentId?slug(x.componentId):'',evidence:x.evidence,name:str(x.name||x.pn),pn:str(x.pn),qty:str(x.qty||''),dw:str(x.drawing||x.dw||''),geo:cleanGeo(x.geo),dir:nums(x.dir,3)}))
+    return {id,name:str(c.name||c.id),group:c.group?slug(c.group):'',shape:SHAPES.includes(c.shape)?c.shape:'box',axis:/^[xyz]$/.test(c.axis)?c.axis:'',color:str(c.color),box,desc:str(c.desc),src:str(c.src),
+      parts:arr(c.parts).filter(x=>x&&(x.name||x.pn)).map((x,i)=>({ref:str(x.ref||i+1),name:str(x.name||x.pn),pn:str(x.pn),qty:str(x.qty||''),dw:str(x.drawing||x.dw||''),geo:cleanGeo(x.geo),dir:nums(x.dir,3)}))
       ,geo:cleanGeo(c.geo)};});
   const cids=new Set(p.components.map(c=>c.id));
   const fix=ids=>arr(ids).map(x=>slug(x)).filter(x=>cids.has(x));
@@ -606,7 +587,7 @@ function normalize(raw){
       causes:arr(d.causes).map(c=>Array.isArray(c)?{area:str(c[0]),cause:str(c[1]),fix:str(c[2])}:{area:str(c.area||'machine'),cause:str(c.cause||c.text),fix:str(c.fix)}).filter(c=>c.cause),params:arr(d.params).map(str),comps:fix(d.comps),src:str(d.src||'ai')};});
   p.sources=arr(p.sources).map(s=>({name:str(s.name),kind:str(s.kind),assetId:str(s.assetId),pages:num(s.pages,0),size:num(s.size,0),added:str(s.added)}));
   p.example=!!p.example;
-  return ROOTIOModel.normalize(p);
+  return p;
 }
 
 /* ============================ 3D SCENE ============================ */
@@ -634,13 +615,11 @@ const MAT={frame:M(0x3a4047,{roughness:.75}),body:M(0xe6e9ec,{roughness:.6}),cab
   screen:M(0x16324f,{emissive:0x0b2440,emissiveIntensity:.7}),hose:M(0x1b1e22,{roughness:.8}),platen:M(0x4d5965,{roughness:.5,metalness:.25})};
 const edgeMat=new THREE.LineBasicMaterial({color:0x1b232c,transparent:true,opacity:.28});
 const model=new THREE.Group(); scene.add(model);
-let meshes={}, pick=[], guardMeshes=[], componentNodes={}, activePart=null;
-let modelAmount=0, dimensionsOn=false, dimensionTags=[];
-const dimensionRoot=new THREE.Group(); scene.add(dimensionRoot);
+let meshes={}, pick=[], guardMeshes=[];
 function add(id,geo,mat,pos,o){
   o=o||{}; const m=new THREE.Mesh(geo,mat.clone()); m.position.copy(pos); m.castShadow=!mat.transparent; m.receiveShadow=true;
   m.userData.id=id; m.userData.base={e:m.material.emissive.getHex(),ei:m.material.emissiveIntensity,op:m.material.opacity};
-  (componentNodes[id]||model).add(m); if(activePart) m.userData.partRef=activePart; pick.push(m); (meshes[id]=meshes[id]||[]).push(m);
+  model.add(m); pick.push(m); (meshes[id]=meshes[id]||[]).push(m);
   if(o.edges!==false&&!mat.transparent){const e=new THREE.LineSegments(new THREE.EdgesGeometry(geo,25),edgeMat); e.raycast=()=>{}; m.add(e);}
   if(mat.transparent||o.guard) guardMeshes.push(m);
   return m;
@@ -685,8 +664,7 @@ function addPrim(id,pr,fallback){const g=primGeo(pr); if(!g) return; const mat=m
 const COLORMAT={frame:'frame',body:'body',cab:'cab',steel:'steel',dark:'dark',yellow:'yellow',blue:'blue',red:'red',green:'green',orange:'orange',white:'white',copper:'copper',grey:'platen',gray:'platen'};
 const SHAPEMAT={base:'frame',column:'frame',table:'steel',spindle:'steel',motor:'dark',cylinder:'steel',cabinet:'cab',panel:'dark',tank:'platen',hopper:'white',conveyor:'platen',carousel:'platen',pump:'blue',fan:'dark',coil:'copper',compressor:'dark',pipe:'steel',unit:'body',box:'body'};
 function buildComp(c){
-  if(c.assemblyOnly) return;
-  if(hasGeo(c)){const fb=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body']; c.geo.forEach(pr=>addPrim(c.id,pr,fb)); (c.parts||[]).forEach(p=>{activePart=p.ref; (p.geo||[]).forEach(pr=>{if(!pr.exo) addPrim(c.id,pr,fb);});activePart=null;}); return;}
+  if(hasGeo(c)){const fb=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body']; c.geo.forEach(pr=>addPrim(c.id,pr,fb)); (c.parts||[]).forEach(p=>(p.geo||[]).forEach(pr=>{if(!pr.exo) addPrim(c.id,pr,fb);})); return;}
   const [cx,cy,z0,w,d,h]=c.box, x0=cx-w/2,x1=cx+w/2,y0=cy-d/2,y1=cy+d/2,z1=z0+h, id=c.id;
   const mat=MAT[COLORMAT[c.color]||SHAPEMAT[c.shape]||'body'];
   const ax=c.axis||(w>=d&&w>=h?'x':d>=h?'y':'z'); const L=ax==='x'?w:ax==='y'?d:h; const R=Math.min(...[w,d,h].filter((v,i)=>i!==['x','y','z'].indexOf(ax)))/2;
@@ -720,22 +698,13 @@ function buildComp(c){
   }
 }
 function autoLayout(comps){
-  const missing=comps.filter(c=>!c.assemblyOnly&&!c.box&&!hasGeo(c)); if(!missing.length) return;
+  const missing=comps.filter(c=>!c.box&&!hasGeo(c)); if(!missing.length) return;
   const placed=comps.filter(c=>c.box&&!hasGeo(c)); let x=placed.length?Math.max(...placed.map(c=>c.box[0]+c.box[3]/2))+400:0;
   missing.forEach((c,i)=>{const s=c.shape==='cabinet'?[800,500,1800]:c.shape==='guard'?[1200,1000,1600]:[500,500,500]; c.box=[x+s[0]/2,0,0,s[0],s[1],s[2]]; c.auto=true; x+=s[0]+250;});
 }
 function buildModel(){
-  goal.t=null;goal.c=null;
-  releaseGeometry(model);
   while(model.children.length) model.remove(model.children[0]);
-  meshes={}; pick=[]; guardMeshes=[]; componentNodes={};
-  modelAmount=0; stageEl('modelExplode').value=0; stageEl('modelAmount').textContent='0%';
-  stageEl('modelTools').hidden=!P.components.some(c=>c.parent);
-  stageEl('modelExplode').closest('label').hidden=!renderer;stageEl('modelDimensions').hidden=!renderer;
-  stageEl('viewBack').textContent='Rear view';
-  stage.querySelector('.hint').textContent=P.components.some(c=>c.parent)?'Tap a component to inspect it · drag to orbit · pinch or scroll to zoom':'Tap a part for its exploded view and faults · drag to orbit · pinch or scroll to zoom';
-  P.components.forEach(c=>{const g=new THREE.Group();g.name=c.id;g.userData.componentId=c.id;componentNodes[c.id]=g;});
-  P.components.forEach(c=>(componentNodes[c.parent]||model).add(componentNodes[c.id]));
+  meshes={}; pick=[]; guardMeshes=[];
   autoLayout(P.components);
   P.components.forEach(c=>{try{buildComp(c);}catch(e){console.warn('component',c.id,e);}});
   const bb=new THREE.Box3().setFromObject(model); if(bb.isEmpty()) bb.set(new THREE.Vector3(-1,0,-1),new THREE.Vector3(1,1,1));
@@ -743,78 +712,37 @@ function buildModel(){
   HOME_T=new THREE.Vector3(ctr.x,Math.min(ctr.y,sz.y*.45),ctr.z);
   HOME_C=HOME_T.clone().add(new THREE.Vector3(-.32,.42,1).normalize().multiplyScalar(span*1.75));
   BACK_C=HOME_T.clone().add(new THREE.Vector3(.4,.45,-1).normalize().multiplyScalar(span*1.75));
-  if(P.components.some(c=>c.parent)){
-    HOME_T.copy(ctr);
-    const vf=camera.fov*Math.PI/180,hf=2*Math.atan(Math.tan(vf/2)*camera.aspect);
-    const distance=sz.length()/2/Math.sin(Math.min(vf,hf)/2)*1.16;
-    HOME_C=ctr.clone().add(new THREE.Vector3(-.65,.5,1).normalize().multiplyScalar(distance));
-    BACK_C=ctr.clone().add(new THREE.Vector3(.65,.5,-1).normalize().multiplyScalar(distance));
-  }
   const fs=span*4; floor.scale.set(fs,fs,1); floor.position.set(ctr.x,0,ctr.z);
-  if(grid){scene.remove(grid);grid.geometry.dispose();grid.material.dispose();} const gs=Math.ceil(span*3); grid=new THREE.GridHelper(gs,Math.min(gs,120),0x888888,0x888888); grid.position.set(ctr.x,0.002,ctr.z); grid.material.transparent=true; grid.material.opacity=.18; scene.add(grid);
+  if(grid) scene.remove(grid); const gs=Math.ceil(span*3); grid=new THREE.GridHelper(gs,Math.min(gs,120),0x888888,0x888888); grid.position.set(ctr.x,0.002,ctr.z); grid.material.transparent=true; grid.material.opacity=.18; scene.add(grid);
   sun.position.set(ctr.x-span*.6,span*2.2,ctr.z+span*1.2); sun.target.position.copy(ctr); Object.assign(sun.shadow.camera,{left:-span,right:span,top:span,bottom:-span,near:.1,far:span*6}); sun.shadow.camera.updateProjectionMatrix();
   fillL.position.set(ctr.x+span*2,span,ctr.z-span*1.5);
   if(controls){controls.minDistance=span*.15; controls.maxDistance=span*6; controls.target.copy(HOME_T);} camera.position.copy(HOME_C);
   camera.near=Math.max(.05,span*.002); camera.far=Math.max(400,span*14); camera.updateProjectionMatrix(); // scale-aware clipping (a pump or a ship)
   guardsOn=true; stageEl('doors').textContent='Hide guards'; stageEl('doors').hidden=!guardMeshes.length;
-  buildDimensions();
 }
 
 /* ---------- highlight + tags ---------- */
 const AMB=new THREE.Color(); let hl=[], tags=[];
 const amberHex=()=>getComputedStyle(document.documentElement).getPropertyValue('--amber').trim()||'#c46f12';
 function highlight(ids){
-  hl=[...new Set(ids.flatMap(id=>ROOTIOModel.descendants(P.components,id)))].filter(i=>meshes[i]); AMB.set(amberHex());
+  hl=ids.filter(i=>meshes[i]); AMB.set(amberHex());
   pick.forEach(m=>{const b=m.userData.base; m.material.emissive.setHex(b.e); m.material.emissiveIntensity=b.ei; if(m.material.transparent) m.material.opacity=b.op;});
   hl.forEach(id=>meshes[id].forEach(m=>{m.material.emissive.copy(AMB); m.material.emissiveIntensity=.6; if(m.material.transparent) m.material.opacity=.42;}));
   tags.forEach(t=>t.el.remove()); tags=[];
   hl.slice(0,8).forEach(id=>{const el=document.createElement('div'); el.className='tag'; el.textContent=C[id].name; stage.appendChild(el); tags.push({el,id});});
 }
-function buildDimensions(){
-  dimensionRoot.children.slice().forEach(o=>{dimensionRoot.remove(o);o.geometry.dispose();o.material.dispose();});
-  dimensionTags.forEach(d=>d.el.remove());dimensionTags=[];
-  P.model.dimensions.filter(d=>d.from&&d.to).forEach(d=>{
-    const a=V(...d.from), b=V(...d.to), color=d.status==='verified'?0x287246:0xb36a19;
-    const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([a,b]),new THREE.LineBasicMaterial({color,depthTest:false}));line.renderOrder=10;dimensionRoot.add(line);
-    const el=document.createElement('div');el.className='dimension-tag';el.textContent=d.label+' · '+d.value+' mm · '+d.status;stage.appendChild(el);
-    dimensionTags.push({el,point:a.clone().add(b).multiplyScalar(.5)});
-  });
-  updateDimensions();
-}
-function updateDimensions(){
-  const visible=dimensionsOn&&modelAmount===0&&!exMode;
-  floor.visible=modelAmount===0;if(grid)grid.visible=modelAmount===0;
-  dimensionRoot.visible=visible;dimensionTags.forEach(d=>d.el.hidden=!visible);
-  stageEl('modelDimensions').setAttribute('aria-pressed',String(dimensionsOn));
-  stageEl('modelDimensions').textContent=modelAmount>0?'Dimensions (assembled only)':'Dimensions';
-}
-function frameAssembly(back=false){
-  const bb=new THREE.Box3().setFromObject(model), ctr=bb.getCenter(new THREE.Vector3()), radius=bb.getSize(new THREE.Vector3()).length()/2;
-  const vf=camera.fov*Math.PI/180,hf=2*Math.atan(Math.tan(vf/2)*camera.aspect);
-  const distance=radius/Math.sin(Math.min(vf,hf)/2)*1.16;
-  const direction=back?new THREE.Vector3(.65,.5,-1):new THREE.Vector3(-.65,.5,1);
-  goal.t=ctr;goal.c=ctr.clone().add(direction.normalize().multiplyScalar(distance));
-  if(controls)controls.maxDistance=Math.max(controls.maxDistance,distance*2);
-}
-stageEl('modelDimensions').addEventListener('click',()=>{dimensionsOn=!dimensionsOn;updateDimensions();});
-stageEl('modelExplode').addEventListener('input',e=>{
-  modelAmount=+e.target.value/100;stageEl('modelAmount').textContent=e.target.value+'%';
-  P.components.forEach(c=>componentNodes[c.id].position.copy(V(...c.explode)).multiplyScalar(modelAmount));
-  model.updateMatrixWorld(true);updateDimensions();
-  frameAssembly(stageEl('viewBack').textContent==='Front view');
-});
 const goal={t:null,c:null};
 function focus(ids){
   const bb=new THREE.Box3(); let any=false;
-  [...new Set(ids.flatMap(id=>ROOTIOModel.descendants(P.components,id)))].forEach(id=>(meshes[id]||[]).forEach(m=>{if(m.visible){bb.expandByObject(m);any=true;}}));
+  ids.forEach(id=>(meshes[id]||[]).forEach(m=>{if(m.visible){bb.expandByObject(m);any=true;}}));
   if(!any||!controls) return;
   const c=bb.getCenter(new THREE.Vector3()), size=bb.getSize(new THREE.Vector3()).length(), span=HOME_C.distanceTo(HOME_T)/1.75; if(size>span*1.05) c.lerp(HOME_T,.5);
   goal.t=c; goal.c=null;
   // very large models (ships, plants): also move in so a small selected part fills the view
   if(span>15&&size<span*.35){const dir=camera.position.clone().sub(controls.target).normalize(), want=Math.max(size*2.4,span*.12); if(camera.position.distanceTo(controls.target)>want*1.3) goal.c=c.clone().add(dir.multiplyScalar(want));}
 }
-stageEl('resetView').addEventListener('click',()=>{if(P.components.some(c=>c.parent)){frameAssembly();stageEl('viewBack').textContent='Rear view';}else{goal.t=HOME_T.clone();goal.c=HOME_C.clone();}});
-stageEl('viewBack').addEventListener('click',e=>{const back=e.currentTarget.textContent==='Rear view';if(P.components.some(c=>c.parent))frameAssembly(back);else{goal.t=HOME_T.clone();goal.c=(back?BACK_C:HOME_C).clone();}e.currentTarget.textContent=back?'Front view':'Rear view';});
+stageEl('resetView').addEventListener('click',()=>{goal.t=HOME_T.clone();goal.c=HOME_C.clone();});
+stageEl('viewBack').addEventListener('click',e=>{const back=e.currentTarget.textContent==='Rear view';goal.t=HOME_T.clone();goal.c=(back?BACK_C:HOME_C).clone();e.currentTarget.textContent=back?'Front view':'Rear view';});
 let guardsOn=true;
 stageEl('doors').addEventListener('click',e=>{guardsOn=!guardsOn;guardMeshes.forEach(m=>m.visible=guardsOn);e.currentTarget.textContent=guardsOn?'Hide guards':'Show guards';});
 
@@ -876,7 +804,7 @@ function bodyShapes(c,S){ // the parent component as a ghost body, size S
     default: return [Bx(S,S*.6,S*.6,0,0,0,'P')];
   }
 }
-function geoBounds(prims){const b=new THREE.Box3(); prims.forEach(pr=>{let g;try{g=primGeo(pr); g.computeBoundingBox(); const bb=g.boundingBox.clone(); const m=new THREE.Matrix4().compose(V(...pr.p),primQuat(pr),new THREE.Vector3(1,1,1)); b.union(bb.applyMatrix4(m));}catch(e){}finally{if(g)g.dispose();}}); return b;}
+function geoBounds(prims){const b=new THREE.Box3(); prims.forEach(pr=>{try{const g=primGeo(pr); g.computeBoundingBox(); const bb=g.boundingBox.clone(); const m=new THREE.Matrix4().compose(V(...pr.p),primQuat(pr),new THREE.Vector3(1,1,1)); b.union(bb.applyMatrix4(m));}catch(e){}}); return b;}
 function partsViewGeo(c){
   const parts=c.parts||[]; const body=(c.geo||[]).filter(pr=>!pr.nox); const all=[...body,...parts.flatMap(p=>p.geo||[])]; const bb=geoBounds(all); const ctr=bb.getCenter(new THREE.Vector3()), sz=bb.getSize(new THREE.Vector3());
   const S=Math.max(sz.x,sz.y,sz.z)*1000, cw=[ctr.x*1000,-ctr.z*1000,ctr.y*1000]; const P2=[]; const fb=COLORMAT[c.color]||SHAPEMAT[c.shape]||'body';
@@ -980,12 +908,8 @@ function partInfo(view,ref){
   if(ref==='G') return null;
   const d=ref.dev; return {it:ref.t,d:ref.f||'',pn:ref.pn||'',qty:ref.qty||'',dev:d,col:d?(d.guess?'#b0412f':d.ios&&d.ios.length?'#1f4fb0':'#c46f12'):'#c46f12'};
 }
-function releaseGeometry(root){
-  const shared=new Set(Object.values(chamCache));
-  root.traverse(o=>{if(o.geometry&&!shared.has(o.geometry))o.geometry.dispose();if(o.material&&o.material!==edgeMat&&o.material!==exEdge)o.material.dispose();});
-}
 function buildEx(id){
-  const view=EXV[id]; releaseGeometry(exRoot); while(exRoot.children.length) exRoot.remove(exRoot.children[0]);
+  const view=EXV[id]; while(exRoot.children.length) exRoot.remove(exRoot.children[0]);
   exBalloons.forEach(b=>b.el.remove()); exBalloons=[]; exParts=[];
   view.parts.forEach((p,pi)=>{
     const [ref,shapes,vec,ghost]=p; const info=partInfo(view,ref);
@@ -1025,7 +949,6 @@ function exHighlight(pi){
   exBalloons.forEach(b=>b.el.classList.toggle('on',b.part.pi===pi));
   document.querySelectorAll('[data-expi]').forEach(r=>r.classList.toggle('on',+r.dataset.expi===pi));
   const v=EXV[exMode]; const cs=stageEl('cabsel'); if(cs&&v&&v.kind==='cab'){const p=v.parts[pi]; if(p&&typeof p[0]==='object') cs.innerHTML=devSel(p[0].dev);}
-  if(v&&v.kind==='parts'){const p=v.parts[pi], ref=p&&p[0];if(ref&&typeof ref==='object')showPart(v.comp,ref.t);}
   const r=document.querySelector(`#exlist [data-expi="${pi}"]`); if(r&&!matchMedia('(max-width:900px)').matches) r.scrollIntoView({block:'nearest'});
 }
 function enterEx(id){
@@ -1033,7 +956,7 @@ function enterEx(id){
   if(!exMode) mainPose={t:controls.target.clone(),c:camera.position.clone()};
   exMode=id; goal.t=null; goal.c=null;
   stage.classList.add('exmode'); tags.forEach(t=>t.el.hidden=true);
-  exGoal=+stageEl('exT').value/100; updateDimensions(); buildEx(id);
+  exGoal=+stageEl('exT').value/100||.75; buildEx(id);
   const v=EXV[id]; cur='c-'+v.comp; detail.innerHTML=v.kind==='cab'?renderCab(v):renderParts(v); detail.scrollTop=0;
   highlightList();
   try{history.replaceState(null,'','#'+id);}catch(e){}
@@ -1041,7 +964,7 @@ function enterEx(id){
 function exitEx(){
   if(!exMode) return; exMode=null; stage.classList.remove('exmode'); document.querySelector('.work').classList.remove('full'); stageEl('exFull').textContent='Expand'; stageEl('exFull').setAttribute('aria-pressed','false');
   exBalloons.forEach(b=>b.el.remove()); exBalloons=[];
-  if(mainPose&&controls){controls.target.copy(mainPose.t); camera.position.copy(mainPose.c);} buildModelLimits(); updateDimensions();
+  if(mainPose&&controls){controls.target.copy(mainPose.t); camera.position.copy(mainPose.c);} buildModelLimits();
 }
 function buildModelLimits(){ if(!controls) return; const span=HOME_C.distanceTo(HOME_T)/1.75; controls.minDistance=span*.15; controls.maxDistance=span*6; camera.near=Math.max(.05,span*.002); camera.far=Math.max(400,span*14); camera.updateProjectionMatrix(); }
 function exFrame(){
@@ -1071,7 +994,7 @@ if(renderer){
     ray.setFromCamera(ndc,camera);
     if(exMode){const ms=[];exParts.forEach(p=>{if(p.info) p.meshes.forEach(m=>ms.push(m));});const h=ray.intersectObjects(ms,false)[0]; if(h) exHighlight(h.object.userData.pi); return;}
     const hit=ray.intersectObjects(pick.filter(m=>m.visible),false)[0];
-    if(hit){const id=hit.object.userData.id, ref=hit.object.userData.partRef; select('c-'+id,true); if(ref) showPart(id,ref); else if(!C[id].parent&&!P.components.some(c=>c.parent===id)&&COMPVIEWS[id]&&COMPVIEWS[id].length) enterEx(COMPVIEWS[id][0]);}
+    if(hit){const id=hit.object.userData.id; select('c-'+id,true); if(COMPVIEWS[id]&&COMPVIEWS[id].length) enterEx(COMPVIEWS[id][0]);}
   });
 }
 function themeScene(){
@@ -1095,7 +1018,6 @@ const tmp=new THREE.Vector3(), tb=new THREE.Box3();
   if(exMode){renderer.render(exScene,camera); exFrame(); return;}
   renderer.render(scene,camera);
   const w=stage.clientWidth,h=stage.clientHeight;
-  dimensionTags.forEach(d=>{const p=d.point.clone().project(camera);d.el.hidden=!dimensionsOn||modelAmount>0||p.z>1||Math.abs(p.x)>1||Math.abs(p.y)>1;if(!d.el.hidden){d.el.style.left=((p.x+1)/2*w)+'px';d.el.style.top=((1-p.y)/2*h)+'px';}});
   tags.forEach(t=>{tb.makeEmpty(); (meshes[t.id]||[]).forEach(m=>{if(m.visible) tb.expandByObject(m);}); if(tb.isEmpty()){t.el.hidden=true;return;}
     const p=new THREE.Vector3((tb.min.x+tb.max.x)/2,tb.max.y,(tb.min.z+tb.max.z)/2).project(camera);
     const vis=p.z<1&&Math.abs(p.x)<1.05&&Math.abs(p.y)<1.05; t.el.hidden=!vis; if(vis){t.el.style.left=((p.x+1)/2*w)+'px'; t.el.style.top=((1-p.y)/2*h)+'px';}});
@@ -1118,7 +1040,7 @@ function index(){
     P.faults.forEach(f=>{if(f.comps.includes(c.id)) f.io.forEach(t=>{if(IOT[t]&&!c.ios.includes(t)) c.ios.push(t);});});
     P.sequence.forEach(s=>{if(s.comps.includes(c.id)) [...s.inputs,...s.outputs].forEach(t=>{if(IOT[t]&&!c.ios.includes(t)&&IOT[t].loc&&c.name.toLowerCase().includes(IOT[t].loc.toLowerCase().split(' ')[0])) c.ios.push(t);});});
     c.defs=DEFS.filter(d=>d.comps.includes(c.id));});
-  byKey={setup:{t:'setup'},io:{t:'iolist'},model:{t:'model'}};
+  byKey={setup:{t:'setup'},io:{t:'iolist'}};
   P.faults.forEach(f=>{f.key='f-'+f.id; byKey[f.key]={t:'fault',o:f};});
   P.components.forEach(c=>{byKey[c.key]={t:'comp',o:c};});
   P.sequence.forEach(s=>{s.key='s-'+s.id; byKey[s.key]={t:'seq',o:s};});
@@ -1230,38 +1152,12 @@ function renderDefect(d){
   <textarea id="woFallback" aria-label="Work order text" hidden readonly></textarea>
   <p class="foot">${d.src==='library'?'General troubleshooting practice for this process, not specific to your machine or material grade. Always check against the material supplier\'s datasheet and your process sheet.':srcLine()}</p></article>`;
 }
-function evidenceHTML(e){return `<span class="evidence ${e.status}">${e.status==='verified'?'Verified dimension':'Estimated geometry'}</span>${e.source?` · ${e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.source)}</a>`:esc(e.source)} ${esc(e.locator)}`:''}${e.notes?`<p>${esc(e.notes)}</p>`:''}`;}
-function dimensionTable(ds){return ds.length?`<div class="tblwrap"><table class="iot"><thead><tr><th>Dimension</th><th>mm</th><th>Evidence</th></tr></thead><tbody>${ds.map(d=>`<tr><td>${esc(d.label)}</td><td class="mn">${d.value}</td><td>${evidenceHTML(d)}</td></tr>`).join('')}</tbody></table></div>`:'';}
-function assemblyContext(c){
-  const parents=ROOTIOModel.ancestors(P.components,c.id).reverse(), children=P.components.filter(x=>x.parent===c.id);
-  if(!parents.length&&!children.length) return '';
-  return `<div class="blk"><h3>Assembly</h3><div class="chips"><button class="chip" data-key="model" type="button">Machine tree</button>${parents.map(id=>`<button class="chip" data-key="c-${id}" type="button">${esc(C[id].name)}</button>`).join('')}</div>${children.length?`<h3>Components</h3>${compChips(children.map(x=>x.id))}`:''}</div>`;
-}
-function relatedRecords(id,includeFaults,skipDirectFaults=false){
-  const ids=ROOTIOModel.descendants(P.components,id), parents=ROOTIOModel.ancestors(P.components,id);
-  const records=[...(includeFaults?P.faults:[]),...P.checks,...P.sequence,...P.reference];
-  const links=records.filter(r=>!(skipDirectFaults&&P.faults.includes(r)&&r.comps.includes(id))&&(r.comps||[]).some(i=>ids.includes(i)||parents.includes(i)));
-  return links.length?`<div class="blk"><h3>Linked troubleshooting records</h3><div class="chips">${links.map(r=>`<button type="button" class="chip" data-key="${r.key}">${esc(r.title||r.name)}${!r.comps.includes(id)?' · assembly context':''}</button>`).join('')}</div></div>`:'';
-}
-function renderModel(){
-  const tree=parent=>`<ul${parent?'':' class="assembly-tree"'}>${P.components.filter(c=>c.parent===parent).map(c=>`<li><button class="chip" type="button" data-key="${c.key}">${esc(c.name)}</button> <span class="evidence ${c.evidence.status}">${c.evidence.status} geometry</span>${tree(c.id)}</li>`).join('')}</ul>`;
-  return `<article class="sheet"><div class="eyebrow">Demonstration machine · millimeters</div><h2>${esc(P.meta.name)} assemblies</h2><p class="lead">${esc(P.model.notes||'Select a component to inspect its geometry and linked records.')}</p><div class="blk"><h3>Dimension evidence</h3>${dimensionTable(P.model.dimensions)}<p class="count">Verified values are reference constraints. Detailed shapes, placements and explode directions are estimates. Dimensions apply with the model assembled.</p></div>${P.model.warnings.map(w=>`<p class="note err">${esc(w)}</p>`).join('')}<div class="blk"><h3>Assembly tree</h3>${tree('')}</div>${FOOT()}</article>`;
-}
-function partDetails(c,p){
-  const linked=C[p.componentId]||c;
-  return `<div class="blk"><h3>Selected item ${esc(p.ref)} · ${esc(p.name)}</h3><p>${p.pn?'Part number: '+esc(p.pn)+' · ':''}Qty: ${esc(p.qty||'—')}</p>${evidenceHTML(p.evidence)}<p>${p.componentId?'Linked component:':'Diagnostic context: containing assembly'}</p>${compChips([linked.id])}${relatedRecords(linked.id,true)}</div>`;
-}
-function showPart(id,ref){const c=C[id],p=c.parts.find(p=>p.ref===ref);if(!p)return;const el=stageEl('partsel');if(el)el.innerHTML=partDetails(c,p);}
 function renderComp(c){
   const vs=COMPVIEWS[c.id]||[];
   return `<article class="sheet">
   <div><div class="eyebrow">Machine part${c.group&&GROUPS[c.group]?' · '+esc(GROUPS[c.group]):''}${c.src?' · '+esc(c.src):''}</div><h2>${esc(c.name)}</h2></div>
   ${c.desc?`<p class="lead">${esc(c.desc)}</p>`:''}
   ${vs.length?`<div class="blk"><h3>Detailed views</h3><div class="exbtns">${vs.map(x=>`<button class="btn" type="button" data-ex="${x}">${EXV[x].kind==='cab'?'Cabinet layout · '+P.cabinets[c.id].devices.length+' devices':'Exploded view · '+c.parts.length+' parts'}</button>`).join('')}</div></div>`:`<p class="count" style="margin:0">No parts list or panel layout for this part yet. Add a BOM or electrical prints in Setup.</p>`}
-  ${assemblyContext(c)}
-  ${P.components.some(x=>x.parent)?`<div class="blk"><h3>Geometry evidence</h3>${evidenceHTML(c.evidence)}${dimensionTable(c.dimensions)}</div>`:''}
-  <div id="partsel"></div>
-  ${relatedRecords(c.id,true,true)}
   ${c.auto?'<div class="note err"><b>Placement</b>No position found in the documents, so this part is placed beside the machine.</div>':''}
   <div class="blk"><h3>Faults on this part (${c.faults.length})</h3>${c.faults.length?faultChips(c.faults):'<p style="margin:0;color:var(--muted)">None in the fault list.</p>'}</div>
   ${c.defs.length?`<div class="blk"><h3>Product defects that involve it</h3>${defChips(c.defs.filter(procMatch).slice(0,12))}</div>`:''}
@@ -1274,9 +1170,8 @@ function renderParts(v){
   <div><div class="eyebrow">Exploded view · ${c.parts.length} parts${c.parts[0]&&c.parts[0].dw?' · drawing '+esc(c.parts[0].dw):''}</div><h2>${esc(c.name)}</h2></div>
   <div class="meta"><button class="chip" type="button" data-key="${c.key}">Part: ${esc(c.name)}</button>${vs.length>1?vs.filter(x=>x!==v.id).map(x=>`<button class="chip" type="button" data-ex="${x}">${EXV[x].kind==='cab'?'Cabinet layout':'Exploded view'}</button>`).join(''):''}</div>
   ${c.faults.length?`<div class="blk"><h3>Faults on ${esc(c.name)} (${c.faults.length})</h3>${faultChips(c.faults)}</div>`:''}
-  <div id="partsel"></div>
   <p class="count" style="margin:0">Tap a row or a balloon to highlight it. ${hasGeo(c)?(c.parts.every(p=>p.geo&&p.geo.length)?'Shapes and positions come from the profile\'s geometry':'Parts with geometry in the profile are drawn to it; the rest are generic stand-ins'):'Shapes are generic stand-ins picked from each part\'s description'}; item numbers, part numbers and names are from the parts list.</p>
-  <div class="blk" id="exlist"><div class="tblwrap"><table class="iot bom"><thead><tr><th>Item</th><th>Qty</th><th>Part no.</th><th>Description</th></tr></thead><tbody>${v.parts.map((p,pi)=>typeof p[0]==='object'?`<tr class="lnk" data-expi="${pi}"><td class="tg"><button class="chip" type="button" data-expi="${pi}" aria-label="Select ${esc(p[0].f)}">${esc(p[0].t)}</button></td><td class="mn">${esc(p[0].qty)}</td><td class="mn">${esc(p[0].pn)}</td><td class="ds">${esc(p[0].f)}</td></tr>`:'').join('')}</tbody></table></div></div>
+  <div class="blk" id="exlist"><div class="tblwrap"><table class="iot bom"><thead><tr><th>Item</th><th>Qty</th><th>Part no.</th><th>Description</th></tr></thead><tbody>${v.parts.map((p,pi)=>typeof p[0]==='object'?`<tr class="lnk" data-expi="${pi}"><td class="tg">${esc(p[0].t)}</td><td class="mn">${esc(p[0].qty)}</td><td class="mn">${esc(p[0].pn)}</td><td class="ds">${esc(p[0].f)}</td></tr>`:'').join('')}</tbody></table></div></div>
   ${FOOT()}</article>`;
 }
 function devSel(d){
@@ -1349,7 +1244,6 @@ function select(key,fromScene){
   if(it.t==='setup'){detail.innerHTML=renderSetup(); wireSetup(); setupButton.setAttribute('aria-current','true');}
   else setupButton.setAttribute('aria-current','false');
   if(it.t==='fault'){detail.innerHTML=renderFault(it.o); ids=it.o.comps; want='machine';}
-  else if(it.t==='model'){detail.innerHTML=renderModel(); want='machine';}
   else if(it.t==='comp'){detail.innerHTML=renderComp(it.o); ids=[it.o.id]; if(tab==='process') want='machine';}
   else if(it.t==='defect'){detail.innerHTML=renderDefect(it.o); ids=it.o.comps; want='defects';}
   else if(it.t==='seq'){detail.innerHTML=renderSeq(it.o); ids=it.o.comps; want='process';}
@@ -1387,7 +1281,7 @@ function applyProfile(raw,keepView){
   if(exMode) exitEx(); buildModel();
   const k=keepView&&cur&&byKey[cur]?cur:null;
   syncTabs();
-  if(k) select(k,true); else {const first=P.components.some(c=>c.parent)?'model':P.faults[0]?P.faults[0].key:P.components[0]?P.components[0].key:(DEMO_MODE?'io':'setup'); select(first,true);}
+  if(k) select(k,true); else {const first=P.faults[0]?P.faults[0].key:P.components[0]?P.components[0].key:(DEMO_MODE?'io':'setup'); select(first,true);}
 }
 /* ============================ WITHOUT CLAUDE: spreadsheet + other AI tools ============================ */
 const L=s=>arr(s).join('\n'), Ls=s=>arr(s).join(', ');
@@ -1395,12 +1289,10 @@ const splitLines=v=>str(v).split(/\r?\n|\s*;\s*/).map(x=>x.replace(/^\s*[-•*]\
 const splitIds=v=>str(v).split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean);
 // one definition drives export, import and the downloadable template
 const SHEETS=[
- {name:'Model',help:'Optional model metadata as JSON: reference dimensions in mm, source locators and notes.',
-  cols:[['Model JSON','data','json']],get:p=>[{data:p.model}],set:(p,r)=>p.model=r[0]&&r[0].data||{}},
  {name:'Groups',help:'Troubleshooting areas used to group faults and components (e.g. Hydraulics, Safety and controls).',
   cols:[['Group ID','id'],['Group name','name']],get:p=>p.groups,set:(p,r)=>p.groups=r},
  {name:'Components',help:'Physical assemblies shown in 3D. Positions in mm: X left→right seen from the operator, Y front→rear, Z up from the floor. Center X/Y and Bottom Z place the part; Width/Depth/Height size it. Leave positions blank to place the part beside the machine.',
-  cols:[['Component ID','id'],['Name','name'],['Group ID','group'],['Shape','shape'],['Axis','axis'],['Color','color'],['Center X','box',0],['Center Y','box',1],['Bottom Z','box',2],['Width X','box',3],['Depth Y','box',4],['Height Z','box',5],['Description','desc'],['Source','src'],['Assembly only (Y)','assemblyOnly','yn'],['Parent ID','parent'],['Assembly explode X,Y,Z (mm)','explode','xyz'],['Evidence JSON','evidence','json'],['Dimensions JSON','dimensions','json']],
+  cols:[['Component ID','id'],['Name','name'],['Group ID','group'],['Shape','shape'],['Axis','axis'],['Color','color'],['Center X','box',0],['Center Y','box',1],['Bottom Z','box',2],['Width X','box',3],['Depth Y','box',4],['Height Z','box',5],['Description','desc'],['Source','src']],
   get:p=>p.components,set:(p,r)=>p.components=r},
  {name:'Faults',help:'Alarms and symptoms. Put one cause or check per line in a cell (Alt+Enter in Excel). Components and I/O tags: comma-separated IDs from the other sheets.',
   cols:[['Fault ID','id'],['Title','title'],['Group ID','group'],['Alarm code','code'],['Effect','effect'],['Screen message','msg'],['Causes','causes','lines'],['Checks','checks','lines'],['Component IDs','comps','ids'],['I/O tags','io','ids'],['Safety warning','safety'],['Source','src']],
@@ -1416,7 +1308,7 @@ const SHEETS=[
   get:p=>p.reference.flatMap(r=>{const rows=r.rows.map(([k,v])=>({id:r.id,name:r.name,intro:'',_k:k,_v:v})).concat(r.notes.map(n=>({id:r.id,name:r.name,intro:'',_k:'Note',_v:n}))); if(!rows.length) rows.push({id:r.id,name:r.name,_k:'',_v:''}); rows[0].intro=r.intro; return rows;}),
   set:(p,rows)=>{const m={}; rows.forEach(r=>{const id=r.id||r.name; if(!id) return; const c=m[id]=m[id]||{id,name:r.name||id,intro:'',rows:[],notes:[]}; if(r.name) c.name=r.name; if(r.intro) c.intro=r.intro; if(/^note$/i.test(r._k)) c.notes.push(r._v); else if(r._k||r._v) c.rows.push([r._k,r._v]);}); p.reference=Object.values(m);}},
  {name:'Parts',help:'Parts list for each component\'s exploded view. Item = balloon number on the drawing.',
-  cols:[['Component ID','_c'],['Item','ref'],['Description','name'],['Part number','pn'],['Qty','qty'],['Drawing','dw'],['Explode move X,Y,Z (mm)','dir','xyz'],['Linked component ID','componentId'],['Evidence JSON','evidence','json']],
+  cols:[['Component ID','_c'],['Item','ref'],['Description','name'],['Part number','pn'],['Qty','qty'],['Drawing','dw'],['Explode move X,Y,Z (mm)','dir','xyz']],
   get:p=>p.components.flatMap(c=>c.parts.map(x=>Object.assign({_c:c.id},x))),
   set:(p,rows)=>{p.components.forEach(c=>c.parts=[]); rows.forEach(r=>{const c=p.components.find(c=>slug(c.id)===slug(r._c)); if(c) c.parts.push(r); else (p._warn=p._warn||[]).push(`Parts: component "${r._c}" not found`);});}},
  {name:'Cabinet devices',help:'Devices on each electrical cabinet\'s back panel. Cabinet component ID must be a component with Shape "cabinet". Kind: plc, io, safety, drive, psu, transformer, breaker, fuse, contactor, relay, terminal, connector, switch, filter, meter, fan. Panel width/height (mm) only needed on the first row of each cabinet.',
@@ -1434,11 +1326,10 @@ const SHEETS=[
 ];
 const MACHINE_ROWS=[['Machine name','name'],['Maker','maker'],['Model','model'],['Serial number','serial'],['Machine function','functions'],['Materials processed','materials'],['Summary','summary']];
 const LISTS={Shape:SHAPES,Axis:['x','y','z'],Color:['frame','body','cab','steel','dark','yellow','blue','red','green','orange','white','copper'],Effect:['stop','warn','info'],Type:['DI','DO','AI','AO','TC'],Kind:['plc','io','safety','drive','psu','transformer','breaker','fuse','contactor','relay','terminal','connector','switch','filter','meter','fan','other']};
-function cellOut(o,[,k,t]){const v=o[k]; if(k==='box') return o.box&&!o.auto?o.box[t]:''; if(t==='json') return v?JSON.stringify(v):''; if(t==='lines') return L(v); if(t==='ids') return Ls(v); if(t==='yn') return v?'Y':''; if(t==='xyz') return v?arr(v).join(', '):'';
+function cellOut(o,[,k,t]){const v=o[k]; if(k==='box') return o.box&&!o.auto?o.box[t]:''; if(t==='lines') return L(v); if(t==='ids') return Ls(v); if(t==='yn') return v?'Y':''; if(t==='xyz') return v?arr(v).join(', '):'';
   if(t==='causes') return arr(v).map(c=>`${c.area} | ${c.cause} | ${c.fix}`).join('\n'); return v==null?'':v;}
 function cellIn(row,[,k,t],obj){const v=row; if(k==='box'){if(v!==''&&v!=null&&isFinite(+v)){obj.box=obj.box||[null,null,null,null,null,null]; obj.box[t]=+v;} return;}
-  if(t==='json'){if(str(v).trim()){try{obj[k]=JSON.parse(v);}catch(e){throw new Error('Invalid JSON in '+k+' column');}}}
-  else if(t==='lines') obj[k]=splitLines(v); else if(t==='ids') obj[k]=splitIds(v); else if(t==='xyz'){const a=str(v).split(/[,;\s]+/).filter(Boolean).map(Number); if(a.length===3&&a.every(isFinite)) obj[k]=a;}
+  if(t==='lines') obj[k]=splitLines(v); else if(t==='ids') obj[k]=splitIds(v); else if(t==='xyz'){const a=str(v).split(/[,;\s]+/).filter(Boolean).map(Number); if(a.length===3&&a.every(isFinite)) obj[k]=a;}
   else if(t==='yn') obj[k]=/^(y|yes|true|1|x)$/i.test(str(v).trim());
   else if(t==='causes') obj[k]=str(v).split(/\r?\n/).map(l=>l.split('|').map(x=>x.trim())).filter(a=>a.join('')).map(a=>a.length>=3?{area:a[0].toLowerCase()||'machine',cause:a[1],fix:a.slice(2).join(' | ')}:{area:'machine',cause:a[0],fix:a[1]||''});
   else obj[k]=str(v).trim();}
