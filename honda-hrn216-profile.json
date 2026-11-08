@@ -10,7 +10,7 @@
   "materials": [
    "Grass (turf)"
   ],
-  "summary": "Dimension-constrained HRN216VKU demonstration with hierarchical assemblies, selectable wheels and blade parts. Overall envelope, cutting width and wheelbase verified against the Honda owner’s manual p. 18. Detailed geometry and placements remain estimates."
+  "summary": "21 in (530 mm) self-propelled rotary mower with twin blades, variable-speed Smart Drive, auto choke, Clip Director (bag / mulch / rear discharge) and a GCV170 166 cc OHV engine. Built from Honda's owner's manual (Australian VKU edition; check intervals against your region's manual). 3D model drawn to the published overall size, cutting width and wheelbase; small parts are placed from the manual's illustrations."
  },
  "groups": [
   {
@@ -45,7 +45,7 @@
     710.0,
     191.0
    ],
-   "desc": "Housing over the blades. Grass and debris build up underneath and cause power loss, vibration and poor bagging. Cutting width 530 mm; overall 1,550 × 575 × 1,037 mm with the handle up.",
+   "desc": "Housing over the blades. Grass and debris build up underneath and cause power loss, vibration and poor bagging. Cutting width 530 mm; overall 1,550 \u00d7 575 \u00d7 1,037 mm with the handle up.",
    "src": "Honda HRN216VKU owner's manual",
    "geo": [
     {
@@ -69,11 +69,11 @@
        -520
       ],
       [
-       287.5,
+       287,
        -480
       ],
       [
-       287.5,
+       287,
        -90
       ],
       [
@@ -85,11 +85,11 @@
        -30
       ],
       [
-       -287.5,
+       -287,
        -90
       ],
       [
-       -287.5,
+       -287,
        -480
       ],
       [
@@ -107,7 +107,8 @@
       0,
       196
      ],
-     "c": "#2b2e33"
+     "c": "#2b2e33",
+     "bevel": 3
     },
     {
      "t": "extrude",
@@ -130,11 +131,11 @@
        -520
       ],
       [
-       287.5,
+       287,
        -480
       ],
       [
-       287.5,
+       287,
        -90
       ],
       [
@@ -146,11 +147,11 @@
        -30
       ],
       [
-       -287.5,
+       -287,
        -90
       ],
       [
-       -287.5,
+       -287,
        -480
       ],
       [
@@ -307,40 +308,6 @@
      ],
      "c": "#5d646b"
     }
-   ],
-   "parent": "",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    0
-   ],
-   "dimensions": [
-    {
-     "label": "Overall width",
-     "value": 575,
-     "unit": "mm",
-     "status": "verified",
-     "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-     "locator": "p. 18, Specifications",
-     "notes": "Reference envelope width.",
-     "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-     "from": [
-      -287.5,
-      -790,
-      0
-     ],
-     "to": [
-      287.5,
-      -790,
-      0
-     ]
-    }
    ]
   },
   {
@@ -358,7 +325,7 @@
     514.0,
     160.0
    ],
-   "desc": "Upper and lower blades bolted to the blade holder with two special bolts (49–59 N·m, 14 mm 6-point socket). Replace as a set.",
+   "desc": "Upper and lower blades bolted to the blade holder with two special bolts (49\u201359 N\u00b7m, 14 mm 6-point socket). Replace as a set.",
    "src": "Honda HRN216VKU owner's manual",
    "parts": [
     {
@@ -368,62 +335,68 @@
      "qty": "1",
      "geo": [
       {
-       "t": "extrude",
-       "plane": "xy",
-       "pts": [
-        [
-         -265,
-         0
-        ],
-        [
-         -262,
-         -25
-        ],
-        [
-         200,
-         -25
-        ],
-        [
-         262,
-         -20
-        ],
-        [
-         265,
-         0
-        ],
-        [
-         262,
-         25
-        ],
-        [
-         -200,
-         25
-        ],
-        [
-         -262,
-         20
-        ]
+       "t": "box",
+       "s": [
+        400,
+        50,
+        4
        ],
-       "depth": 4,
        "p": [
         0,
         -330,
-        35
+        58
        ],
        "c": "#9aa2a9",
-       "exo": 1
+       "rot": [
+        0,
+        0,
+        90
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        66,
+        50,
+        4
+       ],
+       "p": [
+        -0.0,
+        -562.0,
+        62
+       ],
+       "c": "#9aa2a9",
+       "rot": [
+        -18,
+        0,
+        90
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        66,
+        50,
+        4
+       ],
+       "p": [
+        0.0,
+        -98.0,
+        62
+       ],
+       "c": "#9aa2a9",
+       "rot": [
+        18,
+        0,
+        90
+       ]
       }
      ],
      "dir": [
       0,
       0,
       -95
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "upper-blade"
+     ]
     },
     {
      "ref": "2",
@@ -432,62 +405,68 @@
      "qty": "1",
      "geo": [
       {
-       "t": "extrude",
-       "plane": "xy",
-       "pts": [
-        [
-         -265,
-         0
-        ],
-        [
-         -262,
-         -25
-        ],
-        [
-         200,
-         -25
-        ],
-        [
-         262,
-         -20
-        ],
-        [
-         265,
-         0
-        ],
-        [
-         262,
-         25
-        ],
-        [
-         -200,
-         25
-        ],
-        [
-         -262,
-         20
-        ]
+       "t": "box",
+       "s": [
+        400,
+        50,
+        4
        ],
-       "depth": 4,
        "p": [
         0,
         -330,
-        29
+        52
        ],
        "c": "#9aa2a9",
-       "exo": 1
+       "rot": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        66,
+        50,
+        4
+       ],
+       "p": [
+        -232.0,
+        -330.0,
+        56
+       ],
+       "c": "#9aa2a9",
+       "rot": [
+        -18,
+        0,
+        0
+       ]
+      },
+      {
+       "t": "box",
+       "s": [
+        66,
+        50,
+        4
+       ],
+       "p": [
+        232.0,
+        -330.0,
+        56
+       ],
+       "c": "#9aa2a9",
+       "rot": [
+        18,
+        0,
+        0
+       ]
       }
      ],
      "dir": [
       0,
       0,
       -170
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "lower-blade"
+     ]
     },
     {
      "ref": "3",
@@ -502,11 +481,10 @@
        "p": [
         0,
         -330,
-        47
+        70
        ],
        "axis": "z",
-       "c": "#5d646b",
-       "exo": 1
+       "c": "#5d646b"
       },
       {
        "t": "cyl",
@@ -515,23 +493,17 @@
        "p": [
         0,
         -330,
-        62
+        85
        ],
        "axis": "z",
-       "c": "#5d646b",
-       "exo": 1
+       "c": "#5d646b"
       }
      ],
      "dir": [
       0,
       0,
       -20
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "blade-holder"
+     ]
     },
     {
      "ref": "4",
@@ -546,12 +518,11 @@
        "p": [
         -24,
         -330,
-        21
+        44
        ],
        "axis": "z",
        "c": "#7d858d",
-       "seg": 6,
-       "exo": 1
+       "seg": 6
       },
       {
        "t": "cyl",
@@ -560,11 +531,10 @@
        "p": [
         -24,
         -330,
-        37
+        60
        ],
        "axis": "z",
-       "c": "#b9c0c7",
-       "exo": 1
+       "c": "#b9c0c7"
       },
       {
        "t": "cyl",
@@ -573,12 +543,11 @@
        "p": [
         24,
         -330,
-        21
+        44
        ],
        "axis": "z",
        "c": "#7d858d",
-       "seg": 6,
-       "exo": 1
+       "seg": 6
       },
       {
        "t": "cyl",
@@ -587,23 +556,17 @@
        "p": [
         24,
         -330,
-        37
+        60
        ],
        "axis": "z",
-       "c": "#b9c0c7",
-       "exo": 1
+       "c": "#b9c0c7"
       }
      ],
      "dir": [
       0,
       0,
       -330
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "blade-bolts"
+     ]
     },
     {
      "ref": "5",
@@ -618,12 +581,11 @@
        "p": [
         -24,
         -330,
-        25.5
+        49.5
        ],
        "axis": "z",
        "c": "#b9c0c7",
-       "ri": 5,
-       "exo": 1
+       "ri": 5
       },
       {
        "t": "cyl",
@@ -632,24 +594,18 @@
        "p": [
         24,
         -330,
-        25.5
+        49.5
        ],
        "axis": "z",
        "c": "#b9c0c7",
-       "ri": 5,
-       "exo": 1
+       "ri": 5
       }
      ],
      "dir": [
       0,
       0,
       -250
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "blade-washers"
+     ]
     }
    ],
    "geo": [
@@ -664,40 +620,6 @@
      ],
      "axis": "z",
      "c": "#9aa2a9"
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    -150
-   ],
-   "dimensions": [
-    {
-     "label": "Cutting width",
-     "value": 530,
-     "unit": "mm",
-     "status": "verified",
-     "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-     "locator": "p. 18, Specifications",
-     "notes": "Nominal swept cutting diameter; blade contour and thickness are estimated.",
-     "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-     "from": [
-      -265,
-      -330,
-      35
-     ],
-     "to": [
-      265,
-      -330,
-      35
-     ]
     }
    ]
   },
@@ -715,7 +637,7 @@
     505.0,
     360
    ],
-   "desc": "4-stroke OHV single, 166 cc, transistorized magneto ignition, governed at 2,950–3,100 rpm.",
+   "desc": "4-stroke OHV single, 166 cc, transistorized magneto ignition, governed at 2,950\u20133,100 rpm.",
    "src": "Honda HRN216VKU owner's manual",
    "parts": [
     {
@@ -730,7 +652,7 @@
        "l": 60,
        "p": [
         0,
-        -620,
+        -675,
         316
        ],
        "axis": "y",
@@ -743,7 +665,7 @@
        "l": 16,
        "p": [
         0,
-        -593,
+        -648,
         316
        ],
        "axis": "y",
@@ -757,7 +679,7 @@
        "l": 40,
        "p": [
         0,
-        -660,
+        -715,
         316
        ],
        "axis": "y",
@@ -769,12 +691,7 @@
       0,
       -260,
       40
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "spark-plug"
+     ]
     },
     {
      "ref": "2",
@@ -881,12 +798,7 @@
       140,
       0,
       260
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "air-filter"
+     ]
     },
     {
      "ref": "3",
@@ -1009,12 +921,7 @@
       140,
       0,
       420
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "air-filter"
+     ]
     },
     {
      "ref": "4",
@@ -1063,12 +970,7 @@
       120,
       160,
       280
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "oil"
+     ]
     },
     {
      "ref": "5",
@@ -1109,12 +1011,7 @@
       -200,
       -120,
       -40
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "fuel-tank"
+     ]
     },
     {
      "ref": "6",
@@ -1160,12 +1057,7 @@
       -160,
       -60,
       120
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "fuel-tank"
+     ]
     },
     {
      "ref": "7",
@@ -1235,12 +1127,7 @@
       0,
       0,
       380
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "starter"
+     ]
     },
     {
      "ref": "8",
@@ -1335,7 +1222,7 @@
        ],
        "depth": 110,
        "p": [
-        -195,
+        -225,
         -270,
         291
        ],
@@ -1351,7 +1238,7 @@
         120
        ],
        "p": [
-        -247,
+        -277,
         -270,
         291
        ],
@@ -1363,12 +1250,7 @@
       -260,
       120,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "muffler"
+     ]
     },
     {
      "ref": "9",
@@ -1381,7 +1263,7 @@
        "r": 16,
        "l": 70,
        "p": [
-        -195,
+        -225,
         -205,
         286
        ],
@@ -1394,12 +1276,7 @@
       -260,
       300,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "muffler"
+     ]
     },
     {
      "ref": "10",
@@ -1442,12 +1319,7 @@
       -160,
       220,
       160
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "flywheel-brake"
+     ]
     }
    ],
    "geo": [
@@ -1692,18 +1564,6 @@
      ],
      "c": "#1d1f22"
     }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    300
    ]
   },
   {
@@ -1888,18 +1748,6 @@
      "r": 4,
      "c": "#1d1f22"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -220,
-    0,
-    120
    ]
   },
   {
@@ -2120,18 +1968,6 @@
      ],
      "c": "#e0c060"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    220,
-    0,
-    100
    ]
   },
   {
@@ -2149,7 +1985,7 @@
     255.0,
     110.5
    ],
-   "desc": "NGK BPR5ES, gap 0.7–0.8 mm, 20 N·m. 21 mm plug wrench.",
+   "desc": "NGK BPR5ES, gap 0.7\u20130.8 mm, 20 N\u00b7m. 21 mm plug wrench.",
    "src": "Honda HRN216VKU owner's manual",
    "geo": [
     {
@@ -2158,7 +1994,7 @@
      "l": 60,
      "p": [
       0,
-      -620,
+      -675,
       316
      ],
      "axis": "y",
@@ -2170,7 +2006,7 @@
      "l": 16,
      "p": [
       0,
-      -593,
+      -648,
       316
      ],
      "axis": "y",
@@ -2183,7 +2019,7 @@
      "l": 40,
      "p": [
       0,
-      -660,
+      -715,
       316
      ],
      "axis": "y",
@@ -2194,35 +2030,23 @@
      "pts": [
       [
        0,
-       -680,
+       -735,
        316
       ],
       [
        -80,
-       -635,
+       -690,
        396
       ],
       [
        -120,
-       -425,
+       -480,
        416
       ]
      ],
      "r": 5,
      "c": "#1d1f22"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    -200,
-    0
    ]
   },
   {
@@ -2336,18 +2160,6 @@
      "axis": "x",
      "c": "#1d1f22"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    180
    ]
   },
   {
@@ -2454,7 +2266,7 @@
      ],
      "depth": 110,
      "p": [
-      -195,
+      -225,
       -270,
       291
      ],
@@ -2469,7 +2281,7 @@
       120
      ],
      "p": [
-      -247,
+      -277,
       -270,
       291
      ],
@@ -2480,25 +2292,13 @@
      "r": 16,
      "l": 70,
      "p": [
-      -195,
+      -225,
       -205,
       286
      ],
      "axis": "y",
      "c": "#7d858d"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -220,
-    0,
-    0
    ]
   },
   {
@@ -2516,7 +2316,7 @@
     32,
     113.0
    ],
-   "desc": "SAE 10W-30, API SJ or later, 0.35–0.40 L. Check the level without threading the dipstick in.",
+   "desc": "SAE 10W-30, API SJ or later, 0.35\u20130.40 L. Check the level without threading the dipstick in.",
    "src": "Honda HRN216VKU owner's manual",
    "geo": [
     {
@@ -2553,18 +2353,6 @@
       0
      ]
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    140,
-    50,
-    80
    ]
   },
   {
@@ -2639,18 +2427,6 @@
      "r": 3,
      "c": "#1d1f22"
     }
-   ],
-   "parent": "engine",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -120,
-    0,
-    80
    ]
   },
   {
@@ -2667,7 +2443,7 @@
     263.0,
     400.0
    ],
-   "desc": "Variable-speed drive to the rear wheels (0–1.84 m/s). Pinion gears greased and axle bearings inspected by a dealer.",
+   "desc": "Variable-speed drive to the rear wheels (0\u20131.84 m/s). Pinion gears greased and axle bearings inspected by a dealer.",
    "src": "Honda HRN216VKU owner's manual",
    "parts": [
     {
@@ -2799,11 +2575,7 @@
       0,
       0,
       220
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "2",
@@ -2828,11 +2600,7 @@
       -120,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "2R",
@@ -2857,11 +2625,7 @@
       120,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "3",
@@ -2887,11 +2651,7 @@
       -70,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "3R",
@@ -2917,11 +2677,7 @@
       70,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "4",
@@ -2961,11 +2717,7 @@
       0,
       60,
       160
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     }
+     ]
     },
     {
      "ref": "5",
@@ -3010,7 +2762,7 @@
         ]
        ],
        "p": [
-        -261.9,
+        -262,
         66,
         115
        ],
@@ -3024,7 +2776,7 @@
        "r": 85,
        "l": 38.4,
        "p": [
-        -261.9,
+        -262,
         66,
         115
        ],
@@ -3040,7 +2792,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         66.0,
         147.5
        ],
@@ -3060,7 +2812,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         94.1,
         131.2
        ],
@@ -3080,7 +2832,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         94.1,
         98.8
        ],
@@ -3100,7 +2852,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         66.0,
         82.5
        ],
@@ -3120,7 +2872,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         37.9,
         98.7
        ],
@@ -3140,7 +2892,7 @@
         65
        ],
        "p": [
-        -267.9,
+        -268,
         37.9,
         131.2
        ],
@@ -3157,7 +2909,7 @@
        "r": 28,
        "l": 43.2,
        "p": [
-        -265.9,
+        -266,
         66,
         115
        ],
@@ -3170,12 +2922,7 @@
       -230,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "rear-wheel-left"
+     ]
     },
     {
      "ref": "5R",
@@ -3220,7 +2967,7 @@
         ]
        ],
        "p": [
-        261.9,
+        262,
         66,
         115
        ],
@@ -3234,7 +2981,7 @@
        "r": 85,
        "l": 38.4,
        "p": [
-        261.9,
+        262,
         66,
         115
        ],
@@ -3250,7 +2997,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         66.0,
         147.5
        ],
@@ -3270,7 +3017,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         94.1,
         131.2
        ],
@@ -3290,7 +3037,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         94.1,
         98.8
        ],
@@ -3310,7 +3057,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         66.0,
         82.5
        ],
@@ -3330,7 +3077,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         37.9,
         98.7
        ],
@@ -3350,7 +3097,7 @@
         65
        ],
        "p": [
-        267.9,
+        268,
         37.9,
         131.2
        ],
@@ -3367,7 +3114,7 @@
        "r": 28,
        "l": 43.2,
        "p": [
-        265.9,
+        266,
         66,
         115
        ],
@@ -3380,12 +3127,7 @@
       230,
       0,
       0
-     ],
-     "evidence": {
-      "status": "estimated",
-      "notes": "Illustrative shape and placement; not a measured service part."
-     },
-     "componentId": "rear-wheel-right"
+     ]
     }
    ],
    "geo": [
@@ -3401,18 +3143,6 @@
      "axis": "x",
      "c": "#9aa2a9"
     }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    80,
-    120
    ]
   },
   {
@@ -3422,22 +3152,384 @@
    "shape": "cylinder",
    "axis": "x",
    "color": "dark",
+   "box": [
+    0.0,
+    66.0,
+    0,
+    575.2,
+    230,
+    230
+   ],
    "desc": "Driven wheels with pinion gears.",
    "src": "Honda HRN216VKU owner's manual",
-   "geo": [],
-   "parent": "transmission",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    0
-   ],
-   "assemblyOnly": true
+   "geo": [
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       83,
+       -21.1
+      ],
+      [
+       100.6,
+       -24.0
+      ],
+      [
+       107.0,
+       -23.3
+      ],
+      [
+       115,
+       -16.0
+      ],
+      [
+       115,
+       16.0
+      ],
+      [
+       107.0,
+       23.3
+      ],
+      [
+       100.6,
+       24.0
+      ],
+      [
+       83,
+       21.1
+      ]
+     ],
+     "p": [
+      -262,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "seg": 56
+    },
+    {
+     "t": "cyl",
+     "r": 85,
+     "l": 38.4,
+     "p": [
+      -262,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#5d646b"
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      66.0,
+      147.5
+     ],
+     "c": "#4b5158",
+     "rot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      94.1,
+      131.2
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -60,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      94.1,
+      98.8
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -120,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      66.0,
+      82.5
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -180,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      37.9,
+      98.7
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -240,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      -268,
+      37.9,
+      131.2
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -300,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 28,
+     "l": 43.2,
+     "p": [
+      -266,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#c8102e"
+    },
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       83,
+       -21.1
+      ],
+      [
+       100.6,
+       -24.0
+      ],
+      [
+       107.0,
+       -23.3
+      ],
+      [
+       115,
+       -16.0
+      ],
+      [
+       115,
+       16.0
+      ],
+      [
+       107.0,
+       23.3
+      ],
+      [
+       100.6,
+       24.0
+      ],
+      [
+       83,
+       21.1
+      ]
+     ],
+     "p": [
+      262,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#1d1f22",
+     "seg": 56
+    },
+    {
+     "t": "cyl",
+     "r": 85,
+     "l": 38.4,
+     "p": [
+      262,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#5d646b"
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      66.0,
+      147.5
+     ],
+     "c": "#4b5158",
+     "rot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      94.1,
+      131.2
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -60,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      94.1,
+      98.8
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -120,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      66.0,
+      82.5
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -180,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      37.9,
+      98.7
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -240,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "box",
+     "s": [
+      6,
+      14,
+      65
+     ],
+     "p": [
+      268,
+      37.9,
+      131.2
+     ],
+     "c": "#4b5158",
+     "rot": [
+      -300,
+      0,
+      0
+     ]
+    },
+    {
+     "t": "cyl",
+     "r": 28,
+     "l": 43.2,
+     "p": [
+      266,
+      66,
+      115
+     ],
+     "axis": "x",
+     "c": "#c8102e"
+    }
+   ]
   },
   {
    "id": "front-wheels",
@@ -3446,1102 +3538,16 @@
    "shape": "cylinder",
    "axis": "x",
    "color": "dark",
+   "box": [
+    0.0,
+    -610.0,
+    0,
+    569.8,
+    190,
+    190
+   ],
    "desc": "Front wheels with the front cutting height lever.",
    "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "cyl",
-     "r": 8,
-     "l": 494,
-     "p": [
-      0,
-      -610,
-      95
-     ],
-     "axis": "x",
-     "c": "#9aa2a9"
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    0
-   ],
-   "assemblyOnly": false
-  },
-  {
-   "id": "height",
-   "name": "Cutting height levers",
-   "group": "cutting",
-   "shape": "unit",
-   "color": "steel",
-   "box": [
-    -305.0,
-    -282.0,
-    135.0,
-    40.0,
-    557.2,
-    141.0
-   ],
-   "desc": "Front and rear levers on the left side, 7 positions (about 27–100 mm). Set both to the same position, engine off.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "extrude",
-     "plane": "yz",
-     "pts": [
-      [
-       60.6,
-       35.0
-      ],
-      [
-       52.0,
-       46.8
-      ],
-      [
-       41.1,
-       56.6
-      ],
-      [
-       28.5,
-       63.9
-      ],
-      [
-       14.6,
-       68.5
-      ],
-      [
-       0.0,
-       70.0
-      ],
-      [
-       -14.6,
-       68.5
-      ],
-      [
-       -28.5,
-       63.9
-      ],
-      [
-       -41.1,
-       56.6
-      ],
-      [
-       -52.0,
-       46.8
-      ],
-      [
-       -60.6,
-       35.0
-      ],
-      [
-       0,
-       0
-      ]
-     ],
-     "depth": 6,
-     "p": [
-      -254,
-      -500,
-      150
-     ],
-     "c": "#5d646b"
-    },
-    {
-     "t": "box",
-     "s": [
-      14,
-      14,
-      130
-     ],
-     "p": [
-      -262,
-      -500,
-      200
-     ],
-     "c": "#c8102e",
-     "rot": [
-      -20,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "cyl",
-     "r": 14,
-     "l": 40,
-     "p": [
-      -265,
-      -478,
-      262
-     ],
-     "axis": "x",
-     "c": "#1d1f22"
-    },
-    {
-     "t": "extrude",
-     "plane": "yz",
-     "pts": [
-      [
-       60.6,
-       35.0
-      ],
-      [
-       52.0,
-       46.8
-      ],
-      [
-       41.1,
-       56.6
-      ],
-      [
-       28.5,
-       63.9
-      ],
-      [
-       14.6,
-       68.5
-      ],
-      [
-       0.0,
-       70.0
-      ],
-      [
-       -14.6,
-       68.5
-      ],
-      [
-       -28.5,
-       63.9
-      ],
-      [
-       -41.1,
-       56.6
-      ],
-      [
-       -52.0,
-       46.8
-      ],
-      [
-       -60.6,
-       35.0
-      ],
-      [
-       0,
-       0
-      ]
-     ],
-     "depth": 6,
-     "p": [
-      -254,
-      -64,
-      150
-     ],
-     "c": "#5d646b"
-    },
-    {
-     "t": "box",
-     "s": [
-      14,
-      14,
-      130
-     ],
-     "p": [
-      -262,
-      -64,
-      200
-     ],
-     "c": "#c8102e",
-     "rot": [
-      -20,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "cyl",
-     "r": 14,
-     "l": 40,
-     "p": [
-      -265,
-      -42,
-      262
-     ],
-     "axis": "x",
-     "c": "#1d1f22"
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -150,
-    0,
-    0
-   ]
-  },
-  {
-   "id": "clip-director",
-   "name": "Clip Director",
-   "group": "cutting",
-   "shape": "unit",
-   "color": "red",
-   "box": [
-    150.0,
-    -60.0,
-    180,
-    80,
-    90.0,
-    73.0
-   ],
-   "desc": "Lever selects BAG (shutter open) or MULCH (shutter closed). For rear discharge, remove the bag and leave it in BAG.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "lathe",
-     "pts": [
-      [
-       40,
-       0
-      ],
-      [
-       40,
-       20
-      ],
-      [
-       0,
-       24
-      ]
-     ],
-     "p": [
-      150,
-      -60,
-      204
-     ],
-     "axis": "z",
-     "c": "#1d1f22"
-    },
-    {
-     "t": "box",
-     "s": [
-      20,
-      90,
-      26
-     ],
-     "p": [
-      150,
-      -60,
-      240
-     ],
-     "c": "#c8102e",
-     "rot": [
-      0,
-      0,
-      30
-     ]
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    160,
-    0,
-    100
-   ]
-  },
-  {
-   "id": "bag",
-   "name": "Grass bag",
-   "group": "cutting",
-   "shape": "box",
-   "color": "dark",
-   "box": [
-    0.0,
-    270.0,
-    115,
-    400.0,
-    580.0,
-    355
-   ],
-   "desc": "66 L bag on seven clips. Empty before about 90% full; wash when clogged.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "extrude",
-     "plane": "yz",
-     "pts": [
-      [
-       -20,
-       150
-      ],
-      [
-       -20,
-       420
-      ],
-      [
-       70,
-       470
-      ],
-      [
-       470,
-       440
-      ],
-      [
-       540,
-       340
-      ],
-      [
-       520,
-       150
-      ],
-      [
-       420,
-       115
-      ],
-      [
-       60,
-       125
-      ]
-     ],
-     "depth": 400,
-     "p": [
-      0,
-      0,
-      0
-     ],
-     "c": "#3a3f45",
-     "bevel": 20
-    },
-    {
-     "t": "tube",
-     "pts": [
-      [
-       -200,
-       -10,
-       430
-      ],
-      [
-       -200,
-       260,
-       470
-      ],
-      [
-       -200,
-       520,
-       430
-      ],
-      [
-       200,
-       520,
-       430
-      ],
-      [
-       200,
-       260,
-       470
-      ],
-      [
-       200,
-       -10,
-       430
-      ]
-     ],
-     "r": 8,
-     "c": "#1d1f22"
-    },
-    {
-     "t": "box",
-     "s": [
-      120,
-      30,
-      40
-     ],
-     "p": [
-      0,
-      545,
-      380
-     ],
-     "c": "#1d1f22"
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    350,
-    100
-   ]
-  },
-  {
-   "id": "rear-shield",
-   "name": "Rear shield",
-   "group": "controls",
-   "shape": "box",
-   "color": "dark",
-   "box": [
-    0.0,
-    -26.0,
-    30.0,
-    420.0,
-    6.0,
-    170.0
-   ],
-   "desc": "Flap behind the deck. Check before each use; replace if worn.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "box",
-     "s": [
-      420,
-      6,
-      170
-     ],
-     "p": [
-      0,
-      -26,
-      115
-     ],
-     "c": "#1d1f22",
-     "rot": [
-      -8,
-      0,
-      0
-     ]
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    120,
-    -50
-   ]
-  },
-  {
-   "id": "handlebar",
-   "name": "Handlebar and cables",
-   "group": "controls",
-   "shape": "box",
-   "box": [
-    0.0,
-    426.5,
-    220.0,
-    564.0,
-    843.0,
-    810.0
-   ],
-   "desc": "Folding handlebar carrying the blade control lever and Smart Drive control; don't kink the cables when folding.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "tube",
-     "pts": [
-      [
-       -228,
-       30,
-       250
-      ],
-      [
-       -240,
-       420,
-       620
-      ],
-      [
-       -243,
-       770,
-       950
-      ],
-      [
-       -215,
-       819,
-       1005
-      ],
-      [
-       0,
-       832,
-       1024
-      ],
-      [
-       215,
-       819,
-       1005
-      ],
-      [
-       243,
-       770,
-       950
-      ],
-      [
-       240,
-       420,
-       620
-      ],
-      [
-       228,
-       30,
-       250
-      ]
-     ],
-     "r": 13,
-     "c": "#2b2e33"
-    },
-    {
-     "t": "cyl",
-     "r": 26,
-     "l": 40,
-     "p": [
-      -262,
-      420,
-      620
-     ],
-     "axis": "x",
-     "c": "#1d1f22"
-    },
-    {
-     "t": "box",
-     "s": [
-      24,
-      50,
-      60
-     ],
-     "p": [
-      -226,
-      30,
-      250
-     ],
-     "c": "#5d646b"
-    },
-    {
-     "t": "cyl",
-     "r": 26,
-     "l": 40,
-     "p": [
-      262,
-      420,
-      620
-     ],
-     "axis": "x",
-     "c": "#1d1f22"
-    },
-    {
-     "t": "box",
-     "s": [
-      24,
-      50,
-      60
-     ],
-     "p": [
-      226,
-      30,
-      250
-     ],
-     "c": "#5d646b"
-    }
-   ],
-   "parent": "deck",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    180,
-    180
-   ]
-  },
-  {
-   "id": "blade-lever",
-   "name": "Blade control lever",
-   "group": "controls",
-   "shape": "unit",
-   "color": "red",
-   "box": [
-    0.0,
-    780.0,
-    968,
-    476,
-    20,
-    38
-   ],
-   "desc": "Hold against the handlebar to run the engine and blades; release to stop both through the flywheel brake.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "tube",
-     "pts": [
-      [
-       -238,
-       790,
-       968
-      ],
-      [
-       -215,
-       770,
-       995
-      ],
-      [
-       0,
-       772,
-       1006
-      ],
-      [
-       215,
-       770,
-       995
-      ],
-      [
-       238,
-       790,
-       968
-      ]
-     ],
-     "r": 10,
-     "c": "#c8102e"
-    }
-   ],
-   "parent": "handlebar",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    0
-   ]
-  },
-  {
-   "id": "smart-drive",
-   "name": "Smart Drive control",
-   "group": "drive",
-   "shape": "unit",
-   "color": "dark",
-   "box": [
-    35.0,
-    555.0,
-    470,
-    410,
-    650,
-    630.0
-   ],
-   "desc": "Push forward to drive; speed increases with pressure. Five-position adjuster.",
-   "src": "Honda HRN216VKU owner's manual",
-   "geo": [
-    {
-     "t": "tube",
-     "pts": [
-      [
-       215,
-       186,
-       470
-      ],
-      [
-       240,
-       386,
-       640
-      ],
-      [
-       238,
-       756,
-       980
-      ],
-      [
-       120,
-       816,
-       1010
-      ]
-     ],
-     "r": 3,
-     "c": "#1d1f22"
-    },
-    {
-     "t": "box",
-     "s": [
-      130,
-      60,
-      50
-     ],
-     "p": [
-      0,
-      801,
-      1000
-     ],
-     "c": "#1d1f22"
-    },
-    {
-     "t": "tube",
-     "pts": [
-      [
-       -170,
-       826,
-       1012
-      ],
-      [
-       0,
-       836,
-       1012
-      ],
-      [
-       170,
-       826,
-       1012
-      ]
-     ],
-     "r": 9,
-     "c": "#4b5158"
-    },
-    {
-     "t": "cyl",
-     "r": 14,
-     "l": 30,
-     "p": [
-      70,
-      796,
-      1015
-     ],
-     "axis": "z",
-     "c": "#e0b020"
-    }
-   ],
-   "parent": "handlebar",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    0,
-    0,
-    0
-   ]
-  },
-  {
-   "id": "upper-blade",
-   "name": "Upper blade",
-   "group": "cutting",
-   "parent": "blades",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "extrude",
-     "plane": "xy",
-     "pts": [
-      [
-       -265,
-       0
-      ],
-      [
-       -262,
-       -25
-      ],
-      [
-       200,
-       -25
-      ],
-      [
-       262,
-       -20
-      ],
-      [
-       265,
-       0
-      ],
-      [
-       262,
-       25
-      ],
-      [
-       -200,
-       25
-      ],
-      [
-       -262,
-       20
-      ]
-     ],
-     "depth": 4,
-     "p": [
-      0,
-      -330,
-      35
-     ],
-     "c": "#9aa2a9"
-    }
-   ],
-   "desc": "Part of the twin-blade assembly. Nominal cutting width is 530 mm; detailed geometry is estimated.",
-   "evidence": {
-    "status": "estimated",
-    "notes": "Illustrative shape and placement; not a measured service part."
-   },
-   "explode": [
-    0,
-    0,
-    -95
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "lower-blade",
-   "name": "Lower blade",
-   "group": "cutting",
-   "parent": "blades",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "extrude",
-     "plane": "xy",
-     "pts": [
-      [
-       -265,
-       0
-      ],
-      [
-       -262,
-       -25
-      ],
-      [
-       200,
-       -25
-      ],
-      [
-       262,
-       -20
-      ],
-      [
-       265,
-       0
-      ],
-      [
-       262,
-       25
-      ],
-      [
-       -200,
-       25
-      ],
-      [
-       -262,
-       20
-      ]
-     ],
-     "depth": 4,
-     "p": [
-      0,
-      -330,
-      29
-     ],
-     "c": "#9aa2a9"
-    }
-   ],
-   "desc": "Part of the twin-blade assembly. Nominal cutting width is 530 mm; detailed geometry is estimated.",
-   "evidence": {
-    "status": "estimated",
-    "notes": "Illustrative shape and placement; not a measured service part."
-   },
-   "explode": [
-    0,
-    0,
-    -170
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "blade-holder",
-   "name": "Blade holder",
-   "group": "cutting",
-   "parent": "blades",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "cyl",
-     "r": 46,
-     "l": 16,
-     "p": [
-      0,
-      -330,
-      47
-     ],
-     "axis": "z",
-     "c": "#5d646b"
-    },
-    {
-     "t": "cyl",
-     "r": 20,
-     "l": 30,
-     "p": [
-      0,
-      -330,
-      62
-     ],
-     "axis": "z",
-     "c": "#5d646b"
-    }
-   ],
-   "desc": "Part of the twin-blade assembly. Nominal cutting width is 530 mm; detailed geometry is estimated.",
-   "evidence": {
-    "status": "estimated",
-    "notes": "Illustrative shape and placement; not a measured service part."
-   },
-   "explode": [
-    0,
-    0,
-    -20
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "blade-bolts",
-   "name": "Blade bolt (Honda Genuine)",
-   "group": "cutting",
-   "parent": "blades",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "cyl",
-     "r": 9,
-     "l": 8,
-     "p": [
-      -24,
-      -330,
-      21
-     ],
-     "axis": "z",
-     "c": "#7d858d",
-     "seg": 6
-    },
-    {
-     "t": "cyl",
-     "r": 5,
-     "l": 30,
-     "p": [
-      -24,
-      -330,
-      37
-     ],
-     "axis": "z",
-     "c": "#b9c0c7"
-    },
-    {
-     "t": "cyl",
-     "r": 9,
-     "l": 8,
-     "p": [
-      24,
-      -330,
-      21
-     ],
-     "axis": "z",
-     "c": "#7d858d",
-     "seg": 6
-    },
-    {
-     "t": "cyl",
-     "r": 5,
-     "l": 30,
-     "p": [
-      24,
-      -330,
-      37
-     ],
-     "axis": "z",
-     "c": "#b9c0c7"
-    }
-   ],
-   "desc": "Part of the twin-blade assembly. Nominal cutting width is 530 mm; detailed geometry is estimated.",
-   "evidence": {
-    "status": "estimated",
-    "notes": "Illustrative shape and placement; not a measured service part."
-   },
-   "explode": [
-    0,
-    0,
-    -330
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "blade-washers",
-   "name": "Special washer",
-   "group": "cutting",
-   "parent": "blades",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "cyl",
-     "r": 14,
-     "l": 3,
-     "p": [
-      -24,
-      -330,
-      25.5
-     ],
-     "axis": "z",
-     "c": "#b9c0c7",
-     "ri": 5
-    },
-    {
-     "t": "cyl",
-     "r": 14,
-     "l": 3,
-     "p": [
-      24,
-      -330,
-      25.5
-     ],
-     "axis": "z",
-     "c": "#b9c0c7",
-     "ri": 5
-    }
-   ],
-   "desc": "Part of the twin-blade assembly. Nominal cutting width is 530 mm; detailed geometry is estimated.",
-   "evidence": {
-    "status": "estimated",
-    "notes": "Illustrative shape and placement; not a measured service part."
-   },
-   "explode": [
-    0,
-    0,
-    -250
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "front-wheel-left",
-   "name": "Front wheel (left)",
-   "group": "cutting",
-   "parent": "front-wheels",
-   "shape": "unit",
    "geo": [
     {
      "t": "lathe",
@@ -4725,29 +3731,7 @@
      ],
      "axis": "x",
      "c": "#5d646b"
-    }
-   ],
-   "desc": "Wheel diameter, profile and track are estimated. Axle locations preserve the verified 676 mm wheelbase.",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -220,
-    0,
-    0
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "front-wheel-right",
-   "name": "Front wheel (right)",
-   "group": "cutting",
-   "parent": "front-wheels",
-   "shape": "unit",
-   "geo": [
+    },
     {
      "t": "lathe",
      "pts": [
@@ -4930,431 +3914,706 @@
      ],
      "axis": "x",
      "c": "#5d646b"
-    }
-   ],
-   "desc": "Wheel diameter, profile and track are estimated. Axle locations preserve the verified 676 mm wheelbase.",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    220,
-    0,
-    0
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "rear-wheel-left",
-   "name": "Rear wheel (left)",
-   "group": "drive",
-   "parent": "rear-wheels",
-   "shape": "unit",
-   "geo": [
-    {
-     "t": "lathe",
-     "pts": [
-      [
-       83,
-       -21.1
-      ],
-      [
-       100.6,
-       -24.0
-      ],
-      [
-       107.0,
-       -23.3
-      ],
-      [
-       115,
-       -16.0
-      ],
-      [
-       115,
-       16.0
-      ],
-      [
-       107.0,
-       23.3
-      ],
-      [
-       100.6,
-       24.0
-      ],
-      [
-       83,
-       21.1
-      ]
-     ],
-     "p": [
-      -261.9,
-      66,
-      115
-     ],
-     "axis": "x",
-     "c": "#1d1f22",
-     "seg": 56
     },
     {
      "t": "cyl",
-     "r": 85,
-     "l": 38.4,
+     "r": 8,
+     "l": 494,
      "p": [
-      -261.9,
-      66,
-      115
+      0,
+      -610,
+      95
      ],
      "axis": "x",
+     "c": "#9aa2a9"
+    }
+   ]
+  },
+  {
+   "id": "height",
+   "name": "Cutting height levers",
+   "group": "cutting",
+   "shape": "unit",
+   "color": "steel",
+   "box": [
+    -305.0,
+    -282.0,
+    135.0,
+    40.0,
+    557.2,
+    141.0
+   ],
+   "desc": "Front and rear levers on the left side, 7 positions (about 27\u2013100 mm). Set both to the same position, engine off.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "yz",
+     "pts": [
+      [
+       60.6,
+       35.0
+      ],
+      [
+       52.0,
+       46.8
+      ],
+      [
+       41.1,
+       56.6
+      ],
+      [
+       28.5,
+       63.9
+      ],
+      [
+       14.6,
+       68.5
+      ],
+      [
+       0.0,
+       70.0
+      ],
+      [
+       -14.6,
+       68.5
+      ],
+      [
+       -28.5,
+       63.9
+      ],
+      [
+       -41.1,
+       56.6
+      ],
+      [
+       -52.0,
+       46.8
+      ],
+      [
+       -60.6,
+       35.0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "depth": 6,
+     "p": [
+      -294,
+      -500,
+      150
+     ],
      "c": "#5d646b"
     },
     {
      "t": "box",
      "s": [
-      6,
       14,
-      65
+      14,
+      130
      ],
      "p": [
-      -267.9,
-      66.0,
-      147.5
+      -302,
+      -500,
+      200
      ],
-     "c": "#4b5158",
+     "c": "#c8102e",
      "rot": [
-      0,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      -267.9,
-      94.1,
-      131.2
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -60,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      -267.9,
-      94.1,
-      98.8
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -120,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      -267.9,
-      66.0,
-      82.5
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -180,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      -267.9,
-      37.9,
-      98.7
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -240,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      -267.9,
-      37.9,
-      131.2
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -300,
+      -20,
       0,
       0
      ]
     },
     {
      "t": "cyl",
-     "r": 28,
-     "l": 43.2,
+     "r": 14,
+     "l": 40,
      "p": [
-      -265.9,
-      66,
-      115
+      -305,
+      -478,
+      262
      ],
      "axis": "x",
-     "c": "#c8102e"
-    }
-   ],
-   "desc": "Wheel diameter, profile and track are estimated. Axle locations preserve the verified 676 mm wheelbase.",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    -220,
-    0,
-    0
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
-  },
-  {
-   "id": "rear-wheel-right",
-   "name": "Rear wheel (right)",
-   "group": "drive",
-   "parent": "rear-wheels",
-   "shape": "unit",
-   "geo": [
+     "c": "#1d1f22"
+    },
     {
-     "t": "lathe",
+     "t": "extrude",
+     "plane": "yz",
      "pts": [
       [
-       83,
-       -21.1
+       60.6,
+       35.0
       ],
       [
-       100.6,
-       -24.0
+       52.0,
+       46.8
       ],
       [
-       107.0,
-       -23.3
+       41.1,
+       56.6
       ],
       [
-       115,
-       -16.0
+       28.5,
+       63.9
       ],
       [
-       115,
-       16.0
+       14.6,
+       68.5
       ],
       [
-       107.0,
-       23.3
+       0.0,
+       70.0
       ],
       [
-       100.6,
-       24.0
+       -14.6,
+       68.5
       ],
       [
-       83,
-       21.1
+       -28.5,
+       63.9
+      ],
+      [
+       -41.1,
+       56.6
+      ],
+      [
+       -52.0,
+       46.8
+      ],
+      [
+       -60.6,
+       35.0
+      ],
+      [
+       0,
+       0
       ]
      ],
+     "depth": 6,
      "p": [
-      261.9,
-      66,
-      115
+      -294,
+      -64,
+      150
      ],
-     "axis": "x",
-     "c": "#1d1f22",
-     "seg": 56
-    },
-    {
-     "t": "cyl",
-     "r": 85,
-     "l": 38.4,
-     "p": [
-      261.9,
-      66,
-      115
-     ],
-     "axis": "x",
      "c": "#5d646b"
     },
     {
      "t": "box",
      "s": [
-      6,
       14,
-      65
+      14,
+      130
      ],
      "p": [
-      267.9,
-      66.0,
-      147.5
+      -302,
+      -64,
+      200
      ],
-     "c": "#4b5158",
+     "c": "#c8102e",
      "rot": [
-      0,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      267.9,
-      94.1,
-      131.2
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -60,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      267.9,
-      94.1,
-      98.8
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -120,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      267.9,
-      66.0,
-      82.5
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -180,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      267.9,
-      37.9,
-      98.7
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -240,
-      0,
-      0
-     ]
-    },
-    {
-     "t": "box",
-     "s": [
-      6,
-      14,
-      65
-     ],
-     "p": [
-      267.9,
-      37.9,
-      131.2
-     ],
-     "c": "#4b5158",
-     "rot": [
-      -300,
+      -20,
       0,
       0
      ]
     },
     {
      "t": "cyl",
-     "r": 28,
-     "l": 43.2,
+     "r": 14,
+     "l": 40,
      "p": [
-      265.9,
-      66,
-      115
+      -305,
+      -42,
+      262
      ],
      "axis": "x",
+     "c": "#1d1f22"
+    }
+   ]
+  },
+  {
+   "id": "clip-director",
+   "name": "Clip Director",
+   "group": "cutting",
+   "shape": "unit",
+   "color": "red",
+   "box": [
+    150.0,
+    -60.0,
+    180,
+    80,
+    90.0,
+    73.0
+   ],
+   "desc": "Lever selects BAG (shutter open) or MULCH (shutter closed). For rear discharge, remove the bag and leave it in BAG.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "lathe",
+     "pts": [
+      [
+       40,
+       0
+      ],
+      [
+       40,
+       20
+      ],
+      [
+       0,
+       24
+      ]
+     ],
+     "p": [
+      150,
+      -60,
+      204
+     ],
+     "axis": "z",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      20,
+      90,
+      26
+     ],
+     "p": [
+      150,
+      -60,
+      240
+     ],
+     "c": "#c8102e",
+     "rot": [
+      0,
+      0,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "bag",
+   "name": "Grass bag",
+   "group": "cutting",
+   "shape": "box",
+   "color": "dark",
+   "box": [
+    0.0,
+    270.0,
+    115,
+    400.0,
+    580.0,
+    355
+   ],
+   "desc": "66 L bag on seven clips. Empty before about 90% full; wash when clogged.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "extrude",
+     "plane": "yz",
+     "pts": [
+      [
+       -20,
+       150
+      ],
+      [
+       -20,
+       420
+      ],
+      [
+       70,
+       470
+      ],
+      [
+       470,
+       440
+      ],
+      [
+       540,
+       340
+      ],
+      [
+       520,
+       150
+      ],
+      [
+       420,
+       115
+      ],
+      [
+       60,
+       125
+      ]
+     ],
+     "depth": 400,
+     "p": [
+      0,
+      0,
+      0
+     ],
+     "c": "#3a3f45",
+     "bevel": 20
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -200,
+       -10,
+       430
+      ],
+      [
+       -200,
+       260,
+       470
+      ],
+      [
+       -200,
+       520,
+       430
+      ],
+      [
+       200,
+       520,
+       430
+      ],
+      [
+       200,
+       260,
+       470
+      ],
+      [
+       200,
+       -10,
+       430
+      ]
+     ],
+     "r": 8,
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      120,
+      30,
+      40
+     ],
+     "p": [
+      0,
+      545,
+      380
+     ],
+     "c": "#1d1f22"
+    }
+   ]
+  },
+  {
+   "id": "rear-shield",
+   "name": "Rear shield",
+   "group": "controls",
+   "shape": "box",
+   "color": "dark",
+   "box": [
+    0.0,
+    -26.0,
+    30.0,
+    420.0,
+    6.0,
+    170.0
+   ],
+   "desc": "Flap behind the deck. Check before each use; replace if worn.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "box",
+     "s": [
+      420,
+      6,
+      170
+     ],
+     "p": [
+      0,
+      -26,
+      115
+     ],
+     "c": "#1d1f22",
+     "rot": [
+      -8,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "handlebar",
+   "name": "Handlebar and cables",
+   "group": "controls",
+   "shape": "box",
+   "box": [
+    0.0,
+    426.5,
+    220.0,
+    564.0,
+    843.0,
+    810.0
+   ],
+   "desc": "Folding handlebar carrying the blade control lever and Smart Drive control; don't kink the cables when folding.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -228,
+       30,
+       250
+      ],
+      [
+       -240,
+       420,
+       620
+      ],
+      [
+       -243,
+       770,
+       950
+      ],
+      [
+       -215,
+       835,
+       1015
+      ],
+      [
+       0,
+       848,
+       1030
+      ],
+      [
+       215,
+       835,
+       1015
+      ],
+      [
+       243,
+       770,
+       950
+      ],
+      [
+       240,
+       420,
+       620
+      ],
+      [
+       228,
+       30,
+       250
+      ]
+     ],
+     "r": 13,
+     "c": "#2b2e33"
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 40,
+     "p": [
+      -262,
+      420,
+      620
+     ],
+     "axis": "x",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      24,
+      50,
+      60
+     ],
+     "p": [
+      -226,
+      30,
+      250
+     ],
+     "c": "#5d646b"
+    },
+    {
+     "t": "cyl",
+     "r": 26,
+     "l": 40,
+     "p": [
+      262,
+      420,
+      620
+     ],
+     "axis": "x",
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      24,
+      50,
+      60
+     ],
+     "p": [
+      226,
+      30,
+      250
+     ],
+     "c": "#5d646b"
+    }
+   ]
+  },
+  {
+   "id": "blade-lever",
+   "name": "Blade control lever",
+   "group": "controls",
+   "shape": "unit",
+   "color": "red",
+   "box": [
+    0.0,
+    780.0,
+    968,
+    476,
+    20,
+    38
+   ],
+   "desc": "Hold against the handlebar to run the engine and blades; release to stop both through the flywheel brake.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -238,
+       790,
+       968
+      ],
+      [
+       -215,
+       770,
+       995
+      ],
+      [
+       0,
+       772,
+       1006
+      ],
+      [
+       215,
+       770,
+       995
+      ],
+      [
+       238,
+       790,
+       968
+      ]
+     ],
+     "r": 10,
      "c": "#c8102e"
     }
+   ]
+  },
+  {
+   "id": "smart-drive",
+   "name": "Smart Drive control",
+   "group": "drive",
+   "shape": "unit",
+   "color": "dark",
+   "box": [
+    35.0,
+    555.0,
+    470,
+    410,
+    650,
+    630.0
    ],
-   "desc": "Wheel diameter, profile and track are estimated. Axle locations preserve the verified 676 mm wheelbase.",
-   "evidence": {
-    "status": "estimated",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "pp. 3, 12–14, illustrations",
-    "notes": "Shape and position estimated from illustrations; no dimensioned component drawing is available."
-   },
-   "explode": [
-    220,
-    0,
-    0
-   ],
-   "src": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)"
+   "desc": "Push forward to drive; speed increases with pressure. Five-position adjuster.",
+   "src": "Honda HRN216VKU owner's manual",
+   "geo": [
+    {
+     "t": "tube",
+     "pts": [
+      [
+       215,
+       230,
+       470
+      ],
+      [
+       240,
+       430,
+       640
+      ],
+      [
+       238,
+       800,
+       980
+      ],
+      [
+       120,
+       860,
+       1010
+      ]
+     ],
+     "r": 3,
+     "c": "#1d1f22"
+    },
+    {
+     "t": "box",
+     "s": [
+      130,
+      60,
+      50
+     ],
+     "p": [
+      0,
+      845,
+      1055
+     ],
+     "c": "#1d1f22"
+    },
+    {
+     "t": "tube",
+     "pts": [
+      [
+       -170,
+       870,
+       1015
+      ],
+      [
+       0,
+       880,
+       1022
+      ],
+      [
+       170,
+       870,
+       1015
+      ]
+     ],
+     "r": 9,
+     "c": "#4b5158"
+    },
+    {
+     "t": "cyl",
+     "r": 14,
+     "l": 30,
+     "p": [
+      70,
+      840,
+      1085
+     ],
+     "axis": "z",
+     "c": "#e0b020"
+    }
+   ]
   }
  ],
  "faults": [
@@ -5376,7 +4635,7 @@
     "Hold the blade control lever against the handlebar while pulling",
     "Turn the fuel valve ON; check the fuel level",
     "Drain and refill with fresh fuel (86+ octane, up to E10)",
-    "Remove the plug: dry it if wet, regap to 0.7–0.8 mm or replace",
+    "Remove the plug: dry it if wet, regap to 0.7\u20130.8 mm or replace",
     "If it still won't start, the carburetor, ignition or valves need a dealer"
    ],
    "comps": [
@@ -5435,7 +4694,7 @@
    ],
    "checks": [
     "Stop the engine and clean under the deck",
-    "Torque the blade bolts to 49–59 N·m",
+    "Torque the blade bolts to 49\u201359 N\u00b7m",
     "Inspect the blades; bent blades go to a dealer for inspection",
     "After a strike on a hard object, check the blade holder and have the crankshaft checked"
    ],
@@ -5640,7 +4899,7 @@
   {
    "id": "warm",
    "name": "Warm-up",
-   "desc": "Run a cold engine at least 3 minutes before stopping it (longer below 21 °C) so the auto choke opens fully.",
+   "desc": "Run a cold engine at least 3 minutes before stopping it (longer below 21 \u00b0C) so the auto choke opens fully.",
    "ends": "Engine warm",
    "inputs": [],
    "outputs": [],
@@ -5705,7 +4964,7 @@
    "steps": [
     "First month or 5 h, then every 6 months or 50 h; every 25 h in heavy load or heat",
     "Fuel valve OFF; drain warm, tilting onto the right side",
-    "Refill 0.35–0.40 L SAE 10W-30 (API SJ+); don't overfill",
+    "Refill 0.35\u20130.40 L SAE 10W-30 (API SJ+); don't overfill",
     "Never use non-detergent or 2-stroke oil"
    ],
    "comps": [
@@ -5734,8 +4993,8 @@
    "why": "Worn plugs cause hard starting.",
    "steps": [
     "Replace every 2 years or 150 h (NGK BPR5ES)",
-    "Gap 0.7–0.8 mm; bend only the side electrode",
-    "Thread in by hand, then 1/2 turn for new or 1/8–1/4 turn for reused; 20 N·m"
+    "Gap 0.7\u20130.8 mm; bend only the side electrode",
+    "Thread in by hand, then 1/2 turn for new or 1/8\u20131/4 turn for reused; 20 N\u00b7m"
    ],
    "comps": [
     "spark-plug"
@@ -5750,7 +5009,7 @@
     "Fuel OFF, plug cap off, tilt fuel cap side up",
     "Hold the blade with thick gloves; 14 mm 6-point socket",
     "Replace blades as a set with Honda bolts and special washers",
-    "Torque 49–59 N·m",
+    "Torque 49\u201359 N\u00b7m",
     "Replace the blade holder if damaged or after a hard strike"
    ],
    "comps": [
@@ -5764,7 +5023,7 @@
    "name": "Dealer service items",
    "why": "Items the owner's manual leaves to a dealer.",
    "steps": [
-    "Valve clearance: 0.10 ± 0.02 mm intake and exhaust (cold)",
+    "Valve clearance: 0.10 \u00b1 0.02 mm intake and exhaust (cold)",
     "Flywheel brake pad",
     "Smart Drive cable adjustment, pinion gear grease, axle bearings",
     "Fuel tank and filter cleaning; fuel lines every 2 years",
@@ -5781,7 +5040,7 @@
   },
   {
    "id": "storage",
-   "name": "Storage (over 3–4 weeks)",
+   "name": "Storage (over 3\u20134 weeks)",
    "why": "Stale fuel is the most common cause of no-start in spring.",
    "steps": [
     "Fuel valve OFF and run the carburetor dry, or use stabilizer",
@@ -5805,11 +5064,11 @@
    "rows": [
     [
      "Engine",
-     "GCV170, 4-stroke OHV, 166 cc, 60 × 59 mm, 8.0:1"
+     "GCV170, 4-stroke OHV, 166 cc, 60 \u00d7 59 mm, 8.0:1"
     ],
     [
      "Governed speed",
-     "2,950–3,100 rpm"
+     "2,950\u20133,100 rpm"
     ],
     [
      "Fuel tank",
@@ -5817,11 +5076,11 @@
     ],
     [
      "Oil",
-     "SAE 10W-30 API SJ+, 0.35–0.40 L"
+     "SAE 10W-30 API SJ+, 0.35\u20130.40 L"
     ],
     [
      "Spark plug",
-     "NGK BPR5ES, 0.7–0.8 mm, 20 N·m"
+     "NGK BPR5ES, 0.7\u20130.8 mm, 20 N\u00b7m"
     ],
     [
      "Cutting width",
@@ -5829,7 +5088,7 @@
     ],
     [
      "Cutting height",
-     "About 27–100 mm, 7 positions"
+     "About 27\u2013100 mm, 7 positions"
     ],
     [
      "Grass bag",
@@ -5837,7 +5096,7 @@
     ],
     [
      "Ground speed",
-     "0–1.84 m/s (Smart Drive)"
+     "0\u20131.84 m/s (Smart Drive)"
     ],
     [
      "Dry mass",
@@ -5845,7 +5104,7 @@
     ],
     [
      "Size",
-     "1,550 L × 575 W × 1,037 H mm"
+     "1,550 L \u00d7 575 W \u00d7 1,037 H mm"
     ]
    ],
    "notes": []
@@ -5857,15 +5116,15 @@
    "rows": [
     [
      "Blade bolts",
-     "49–59 N·m"
+     "49\u201359 N\u00b7m"
     ],
     [
      "Spark plug",
-     "20 N·m"
+     "20 N\u00b7m"
     ],
     [
      "Valve clearance (cold)",
-     "0.10 ± 0.02 mm intake and exhaust"
+     "0.10 \u00b1 0.02 mm intake and exhaust"
     ]
    ],
    "notes": [
@@ -6035,116 +5294,6 @@
   {
    "name": "General mowing practice",
    "kind": "other"
-  },
-  {
-   "name": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020) — https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-   "kind": "manual"
   }
- ],
- "model": {
-  "revision": 2,
-  "notes": "Dimension-constrained demonstration: 1,550 × 575 × 1,037 mm envelope and 676 mm wheelbase, referenced to the HRN216VKU manual. Cutting height 27 mm; handlebar in highest position. Internal shapes, wheel diameters, cable paths and assembly separation are estimated; this is not a manufacturing drawing.",
-  "dimensions": [
-   {
-    "label": "Overall length",
-    "value": 1550,
-    "unit": "mm",
-    "status": "verified",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "p. 18, Specifications",
-    "notes": "Handlebar raised, highest position.",
-    "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-    "from": [
-     350,
-     -705,
-     0
-    ],
-    "to": [
-     350,
-     845,
-     0
-    ]
-   },
-   {
-    "label": "Overall width",
-    "value": 575,
-    "unit": "mm",
-    "status": "verified",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "p. 18, Specifications",
-    "notes": "Reference envelope width.",
-    "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-    "from": [
-     -287.5,
-     -790,
-     0
-    ],
-    "to": [
-     287.5,
-     -790,
-     0
-    ]
-   },
-   {
-    "label": "Overall height",
-    "value": 1037,
-    "unit": "mm",
-    "status": "verified",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "p. 18, Specifications",
-    "notes": "Cutting height 27 mm; handlebar in highest position.",
-    "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-    "from": [
-     -390,
-     832,
-     0
-    ],
-    "to": [
-     -390,
-     832,
-     1037
-    ]
-   },
-   {
-    "label": "Wheelbase",
-    "value": 676,
-    "unit": "mm",
-    "status": "verified",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "p. 18, Specifications",
-    "notes": "Axle separation; wheel diameters and track are estimated.",
-    "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-    "from": [
-     320,
-     -610,
-     95
-    ],
-    "to": [
-     320,
-     66,
-     95
-    ]
-   },
-   {
-    "label": "Cutting width",
-    "value": 530,
-    "unit": "mm",
-    "status": "verified",
-    "source": "Honda HRN216VKU Owner’s Manual, 00X32VR8 A102 (2020)",
-    "locator": "p. 18, Specifications",
-    "notes": "Nominal swept cutting diameter; blade contour and thickness are estimated.",
-    "url": "https://cf.hondappsv.com/files/OM/OM001839AUS/Honda_Mowers_HRN216vku_2020_Owners_Manual.pdf",
-    "from": [
-     -265,
-     -330,
-     35
-    ],
-    "to": [
-     265,
-     -330,
-     35
-    ]
-   }
-  ]
- }
+ ]
 }
