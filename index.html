@@ -229,7 +229,7 @@ textarea{width:100%;min-height:140px;font:12.5px/1.45 var(--f-mono);color:var(--
     <div class="rail-head">
       <div class="idrow">
         <img class="brand-header" src="rootio-header.png" alt="ROOT/IO — Industrial Diagnostic Intelligence" width="1400" height="350">
-        <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Setup &amp; sources</button>
+        <button class="setupbtn" type="button" data-key="setup" id="setupBtn">Build Machine</button>
          <span id="demoLabel" class="demo-label" hidden>Interactive Demo</span>
       </div>
       <div class="machine-heading">
@@ -1123,7 +1123,7 @@ const defChips=a=>`<div class="chips">${a.map(d=>`<button class="chip" type="but
 const ioRows=tags=>tags.filter(t=>IOT[t]).map(t=>{const o=IOT[t];return `<tr><td class="tg">${esc(o.tag)}</td><td><span class="ty ${esc(o.type)}" title="${esc(IOTYPE[o.type]||o.type)}">${esc(o.type||'—')}</span></td><td class="ds">${esc(o.desc)}</td><td class="mn">${esc(o.device||'—')}${o.wire?' · '+esc(o.wire):''}</td><td class="mn hidem">${esc(o.addr||o.loc||'—')}</td><td class="mn hidem">${esc(o.sheet||'—')}</td></tr>`;}).join('');
 const IOHEAD='<thead><tr><th>Tag</th><th>Type</th><th>Description</th><th>Device · wire</th><th class="hidem">Address / location</th><th class="hidem">Sheet</th></tr></thead>';
 const ioTable=(tags,title,sub)=>{tags=tags.filter(t=>IOT[t]);if(!tags.length) return '';return `<div class="blk"><h3>${title}${sub?`<em>${sub}</em>`:''}</h3><div class="tblwrap"><table class="iot">${IOHEAD}<tbody>${ioRows(tags)}</tbody></table></div></div>`;};
-const srcLine=()=>P.example?'Example data for demonstration. Open Setup & sources to build this page from your own machine documents.':`Built from: ${P.sources.length?P.sources.map(s=>esc(s.name)).join(', '):'documents added in Setup'}. Content extracted by Claude; check anything safety-critical against the original documents.`;
+const srcLine=()=>P.example?'Example data for demonstration. Open Build Machine to create a profile from your machine documents.':`Built from: ${P.sources.length?P.sources.map(s=>esc(s.name)).join(', '):'imported profile'}. Check anything safety-critical against the original documents.`;
 const FOOT=()=>`<p class="foot">${srcLine()} Lock out and verify zero energy before working on the machine.</p>`;
 function woFault(f){return `${f.title}${f.code?' ('+f.code+')':''}\n${P.meta.name}${P.meta.serial?' · S/N '+P.meta.serial:''}${f.msg?'\nScreen: '+f.msg:''}\n\nPossible causes:\n${f.causes.map(x=>'- '+x).join('\n')}\n\nHow to check:\n${f.checks.map(x=>'- '+x).join('\n')}\n\nParts: ${f.comps.map(c=>C[c]?C[c].name:c).join(', ')}${f.io.length?'\n\nI/O to check:\n'+f.io.filter(t=>IOT[t]).map(t=>`- ${t} ${IOT[t].desc}${IOT[t].device?' ('+IOT[t].device+')':''}`).join('\n'):''}`;}
 function woDefect(d){return `${d.name} — ${d.procName}\n${P.meta.name}${P.meta.serial?' · S/N '+P.meta.serial:''}\n\n${d.looks}\n\nIsolate first:\n${d.isolate.map(x=>'- '+x).join('\n')}\n\nCauses and actions:\n${d.causes.map(c=>`- [${c.area}] ${c.cause} → ${c.fix}`).join('\n')}${d.params.length?'\n\nParameters to review: '+d.params.join(', '):''}`;}
@@ -1262,6 +1262,7 @@ function select(key,fromScene){
   if(want!==tab){tab=want; syncTabs();}
   renderList(); highlight(ids); if(ids.length) focus(ids);
   detail.scrollTop=0;
+  if(it.t==='setup' && matchMedia('(max-width:900px)').matches) detail.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});
   try{history.replaceState(null,'','#'+key);}catch(e){}
   if(!fromScene&&it.t!=='setup'&&matchMedia('(max-width:900px)').matches) stage.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});
   const act=list.querySelector('[aria-current="true"]'); if(act&&!matchMedia('(max-width:900px)').matches) act.scrollIntoView({block:'nearest'});
@@ -1473,50 +1474,14 @@ function renderSetup(){
   const m=DRAFT?{name:DRAFT.name,maker:DRAFT.maker,model:DRAFT.model,serial:DRAFT.serial,functions:DRAFT.functions,materials:DRAFT.materials}:m0;
   return `<article class="sheet">
   <div><div class="eyebrow">Setup &amp; sources</div><h2>Build this page for your machine</h2></div>
-  <p class="lead">Add the machine's manuals, mechanical drawings, electrical prints, parts lists and photos. Claude reads them and fills in the 3D model, faults, I/O, sequence, process checks, exploded views and cabinet layouts. The Defects tab combines your documents with general practice for the machine's function and material.</p>
-  ${P.example?`<div class="note err"><b>Example data</b>The page is showing an example machine. Building from your documents replaces it for everyone who opens this page.</div>`:''}
-  ${CAP.ready&&!can?`<div class="note err"><b>Reading documents needs Claude</b>${window.claude?'This view can\'t ask Claude (you may be signed out).':'This copy of the page runs outside claude.ai, so it can\'t ask Claude to read documents.'} The Build button works in the claude.ai version of this template; here, fill in the spreadsheet or use another AI tool below.</div>`:''}
-  <div class="blk"><h3>Machine</h3>
-  <div class="form">
-    <label>Machine name<input type="text" id="fName" value="${esc(ex?'':m.name)}" placeholder="e.g. Press 14 or Line 3 freezer"></label>
-    <label>Maker<input type="text" id="fMaker" value="${esc(ex?'':m.maker)}"></label>
-    <label>Model<input type="text" id="fModel" value="${esc(ex?'':m.model)}"></label>
-    <label>Serial number<input type="text" id="fSerial" value="${esc(ex?'':m.serial)}"></label>
-    <label class="wide">Machine function<input type="text" id="fFunc" value="${esc(ex?'':m.functions.join(', '))}" placeholder="e.g. injection molding, CNC machining, welding, sawing, refrigeration"></label>
-    <label class="wide">Materials processed<input type="text" id="fMat" value="${esc(ex?'':m.materials.join(', '))}" placeholder="e.g. plastic (PP, ABS), metal (6061 aluminum), wood"></label>
-  </div>
-  <div class="actions"><button class="btn" type="button" id="saveMeta">Save machine details</button><span class="count" id="metaMsg"></span></div></div>
-
-  <div class="blk"><h3>Documents <em>${FILES.length} added</em></h3>
-  <div class="drop" id="drop"><p><b>Drop files here</b> or choose them. PDF, images (JPG, PNG), and text or CSV exports work. Large PDFs are fine: Claude reads the pages that matter for each step.</p>
-  <div class="actions"><label class="btn" for="fileIn" style="cursor:pointer">Choose files</label><input type="file" id="fileIn" multiple accept=".pdf,.txt,.csv,.md,.json,image/jpeg,image/png,image/webp" hidden></div></div>
-  ${FILES.length?`<div class="tblwrap files"><table class="iot"><thead><tr><th>File</th><th>Type</th><th class="hidem">Size</th><th>Status</th><th></th></tr></thead><tbody>${FILES.map((f,i)=>`<tr><td class="ds">${esc(f.name)}</td><td><select data-fkind="${i}" aria-label="Document type for ${esc(f.name)}">${KINDS.map(([k,n])=>`<option value="${k}"${f.kind===k?' selected':''}>${n}</option>`).join('')}</select></td><td class="mn hidem">${fmtSize(f.size)}${f.pages?' · '+f.pages+' p':''}</td><td class="mn">${esc(f.status)}</td><td><button class="chip" type="button" data-frm="${i}">Remove</button></td></tr>`).join('')}</tbody></table></div>`:''}
-  ${P.sources.length&&!P.example?`<p class="count" style="margin:0">Last build used: ${P.sources.map(s=>esc(s.name)).join(', ')}</p>`:''}
-  </div>
-
-  <div class="blk"><h3>Build with Claude</h3>
-  <ul class="steps">${STEPS.map(([k,n,d])=>`<li><label><input type="checkbox" data-step="${k}"${stepOn[k]?' checked':''}> <span>${n} <small>— ${d}</small></span></label></li>`).join('')}</ul>
-  <div class="actions"><button class="btn primary" type="button" id="runBuild"${!can||running?' disabled':''}>${running?'Building…':'Build from documents'}</button>${running?'<button class="btn" type="button" id="stopBuild">Stop</button>':''}<span class="count">${CAP.ready&&!can?(window.claude?'Sign in to Claude to build from documents.':'Building needs Claude: open this template in claude.ai to use it. Here, use the spreadsheet or another AI tool below.'):FILES.length?'':'Add documents first. With no documents, only the Defects step runs (from the machine function and material).'}</span></div>
-  <div class="log" id="log" ${LOG.length?'':'hidden'}>${LOG.map(l=>`<div class="${l[0]}">${esc(l[1])}</div>`).join('')}</div>
-  </div>
-
-  <div class="blk"><h3>Without Claude: fill in a spreadsheet</h3>
+  <p class="lead">Build a machine profile using your preferred AI tool. Download the prompt, attach the machine manuals and supporting documents to your AI tool, then import the generated JSON profile.</p>
+  <div class="blk"><h3>Build with your AI tool</h3>
   <ol>
-    <li>Download the spreadsheet. It holds what's on the page now${P.example?' (the example machine, so every sheet shows sample rows to overwrite)':''}, with an Instructions sheet.</li>
-    <li>Fill it in from your manuals and prints: copy I/O lists, alarm tables and parts lists straight in.</li>
-    <li>Import it here. The page checks that every fault, step and device points at a real component and I/O tag.</li>
+    <li>Download the prompt and provide it to your preferred AI tool along with the machine manuals, drawings, electrical prints and other relevant documents.</li>
+    <li>Have the AI tool generate a complete machine profile as JSON using the prompt instructions.</li>
+    <li>Save the JSON response as a .json file, then select <b>Import Profile</b> below to load it into ROOT /IO.</li>
   </ol>
-  <div class="actions"><button class="btn" type="button" id="expXlsx">Download spreadsheet</button><label class="btn" for="xlsxIn" style="cursor:pointer">Import spreadsheet</label><input type="file" id="xlsxIn" accept=".xlsx,.xls,.ods" hidden></div></div>
-
-  <div class="blk"><h3>Without Claude: use another AI tool</h3>
-  <ol>
-    <li>Copy the instructions below and paste them into the AI tool your company allows, with the machine's documents attached.</li>
-    <li>Paste its reply into the box and load it. Sections in the reply replace the same sections here; the rest is kept, so you can do it in parts (for example faults first, then I/O).</li>
-  </ol>
-  <div class="actions"><button class="btn" type="button" id="copyPrompt">Copy instructions for the AI tool</button></div>
-  <textarea id="promptFallback" aria-label="Instructions for another AI tool" hidden readonly></textarea>
-  <textarea id="pasteJson" aria-label="Paste the AI tool's reply" placeholder="Paste the reply here (JSON)"></textarea>
-  <div class="actions"><button class="btn" type="button" id="loadPaste">Load reply</button><span class="count" id="pasteMsg"></span></div></div>
+  <div class="actions"><button class="btn primary" type="button" id="downloadPrompt">Download Prompt</button></div></div>
 
   ${IMPORT_WARN.length?`<div class="blk" id="impReport"><h3>Import check <em>${IMPORT_WARN.length} item${IMPORT_WARN.length>1?'s':''} to fix</em></h3><div class="note err"><b>Not linked</b>${IMPORT_WARN.slice(0,40).map(esc).join('<br>')}${IMPORT_WARN.length>40?'<br>…and '+(IMPORT_WARN.length-40)+' more':''}</div></div>`:(LOG.length||!P.sources.length?'':`<p class="count" id="impReport" style="margin:0">Last import: all references link up.</p>`)}
 
@@ -1533,7 +1498,7 @@ function renderSetup(){
   <div class="actions"><button class="btn" type="button" id="expJson">Download profile</button><label class="btn" for="impIn" style="cursor:pointer">Import profile</label><input type="file" id="impIn" accept=".json,application/json" hidden>${P.example?'':`<button class="btn" type="button" id="loadEx">Show the example machine</button>`}<button class="btn danger" type="button" id="blank">Start blank</button></div>
   <textarea id="expFallback" aria-label="Profile JSON" hidden readonly></textarea>
   <span class="count" id="impMsg"></span></div>
-  <p class="foot">Claude reads your documents only when you press Build, using your Claude account. The spreadsheet and other-AI routes don't use Claude at all. The finished profile is saved with this page and shared with everyone who can open it. Uploaded files are kept with the page when you can edit it.</p>
+  <p class="foot">Review AI-generated machine information against the original documentation before relying on it, especially for safety-critical diagnostics.</p>
   </article>`;
 }
 let LOG=[];
@@ -1542,35 +1507,22 @@ function rerenderSetup(){if(cur==='setup'&&!exMode){const y=detail.scrollTop; de
 function readMeta(){const v=id=>(stageEl(id)||{}).value||''; const split=s=>s.split(/[,;]\s*/).map(x=>x.trim()).filter(Boolean);
   return {name:v('fName').trim(),maker:v('fMaker').trim(),model:v('fModel').trim(),serial:v('fSerial').trim(),functions:split(v('fFunc')),materials:split(v('fMat'))};}
 function wireSetup(){
-  const drop=stageEl('drop'), fi=stageEl('fileIn');
-  const cl=stageEl('copyLink'); if(cl) cl.addEventListener('click',()=>{const u=libLink(LIBCUR); try{navigator.clipboard.writeText(u); stageEl('linkMsg').textContent='Copied: '+u;}catch(e){stageEl('linkMsg').textContent=u;}});
-  const lbe=stageEl('libEntry'); if(lbe) lbe.addEventListener('click',()=>{const t=`{"file": "${slug(P.meta.name||'machine')}-troubleshooter.json", "name": "${String(P.meta.name||'').replace(/"/g,"'")}", "group": ""}`; try{navigator.clipboard.writeText(t); lbe.textContent='Copied — paste it into machines.json';}catch(e){lbe.textContent=t;}});
-  ['fName','fMaker','fModel','fSerial','fFunc','fMat'].forEach(id=>stageEl(id).addEventListener('input',()=>{DRAFT=readMeta();}));
-  if(drop&&fi){
-  fi.addEventListener('change',()=>{addFiles([...fi.files]); fi.value='';});
-  ['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault(); drop.classList.add('over');}));
-  ['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault(); drop.classList.remove('over');}));
-  drop.addEventListener('drop',e=>addFiles([...(e.dataTransfer?e.dataTransfer.files:[])]));
-  }
-  detail.querySelectorAll('[data-fkind]').forEach(s=>s.addEventListener('change',()=>{FILES[+s.dataset.fkind].kind=s.value;}));
-  detail.querySelectorAll('[data-frm]').forEach(b=>b.addEventListener('click',()=>{FILES.splice(+b.dataset.frm,1); rerenderSetup();}));
-  detail.querySelectorAll('[data-step]').forEach(c=>c.addEventListener('change',()=>{stepOn[c.dataset.step]=c.checked;}));
-  stageEl('saveMeta').addEventListener('click',async()=>{const m=readMeta(); const raw=P.example?blankProfile():JSON.parse(JSON.stringify(P)); Object.assign(raw.meta,m); if(!raw.meta.name) raw.meta.name='Untitled machine'; raw.example=false;
-    DRAFT=null; applyProfile(raw,true); const ok=await saveProfile(); const mm=stageEl('metaMsg'); if(mm) mm.textContent=ok?'Saved':'Saved for this view only';});
-  const rb=stageEl('runBuild'); if(rb) rb.addEventListener('click',runBuild);
-  const sb=stageEl('stopBuild'); if(sb) sb.addEventListener('click',()=>{if(running) running.abort();});
-  stageEl('expJson').addEventListener('click',exportProfile);
-  stageEl('expXlsx').addEventListener('click',exportWorkbook);
-  const xi=stageEl('xlsxIn'); xi.addEventListener('change',()=>{const f=xi.files[0]; xi.value=''; if(f) importWorkbook(f);});
-  stageEl('copyPrompt').addEventListener('click',e=>{const t=aiPrompt(), b=e.currentTarget, fb=stageEl('promptFallback');
-    const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy instructions for the AI tool',1600);}; const fall=()=>{fb.value=t;fb.hidden=false;fb.focus();fb.select();b.textContent='Select and copy the text below';};
-    try{navigator.clipboard.writeText(t).then(done,fall);}catch(err){fall();}});
-  stageEl('loadPaste').addEventListener('click',importPasted);
-  const imp=stageEl('impIn'); imp.addEventListener('change',async()=>{const f=imp.files[0]; if(!f) return; const msg=stageEl('impMsg');
+  const promptButton=stageEl('downloadPrompt');
+  if(promptButton) promptButton.addEventListener('click',()=>{
+    const blob=new Blob([aiPrompt()],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='ROOT-IO-machine-profile-prompt.txt'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  const exp=stageEl('expJson'); if(exp) exp.addEventListener('click',exportProfile);
+  const imp=stageEl('impIn'); if(imp) imp.addEventListener('change',async()=>{
+    const f=imp.files[0]; if(!f) return; const msg=stageEl('impMsg');
     try{const raw=JSON.parse(await f.text()); if(!raw||typeof raw!=='object'||!(raw.meta||raw.components)) throw new Error('not a profile'); await finishImport(raw,checkRefs(raw));}
-    catch(e){msg.textContent='That file is not a profile from this page. Choose a .json file saved with "Download profile".';}});
+    catch(e){if(msg) msg.textContent='That file is not a valid machine profile JSON. Check the AI output and try again.';}
+    imp.value='';
+  });
   const le=stageEl('loadEx'); if(le) le.addEventListener('click',()=>{applyProfile(EXAMPLE); select('setup',true);});
-  stageEl('blank').addEventListener('click',e=>{const b=e.currentTarget; if(b.dataset.armed){applyProfile(blankProfile()); saveProfile(); select('setup',true);} else {b.dataset.armed='1'; b.textContent='Click again to clear everything';}});
+  const blank=stageEl('blank'); if(blank) blank.addEventListener('click',e=>{const b=e.currentTarget; if(b.dataset.armed){applyProfile(blankProfile()); saveProfile(); select('setup',true);} else {b.dataset.armed='1'; b.textContent='Click again to clear everything';}});
 }
 function blankProfile(){return {meta:{name:'Untitled machine',functions:[],materials:[]},groups:[],components:[],faults:[],io:[],sequence:[],checks:[],reference:[],cabinets:{},defects:[],sources:[]};}
 async function addFiles(fs){
